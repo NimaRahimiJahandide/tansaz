@@ -6,3 +6,10 @@
         </NuxtLayout>
     </div>
 </template>
+
+<style>
+*{
+    direction: rtl;
+    box-sizing: border-box;
+}
+</style>

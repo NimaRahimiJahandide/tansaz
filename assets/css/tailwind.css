@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+@theme{
+    --color-primary: #EF172E;
+    --color-background-input : #2727270A;
+    --color-light-red: #fde1e4
+}
