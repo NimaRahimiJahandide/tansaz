@@ -3,7 +3,7 @@
 <template>
     <div class="flex flex-col w-full">
         <Navbar />
-        <main class="w-full">
+        <main class="w-full h-screen">
             <slot />
         </main>
         <Footer />

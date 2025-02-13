@@ -20,6 +20,7 @@
         "vue3-apexcharts": "^1.8.0"
     },
     "devDependencies": {
+        "@nuxt/icon": "^1.10.3",
         "@vueuse/core": "^12.5.0",
         "@vueuse/nuxt": "^12.5.0"
     },
