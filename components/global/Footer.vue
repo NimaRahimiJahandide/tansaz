@@ -89,25 +89,25 @@
         <ul class="flex flex-col gap-3.5 text-sm"></ul>
       </div>
 
-      <!-- start copyright -->
-       <div class="border-t border-[#FFFFFF38] pt-6">
-        <div class="flex items-center justify-center gap-1">
-          <a class="border border-[#FFFFFF38] flex justify-center items-center size-9 rounded-[10px]" href="#">
-            <Icon name="ic:baseline-whatsapp" size="24px" style="color: #fff" />
-          </a>
-          <a class="border border-[#FFFFFF38] flex justify-center items-center size-9 rounded-[10px]" href="#">
-            <Icon name="akar-icons:instagram-fill" size="24px" style="color: #fff" />
-          </a>
-          <a class="border border-[#FFFFFF38] flex justify-center items-center size-9 rounded-[10px]" href="#">
-            <Icon name="ic:baseline-telegram" size="24px" style="color: #fff" />
-          </a>
-        </div>
-        <div class="text-center text-[14px] pt-6">
-          تمامی حقوق برای کلینیک تن ساز محفوظ می باشد
-        </div>
-       </div>
-      <!-- end copyright -->
     </div>
+    <!-- start copyright -->
+     <div class="max-w-[1200px] mx-auto px-3 border-t border-[#FFFFFF38] pt-6 mt-6">
+      <div class="flex items-center justify-center gap-1">
+        <a class="border border-[#FFFFFF38] flex justify-center items-center size-9 rounded-[10px]" href="#">
+          <Icon name="ic:baseline-whatsapp" size="24px" style="color: #fff" />
+        </a>
+        <a class="border border-[#FFFFFF38] flex justify-center items-center size-9 rounded-[10px]" href="#">
+          <Icon name="akar-icons:instagram-fill" size="24px" style="color: #fff" />
+        </a>
+        <a class="border border-[#FFFFFF38] flex justify-center items-center size-9 rounded-[10px]" href="#">
+          <Icon name="ic:baseline-telegram" size="24px" style="color: #fff" />
+        </a>
+      </div>
+      <div class="text-center text-[14px] pt-6">
+        تمامی حقوق برای کلینیک تن ساز محفوظ می باشد
+      </div>
+     </div>
+    <!-- end copyright -->
   </div>
 </template>
 

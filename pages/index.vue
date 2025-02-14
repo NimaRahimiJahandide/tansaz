@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-    <div></div>
+    <div>
+        <HomeHeroComponent  />
+    </div>
 </template>
 
 <style scoped></style>

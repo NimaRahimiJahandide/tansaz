@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const service = ref(false)
 const isMenuOpen = ref(false);
 
 const toggleMenu = () => {
@@ -17,7 +18,7 @@ const toggleMenu = () => {
           <NuxtLink to="#" class="flex items-center py-4 px-2">
             <img class="w-[108px]" src="/icons/logo.png" alt="logo">
           </NuxtLink>
-          <input class="bg-background-input py-4 pr-4 pl-7 w-[200px] lg:w-[420px] border-none rounded-2xl" type="text"
+          <input class="bg-background-input py-4 pr-4 pl-7 w-[200px] lg:w-[420px] focus:border-none focus:outline-none border-none rounded-2xl ml-2" type="text"
             placeholder="جستجو محصولات">
         </div>
         <div class="flex items-center gap-[10px]">
@@ -34,10 +35,10 @@ const toggleMenu = () => {
             </svg>
           </NuxtLink>
           <a href="tel:07136385004"
-            class="bg-[#262626] rounded-lg text-white tracking-[2px] px-6 py-3 max-h-10 flex items-center justify-center">
+            class="bg-[#262626] rounded-lg whitespace-nowrap text-white tracking-[2px] px-6 py-3 max-h-10 flex items-center justify-center">
             <span>071-36385004</span>
           </a>
-          <NuxtLink class="bg-primary py-3 px-6 rounded-[10px] text-white flex items-center justify-center max-h-10"
+          <NuxtLink class="bg-primary whitespace-nowrap py-3 px-6 rounded-[10px] text-white flex items-center justify-center max-h-10"
             to="#">
             <span>رزرو آنلاین</span>
           </NuxtLink>
@@ -56,7 +57,7 @@ const toggleMenu = () => {
             فروشگاه</NuxtLink>
 
         </li>
-        <li class="relative navbar">
+        <li class="relative group">
           <NuxtLink to="#"
             class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px] flex items-center justify-center gap-1">
             <span>خدمات زیبایی</span>
@@ -64,8 +65,9 @@ const toggleMenu = () => {
               <path fill="#000" d="M4.659 11.833h30.682L20 32.167z" />
             </svg>
           </NuxtLink>
+          <div class="absolute top-full left-0 right-0 h-4"></div>
           <ul
-            class="hidden navbar-item lg:w-[1000px] w-[750px] gap-[10px] left-1/2 transform -translate-x-1/2 bg-white shadow-[0_0px_35px_rgba(0,0,0,0.12)] absolute top-14 p-[35px] rounded-[10px]">
+            class="hidden group-hover:flex lg:w-[1000px] w-[750px] gap-[10px] left-1/2 transform -translate-x-1/2 bg-white shadow-[0_0px_35px_rgba(0,0,0,0.12)] absolute top-14  p-[35px] rounded-[10px] z-50">
             <li class="flex flex-col gap-[20px] flex-grow">
               <NuxtLink to="#"
                 class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]">
@@ -183,7 +185,7 @@ const toggleMenu = () => {
       <div class="flex justify-between md:hidden px-3 py-[10px]">
         <div>
           <button @click="toggleMenu"
-            class="bg-[#333333] rounded-[10px] size-10 flex items-center justify-center max-h-10">
+            class="bg-[#333333] rounded-[10px] cursor-pointer size-10 flex items-center justify-center max-h-10">
             <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 16 16">
               <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                 d="M2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5" />
@@ -208,29 +210,51 @@ const toggleMenu = () => {
 
       <!--start hamburger menu -->
       <div :class="['mobile-menu', { 'open': isMenuOpen }]">
-        <div class="menu-content">
-          <div class="flex justify-between items-center p-4 border-b">
-            <img class="w-[108px]" src="/icons/logo.png" alt="logo">
-            <button @click="toggleMenu" class="bg-[#333333] rounded-[10px] size-10 flex items-center justify-center max-h-10">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16">
-                <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"/>
-              </svg>
+        <div class="menu-content flex flex-col gap-5">
+          <div class="flex items-end justify-end p-4">
+            <button @click="toggleMenu" class="bg-primary cursor-pointer rounded-[10px] size-5 flex items-center justify-center">
+              <Icon name="codex:cross" size="20px" style="color: #fff" />
             </button>
           </div>
-          <ul class="p-4">
+          <div class="flex items-center justify-center">
+            <img class="size-[117px] object-contain" src="/icons/logo.png" alt="logo">
+          </div>
+          <div class="flex justify-center gap-2.5">
+            <button :class="service ? 'bg-[#F1F2F3] text-light-grey ': 'bg-primary text-white'" class="cursor-pointer rounded-[10px] py-2 px-4" @click="service = false">منو</button>
+            <button :class="service ? 'bg-primary text-white': 'bg-[#F1F2F3] text-light-grey '" class="cursor-pointer rounded-[10px] py-2 px-4 transition-all duration-300" @click="service = true">خدمات ما</button>
+          </div>
+          <ul class="p-4 text-dark" v-if="service">
+            <li>
+              <NuxtLink to="#" class="block py-2 px-4">خدمات زیبایی</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="#" class="block py-2 px-4">خدمات لاغزی</NuxtLink>
+            </li>
+          </ul>
+          <ul class="p-4 text-dark" v-else>
             <li>
               <NuxtLink to="#" class="block py-2 px-4 text-primary">صفحه اصلی</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="#" class="block py-2 px-4 text-primary">فروشگاه</NuxtLink>
+              <NuxtLink to="#" class="block py-2 px-4">تماس با ما</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="#" class="block py-2 px-4 text-primary">خدمات زیبایی</NuxtLink>
+              <NuxtLink to="#" class="block py-2 px-4">رزو آنلاین نوبت</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="#" class="block py-2 px-4 text-primary">خدمات لاغری</NuxtLink>
+              <NuxtLink to="#" class="block py-2 px-4">بلاگ</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="#" class="block py-2 px-4">درباره ما</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink to="#" class="block py-2 px-4">فروشگاه</NuxtLink>
             </li>
           </ul>
+          <div class="flex flex-col gap-5 px-4">
+            <NuxtLink to="#" class="flex  w-full py-[17px] bg-black text-white items-center justify-center rounded-[10px]">تماس با ما</NuxtLink>
+            <NuxtLink to="#" class="flex w-full py-[17px] bg-primary text-white items-center justify-center rounded-[10px]">محصولات ما</NuxtLink>
+          </div>
         </div>
       </div>
 
@@ -247,7 +271,6 @@ const toggleMenu = () => {
   top: 0;
   right: -100%;
   width: 80%;
-  max-width: 300px;
   height: 100%;
   background: white;
   transition: right 0.3s ease;
@@ -264,7 +287,7 @@ const toggleMenu = () => {
   right: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(5px);
   z-index: 999;
   opacity: 0;
@@ -282,11 +305,6 @@ const toggleMenu = () => {
   overflow-y: auto;
 }
 
-.navbar-item:hover {
-  background-color: #EF172E;
-  color: white;
-}
-
 .navbar-item:hover svg {
   transform: rotate(180deg);
   transition: all 0.15s ease;
@@ -297,7 +315,15 @@ const toggleMenu = () => {
   transition: all 0.15s ease;
 }
 
-.navbar-children_item:hover {
-  color: #EF172E;
+.group:hover ul {
+  display: flex;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.group ul {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 </style>
