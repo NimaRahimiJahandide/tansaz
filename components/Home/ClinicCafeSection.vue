@@ -66,8 +66,7 @@ const slides = ref([
         :space-between="30"
         :breakpoints="{
           0: {
-            slidesPerView: 2پ
-            ,
+            slidesPerView: 2,
           },
           768: {
             slidesPerView: 4,
