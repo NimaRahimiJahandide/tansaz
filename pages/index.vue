@@ -3,6 +3,9 @@
 <template>
     <div>
         <HomeHeroComponent  />
+        <HomeClinicServicesSection  />
+        <HomeBeforAfterExample  />
+        <HomeFaqSection />
     </div>
 </template>
 

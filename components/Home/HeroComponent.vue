@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { useSwiper } from "#imports";
-import { ref } from "vue";
-
 const slides = ref([
   {
     id: 0,
