@@ -6,6 +6,7 @@
         <HomeClinicServicesSection  />
         <HomeBeforAfterExample  />
         <HomeFaqSection />
+        <HomeClinicCafeSection />
     </div>
 </template>
 
