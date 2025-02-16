@@ -4,7 +4,7 @@
       <h2 class="text-[30px] text-start mb-10 font-semibold">
         رضایت شما عزیزان از <span class="text-primary">کلینیک تن ساز</span>
       </h2>
-      <div class="grid grid-cols-4 gap-8 text-right">
+      <div class="grid md:grid-cols-4 gap-8 text-right">
         <div class="flex flex-col items-center gap-2.5">
           <p class="text-sm text-center text-gray-600 leading-relaxed">
             برای تغییر این متن بر روی دکمه ویرایش کلیک کنید. لورم ایپسوم متن

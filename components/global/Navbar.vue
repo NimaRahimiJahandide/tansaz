@@ -78,7 +78,7 @@ const toggleMenu = () => {
         class="md:flex hidden items-center justify-center py-[10px] sticky top-0"
       >
         <li>
-          <NuxtLink to="#" class="text-primary py-2 px-4">صفحه اصلی</NuxtLink>
+          <NuxtLink to="/" class="text-primary py-2 px-4">صفحه اصلی</NuxtLink>
         </li>
         <li>
           <NuxtLink
@@ -368,12 +368,12 @@ const toggleMenu = () => {
           </ul>
           <ul class="p-4 text-dark" v-else>
             <li>
-              <NuxtLink to="#" class="block py-2 px-4 text-primary"
+              <NuxtLink to="/" class="block py-2 px-4 text-primary"
                 >صفحه اصلی</NuxtLink
               >
             </li>
             <li>
-              <NuxtLink to="#" class="block py-2 px-4">تماس با ما</NuxtLink>
+              <NuxtLink to="/contact-us" class="block py-2 px-4">تماس با ما</NuxtLink>
             </li>
             <li>
               <NuxtLink to="#" class="block py-2 px-4"
@@ -392,7 +392,7 @@ const toggleMenu = () => {
           </ul>
           <div class="flex flex-col gap-5 px-4">
             <NuxtLink
-              to="#"
+              to="/contact-us"
               class="flex w-full py-[17px] bg-black text-white items-center justify-center rounded-[10px]"
               >تماس با ما</NuxtLink
             >

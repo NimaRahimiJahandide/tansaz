@@ -57,11 +57,11 @@ const slides = ref([
           تناسب اندام را به شما اراِئه خواهد داد.
         </p>
         <div class="flex gap-2.5">
-          <button
+          <NuxtLink to="/contact-us"
             class="bg-primary flex justify-center items-center text-white rounded-r-full py-[18px] px-[25px] max-h-[51px]"
           >
             تماس با ما
-          </button>
+          </NuxtLink>
           <button
             class="py-[18px] px-[25px] flex justify-center items-center border max-h-[51px]"
           >

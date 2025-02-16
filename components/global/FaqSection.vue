@@ -67,7 +67,7 @@ const toggleItem = (index: number) => {
 <template>
   <div class="max-w-[1200px] mx-auto px-3 mt-[75px]">
     <!-- start FAQ -->
-    <div class="w-full grid grid-cols-2 gap-5">
+    <div class="w-full grid md:grid-cols-2 gap-5">
       <div
         v-for="(item, index) in faqItems"
         :key="index"

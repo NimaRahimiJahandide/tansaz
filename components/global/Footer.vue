@@ -70,7 +70,7 @@
               <NuxtLink to="#">حساب کاربری</NuxtLink>
             </li>
             <li class="flex gap-[5px] items-center">
-              <NuxtLink to="#">تماس با ما</NuxtLink>
+              <NuxtLink to="/contact-us">تماس با ما</NuxtLink>
             </li>
             <li class="flex gap-[5px] items-center">
               <NuxtLink to="#">مقالات آموزشی</NuxtLink>
