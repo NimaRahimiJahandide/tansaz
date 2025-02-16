@@ -42,7 +42,7 @@ const slides = ref([
         </p>
         <NuxtLink
           class="px-6 w-fit py-3 bg-primary text-white rounded-[10px]"
-          to="#"
+          to="/about-us"
           >درباره ما</NuxtLink
         >
       </div>

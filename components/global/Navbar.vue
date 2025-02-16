@@ -384,7 +384,7 @@ const toggleMenu = () => {
               <NuxtLink to="#" class="block py-2 px-4">بلاگ</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="#" class="block py-2 px-4">درباره ما</NuxtLink>
+              <NuxtLink to="/about-us" class="block py-2 px-4">درباره ما</NuxtLink>
             </li>
             <li>
               <NuxtLink to="#" class="block py-2 px-4">فروشگاه</NuxtLink>

@@ -76,10 +76,10 @@
               <NuxtLink to="#">مقالات آموزشی</NuxtLink>
             </li>
             <li class="flex gap-[5px] items-center">
-              <NuxtLink to="#">درباره ما</NuxtLink>
+              <NuxtLink to="/about-us">درباره ما</NuxtLink>
             </li>
             <li class="flex gap-[5px] items-center">
-              <NuxtLink to="#">قوانین سایت</NuxtLink>
+              <NuxtLink to="/terms">قوانین سایت</NuxtLink>
             </li>
           </ul>
         </div>
