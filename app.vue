@@ -11,6 +11,7 @@
 *{
     direction: rtl;
     box-sizing: border-box;
+    font-family: 'iran-yekan';
 }
 
 :root {

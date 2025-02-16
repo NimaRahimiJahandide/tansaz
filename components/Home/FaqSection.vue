@@ -50,7 +50,7 @@ const toggleItem = (index: number) => {
         <h2 class="text-2xl font-bold">
           <span class="text-primary">سوالات متداول</span> شما از تن ساز
         </h2>
-        <p class="text-gray-600 leading-relaxed">
+        <p class="text-gray-600 leading-relaxed text-justify">
           کلینیک زیبایی و لاغری تن ساز از سال 1401 با هدف ارائه کامل ترین و به
           روزترین خدمات پزشکی زیبایی و تناسب اندام در شهر شیراز با شعار تندرستی،
           سلامتی و زیبایی تاسیس گردید.

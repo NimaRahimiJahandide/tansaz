@@ -1,6 +1,12 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: 'iran-yekan';
+    src: url('../fonts/IRANYekanXFaNum-Regular.ttf');
+}
+
 @theme{
+    --font-IranYekan: 'iran-yekan';
     --color-primary: #EF172E;
     --color-background-input : #2727270A;
     --color-light-red: #fde1e4;

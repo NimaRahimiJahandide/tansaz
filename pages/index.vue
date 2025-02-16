@@ -7,6 +7,8 @@
         <HomeBeforAfterExample  />
         <HomeFaqSection />
         <HomeClinicCafeSection />
+        <HomeAboutUsSection  />
+        <HomeBlogsSection  />
     </div>
 </template>
 
