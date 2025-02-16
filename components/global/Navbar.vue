@@ -66,7 +66,7 @@ const toggleMenu = () => {
           </a>
           <NuxtLink
             class="bg-primary whitespace-nowrap py-3 px-6 rounded-[10px] text-white flex items-center justify-center max-h-10"
-            to="#"
+            to="/reserve"
           >
             <span>رزرو آنلاین</span>
           </NuxtLink>

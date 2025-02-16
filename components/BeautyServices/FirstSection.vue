@@ -38,11 +38,11 @@ const slides = ref([
           >
             تماس با ما
           </NuxtLink>
-          <button
+          <NuxtLink to="/about-us"
             class="py-[18px] px-[25px] flex justify-center items-center border max-h-[51px]"
           >
             معرفی مجموعه
-          </button>
+          </NuxtLink>
         </div>
       </div>
       <div class=",md:w-1/3">

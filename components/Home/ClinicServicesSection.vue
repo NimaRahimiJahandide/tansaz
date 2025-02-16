@@ -48,7 +48,7 @@ let cards = ref<Card[]>([
         </div>
         
         <div class="bg-primary flex gap-5 justify-end bg-[url(/images/pattern.png)] mt-[75px] rounded-[25px] p-[25px] md:flex-row flex-col">
-          <NuxtLink to="#" class="text-white bg-black flex flex-col p-[25px] md:w-1/4 rounded-[15px]">
+          <NuxtLink to="/reserve" class="text-white bg-black flex flex-col p-[25px] md:w-1/4 rounded-[15px]">
             <h4 class="text-[28px] font-semibold">رزرو نوبت</h4>
             <p>برای رزرو نوبت، کلیک کنید</p>
           </NuxtLink>
