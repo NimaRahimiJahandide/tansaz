@@ -75,7 +75,7 @@
         <form>
           <div class="mb-6">
             <label class="block mb-2 text-white text-sm">
-              نام و نام خانوادگی <span class="text-red-500">*</span>
+              نام و نام خانوادگی <span class="text-primary">*</span>
             </label>
             <input
               type="text"
@@ -85,13 +85,13 @@
           </div>
           <div class="mb-6">
             <label class="block mb-2 text-white text-sm">
-              شماره موبایل <span class="text-red-500">*</span>
+              شماره موبایل <span class="text-primary">*</span>
             </label>
             <input type="tel" class="w-full p-3 rounded bg-white" required="" />
           </div>
           <div class="mb-6">
             <label class="block mb-2 text-white text-sm">
-              توضیحات شما <span class="text-red-500">*</span>
+              توضیحات شما <span class="text-primary">*</span>
             </label>
             <textarea
               class="w-full p-3 rounded bg-white h-40"

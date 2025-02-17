@@ -73,7 +73,7 @@
               <NuxtLink to="/contact-us">تماس با ما</NuxtLink>
             </li>
             <li class="flex gap-[5px] items-center">
-              <NuxtLink to="#">مقالات آموزشی</NuxtLink>
+              <NuxtLink to="/blogs">مقالات آموزشی</NuxtLink>
             </li>
             <li class="flex gap-[5px] items-center">
               <NuxtLink to="/about-us">درباره ما</NuxtLink>

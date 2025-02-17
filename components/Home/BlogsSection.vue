@@ -29,7 +29,7 @@ const slides = ref([
       <h3 class="text-[30px] font-light">جدیدترین <span class="text-primary">مقالات</span> آموزشی</h3>
       <NuxtLink
         class="flex w-fit gap-[5px] justify-center items-center bg-primary text-white px-[24px] py-[12px] whitespace-nowrap rounded-[10px]"
-        to="#"
+        to="/blogs"
       >
         <span>خواندن مقالات</span>
         <Icon name="mingcute:arrow-left-fill" size="20px" style="color: #fff" />
