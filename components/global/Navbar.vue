@@ -126,7 +126,7 @@ const toggleMenu = () => {
                 هایفوتراپی
               </NuxtLink>
               <NuxtLink
-                to="#"
+                to="/pages/laser-hair-removal"
                 class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
               >
                 <svg
