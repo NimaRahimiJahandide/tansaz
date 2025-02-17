@@ -143,7 +143,7 @@ const toggleMenu = () => {
                 لیزررفع مو های زائد
               </NuxtLink>
               <NuxtLink
-                to="#"
+                to="/pages/beauty-injections"
                 class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
               >
                 <svg
