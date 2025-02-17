@@ -90,7 +90,7 @@ const toggleMenu = () => {
         </li>
         <li class="relative group">
           <NuxtLink
-            to="/beauty-services"
+            to="/pages/beauty-services"
             class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px] flex items-center justify-center gap-1"
           >
             <span>خدمات زیبایی</span>
@@ -109,7 +109,7 @@ const toggleMenu = () => {
           >
             <li class="flex flex-col gap-[20px] flex-grow">
               <NuxtLink
-                to="#"
+                to="/pages/hyphotherapy"
                 class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
               >
                 <svg
@@ -163,7 +163,7 @@ const toggleMenu = () => {
                 class="list-disc list-inside marker:text-primary flex flex-col gap-1"
               >
                 <li class="navbar-children_item">
-                  <NuxtLink to="#"> بوتاکس </NuxtLink>
+                  <NuxtLink to="/pages/botox"> بوتاکس </NuxtLink>
                 </li>
                 <li class="navbar-children_item">
                   <NuxtLink to="#"> ژل، فیلر و آنزیم </NuxtLink>

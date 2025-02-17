@@ -59,7 +59,7 @@ const newBlogs = ref([
           >
             <img :src="blog.image" class="rounded-2xl mb-4 w-full" alt="" />
             <div class="text-center font-semibold">
-              تزریقات زیبایی بوتاکس، ژل و فیلر و هایفوتراپی
+              {{ blog.text }}
             </div>
           </NuxtLink>
         </div>
