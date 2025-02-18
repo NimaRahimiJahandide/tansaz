@@ -166,13 +166,15 @@ const toggleMenu = () => {
                   <NuxtLink to="/pages/botox"> بوتاکس </NuxtLink>
                 </li>
                 <li class="navbar-children_item">
-                  <NuxtLink to="#"> ژل، فیلر و آنزیم </NuxtLink>
+                  <NuxtLink to="/pages/gel-and-filler">
+                    ژل، فیلر و آنزیم
+                  </NuxtLink>
                 </li>
                 <li class="navbar-children_item">
-                  <NuxtLink to="#"> مزوژل های آبرسان </NuxtLink>
+                  <NuxtLink to="/pages/hydrating-mesogels"> مزوژل های آبرسان </NuxtLink>
                 </li>
                 <li class="navbar-children_item">
-                  <NuxtLink to="#"> مزوتراپی و prp </NuxtLink>
+                  <NuxtLink to="/pages/mesotherapy"> مزوتراپی و prp </NuxtLink>
                 </li>
               </ul>
             </li>
@@ -373,7 +375,9 @@ const toggleMenu = () => {
               >
             </li>
             <li>
-              <NuxtLink to="/contact-us" class="block py-2 px-4">تماس با ما</NuxtLink>
+              <NuxtLink to="/contact-us" class="block py-2 px-4"
+                >تماس با ما</NuxtLink
+              >
             </li>
             <li>
               <NuxtLink to="#" class="block py-2 px-4"
@@ -384,7 +388,9 @@ const toggleMenu = () => {
               <NuxtLink to="#" class="block py-2 px-4">بلاگ</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/about-us" class="block py-2 px-4">درباره ما</NuxtLink>
+              <NuxtLink to="/about-us" class="block py-2 px-4"
+                >درباره ما</NuxtLink
+              >
             </li>
             <li>
               <NuxtLink to="#" class="block py-2 px-4">فروشگاه</NuxtLink>
