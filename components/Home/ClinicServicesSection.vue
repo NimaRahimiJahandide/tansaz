@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useLoadingState } from '@/store/loadingState';
 interface Card {
   id: number;
   text: string;
@@ -9,10 +10,23 @@ let cards = ref<Card[]>([
   { id: 0, text: "پوست، مو، زیبایی", icon: "/icons/zibaii.png" },
   { id: 1, text: "لاغری بدون جراحی", icon: "/icons/laghari.png" },
 ]);
+
+const loadingState = useLoadingState();
+
+setTimeout(() => {
+  loadingState.setLoading(false); 
+}, 2000);
 </script>
 
 <template>
-  <div class="mt-[85px]">
+  <div class="mt-[85px]" v-if="loadingState.isLoading">
+    <div>
+      <div class="w-full h-[222px] bg-gray-300 rounded animate-pulse">
+       
+      </div>
+    </div>
+  </div>
+  <div class="mt-[85px]" v-else>
     <div>
       <div class="bg-primary h-[222px] relative -z-10">
         <h2

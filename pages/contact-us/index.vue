@@ -1,6 +1,23 @@
+<script setup lang="ts">
+import { useLoadingState } from "@/store/loadingState";
+
+const loadingState = useLoadingState();
+
+setTimeout(() => {
+  loadingState.setLoading(false);
+}, 2000);
+</script>
+
 <template>
   <div>
-    <div class="flex flex-col md:flex-row max-w-[1200px] text-dark mx-auto px-3 mt-[75px]">
+    <div v-if="loadingState.isLoading"
+      class="flex flex-col md:flex-row max-w-[1200px] text-dark mx-auto px-3 mt-[75px]"
+    >
+      <div class="w-full h-[500px] bg-gray-300 rounded animate-pulse"></div>
+    </div>
+    <div v-else
+      class="flex flex-col md:flex-row max-w-[1200px] text-dark mx-auto px-3 mt-[75px]"
+    >
       <div class="md:w-1/2 p-8 bg-background-input">
         <h2 class="text-2xl mb-8">
           راه های <span class="text-primary">ارتباطی</span> با ما
@@ -62,7 +79,11 @@
             <span
               class="bg-primary flex justify-center items-center rounded-[6px] size-[30px]"
             >
-              <Icon name="ic:baseline-whatsapp" size="17px" style="color: #fff" />
+              <Icon
+                name="ic:baseline-whatsapp"
+                size="17px"
+                style="color: #fff"
+              />
             </span>
             <div class="flex flex-col gap-2.5">
               <p class="text-[20px] font-semibold">واتس اپ</p>
