@@ -56,7 +56,7 @@ const toggleItem = (index: number) => {
           سلامتی و زیبایی تاسیس گردید.
         </p>
         <button
-          class="bg-primary w-fit text-white px-6 py-2 rounded-lg hover:bg-red-600 transition"
+          class="text-white  bg-primary focus:outline-none focus:ring-primary shadow-lg shadow-primary/50  rounded-lg py-[18px] px-[25px] flex justify-center items-center max-h-[51px] w-fit"
         >
           خواندن سوالات
         </button>

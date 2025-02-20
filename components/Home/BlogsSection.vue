@@ -28,7 +28,7 @@ const slides = ref([
     <div class="flex items-center justify-between">
       <h3 class="text-[30px] font-light">جدیدترین <span class="text-primary">مقالات</span> آموزشی</h3>
       <NuxtLink
-        class="flex w-fit gap-[5px] justify-center items-center bg-primary text-white px-[24px] py-[12px] whitespace-nowrap rounded-[10px]"
+        class="text-white w-fit bg-primary focus:outline-none gap-1 focus:ring-primary shadow-lg shadow-primary/50  rounded-lg py-[18px] px-[25px] flex justify-center items-center max-h-[51px]"
         to="/blogs"
       >
         <span>خواندن مقالات</span>

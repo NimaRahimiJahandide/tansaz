@@ -54,10 +54,10 @@ setTimeout(() => {
           class="flex gap-5 mt-[75px] md:flex-row flex-col justify-center items-center"
         >
           <NuxtLink class="rounded-[25px]" to="#">
-            <img class="rounded-[25px]" src="/images/second.jpg" alt="" />
+            <img class="rounded-[25px]" src="public/images/second.jpg" alt="" />
           </NuxtLink>
           <NuxtLink class="rounded-[25px]" to="#">
-            <img class="rounded-[25px]" src="/images/first.jpg" alt="first" />
+            <img class="rounded-[25px]" src="public/images/first.jpg" alt="first" />
           </NuxtLink>
         </div>
         

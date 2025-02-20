@@ -50,7 +50,7 @@ const slides = ref([
         کافه <span class="text-primary">کلینیک</span>
       </h3>
       <NuxtLink
-        class="flex w-fit gap-[5px] justify-center items-center bg-primary text-white px-[24px] py-[12px] whitespace-nowrap rounded-[10px]"
+        class="text-white gap-1 w-fit bg-primary focus:outline-none focus:ring-primary shadow-lg shadow-primary/50  rounded-lg py-[18px] px-[25px] flex justify-center items-center max-h-[51px]"
         to="#"
       >
         <span>مشاهده همه</span>

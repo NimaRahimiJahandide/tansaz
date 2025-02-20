@@ -41,7 +41,7 @@ const slides = ref([
           است.
         </p>
         <NuxtLink
-          class="px-6 w-fit py-3 bg-primary text-white rounded-[10px]"
+          class="text-white w-fit bg-primary focus:outline-none focus:ring-primary shadow-lg shadow-primary/50  rounded-lg py-[18px] px-[25px] flex justify-center items-center max-h-[51px]"
           to="/about-us"
           >درباره ما</NuxtLink
         >

@@ -73,17 +73,17 @@ setTimeout(() => {
           </p>
           <div class="flex gap-2.5">
             <NuxtLink
-              to="/contact-us"
-              class="bg-primary flex justify-center items-center text-white rounded-r-full py-[18px] px-[25px] max-h-[51px]"
-            >
-              تماس با ما
-            </NuxtLink>
-            <NuxtLink
-              to="/about-us"
-              class="py-[18px] px-[25px] flex justify-center items-center border max-h-[51px]"
-            >
-              معرفی مجموعه
-            </NuxtLink>
+            to="/contact-us"
+            class="text-white  bg-primary focus:outline-none focus:ring-primary shadow-lg shadow-primary/50  rounded-lg py-[18px] px-[25px] flex justify-center items-center max-h-[51px]"
+          >
+            تماس با ما</NuxtLink
+          >
+          <NuxtLink
+            to="/about-us"
+            class="bg-transparent hover:bg-primary text-primary font-semibold hover:text-white hover:shadow-lg transition-all duration-300 hover:shadow-primary/50 py-[18px] px-[25px] flex justify-center items-center max-h-[51px] border border-primary hover:border-transparent rounded"
+          >
+            معرفی مجموعه
+          </NuxtLink>
           </div>
         </div>
         <div class="md:w-1/3">
