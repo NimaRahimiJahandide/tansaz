@@ -26,8 +26,8 @@ const slides = ref([
 
 <template>
   <div class="mt-[75px] max-w-[1200px] mx-auto px-3 text-dark">
-    <div class="flex justify-center items-center gap-[20px]">
-      <div class="flex w-1/2 flex-col gap-5">
+    <div class="flex flex-col md:flex-row justify-center items-center gap-[20px]">
+      <div class="flex md:w-1/2 flex-col gap-5">
         <h3 class="text-[30px]">
           درباره کلینیک <span class="text-primary">تن ساز</span>
         </h3>
@@ -46,7 +46,7 @@ const slides = ref([
           >درباره ما</NuxtLink
         >
       </div>
-      <div class="w-1/2">
+      <div class="md:w-1/2 w-full">
         <swiper-container
           class="h-full swiper-container"
           :loop="true"

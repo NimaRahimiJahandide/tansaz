@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     devtools: { enabled: false },
     css: ["~/assets/css/tailwind.css"],
 
-    modules: ["@vueuse/nuxt", "@pinia/nuxt", "@nuxt/icon", "nuxt-swiper"],
+    modules: ["@vueuse/nuxt", "@pinia/nuxt", "@nuxt/icon", "nuxt-swiper", 'nuxt-aos'],
 
     vite: {
         plugins: [tailwindcss()],
