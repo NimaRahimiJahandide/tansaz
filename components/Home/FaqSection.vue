@@ -1,14 +1,11 @@
-<script setup lang="ts">
-import { ref } from "vue";
 
-// تعریف نوع داده برای سوالات FAQ
+<script lang="ts" setup>
 interface FaqItem {
   question: string;
   answer: string;
 }
 
-// داده‌های FAQ
-const faqItems = ref<FaqItem[]>([
+const faqItems: FaqItem[] = [
   {
     question: "چرا کلینیک تن ساز؟",
     answer:
@@ -29,86 +26,69 @@ const faqItems = ref<FaqItem[]>([
     answer:
       "کلینیک تن ساز شنبه تا چهارشنبه ساعت 9 صبح الی 21 و روزهای پنج شنبه 9 الی 13 آماده خدمات رسانی شما عزیزان می‌باشد.",
   },
-]);
+];
 
 const activeIndex = ref<number | null>(null);
 
-const toggleItem = (index: number) => {
+const toggleAnswer = (index: number): void => {
   activeIndex.value = activeIndex.value === index ? null : index;
 };
 </script>
 
 <template>
-  <div class="max-w-[1200px] mx-auto px-3 mt-[75px]">
-    <!-- start FAQ -->
-    <div
-      class="flex md:flex-row flex-col w-full justify-between items-start gap-20"
-    >
-      <div
-        class="md:w-1/2 flex flex-col justify-center my-auto text-right space-y-4"
-      >
-        <h2 class="text-2xl font-bold">
-          <span class="text-primary">سوالات متداول</span> شما از تن ساز
-        </h2>
-        <p class="text-gray-600 leading-relaxed text-justify">
+  <div class="bg-gray-100 py-10 px-4 mt-[70px]">
+    <div class="max-w-[1200px] mx-auto px-3 w-full">
+      <div class="flex items-center flex-col ">
+        <h3 class="text-3xl font-bold text-center mb-8">سوالات <span class="text-primary">متداول</span> شما از تن ساز</h3>
+        <p class="text-gray-600 max-w-2xl  mb-[14px] leading-relaxed text-justify">
           کلینیک زیبایی و لاغری تن ساز از سال 1401 با هدف ارائه کامل ترین و به
           روزترین خدمات پزشکی زیبایی و تناسب اندام در شهر شیراز با شعار تندرستی،
           سلامتی و زیبایی تاسیس گردید.
         </p>
-        <button
-          class="text-white  bg-primary focus:outline-none focus:ring-primary shadow-lg shadow-primary/50  rounded-lg py-[18px] px-[25px] flex justify-center items-center max-h-[51px] w-fit"
-        >
-          خواندن سوالات
-        </button>
       </div>
-      <div class="md:w-1/2 w-full space-y-4">
+      <div class="mx-auto space-y-6">
         <div
           v-for="(item, index) in faqItems"
           :key="index"
-          class="rounded-lg transition"
+          class="container bg-primary text-white rounded-lg shadow-md transition-all duration-500"
         >
           <div
-            class="flex items-center bg-primary rounded-lg gap-2.5 p-4 font-medium cursor-pointer text-white"
-            @click="toggleItem(index)"
+            class="question flex items-center justify-between p-4 cursor-pointer"
+            @click="toggleAnswer(index)"
           >
-            <Icon
-              v-if="activeIndex === index"
-              name="ic:baseline-minus"
-              size="17px"
-              style="color: #fff"
-            />
-            <Icon
-              v-else
-              name="ic:baseline-plus"
-              size="17px"
-              style="color: #fff"
-            />
-            <span>{{ item.question }}</span>
+            <span class="text-lg font-semibold">{{ item.question }}</span>
+            <span
+              class="icon text-2xl transition-transform duration-500"
+              :class="{ 'rotate-45': activeIndex === index }"
+            >
+              +
+            </span>
           </div>
           <div
-            v-if="activeIndex === index"
-            class="p-4 text-right leading-8 transition-all duration-500 ease-in-out"
-            :class="{
-              'max-h-0 overflow-hidden': activeIndex !== index,
-              'max-h-[1000px]': activeIndex === index,
-            }"
+            class="answercont text-white overflow-hidden rounded-b-2xl transition-max-h duration-500"
+            :style="{ maxHeight: activeIndex === index ? '200px' : '0px' }"
+            :class="activeIndex === index ? ' border-t' : ''"
           >
-            {{ item.answer }}
+            <div class="answer p-4">
+              <p v-html="item.answer"></p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- end FAQ -->
-
-    <div class="text-white bg-primary w-full flex md:flex-row flex-col text-center items-center justify-center gap-5 bg-[url(/images/pattern.png)] mt-[75px] rounded-3xl py-10">
-      <p class="md:text-[40px] text-[25px] leading-10">همیـن الان شانستـو امتحـان کـن (همین حالا جایزتو بگیر)</p>
-      <NuxtLink to="#" class="px-[15px] whitespace-nowrap flex items-center py-2 bg-dark rounded-3xl">کلیک کن</NuxtLink>
     </div>
   </div>
 </template>
 
 <style scoped>
-.transition-all {
-  transition: all 0.5s ease-in-out;
+
+.container {
+  border-radius: 0.5rem;
+}
+.question:hover {
+  border-radius: 0.5rem;
+  background-color: #C50E21;
+}
+.icon.rotate-45 {
+  transform: rotate(45deg);
 }
 </style>
