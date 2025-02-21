@@ -1,17 +1,35 @@
 <script setup lang="ts">
-import { useLoadingState } from '@/store/loadingState';
+import { useLoadingState } from "@/store/loadingState";
 const service = ref(false);
 const isMenuOpen = ref(false);
-
+const isSticky = ref(false);
 const loadingState = useLoadingState();
 
+const isServicesMenuOpen =  ref(false)
+
 setTimeout(() => {
-  loadingState.setLoading(false); 
+  loadingState.setLoading(false);
 }, 2000);
+
+const handleScroll = () => {
+  isSticky.value = window.scrollY > 50;
+};
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
+
+const toggleServicesMenu = () => {
+  isServicesMenuOpen.value = !isServicesMenuOpen.value;
+}
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 <template>
   <div>
@@ -22,8 +40,12 @@ const toggleMenu = () => {
           class="md:flex hidden justify-between items-center py-[15px] max-w-[1200px] mx-auto px-3"
         >
           <div class="flex items-center gap-[20px]">
-            <div class="w-[108px] h-[68px] bg-gray-300 rounded animate-pulse"></div>
-            <div class="w-[200px] lg:w-[420px] h-[68px] bg-gray-300 rounded animate-pulse"></div>
+            <div
+              class="w-[108px] h-[68px] bg-gray-300 rounded animate-pulse"
+            ></div>
+            <div
+              class="w-[200px] lg:w-[420px] h-[68px] bg-gray-300 rounded animate-pulse"
+            ></div>
           </div>
           <div class="flex items-center gap-[10px]">
             <div class="size-10 bg-gray-300 rounded animate-pulse"></div>
@@ -37,7 +59,11 @@ const toggleMenu = () => {
         <ul
           class="md:flex hidden items-center justify-center py-[10px] gap-2 sticky top-0"
         >
-          <li v-for="(item, index) in 4" :key="index" class="w-[100px] h-10 bg-gray-300 rounded animate-pulse"></li>
+          <li
+            v-for="(item, index) in 4"
+            :key="index"
+            class="w-[100px] h-10 bg-gray-300 rounded animate-pulse"
+          ></li>
         </ul>
         <hr />
         <!-- start mobile -->
@@ -47,11 +73,11 @@ const toggleMenu = () => {
             <div class="size-10 bg-gray-300 rounded animate-pulse"></div>
             <div class="size-10 bg-gray-300 rounded animate-pulse"></div>
           </div>
-        </div>  
+        </div>
         <!-- end mobile -->
       </nav>
     </div>
-    
+
     <div v-else>
       <!-- Overlay -->
       <div :class="['overlay', { open: isMenuOpen }]" @click="toggleMenu"></div>
@@ -61,7 +87,7 @@ const toggleMenu = () => {
           class="md:flex hidden justify-between items-center py-[15px] max-w-[1200px] mx-auto px-3"
         >
           <div class="flex items-center gap-[20px]">
-            <NuxtLink to="#" class="flex items-center py-4 px-2">
+            <NuxtLink to="/" class="flex items-center py-4 px-2">
               <img class="w-[108px]" src="/icons/logo.png" alt="logo" />
             </NuxtLink>
             <input
@@ -101,10 +127,10 @@ const toggleMenu = () => {
             </NuxtLink>
           </div>
         </div>
-        <hr />
         <!-- bottom of navbar -->
         <ul
-          class="md:flex hidden items-center justify-center py-[10px] sticky top-0"
+          :class="{ 'fixed top-0': isSticky, 'fixed top-32': !isSticky }"
+          class="md:flex hidden items-center justify-center py-[10px] border-b w-full"
         >
           <li>
             <NuxtLink to="/" class="text-primary py-2 px-4">صفحه اصلی</NuxtLink>
@@ -119,7 +145,7 @@ const toggleMenu = () => {
           </li>
           <li class="relative group">
             <NuxtLink
-              to="/pages/beauty-services"
+              to="/services/beauty-services"
               class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px] flex items-center justify-center gap-1"
             >
               <span>خدمات زیبایی</span>
@@ -131,11 +157,11 @@ const toggleMenu = () => {
             </NuxtLink>
             <div class="absolute top-full left-0 right-0 h-4"></div>
             <ul
-              class="hidden group-hover:flex lg:w-[1000px] w-[750px] gap-[10px] left-1/2 transform -translate-x-1/2 bg-white shadow-[0_0px_35px_rgba(0,0,0,0.12)] absolute top-14 p-[35px] rounded-[10px] z-50"
+              class="hidden group-hover:flex lg:w-[55rem] w-[40rem] gap-[10px] left-1/2 transform -translate-x-1/2 bg-white shadow-[0_0px_35px_rgba(0,0,0,0.12)] absolute top-14 p-[35px] rounded-[10px]"
             >
               <li class="flex flex-col gap-[20px] flex-grow">
                 <NuxtLink
-                  to="/pages/hyphotherapy"
+                  to="/services/hyphotherapy"
                   class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
                 >
                   <Icon
@@ -146,7 +172,7 @@ const toggleMenu = () => {
                   هایفوتراپی
                 </NuxtLink>
                 <NuxtLink
-                  to="/pages/laser-hair-removal"
+                  to="/services/laser-hair-removal"
                   class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
                 >
                   <Icon
@@ -157,7 +183,7 @@ const toggleMenu = () => {
                   لیزررفع مو های زائد
                 </NuxtLink>
                 <NuxtLink
-                  to="/pages/beauty-injections"
+                  to="/services/beauty-injections"
                   class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
                 >
                   <Icon
@@ -171,20 +197,22 @@ const toggleMenu = () => {
                   class="list-disc list-inside marker:text-primary flex flex-col gap-1"
                 >
                   <li class="navbar-children_item">
-                    <NuxtLink to="/pages/botox"> بوتاکس </NuxtLink>
+                    <NuxtLink to="/services/botox"> بوتاکس </NuxtLink>
                   </li>
                   <li class="navbar-children_item">
-                    <NuxtLink to="/pages/gel-and-filler">
+                    <NuxtLink to="/services/gel-and-filler">
                       ژل، فیلر و آنزیم
                     </NuxtLink>
                   </li>
                   <li class="navbar-children_item">
-                    <NuxtLink to="/pages/hydrating-mesogels">
+                    <NuxtLink to="/services/hydrating-mesogels">
                       مزوژل های آبرسان
                     </NuxtLink>
                   </li>
                   <li class="navbar-children_item">
-                    <NuxtLink to="/pages/mesotherapy"> مزوتراپی و prp </NuxtLink>
+                    <NuxtLink to="/services/mesotherapy">
+                      مزوتراپی و prp
+                    </NuxtLink>
                   </li>
                 </ul>
               </li>
@@ -252,9 +280,9 @@ const toggleMenu = () => {
             </NuxtLink>
           </li>
         </ul>
-        <hr />
+        <hr v-if="!isSticky" />
         <!-- start mobile -->
-        <div class="flex justify-between md:hidden px-3 py-[10px]">
+        <div class="flex fixed w-full bg-white justify-between md:hidden px-3 py-[10px]">
           <div>
             <button
               @click="toggleMenu"
@@ -282,18 +310,21 @@ const toggleMenu = () => {
             </NuxtLink>
           </div>
         </div>
-  
+
         <!--start hamburger menu -->
         <div :class="['mobile-menu', { open: isMenuOpen }]">
           <div class="menu-content flex flex-col gap-5">
-            <div class="flex items-end justify-end p-4">
-              <button
-                @click="toggleMenu"
-                class="bg-primary cursor-pointer rounded-[10px] size-5 flex items-center justify-center"
-              >
-                <Icon name="codex:cross" size="20px" style="color: #fff" />
-              </button>
-            </div>
+            <button
+              @click="toggleMenu"
+              class="absolute -left-[20%] top-3 cursor-pointer rounded-[10px] size-10 flex items-center justify-center"
+            >
+              <Icon
+                class="hover:rotate-90 transition-all duration-1000"
+                name="codex:cross"
+                size="40px"
+                style="color: #fff"
+              />
+            </button>
             <div class="flex items-center justify-center">
               <img
                 class="size-[117px] object-contain"
@@ -301,30 +332,7 @@ const toggleMenu = () => {
                 alt="logo"
               />
             </div>
-            <div class="flex justify-center gap-2.5">
-              <button
-                :class="
-                  service
-                    ? 'bg-[#F1F2F3] text-light-grey '
-                    : 'bg-primary text-white'
-                "
-                class="cursor-pointer rounded-[10px] py-2 px-4"
-                @click="service = false"
-              >
-                منو
-              </button>
-              <button
-                :class="
-                  service
-                    ? 'bg-primary text-white'
-                    : 'bg-[#F1F2F3] text-light-grey '
-                "
-                class="cursor-pointer rounded-[10px] py-2 px-4 transition-all duration-300"
-                @click="service = true"
-              >
-                خدمات ما
-              </button>
-            </div>
+            <div class="flex justify-center gap-2.5"></div>
             <ul class="p-4 text-dark" v-if="service">
               <li>
                 <NuxtLink to="#" class="block py-2 px-4">خدمات زیبایی</NuxtLink>
@@ -335,32 +343,81 @@ const toggleMenu = () => {
             </ul>
             <ul class="p-4 text-dark" v-else>
               <li>
-                <NuxtLink to="/" class="block py-2 px-4 text-primary"
+                <NuxtLink to="/" class="block py-2 px-4 text-primary hover:text-primary"
                   >صفحه اصلی</NuxtLink
                 >
               </li>
               <li>
-                <NuxtLink to="/contact-us" class="block py-2 px-4"
+                <div
+                  class="flex cursor-pointer items-center justify-between py-2 px-4 hover:text-primary"
+                  @click="toggleServicesMenu"
+                >
+                  <span>خدمات ما</span>
+                  <Icon
+                    name="dashicons:arrow-down"
+                    size="24"
+                    class="icon text-black transition-transform duration-200"
+                    :class="{ 'rotate-180': isServicesMenuOpen }"
+                  />
+                </div>
+                <ul
+                  v-if="isServicesMenuOpen"
+                  class="pl-6 transition-all duration-300 overflow-hidden mr-5"
+                >
+                  <li>
+                    <NuxtLink
+                      to="/services/service1"
+                      class="block py-2 px-4 hover:text-primary"
+                      >هایفوتراپی</NuxtLink
+                    >
+                  </li>
+                  <li>
+                    <NuxtLink
+                      to="/services/service2"
+                      class="block py-2 px-4 hover:text-primary"
+                      >لیزر موهای زائد</NuxtLink
+                    >
+                  </li>
+                  <li>
+                    <NuxtLink
+                      to="/services/service3"
+                      class="block py-2 px-4 hover:text-primary"
+                      >تزریقات زیبایی</NuxtLink
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <NuxtLink
+                  to="/contact-us"
+                  class="block py-2 px-4 hover:text-primary"
                   >تماس با ما</NuxtLink
                 >
               </li>
               <li>
-                <NuxtLink to="#" class="block py-2 px-4"
+                <NuxtLink to="#" class="block py-2 px-4 hover:text-primary"
                   >رزو آنلاین نوبت</NuxtLink
                 >
               </li>
               <li>
-                <NuxtLink to="#" class="block py-2 px-4">بلاگ</NuxtLink>
+                <NuxtLink to="#" class="block py-2 px-4 hover:text-primary"
+                  >بلاگ</NuxtLink
+                >
               </li>
               <li>
-                <NuxtLink to="/about-us" class="block py-2 px-4"
+                <NuxtLink
+                  to="/about-us"
+                  class="block py-2 px-4 hover:text-primary"
                   >درباره ما</NuxtLink
                 >
               </li>
               <li>
-                <NuxtLink to="#" class="block py-2 px-4">فروشگاه</NuxtLink>
+                <NuxtLink to="#" class="block py-2 px-4 hover:text-primary"
+                  >فروشگاه</NuxtLink
+                >
               </li>
             </ul>
+          
             <div class="flex flex-col gap-5 px-4">
               <NuxtLink
                 to="/contact-us"
@@ -375,9 +432,9 @@ const toggleMenu = () => {
             </div>
           </div>
         </div>
-  
+
         <!--end hamburger menu -->
-  
+
         <!-- end mobile -->
       </nav>
     </div>
@@ -440,5 +497,11 @@ const toggleMenu = () => {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease;
+}
+
+.fixed.top-0 {
+  transition: top 0.3s ease-in-out;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
 }
 </style>

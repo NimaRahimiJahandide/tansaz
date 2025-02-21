@@ -6,6 +6,10 @@ export default defineNuxtConfig({
     devtools: { enabled: false },
     css: ["~/assets/css/tailwind.css"],
 
+    app: {
+        pageTransition: { name: 'page', mode: 'out-in' }
+      },
+
     modules: ["@vueuse/nuxt", "@pinia/nuxt", "@nuxt/icon", "nuxt-swiper", 'nuxt-aos'],
 
     vite: {

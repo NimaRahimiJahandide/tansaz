@@ -19,9 +19,9 @@ setTimeout(() => {
       >
         <div class="w-full h-[500px] bg-gray-300 rounded animate-pulse"></div>
       </div>
-      <div v-else class="w-full flex md:flex-row flex-col">
+      <div v-else class="w-full flex md:flex-row bg-background-input  rounded-3xl flex-col shadow-2xl">
         <div
-          class="md:w-1/2 p-8 bg-background-input md:rounded-r-3xl rounded-t-3xl"
+          class="md:w-1/2 p-8"
         >
           <div class="mb-8">
             <h2 class="text-2xl mb-2">
@@ -107,23 +107,23 @@ setTimeout(() => {
             </div>
           </div>
         </div>
-        <div class="md:w-1/2 bg-neutral-900 p-8 md:rounded-l-3xl rounded-b-3xl">
+        <div class="md:w-1/2 p-8">
           <div
             class="flex flex-col md:flex-row justify-between items-start gap-5"
           >
             <div class="w-full space-y-6">
               <div class="space-y-2">
-                <label class="block text-white text-sm">
+                <label class="block text-sm">
                   نام و نام خانوادگی *
                 </label>
                 <input type="text" class="w-full p-3 rounded-lg bg-white" />
               </div>
               <div class="space-y-2">
-                <label class="block text-white text-sm"> شماره موبایل * </label>
+                <label class="block text-sm"> شماره موبایل * </label>
                 <input type="tel" class="w-full p-3 rounded-lg bg-white" />
               </div>
               <div class="space-y-2">
-                <label class="block text-white text-sm">
+                <label class="block text-sm">
                   در چه زمینه‌ای مشاوره میخواهید؟ *
                 </label>
                 <details class="relative">
@@ -153,7 +153,7 @@ setTimeout(() => {
                 </details>
               </div>
               <div class="space-y-2">
-                <label class="block text-white text-sm">
+                <label class="block text-sm">
                   توضیحات در صورت نیاز
                 </label>
                 <textarea
