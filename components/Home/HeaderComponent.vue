@@ -172,20 +172,19 @@ const slides = ref([
         </div>
         <!-- start slider desktop -->
         <div
-          class="hidden md:flex w-full min-[852px]:max-w-md max-w-[350px] -z-1"
+          class="hidden md:flex w-full min-[852px]:max-w-md max-w-[350px]"
         >
           <swiper-container
-            class="h-full w-full swiper-container -z-1"
+            class="h-full w-full swiper-container"
             :loop="true"
-            :pagination="true"
+            :pagination="{ clickable: true }"
             :slides-per-view="1"
             :space-between="0"
-            :grab-cursor="false"
           >
             <swiper-slide
               v-for="slide in slides"
               :key="`slide-basic-${slide.id}`"
-              class="swiper-slide w-full rounded-2xl h-full -z-1"
+              class="swiper-slide w-full rounded-2xl h-full -z-10"
             >
               <img
                 :src="slide.image"

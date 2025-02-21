@@ -21,11 +21,11 @@ const toggleMenu = () => {
         <div
           class="md:flex hidden justify-between items-center py-[15px] max-w-[1200px] mx-auto px-3"
         >
-          <div class="flex items-center gap-[20px]">
+          <div class="flex items-center gap-[1.25rem]">
             <div class="w-[108px] h-[68px] bg-gray-300 rounded animate-pulse"></div>
-            <div class="w-[200px] lg:w-[420px] h-[68px] bg-gray-300 rounded animate-pulse"></div>
+            <div class="w-[200px] lg:w-[30rem] h-[68px] bg-gray-300 rounded animate-pulse"></div>
           </div>
-          <div class="flex items-center gap-[10px]">
+          <div class="flex items-center gap-[0.625rem]">
             <div class="size-10 bg-gray-300 rounded animate-pulse"></div>
             <div class="size-10 bg-gray-300 rounded animate-pulse"></div>
             <div class="w-[170px] h-10 bg-gray-300 rounded animate-pulse"></div>
@@ -35,15 +35,15 @@ const toggleMenu = () => {
         <hr />
         <!-- bottom of navbar -->
         <ul
-          class="md:flex hidden items-center justify-center py-[10px] gap-2 sticky top-0"
+          class="md:flex hidden items-center justify-center py-[0.625rem] gap-2 sticky top-0"
         >
           <li v-for="(item, index) in 4" :key="index" class="w-[100px] h-10 bg-gray-300 rounded animate-pulse"></li>
         </ul>
         <hr />
         <!-- start mobile -->
-        <div class="flex justify-between md:hidden px-3 py-[10px]">
+        <div class="flex justify-between md:hidden px-3 py-[0.625rem]">
           <div class="size-10 bg-gray-300 rounded animate-pulse"></div>
-          <div class="flex gap-[10px]">
+          <div class="flex gap-[0.625rem]">
             <div class="size-10 bg-gray-300 rounded animate-pulse"></div>
             <div class="size-10 bg-gray-300 rounded animate-pulse"></div>
           </div>
@@ -58,28 +58,28 @@ const toggleMenu = () => {
       <nav>
         <!-- top of navbar -->
         <div
-          class="md:flex hidden justify-between items-center py-[15px] max-w-[1200px] mx-auto px-3"
+          class="md:flex hidden justify-between items-center py-[15px] max-w-[75rem] mx-auto px-3"
         >
-          <div class="flex items-center gap-[20px]">
-            <NuxtLink to="#" class="flex items-center py-4 px-2">
+          <div class="flex items-center gap-[1.25rem]">
+            <NuxtLink to="/" class="flex items-center py-4 px-2">
               <img class="w-[108px]" src="/icons/logo.png" alt="logo" />
             </NuxtLink>
             <input
-              class="bg-background-input py-4 pr-4 pl-7 w-[200px] lg:w-[420px] focus:border-none focus:outline-none border-none rounded-2xl ml-2"
+              class="bg-background-input py-4 pr-4 pl-7 w-[12.5rem] lg:w-[32rem] focus:border-none focus:outline-none border-none rounded-2xl ml-2"
               type="text"
               placeholder="جستجو محصولات"
             />
           </div>
-          <div class="flex items-center gap-[10px]">
+          <div class="flex items-center gap-[0.625rem]">
             <NuxtLink
               to="#"
-              class="bg-[#333333] rounded-[10px] size-10 flex items-center justify-center max-h-10"
+              class="bg-[#333333] rounded-[0.625rem] size-10 flex items-center justify-center max-h-10"
             >
               <Icon name="mdi:user" size="24px" style="color: #fff" />
             </NuxtLink>
             <NuxtLink
               to="#"
-              class="bg-primary rounded-[10px] size-10 flex items-center justify-center max-h-10"
+              class="bg-primary rounded-[0.625rem] size-10 flex items-center justify-center max-h-10"
             >
               <Icon
                 name="teenyicons:basket-solid"
@@ -94,7 +94,7 @@ const toggleMenu = () => {
               <span>071-36385004</span>
             </a>
             <NuxtLink
-              class="bg-primary whitespace-nowrap py-3 px-6 rounded-[10px] text-white flex items-center justify-center max-h-10"
+              class="bg-primary whitespace-nowrap py-3 px-6 rounded-[0.625rem] text-white flex items-center justify-center max-h-10"
               to="/reserve"
             >
               <span>رزرو آنلاین</span>
@@ -104,7 +104,7 @@ const toggleMenu = () => {
         <hr />
         <!-- bottom of navbar -->
         <ul
-          class="md:flex hidden items-center justify-center py-[10px] sticky top-0"
+          class="md:flex hidden items-center justify-center py-[0.625rem] sticky top-0"
         >
           <li>
             <NuxtLink to="/" class="text-primary py-2 px-4">صفحه اصلی</NuxtLink>
@@ -112,15 +112,15 @@ const toggleMenu = () => {
           <li>
             <NuxtLink
               to="#"
-              class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px]"
+              class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[0.625rem]"
             >
               فروشگاه</NuxtLink
             >
           </li>
           <li class="relative group">
             <NuxtLink
-              to="/pages/beauty-services"
-              class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px] flex items-center justify-center gap-1"
+              to="/services/beauty-services"
+              class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[0.625rem] flex items-center justify-center gap-1"
             >
               <span>خدمات زیبایی</span>
               <Icon
@@ -131,12 +131,12 @@ const toggleMenu = () => {
             </NuxtLink>
             <div class="absolute top-full left-0 right-0 h-4"></div>
             <ul
-              class="hidden group-hover:flex lg:w-[1000px] w-[750px] gap-[10px] left-1/2 transform -translate-x-1/2 bg-white shadow-[0_0px_35px_rgba(0,0,0,0.12)] absolute top-14 p-[35px] rounded-[10px] z-50"
+              class="hidden group-hover:flex lg:w-[1000px] w-[750px] gap-[0.625rem] left-1/2 transform -translate-x-1/2 bg-white shadow-[0_0px_35px_rgba(0,0,0,0.12)] absolute top-14 p-[35px] rounded-[0.625rem] z-50"
             >
-              <li class="flex flex-col gap-[20px] flex-grow">
+              <li class="flex flex-col gap-[1.25rem] flex-grow">
                 <NuxtLink
-                  to="/pages/hyphotherapy"
-                  class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
+                  to="/services/hyphotherapy"
+                  class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[0.625rem]"
                 >
                   <Icon
                     name="mingcute:arrow-left-circle-fill"
@@ -146,8 +146,8 @@ const toggleMenu = () => {
                   هایفوتراپی
                 </NuxtLink>
                 <NuxtLink
-                  to="/pages/laser-hair-removal"
-                  class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
+                  to="/services/laser-hair-removal"
+                  class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[0.625rem]"
                 >
                   <Icon
                     name="mingcute:arrow-left-circle-fill"
@@ -157,8 +157,8 @@ const toggleMenu = () => {
                   لیزررفع مو های زائد
                 </NuxtLink>
                 <NuxtLink
-                  to="/pages/beauty-injections"
-                  class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
+                  to="/services/beauty-injections"
+                  class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[0.625rem]"
                 >
                   <Icon
                     name="mingcute:arrow-left-circle-fill"
@@ -171,27 +171,27 @@ const toggleMenu = () => {
                   class="list-disc list-inside marker:text-primary flex flex-col gap-1"
                 >
                   <li class="navbar-children_item">
-                    <NuxtLink to="/pages/botox"> بوتاکس </NuxtLink>
+                    <NuxtLink to="/services/botox"> بوتاکس </NuxtLink>
                   </li>
                   <li class="navbar-children_item">
-                    <NuxtLink to="/pages/gel-and-filler">
+                    <NuxtLink to="/services/gel-and-filler">
                       ژل، فیلر و آنزیم
                     </NuxtLink>
                   </li>
                   <li class="navbar-children_item">
-                    <NuxtLink to="/pages/hydrating-mesogels">
+                    <NuxtLink to="/services/hydrating-mesogels">
                       مزوژل های آبرسان
                     </NuxtLink>
                   </li>
                   <li class="navbar-children_item">
-                    <NuxtLink to="/pages/mesotherapy"> مزوتراپی و prp </NuxtLink>
+                    <NuxtLink to="/services/mesotherapy"> مزوتراپی و prp </NuxtLink>
                   </li>
                 </ul>
               </li>
-              <li class="flex flex-col gap-[20px] flex-grow">
+              <li class="flex flex-col gap-[1.25rem] flex-grow">
                 <NuxtLink
                   to="#"
-                  class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
+                  class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[0.625rem]"
                 >
                   <Icon
                     name="mingcute:arrow-left-circle-fill"
@@ -223,10 +223,10 @@ const toggleMenu = () => {
                   </li>
                 </ul>
               </li>
-              <li class="flex flex-col gap-[20px] flex-grow">
+              <li class="flex flex-col gap-[1.25rem] flex-grow">
                 <NuxtLink
                   to="#"
-                  class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
+                  class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[0.625rem]"
                 >
                   <Icon
                     name="mingcute:arrow-left-circle-fill"
@@ -241,7 +241,7 @@ const toggleMenu = () => {
           <li>
             <NuxtLink
               to="#"
-              class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px] flex items-center justify-center gap-1"
+              class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[0.625rem] flex items-center justify-center gap-1"
             >
               <span>خدمات لاغری</span>
               <Icon
@@ -254,19 +254,19 @@ const toggleMenu = () => {
         </ul>
         <hr />
         <!-- start mobile -->
-        <div class="flex justify-between md:hidden px-3 py-[10px]">
+        <div class="flex justify-between md:hidden px-3 py-[0.625rem]">
           <div>
             <button
               @click="toggleMenu"
-              class="bg-[#333333] rounded-[10px] cursor-pointer size-10 flex items-center justify-center max-h-10"
+              class="bg-[#333333] rounded-[0.625rem] cursor-pointer size-10 flex items-center justify-center max-h-10"
             >
               <Icon name="pajamas:hamburger" size="18" style="color: #fff" />
             </button>
           </div>
-          <div class="flex gap-[10px]">
+          <div class="flex gap-[0.625rem]">
             <NuxtLink
               to="#"
-              class="bg-primary rounded-[10px] size-10 flex items-center justify-center max-h-10"
+              class="bg-primary rounded-[0.625rem] size-10 flex items-center justify-center max-h-10"
             >
               <Icon
                 name="teenyicons:basket-solid"
@@ -276,7 +276,7 @@ const toggleMenu = () => {
             </NuxtLink>
             <NuxtLink
               to="#"
-              class="bg-[#333333] rounded-[10px] size-10 flex items-center justify-center max-h-10"
+              class="bg-[#333333] rounded-[0.625rem] size-10 flex items-center justify-center max-h-10"
             >
               <Icon name="mdi:user" size="24px" style="color: #fff" />
             </NuxtLink>
@@ -289,9 +289,9 @@ const toggleMenu = () => {
             <div class="flex items-end justify-end p-4">
               <button
                 @click="toggleMenu"
-                class="bg-primary cursor-pointer rounded-[10px] size-5 flex items-center justify-center"
+                class="bg-primary cursor-pointer rounded-[0.625rem] size-5 flex items-center justify-center"
               >
-                <Icon name="codex:cross" size="20px" style="color: #fff" />
+                <Icon name="codex:cross" size="1.25rem" style="color: #fff" />
               </button>
             </div>
             <div class="flex items-center justify-center">
@@ -308,7 +308,7 @@ const toggleMenu = () => {
                     ? 'bg-[#F1F2F3] text-light-grey '
                     : 'bg-primary text-white'
                 "
-                class="cursor-pointer rounded-[10px] py-2 px-4"
+                class="cursor-pointer rounded-[0.625rem] py-2 px-4"
                 @click="service = false"
               >
                 منو
@@ -319,7 +319,7 @@ const toggleMenu = () => {
                     ? 'bg-primary text-white'
                     : 'bg-[#F1F2F3] text-light-grey '
                 "
-                class="cursor-pointer rounded-[10px] py-2 px-4 transition-all duration-300"
+                class="cursor-pointer rounded-[0.625rem] py-2 px-4 transition-all duration-300"
                 @click="service = true"
               >
                 خدمات ما
@@ -364,12 +364,12 @@ const toggleMenu = () => {
             <div class="flex flex-col gap-5 px-4">
               <NuxtLink
                 to="/contact-us"
-                class="flex w-full py-[17px] bg-black text-white items-center justify-center rounded-[10px]"
+                class="flex w-full py-[17px] bg-black text-white items-center justify-center rounded-[0.625rem]"
                 >تماس با ما</NuxtLink
               >
               <NuxtLink
                 to="#"
-                class="flex w-full py-[17px] bg-primary text-white items-center justify-center rounded-[10px]"
+                class="flex w-full py-[17px] bg-primary text-white items-center justify-center rounded-[0.625rem]"
                 >محصولات ما</NuxtLink
               >
             </div>
