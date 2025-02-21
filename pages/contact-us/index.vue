@@ -16,9 +16,9 @@ setTimeout(() => {
       <div class="w-full h-[500px] bg-gray-300 rounded animate-pulse"></div>
     </div>
     <div v-else
-      class="flex flex-col md:flex-row max-w-[1200px] text-dark mx-auto px-3 mt-[75px]"
+      class="flex flex-col md:flex-row max-w-[1200px] rounded-4xl bg-background-input text-dark mx-auto px-3 mt-[75px] shadow-2xl"
     >
-      <div class="md:w-1/2 p-8 bg-background-input">
+      <div class="md:w-1/2 p-8">
         <h2 class="text-2xl mb-8">
           راه های <span class="text-primary">ارتباطی</span> با ما
         </h2>
@@ -92,30 +92,30 @@ setTimeout(() => {
           </div>
         </div>
       </div>
-      <div class="md:w-1/2 bg-neutral-900 p-8">
+      <div class="md:w-1/2  p-8">
         <form>
           <div class="mb-6">
-            <label class="block mb-2 text-white text-sm">
+            <label class="block mb-2 text-sm">
               نام و نام خانوادگی <span class="text-primary">*</span>
             </label>
             <input
               type="text"
-              class="w-full p-3 rounded bg-white"
+              class="w-full p-3 rounded bg-white focus:border-primary focus:outline-primary"
               required=""
             />
           </div>
           <div class="mb-6">
-            <label class="block mb-2 text-white text-sm">
+            <label class="block mb-2 text-sm">
               شماره موبایل <span class="text-primary">*</span>
             </label>
-            <input type="tel" class="w-full p-3 rounded bg-white" required="" />
+            <input type="tel" class="w-full p-3 rounded bg-white focus:border-primary focus:outline-primary" required="" />
           </div>
           <div class="mb-6">
-            <label class="block mb-2 text-white text-sm">
+            <label class="block mb-2 text-sm">
               توضیحات شما <span class="text-primary">*</span>
             </label>
             <textarea
-              class="w-full p-3 rounded bg-white h-40"
+              class="w-full p-3 resize-none rounded bg-white focus:border-primary focus:outline-primary h-40"
               required=""
             ></textarea>
           </div>
@@ -124,7 +124,7 @@ setTimeout(() => {
             <div class="g-recaptcha"></div>
           </div>
           <button
-            class="w-full bg-primary text-white py-3 rounded hover:bg-red-700 transition duration-200"
+            class="w-full bg-primary text-white py-3 rounded hover:bg-red-700 transition duration-200 shadow-lg"
           >
             ثبت نظر
           </button>

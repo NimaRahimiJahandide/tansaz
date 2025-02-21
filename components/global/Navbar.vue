@@ -87,7 +87,7 @@ onBeforeUnmount(() => {
           class="md:flex hidden justify-between items-center py-[15px] max-w-[1200px] mx-auto px-3"
         >
           <div class="flex items-center gap-[20px]">
-            <NuxtLink to="#" class="flex items-center py-4 px-2">
+            <NuxtLink to="/" class="flex items-center py-4 px-2">
               <img class="w-[108px]" src="/icons/logo.png" alt="logo" />
             </NuxtLink>
             <input
@@ -145,7 +145,7 @@ onBeforeUnmount(() => {
           </li>
           <li class="relative group">
             <NuxtLink
-              to="/pages/beauty-services"
+              to="/services/beauty-services"
               class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px] flex items-center justify-center gap-1"
             >
               <span>خدمات زیبایی</span>
@@ -161,7 +161,7 @@ onBeforeUnmount(() => {
             >
               <li class="flex flex-col gap-[20px] flex-grow">
                 <NuxtLink
-                  to="/pages/hyphotherapy"
+                  to="/services/hyphotherapy"
                   class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
                 >
                   <Icon
@@ -172,7 +172,7 @@ onBeforeUnmount(() => {
                   هایفوتراپی
                 </NuxtLink>
                 <NuxtLink
-                  to="/pages/laser-hair-removal"
+                  to="/services/laser-hair-removal"
                   class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
                 >
                   <Icon
@@ -183,7 +183,7 @@ onBeforeUnmount(() => {
                   لیزررفع مو های زائد
                 </NuxtLink>
                 <NuxtLink
-                  to="/pages/beauty-injections"
+                  to="/services/beauty-injections"
                   class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
                 >
                   <Icon
@@ -197,20 +197,20 @@ onBeforeUnmount(() => {
                   class="list-disc list-inside marker:text-primary flex flex-col gap-1"
                 >
                   <li class="navbar-children_item">
-                    <NuxtLink to="/pages/botox"> بوتاکس </NuxtLink>
+                    <NuxtLink to="/services/botox"> بوتاکس </NuxtLink>
                   </li>
                   <li class="navbar-children_item">
-                    <NuxtLink to="/pages/gel-and-filler">
+                    <NuxtLink to="/services/gel-and-filler">
                       ژل، فیلر و آنزیم
                     </NuxtLink>
                   </li>
                   <li class="navbar-children_item">
-                    <NuxtLink to="/pages/hydrating-mesogels">
+                    <NuxtLink to="/services/hydrating-mesogels">
                       مزوژل های آبرسان
                     </NuxtLink>
                   </li>
                   <li class="navbar-children_item">
-                    <NuxtLink to="/pages/mesotherapy">
+                    <NuxtLink to="/services/mesotherapy">
                       مزوتراپی و prp
                     </NuxtLink>
                   </li>

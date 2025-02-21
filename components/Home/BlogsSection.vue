@@ -24,7 +24,7 @@ const slides = ref([
 </script>
 
 <template>
-  <div class="max-w-[1200px] mx-auto px-3 text-dark mt-[75px]">
+  <div class="max-w-[1200px] mx-auto px-3 text-dark mt-[75px] md:mb-28">
     <div class="flex items-center justify-between">
       <h3 class="md:text-[30px] text-[22px] font-light">جدیدترین <span class="text-primary">مقالات</span> آموزشی</h3>
       <NuxtLink
