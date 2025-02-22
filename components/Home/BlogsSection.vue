@@ -26,9 +26,11 @@ const slides = ref([
 <template>
   <div class="max-w-[1200px] mx-auto px-3 text-dark mt-[75px] md:mb-28">
     <div class="flex items-center justify-between">
-      <h3 class="md:text-[30px] text-[22px] font-light">جدیدترین <span class="text-primary">مقالات</span> آموزشی</h3>
+      <h3 class="md:text-[30px] text-[22px] font-light">
+        جدیدترین <span class="text-primary">مقالات</span> آموزشی
+      </h3>
       <NuxtLink
-        class="text-white w-fit bg-primary focus:outline-none whitespace-nowrap gap-1 focus:ring-primary shadow-lg shadow-primary/50  rounded-lg py-[18px] md:px-[25px] px-[5px] flex justify-center items-center max-h-[51px]"
+        class="text-white w-fit bg-primary focus:outline-none whitespace-nowrap gap-1 focus:ring-primary shadow-lg shadow-primary/50 rounded-lg py-[18px] md:px-[25px] px-[5px] flex justify-center items-center max-h-[51px]"
         to="/blogs"
       >
         <span>خواندن مقالات</span>
@@ -56,16 +58,7 @@ const slides = ref([
           :key="`slide-basic-${slide.id}`"
           class="swiper-slide rounded-2xl h-full"
         >
-          <NuxtLink to="#"
-            class="rounded-3xl h-full md:h-[400px]  bg-primary"
-          >
-              <img
-                :src="slide.image"
-                alt="Robusta Coffee"
-                class="h-full w-full object-cover rounded-3xl"
-              />
-              <h4>{{slide.text}}</h4>
-          </NuxtLink>
+          <BlogCardComponent :title="slide.text" :image="slide.image" />
         </swiper-slide>
       </swiper-container>
     </div>

@@ -12,7 +12,7 @@ setTimeout(() => {
 }, 2000);
 
 const handleScroll = () => {
-  isSticky.value = window.scrollY > 50;
+  isSticky.value = window.scrollY > 20;
 };
 
 const toggleMenu = () => {
