@@ -421,7 +421,7 @@ onBeforeUnmount(() => {
             <div class="flex flex-col gap-5 px-4">
               <NuxtLink
                 to="/contact-us"
-                class="flex w-full py-[17px] bg-black text-white items-center justify-center rounded-[10px]"
+                class="flex w-full py-[17px] bg-space text-white items-center justify-center rounded-[10px]"
                 >تماس با ما</NuxtLink
               >
               <NuxtLink

@@ -64,7 +64,7 @@ setTimeout(() => {
         <ReservationAndContactUsBanner  />
 
         <div class="flex md:flex-row flex-col gap-[20px] mt-[75px]">
-          <div class="flex flex-col gap-2.5 bg-dark text-white rounded-[25px] p-[35px] w-full">
+          <div class="flex flex-col gap-2.5 bg-space text-white rounded-[25px] p-[35px] w-full">
             <h4 class="text-[30px] font-bold">باشگاه مشتریان</h4>
             <p class="text-[18px] font-light">در باشگاه مشتریان از امتیازات ویژه کلینیک تن ساز بهره مند شوید</p>
             <NuxtLink class="w-fit text-white bg-primary px-[15px] py-2 rounded-[25px]" to="#">کلیک کنید</NuxtLink>
@@ -72,7 +72,7 @@ setTimeout(() => {
           <div class="flex flex-col gap-2.5 bg-primary bg-[url(/images/pattern.png)] text-white rounded-[25px] p-[35px] w-full">
             <h4 class="text-[30px] font-bold">خدمات اقساطی</h4>
             <p class="text-[18px] font-light">تا سقف 200 میلیون تومان، بدون سود و بدون ضامن</p>
-            <NuxtLink class="w-fit text-white bg-dark px-[15px] py-2 rounded-[25px]" to="#">شرایط ویژه</NuxtLink>
+            <NuxtLink class="w-fit text-white bg-space px-[15px] py-2 rounded-[25px]" to="#">شرایط ویژه</NuxtLink>
           </div>
         </div>
       </div>
