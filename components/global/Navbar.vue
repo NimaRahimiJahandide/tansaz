@@ -2,34 +2,13 @@
 import { useLoadingState } from "@/store/loadingState";
 const service = ref(false);
 const isMenuOpen = ref(false);
-const isSticky = ref(false);
 const loadingState = useLoadingState();
 
-const isServicesMenuOpen =  ref(false)
+const isServicesMenuOpen = ref(false);
 
 setTimeout(() => {
   loadingState.setLoading(false);
 }, 2000);
-
-const handleScroll = () => {
-  isSticky.value = window.scrollY > 20;
-};
-
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;
-};
-
-const toggleServicesMenu = () => {
-  isServicesMenuOpen.value = !isServicesMenuOpen.value;
-}
-
-onMounted(() => {
-  window.addEventListener("scroll", handleScroll);
-});
-
-onBeforeUnmount(() => {
-  window.removeEventListener("scroll", handleScroll);
-});
 </script>
 <template>
   <div>
@@ -54,18 +33,6 @@ onBeforeUnmount(() => {
             <div class="w-[115px] h-10 bg-gray-300 rounded animate-pulse"></div>
           </div>
         </div>
-        <hr />
-        <!-- bottom of navbar -->
-        <ul
-          class="md:flex hidden items-center justify-center py-[10px] gap-2 sticky top-0"
-        >
-          <li
-            v-for="(item, index) in 4"
-            :key="index"
-            class="w-[100px] h-10 bg-gray-300 rounded animate-pulse"
-          ></li>
-        </ul>
-        <hr />
         <!-- start mobile -->
         <div class="flex justify-between md:hidden px-3 py-[10px]">
           <div class="size-10 bg-gray-300 rounded animate-pulse"></div>
@@ -77,7 +44,6 @@ onBeforeUnmount(() => {
         <!-- end mobile -->
       </nav>
     </div>
-
     <div v-else>
       <!-- Overlay -->
       <div :class="['overlay', { open: isMenuOpen }]" @click="toggleMenu"></div>
@@ -127,162 +93,10 @@ onBeforeUnmount(() => {
             </NuxtLink>
           </div>
         </div>
-        <!-- bottom of navbar -->
-        <ul
-          :class="{ 'fixed top-0': isSticky, 'fixed top-32': !isSticky }"
-          class="md:flex hidden items-center justify-center py-[10px] border-b w-full"
-        >
-          <li>
-            <NuxtLink to="/" class="text-primary py-2 px-4">صفحه اصلی</NuxtLink>
-          </li>
-          <li>
-            <NuxtLink
-              to="#"
-              class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px]"
-            >
-              فروشگاه</NuxtLink
-            >
-          </li>
-          <li class="relative group">
-            <NuxtLink
-              to="/services/beauty-services"
-              class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px] flex items-center justify-center gap-1"
-            >
-              <span>خدمات زیبایی</span>
-              <Icon
-                name="dashicons:arrow-down"
-                size="24"
-                class="icon text-black"
-              />
-            </NuxtLink>
-            <div class="absolute top-full left-0 right-0 h-4"></div>
-            <ul
-              class="hidden group-hover:flex lg:w-[55rem] w-[40rem] gap-[10px] left-1/2 transform -translate-x-1/2 bg-white shadow-[0_0px_35px_rgba(0,0,0,0.12)] absolute top-14 p-[35px] rounded-[10px]"
-            >
-              <li class="flex flex-col gap-[20px] flex-grow">
-                <NuxtLink
-                  to="/services/hyphotherapy"
-                  class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
-                >
-                  <Icon
-                    name="mingcute:arrow-left-circle-fill"
-                    size="18"
-                    class="text-primary"
-                  />
-                  هایفوتراپی
-                </NuxtLink>
-                <NuxtLink
-                  to="/services/laser-hair-removal"
-                  class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
-                >
-                  <Icon
-                    name="mingcute:arrow-left-circle-fill"
-                    size="18"
-                    class="text-primary"
-                  />
-                  لیزررفع مو های زائد
-                </NuxtLink>
-                <NuxtLink
-                  to="/services/beauty-injections"
-                  class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
-                >
-                  <Icon
-                    name="mingcute:arrow-left-circle-fill"
-                    size="18"
-                    class="text-primary"
-                  />
-                  تزریقات زیبایی
-                </NuxtLink>
-                <ul
-                  class="list-disc list-inside marker:text-primary flex flex-col gap-1"
-                >
-                  <li class="navbar-children_item">
-                    <NuxtLink to="/services/botox"> بوتاکس </NuxtLink>
-                  </li>
-                  <li class="navbar-children_item">
-                    <NuxtLink to="/services/gel-and-filler">
-                      ژل، فیلر و آنزیم
-                    </NuxtLink>
-                  </li>
-                  <li class="navbar-children_item">
-                    <NuxtLink to="/services/hydrating-mesogels">
-                      مزوژل های آبرسان
-                    </NuxtLink>
-                  </li>
-                  <li class="navbar-children_item">
-                    <NuxtLink to="/services/mesotherapy">
-                      مزوتراپی و prp
-                    </NuxtLink>
-                  </li>
-                </ul>
-              </li>
-              <li class="flex flex-col gap-[20px] flex-grow">
-                <NuxtLink
-                  to="#"
-                  class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
-                >
-                  <Icon
-                    name="mingcute:arrow-left-circle-fill"
-                    size="18"
-                    class="text-primary"
-                  />
-                  اقدامات جراحی
-                </NuxtLink>
-                <ul
-                  class="list-disc list-inside marker:text-primary flex flex-col gap-1"
-                >
-                  <li class="navbar-children_item">
-                    <NuxtLink to="#"> جراحی بوکال فت </NuxtLink>
-                  </li>
-                  <li class="navbar-children_item">
-                    <NuxtLink to="#"> جراحی سانترال لب </NuxtLink>
-                  </li>
-                  <li class="navbar-children_item">
-                    <NuxtLink to="#"> کاشت نخهای لیفت و جوانساز </NuxtLink>
-                  </li>
-                  <li class="navbar-children_item">
-                    <NuxtLink to="#"> ساب سیژن تراپی </NuxtLink>
-                  </li>
-                  <li class="navbar-children_item">
-                    <NuxtLink to="#"> تزریق و پیوند اتولوگ چربی </NuxtLink>
-                  </li>
-                  <li class="navbar-children_item">
-                    <NuxtLink to="#"> ساکشن غبغب </NuxtLink>
-                  </li>
-                </ul>
-              </li>
-              <li class="flex flex-col gap-[20px] flex-grow">
-                <NuxtLink
-                  to="#"
-                  class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
-                >
-                  <Icon
-                    name="mingcute:arrow-left-circle-fill"
-                    size="18"
-                    class="text-primary"
-                  />
-                  فشیال تخصصی
-                </NuxtLink>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <NuxtLink
-              to="#"
-              class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px] flex items-center justify-center gap-1"
-            >
-              <span>خدمات لاغری</span>
-              <Icon
-                name="dashicons:arrow-down"
-                size="24"
-                class="icon text-black"
-              />
-            </NuxtLink>
-          </li>
-        </ul>
-        <hr v-if="!isSticky" />
         <!-- start mobile -->
-        <div class="flex fixed w-full bg-white justify-between md:hidden px-3 py-[10px]">
+        <div
+          class="flex fixed w-full bg-white justify-between md:hidden px-3 py-[10px]"
+        >
           <div>
             <button
               @click="toggleMenu"
@@ -310,7 +124,6 @@ onBeforeUnmount(() => {
             </NuxtLink>
           </div>
         </div>
-
         <!--start hamburger menu -->
         <div :class="['mobile-menu', { open: isMenuOpen }]">
           <div class="menu-content flex flex-col gap-5">
@@ -343,7 +156,9 @@ onBeforeUnmount(() => {
             </ul>
             <ul class="p-4 text-dark" v-else>
               <li>
-                <NuxtLink to="/" class="block py-2 px-4 text-primary hover:text-primary"
+                <NuxtLink
+                  to="/"
+                  class="block py-2 px-4 text-primary hover:text-primary"
                   >صفحه اصلی</NuxtLink
                 >
               </li>
@@ -417,7 +232,7 @@ onBeforeUnmount(() => {
                 >
               </li>
             </ul>
-          
+
             <div class="flex flex-col gap-5 px-4">
               <NuxtLink
                 to="/contact-us"
@@ -432,9 +247,7 @@ onBeforeUnmount(() => {
             </div>
           </div>
         </div>
-
         <!--end hamburger menu -->
-
         <!-- end mobile -->
       </nav>
     </div>
@@ -499,9 +312,12 @@ onBeforeUnmount(() => {
   transition: opacity 0.3s ease;
 }
 
-.fixed.top-0 {
-  transition: top 0.3s ease-in-out;
+.sticky {
+  position: -webkit-sticky; /* برای ساپورت در مرورگرهای قدیمی */
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 50;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  background-color: white;
 }
 </style>
