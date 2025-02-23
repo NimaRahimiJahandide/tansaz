@@ -51,7 +51,7 @@ const slides = ref([
       </h3>
       <NuxtLink
         class="text-white gap-1 w-fit bg-primary focus:outline-none focus:ring-primary shadow-lg shadow-primary/50  rounded-lg py-[18px] md:px-[25px] px-[15px] flex justify-center items-center max-h-[51px]"
-        to="#"
+        to="/cafe"
       >
         <span>مشاهده همه</span>
         <Icon name="mingcute:arrow-left-fill" size="20px" style="color: #fff" />

@@ -1,0 +1,386 @@
+<script setup lang="ts">
+const route = useRoute();
+
+const pageData = ref([
+  {
+    id: 1,
+    slug: "beauty-injections",
+    title: "تزریقات زیبایی",
+    data: {
+      firstSection: {
+        title: "تزریقات زیبایی در",
+        description: `کلینیک تخصصی تن ساز یکی از برترین مراکز زیبایی در شیراز است که به شما این امکان را می‌دهد تا از خدمات پیشرفته و تخصصی تزریقات زیبایی بهره‌مند شوید. این کلینیک با ارائه خدماتی نظیر تزریق ژل و فیلر، آنزیم و بوتاکس، مزو ژل‌های جوان‌ساز، همواره به عنوان یک مرکز معتبر در زمینه رفع مشکلات پوستی و بهبود زیبایی صورت شناخته می‌شود. در اینجا، شما می‌توانید با اطمینان خاطر از بهترین مواد و متریال‌های موجود در بازار، درمان‌های خود را تحت نظر پزشکان متخصص و باتجربه انجام دهید.`,
+      },
+      banner: {
+        title: '" خدمات زیبایی در تن ساز "',
+        cards: [
+          { id: 0, text: "تزریق مزوژل جوانساز", icon: "/icons/laghari.png" },
+          { id: 1, text: "ژل و فیلر", icon: "/icons/cafe.png" },
+          { id: 2, text: "مزوتراپی صورت", icon: "/icons/Equipment.png" },
+          { id: 3, text: "PRP مو و صورت", icon: "/icons/Dispatch-doctor.png" },
+        ],
+      },
+      slides: [
+        { id: 0, image: "/images/exmple1.png" },
+        { id: 1, image: "/images/exmple2.png" },
+        { id: 2, image: "/images/exmple3.png" },
+        { id: 3, image: "/images/exmple4.png" },
+        { id: 4, image: "/images/exmple5.png" },
+        { id: 5, image: "/images/exmple6.png" },
+        { id: 6, image: "/images/exmple7.png" },
+        { id: 7, image: "/images/exmple8.png" },
+        { id: 8, image: "/images/exmple9.png" },
+        { id: 9, image: "/images/exmple10.png" },
+        { id: 10, image: "/images/exmple11.jpg" },
+        { id: 11, image: "/images/exmple12.png" },
+      ],
+      cards: [
+        {
+          id: 0,
+          text: "تخصص و تجربه‌ای بی‌نظیر در ارائه خدمات پزشکی و زیبایی",
+        },
+        {
+          id: 1,
+          text: "استفاده از جدیدترین تکنولوژی‌ها و تجهیزات پیشرفته",
+        },
+        {
+          id: 2,
+          text: "تیم حرفه‌ای و متخصص در تمامی زمینه‌های درمانی",
+        },
+        {
+          id: 3,
+          text: "ارائه مشاوره‌های شخصی‌سازی شده برای هر بیمار",
+        },
+        {
+          id: 4,
+          text: "محیطی آرام، مدرن و بهداشتی برای راحتی شما",
+        },
+        {
+          id: 5,
+          text: "رضایت بیماران و نتایج موفقیت‌آمیز، تضمین کیفیت",
+        },
+      ],
+    },
+  },
+  {
+    id: 2,
+    slug: "beauty-services",
+    title: "خدمات زیبایی",
+    data: {
+      firstSection: {
+        title: "خدمات زیبایی در",
+        description: `کلینیک زیبایی و لاغری تن‌ساز، همراه همیشگی شما برای رسیدن به زیبایی و اندام ایده‌آل، مفتخر است به‌عنوان مجهزترین و تخصصی‌ترین کلینیک زیبایی و لاغری در جنوب کشور، در کنار شما باشد.
+با بهره‌گیری از پیشرفته‌ترین دستگاه‌های روز دنیا و تیمی از پزشکان مجرب و متخصص، کلینیک تن‌ساز تجربه‌ای بی‌نظیر از خدمات زیبایی، جوان‌سازی و تناسب اندام را به شما اراِئه خواهد داد.`,
+      },
+      banner: {
+        title: '" خدمات زیبایی در تن ساز "',
+        cards: [
+          {
+            id: 0,
+            text: "جراحی ها",
+            icon: "/icons/laghari.png",
+            route: "/services/surgery",
+          },
+          {
+            id: 1,
+            text: "تزریقات زیبایی",
+            icon: "/icons/cafe.png",
+            route: "/services/beauty-injections",
+          },
+          {
+            id: 2,
+            text: "دستگاه ها",
+            icon: "/icons/Equipment.png",
+            route: "/",
+          },
+          {
+            id: 3,
+            text: "بوتاکس",
+            icon: "/icons/Dispatch-doctor.png",
+            route: "/services/botox",
+          },
+        ],
+      },
+      slides: [
+        {
+          id: 0,
+          image: "/images/exmple1.png",
+        },
+        {
+          id: 1,
+          image: "/images/exmple2.png",
+        },
+        {
+          id: 2,
+          image: "/images/exmple3.png",
+        },
+        {
+          id: 3,
+          image: "/images/exmple4.png",
+        },
+        {
+          id: 4,
+          image: "/images/exmple5.png",
+        },
+        {
+          id: 5,
+          image: "/images/exmple6.png",
+        },
+        {
+          id: 6,
+          image: "/images/exmple7.png",
+        },
+        {
+          id: 7,
+          image: "/images/exmple8.png",
+        },
+        {
+          id: 8,
+          image: "/images/exmple9.png",
+        },
+        {
+          id: 9,
+          image: "/images/exmple10.png",
+        },
+        {
+          id: 10,
+          image: "/images/exmple11.jpg",
+        },
+        {
+          id: 11,
+          image: "/images/exmple12.png",
+        },
+      ],
+      cards: [
+        {
+          id: 0,
+          text: "تخصص و تجربه‌ای بی‌نظیر در ارائه خدمات پزشکی و زیبایی",
+        },
+        {
+          id: 1,
+          text: "استفاده از جدیدترین تکنولوژی‌ها و تجهیزات پیشرفته",
+        },
+        {
+          id: 2,
+          text: "تیم حرفه‌ای و متخصص در تمامی زمینه‌های درمانی",
+        },
+        {
+          id: 3,
+          text: "ارائه مشاوره‌های شخصی‌سازی شده برای هر بیمار",
+        },
+        {
+          id: 4,
+          text: "محیطی آرام، مدرن و بهداشتی برای راحتی شما",
+        },
+        {
+          id: 5,
+          text: "رضایت بیماران و نتایج موفقیت‌آمیز، تضمین کیفیت",
+        },
+      ],
+    },
+  },
+]);
+
+const firstSectionData = ref({});
+const bannerData = ref({});
+const slides = ref([]);
+const cards = ref([]);
+
+watch(
+  () => route.params.id,
+  (newId) => {
+    const selectedPage = pageData.value.find(page => page.id === parseInt(newId));
+    if (selectedPage) {
+      firstSectionData.value = selectedPage.data.firstSection;
+      bannerData.value = selectedPage.data.banner;
+      slides.value = selectedPage.data.slides;
+      cards.value = selectedPage.data.cards;
+    }
+  },
+  { immediate: true }
+);
+</script>
+
+<template>
+  <div>
+    <PagesFirstSection :firstSectionData="firstSectionData" />
+    <PagesBannerSection :bannerData="bannerData" />
+    <div class="mt-[75px] max-w-[1200px] mx-auto px-3">
+      <div class="flex items-center md:flex-row flex-col gap-[20px] mt-[75px]">
+        <div class="md:w-1/2">
+          <h3 class="text-primary text-[30px]">
+            تزریقات ژل ،فیلر و بوتاکس در تن ساز
+          </h3>
+          <div class="p-6 rounded-lg">
+            <ul class="list-disc list-inside space-y-2 text-[14px] mr-4">
+              <li>
+                تزریق بوتاکس های درمانی و زیبایی (رفع چین وچروک صورت،لیفت ابرو و
+                چشم،کوچک کردن بینی،فرم دهی چانه و ایجاد کانتورینگ زاویه فک،درمان
+                لبخند لثه ای،درمان قطعی سردردهای میگرنی ،درمان تعریق بیش از حد
+                زیر بغل و کف دست ها و درمان واژینیسموس)
+              </li>
+              <li>
+                آبرسانی عمیق،کلاژن سازی و جوانسازی گسترده و چشمگیر با تزریق
+                مزوژل های جوانساز
+              </li>
+              <li>لیفت و فرم دهی بسیار طبیعی صورت با تکنیک 10 نقطه ای جدید</li>
+              <li>روشنن سازی و افزایش شادابی و شفافیت پوست</li>
+              <li>
+                فرم دهی لب ها،اصلاح فرم بینی بدون جراحی،کانتورینگ زاویه فک و فرم
+                دهی چانه،رفع گودی زیر چشم،درمان گودی ناحیه شقیقه و اصلاح فرم
+                پیشانی و درمان غیر قرینگی های صورت به روش MD CODE
+              </li>
+              <li>پی آر پی و مزوتراپی برای درمان مشکلات پوستی</li>
+              <li>
+                پی ار پی و مزوتراپی برای درمان ریزش مو و افزایش رشد موها و بهبود
+                کیفیت موهای آسیب دیده
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="md:w-1/2">
+          <img src="/images/exmple5.png" alt="example5" />
+        </div>
+      </div>
+    </div>
+    <SliderBeforAfterExample
+      :slides="slides"
+      title="نمونه های قبل و بعد"
+      description="با اطمینانی کامل، زیبایی خود را با ما دو چندان کنید"
+    />
+    <ReservationAndContactUsBanner />
+    <div
+      class="text-dark flex flex-col gap-3.5 mt-[75px] max-w-[1200px] mx-auto px-3"
+    >
+      <h3 class="text-[28px] font-extrabold leading-8">
+        کاربردهای تزریقات زیبایی
+      </h3>
+      <h4 class="text-[24px] font-extrabold leading-8">1. بوتاکس</h4>
+      <p class="text-[21px] text-justify font-light leading-10">
+        بوتاکس یکی از محبوب‌ترین و مؤثرترین تزریقات زیبایی است که در کلینیک تن
+        ساز برای رفع چین و چروک‌ها و جوانسازی پوست استفاده می‌شود. بوتاکس با فلج
+        موقت عضلات صورت باعث کاهش چین و چروک‌های ناشی از حرکات مداوم عضلات صورت
+        می‌شود. این تزریق معمولاً برای:
+      </p>
+      <ul class="list-disc list-inside text-[21px] leading-10">
+        <li>چین و چروک‌های پیشانی</li>
+        <li>خطوط اطراف چشم‌ها (پنجه کلاغی)</li>
+        <li>خطوط اخم میان ابروها</li>
+        <li>لیفت ابروها و رفع افتادگی آن‌ها</li>
+      </ul>
+      <p class="text-[21px] text-justify font-light leading-10">
+        بوتاکس همچنین برای درمان تعریق بیش از حد (هایپرهیدروزیس) و برخی مشکلات
+        پزشکی مانند میگرن و دندان قروچه نیز کاربرد دارد.
+      </p>
+
+      <h4 class="text-[24px] font-extrabold leading-8">2. ژل‌ها و فیلرها</h4>
+      <p class="text-[21px] text-justify font-light leading-10">
+        ژل‌ها و فیلرها (مثل هیالورونیک اسید) برای پرکردن خطوط و چین و چروک‌های
+        صورت و حجم‌دهی به نواحی مختلف صورت مانند گونه‌ها، لب‌ها و خط فک استفاده
+        می‌شوند. در کلینیک تن ساز، فیلرها از بهترین برندهای معتبر جهانی از جمله
+        Restylane، Juvederm و Belotero استفاده می‌شود. این فیلرها به شما این
+        امکان را می‌دهند که:
+      </p>
+      <ul class="list-disc list-inside text-[21px] leading-10">
+        <li>حجم صورت را بازسازی کنید (مانند حجم گونه‌ها و لب‌ها)</li>
+        <li>رفع چین و چروک‌ها و خطوط عمیق صورت</li>
+        <li>لیفت طبیعی صورت و بهبود خطوط فک و گردن</li>
+      </ul>
+      <p class="text-[21px] text-justify font-light leading-10">
+        فیلرها معمولاً دارای اثرات فوری هستند و نتایج آن‌ها می‌تواند برای چندین
+        ماه تا چندسال ادامه یابد.
+      </p>
+
+      <h4 class="text-[24px] font-extrabold leading-8">
+        3. مزوتراپی مو (Mesotherapy)
+      </h4>
+      <p class="text-[21px] text-justify font-light leading-10">
+        مزوتراپی مو یک روش غیرجراحی است که برای تقویت و بهبود رشد مو و درمان
+        ریزش مو استفاده می‌شود. در این روش، ماده مغذی (مثل ویتامین‌ها، مواد
+        معدنی، آمینو اسیدها و داروهای خاص) به طور مستقیم به لایه میانه پوست
+        سرتزریق می‌شود. مزوتراپی مو باعث:
+      </p>
+      <ul class="list-disc list-inside text-[21px] leading-10">
+        <li>تحریک رشد مجدد موها</li>
+        <li>تقویت ریشه‌های مو</li>
+        <li>بهبود ضخامت و کیفیت مو</li>
+      </ul>
+      <p class="text-[21px] text-justify font-light leading-10">
+        این روش برای افرادی که دچار ریزش مو هستند و به دنبال درمانی مؤثر و بدون
+        عوارض جانبی جدی هستند، بسیار مناسب است.
+      </p>
+
+      <h4 class="text-[24px] font-extrabold leading-8">4. پی‌آر‌پی (PRP)</h4>
+      <p class="text-[21px] text-justify font-light leading-10">
+        پی‌آر‌پی (Plasma Rich Platelet) یک درمان جوانسازی و احیای پوست و مو است
+        که از پلاسمای غنی از پلاکت خون خود بیمار استفاده می‌کند. در این روش،
+        پلاسمای خون شما استخراج و غنی‌شده و پس از آماده‌سازی به نواحی مختلف پوست
+        صورت و یا پوست سر تزریق می‌شود. پی‌آر‌پی برای:
+      </p>
+      <ul class="list-disc list-inside text-[21px] leading-10">
+        <li>جوانسازی پوست و کاهش چین و چروک‌ها</li>
+        <li>تقویت و درمان ریزش مو</li>
+        <li>بازسازی و بهبود بافت پوست</li>
+        <li>رفع آثار زخم‌ها و اسکار بسیار مؤثر است.</li>
+      </ul>
+      <p class="text-[21px] text-justify font-light leading-10">
+        این روش با تحریک کلاژن‌سازی و بازسازی سلولی، به جوانسازی و احیای پوست
+        کمک می‌کند و نتایج بسیار طبیعی و ماندگاری به همراه دارد.
+      </p>
+
+      <h4 class="text-[24px] font-extrabold leading-8">
+        ویژگی‌های تزریقات زیبایی در کلینیک تن ساز
+      </h4>
+      <ul class="list-decimal list-inside text-[21px] leading-10">
+        <li>
+          پزشکان مجرب و متخصص: در کلینیک تن ساز، تمامی درمان‌های تزریقی تحت نظر
+          پزشکان متخصص و با تجربه در زمینه جوانسازی پوست و مو انجام می‌شود.
+          پزشکان این کلینیک با تسلط کامل به تکنیک‌های روز دنیا و استفاده از
+          بهترین برندهای جهانی، نتایج مطلوب و طبیعی را برای شما فراهم می‌آورند.
+        </li>
+        <li>
+          استفاده از مواد و متریال لوکس اروپایی: در کلینیک تن ساز، از برترین
+          برندهای اروپایی و مواد استاندارد و معتبر جهانی مانند Restylane، jalor،
+          jalupro، stylage، profhiloو بوتاکس‌های معتبر استفاده می‌شود. این مواد
+          دارای کیفیت بالا، ایمنی کامل و نتایج ماندگار هستند.
+        </li>
+        <li>
+          محیط بهداشتی و لوکس: کلینیک تن ساز با محیطی لوکس و مدرن، تمامی
+          استانداردهای بهداشتی و ایمنی را رعایت می‌کند. این کلینیک با استفاده از
+          تجهیزات پزشکی به‌روز، اطمینان خاطر و آرامش را برای بیماران خود فراهم
+          می‌آورد.
+        </li>
+        <li>
+          نتایج طبیعی و قابل اعتماد: تمامی تزریقات زیبایی در این کلینیک
+          به‌گونه‌ای انجام می‌شود که نتایج طبیعی، صاف و جوان به دست آید. پزشکان
+          به دقت به ویژگی‌های صورت و نیازهای شما توجه می‌کنند تا نتایج متناسب و
+          هماهنگ با چهره شما ارائه شود.
+        </li>
+        <li>
+          دوره نقاهت کوتاه و راحتی درمان: بیشتر روش‌های تزریقی در کلینیک تن ساز
+          دارای دوره نقاهت کوتاه و بدون نیاز به بستری شدن هستند. شما می‌توانید
+          بلافاصله پس از درمان به فعالیت‌های روزمره خود بازگردید.
+        </li>
+      </ul>
+    </div>
+    <WhyTansaz title="چرا زیبایی و لاغری در کلینیک تن ساز" :cards="cards" />
+    <div
+      class="text-dark flex flex-col gap-3.5 mt-[75px] max-w-[1200px] mx-auto px-3"
+    >
+      <p class="text-[21px] font-light leading-10">
+        تزریقات زیبایی در کلینیک تن ساز، روشی موثر و ایمن برای جوانسازی پوست،
+        رفع چین و چروک‌ها، حجم‌دهی به صورت، تقویت مو و بسیاری دیگر از مشکلات
+        زیبایی است. این درمان‌ها با استفاده از مواد و برندهای لوکس اروپایی و
+        تکنیک‌های تخصصی انجام می‌شود تا بهترین نتایج ممکن حاصل شود. در کنار
+        پزشکان مجرب و محیط لوکس و بهداشتی، شما می‌توانید از این خدمات زیبایی با
+        خاطری آسوده بهره‌مند شوید و ظاهری شاداب‌تر و جوان‌تر داشته باشید.
+      </p>
+    </div>
+    <ReservationForm />
+    <FaqSection />
+    <YoursSatisfaction />
+    <HomeBlogsSection />
+  </div>
+</template>
+
+<style scoped></style>

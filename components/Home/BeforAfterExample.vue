@@ -53,7 +53,7 @@ const slides = ref([
 
 <template>
   <div class="mt-[75px] max-w-[1200px] mx-auto px-3">
-    <div class="bg-dark text-white rounded-3xl p-[45px]">
+    <div class="bg-space text-white rounded-3xl p-[45px]">
       <h3 class="text-[30px] font-light">
         نمونه های <span class="text-primary">قبل</span> و بعد
       </h3>

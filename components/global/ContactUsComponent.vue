@@ -29,7 +29,7 @@
             />
           </div>
           <button
-            class="w-full cursor-pointer bg-dark text-white rounded-lg p-3 transition duration-200"
+            class="w-full cursor-pointer bg-space text-white rounded-lg p-3 transition duration-200"
           >
             ثبت درخواست
           </button>

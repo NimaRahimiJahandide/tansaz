@@ -84,19 +84,9 @@ const newBlogs = ref([
       </div>
     </div>
     <div v-else>
-      <div class="flex md:flex-row flex-col gap-8">
+      <div class="flex md:flex-row flex-col gap-8 mb-28">
         <div class="md:w-3/4 grid md:grid-cols-3 gap-8">
-          <NuxtLink
-            to="#"
-            v-for="blog in blogs"
-            :key="blog.id"
-            class="rounded-3xl shadow-lg p-4 hover:scale-105 transition-transform cursor-pointer"
-          >
-            <img :src="blog.image" class="rounded-2xl mb-4 w-full" alt="" />
-            <div class="text-center font-semibold">
-              {{ blog.text }}
-            </div>
-          </NuxtLink>
+          <BlogCardComponent  v-for="blog in blogs" :key="blog.id" :title="blog.text" :image="blog.image"  />
         </div>
         <div class="md:w-1/4">
           <div class="flex items-start gap-[20px]">

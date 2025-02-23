@@ -1,7 +1,7 @@
 <template>
   <div class="mt-[75px] max-w-[1200px] mx-auto px-3">
     <div
-      class="bg-[#820106] flex gap-5 justify-end mt-[75px] rounded-[25px] p-[25px] md:flex-row flex-col"
+      class="bg-space flex gap-5 justify-end mt-[75px] rounded-[25px] p-[25px] md:flex-row flex-col"
     >
       <NuxtLink
         to="/reserve"
