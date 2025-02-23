@@ -10,7 +10,7 @@ setTimeout(() => {
 
 <template>
   <div class="max-w-[1200px] text-dark mx-auto px-3 mt-[75px]">
-    <div v-if="loadingState.isLoading">
+    <!-- <div v-if="loadingState.isLoading">
       <div
         class="flex w-full flex-col-reverse md:flex-row justify-between gap-5"
       >
@@ -51,8 +51,8 @@ setTimeout(() => {
           ></div>
         </div>
       </div>
-    </div>
-    <div v-else>
+    </div> -->
+    <div>
       <div
         class="flex w-full flex-col-reverse md:flex-row justify-between gap-5"
       >

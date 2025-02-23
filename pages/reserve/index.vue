@@ -13,13 +13,13 @@ setTimeout(() => {
     <div
       class="flex flex-col md:flex-row max-w-[1200px] text-dark mx-auto px-3 mt-[75px]"
     >
-      <div
+      <!-- <div
         v-if="loadingState.isLoading"
         class="flex flex-col md:flex-row max-w-[1200px] text-dark mx-auto w-full px-3 mt-[75px]"
       >
         <div class="w-full h-[500px] bg-gray-300 rounded animate-pulse"></div>
-      </div>
-      <div v-else class="w-full flex md:flex-row bg-background-input  rounded-3xl flex-col shadow-2xl">
+      </div> -->
+      <div class="w-full flex md:flex-row bg-background-input  rounded-3xl flex-col shadow-2xl">
         <div
           class="md:w-1/2 p-8"
         >

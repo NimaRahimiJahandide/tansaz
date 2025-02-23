@@ -52,11 +52,11 @@ const coffees = ref([
 
 <template>
   <div class="max-w-[1200px] text-dark mx-auto px-3 mt-[75px]">
-    <div v-if="loadingState.isLoading">
+    <!-- <div v-if="loadingState.isLoading">
       <div class="flex md:flex-row flex-col gap-8">
         <div class="md:w-3/4 grid md:grid-cols-3 gap-8">
           <div
-            v-for="blog in blogs"
+            v-for="blog in coffees"
             :key="blog.id"
             class="rounded-3xl p-4 animate-pulse h-[400px] bg-gray-300"
           ></div>
@@ -91,8 +91,8 @@ const coffees = ref([
           ></div>
         </div>
       </div>
-    </div>
-    <div v-else>
+    </div> -->
+    <div>
       <div class="flex md:flex-row flex-col gap-8 mb-28">
         <div class="md:w-3/4 grid md:grid-cols-3 gap-8">
           <div v-for="coffee in coffees" :key="coffee.id"

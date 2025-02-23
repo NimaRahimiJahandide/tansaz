@@ -12,9 +12,8 @@ setTimeout(() => {
 </script>
 <template>
   <div>
-    <div v-if="loadingState.isLoading">
+    <!-- <div v-if="loadingState.isLoading">
       <nav>
-        <!-- top of navbar -->
         <div
           class="md:flex hidden justify-between items-center py-[15px] max-w-[1200px] mx-auto px-3"
         >
@@ -33,7 +32,6 @@ setTimeout(() => {
             <div class="w-[115px] h-10 bg-gray-300 rounded animate-pulse"></div>
           </div>
         </div>
-        <!-- start mobile -->
         <div class="flex justify-between md:hidden px-3 py-[10px]">
           <div class="size-10 bg-gray-300 rounded animate-pulse"></div>
           <div class="flex gap-[10px]">
@@ -41,10 +39,9 @@ setTimeout(() => {
             <div class="size-10 bg-gray-300 rounded animate-pulse"></div>
           </div>
         </div>
-        <!-- end mobile -->
       </nav>
-    </div>
-    <div v-else>
+    </div> -->
+    <div>
       <!-- Overlay -->
       <div :class="['overlay', { open: isMenuOpen }]" @click="toggleMenu"></div>
       <nav>

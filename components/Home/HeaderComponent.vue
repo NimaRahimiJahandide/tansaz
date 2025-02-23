@@ -20,18 +20,16 @@ const slides = ref([
 
 <template>
   <div>
-    <div
+    <!-- <div
       v-if="loadingState.isLoading"
       class="max-w-[1200px] text-dark mx-auto px-3 my-[25px] pt-2.5 flex justify-between w-full gap-[20px]"
     >
       <div class="flex w-full flex-col md:flex-row gap-5">
-        <!-- start slider mobile -->
         <div class="w-[calc(100vw-50px)] md:hidden sm:h-[40vh]">
           <div
             class="w-full h-[40vh] bg-gray-300 rounded-4xl animate-pulse"
           ></div>
         </div>
-        <!-- end slider mobile -->
         <div class="flex md:flex-row flex-col justify-between w-full">
           <div class="flex flex-col gap-5">
             <div class="flex flex-col gap-3.5">
@@ -108,10 +106,9 @@ const slides = ref([
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div
-      v-else
       class="max-w-[1200px] text-dark mx-auto px-3 my-[25px] pt-2.5 flex justify-between w-full gap-[20px]"
     >
       <div class="flex flex-col md:flex-row gap-5">
