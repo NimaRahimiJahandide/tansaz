@@ -84,11 +84,19 @@ const newBlogs = ref([
       </div>
     </div> -->
     <div>
-      <div class="flex md:flex-row flex-col gap-8 mb-28">
-        <div class="md:w-3/4 grid md:grid-cols-3 gap-8">
-          <BlogCardComponent  v-for="blog in blogs" :key="blog.id" :title="blog.text" :image="blog.image"  />
+      <div class="flex lg:flex-row flex-col gap-8 mb-28">
+        <div
+          class="lg:w-3/4 w-full grid min-[378px]:grid-cols-2 md:grid-cols-3 lg:grid-col-3 gap-8 justify-items-center"
+        >
+          <BlogCardComponent
+            v-for="blog in blogs"
+            :key="blog.id"
+            :title="blog.text"
+            :route="`/blogs/${blog.id}`"
+            :image="blog.image"
+          />
         </div>
-        <div class="md:w-1/4">
+        <div class="lg:w-1/4 hidden md:block w-full">
           <div class="flex items-start gap-[20px]">
             <span
               class="bg-primary flex justify-center items-center rounded-[6px] size-[30px]"
@@ -137,8 +145,8 @@ const newBlogs = ref([
             </summary>
             <div class="mt-4 space-y-4">
               <NuxtLink
-                to="#"
                 v-for="blog in newBlogs"
+                :to="`/blogs/${blog.id}`"
                 :key="blog.id"
                 class="flex gap-2 items-center"
               >
@@ -160,13 +168,13 @@ const newBlogs = ref([
               />
             </summary>
             <div class="mt-4 flex flex-col gap-2">
-                <div>زیبایی و لاغری</div>
-                <div>کافه کلینیک</div>
-                <div>اجاره تجهیزات پزشکی</div>
-                <div>اعزام پزشک به منزل</div>
-                <div>آکادمی و آموزش</div>
-                <div>فروشگاه آنلاین</div>
-        </div>
+              <div>زیبایی و لاغری</div>
+              <div>کافه کلینیک</div>
+              <div>اجاره تجهیزات پزشکی</div>
+              <div>اعزام پزشک به منزل</div>
+              <div>آکادمی و آموزش</div>
+              <div>فروشگاه آنلاین</div>
+            </div>
           </details>
         </div>
       </div>

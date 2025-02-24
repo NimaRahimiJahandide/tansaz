@@ -1,7 +1,36 @@
 <script setup lang="ts">
 const route = useRoute();
 
-const pageData = ref([
+interface PageData {
+  id: number;
+  slug: string;
+  title: string;
+  data: {
+    firstSection: {
+      title: string;
+      description: string;
+    };
+    banner: {
+      title: string;
+      cards: Array<{
+        id: number;
+        text: string;
+        icon: string;
+        route?: string;
+      }>;
+    };
+    slides: Array<{
+      id: number;
+      image: string;
+    }>;
+    cards: Array<{
+      id: number;
+      text: string;
+    }>;
+  };
+}
+
+const pageData = ref<PageData[]>([
   {
     id: 1,
     slug: "beauty-injections",
@@ -181,10 +210,10 @@ const pageData = ref([
   },
 ]);
 
-const firstSectionData = ref({});
-const bannerData = ref({});
-const slides = ref([]);
-const cards = ref([]);
+const firstSectionData = ref<PageData['data']['firstSection']>({});
+const bannerData = ref<PageData['data']['banner']>({});
+const slides = ref<PageData['data']['slides']>([]);
+const cards = ref<PageData['data']['cards']>([]);
 
 watch(
   () => route.params.id,
@@ -202,9 +231,9 @@ watch(
 </script>
 
 <template>
-  <div>
+  <div class="mt-[75px]">
     <PagesFirstSection :firstSectionData="firstSectionData" />
-    <PagesBannerSection :bannerData="bannerData" />
+    <ServicesSection  />
     <div class="mt-[75px] max-w-[1200px] mx-auto px-3">
       <div class="flex items-center md:flex-row flex-col gap-[20px] mt-[75px]">
         <div class="md:w-1/2">

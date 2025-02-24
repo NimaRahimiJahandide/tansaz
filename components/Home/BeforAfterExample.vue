@@ -53,16 +53,18 @@ const slides = ref([
 
 <template>
   <div class="mt-[75px] max-w-[1200px] mx-auto px-3">
-    <div class="bg-space text-white rounded-3xl p-[45px]">
-      <h3 class="text-[30px] font-light">
+    <div
+      class="h-full w-full bg-gradient-to-bl from-[#1a1e41] to-[#421A32]  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 text-white rounded-3xl md:p-[45px] p-6"
+    >
+      <h3 class="sm:text-[30px] text-2xl font-light">
         نمونه های <span class="text-primary">قبل</span> و بعد
       </h3>
-      <p class="font-light mb-3.5">
+      <p class="font-light mb-3.5 text-justify sm:text-base text-sm mt-2">
         با اطمینانی کامل، زیبایی خود را با ما دو چندان کنید
       </p>
       <div>
         <swiper-container
-          class="h-full swiper-container mt-12 pb-[50px]"
+          class="h-full swiper-container sm:mt-12 mt-5 sm:pb-[50px] pb-5"
           :loop="true"
           :navigation="true"
           :slides-per-view="4"

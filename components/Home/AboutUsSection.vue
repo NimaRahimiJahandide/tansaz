@@ -32,7 +32,7 @@ const slides = ref([
           درباره کلینیک <span class="text-primary">تن ساز</span>
         </h3>
         <span class="text-light-grey mb-3.5">همه ی آن چیزی که باید بدانید</span>
-        <p class="text-[20px] leading-10 text-justify">
+        <p class="sm:text-[20px] leading-10 text-justify">
           کلینیک تن سازمجهزترین کلینیک زیبایی و لاغری در شیراز است که با استفاده
           از پیشرفته‌ترین دستگاه‌ها و خدمات تخصصی، به افراد کمک می‌کند تا به
           اهداف زیبایی و تناسب اندام خود برسند. این کلینیک با بهره‌گیری از

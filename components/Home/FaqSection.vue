@@ -39,8 +39,8 @@ const toggleAnswer = (index: number): void => {
   <div class="bg-gray-100 py-10 px-4 mt-[70px]">
     <div class="max-w-[1200px] mx-auto px-3 w-full">
       <div class="flex items-center flex-col ">
-        <h3 class="text-3xl font-bold text-center mb-8">سوالات <span class="text-primary">متداول</span> شما از تن ساز</h3>
-        <p class="text-gray-600 max-w-2xl  mb-[14px] leading-relaxed text-justify">
+        <h3 class="sm:text-3xl text-2xl font-bold text-center mb-8">سوالات <span class="text-primary">متداول</span> شما از تن ساز</h3>
+        <p class="text-gray-600 max-w-2xl  mb-[14px] sm:text-base text-sm leading-relaxed text-justify">
           کلینیک زیبایی و لاغری تن ساز از سال 1401 با هدف ارائه کامل ترین و به
           روزترین خدمات پزشکی زیبایی و تناسب اندام در شهر شیراز با شعار تندرستی،
           سلامتی و زیبایی تاسیس گردید.
@@ -56,7 +56,7 @@ const toggleAnswer = (index: number): void => {
             class="question flex items-center justify-between p-4 cursor-pointer"
             @click="toggleAnswer(index)"
           >
-            <span class="text-lg font-semibold">{{ item.question }}</span>
+            <span class="sm:text-lg text-basef font-semibold">{{ item.question }}</span>
             <span
               class="icon text-2xl transition-transform duration-500"
               :class="{ 'rotate-45': activeIndex === index }"
@@ -66,7 +66,7 @@ const toggleAnswer = (index: number): void => {
           </div>
           <div
             class="answercont text-white overflow-hidden rounded-b-2xl transition-max-h duration-500"
-            :style="{ maxHeight: activeIndex === index ? '200px' : '0px' }"
+            :style="{ maxHeight: activeIndex === index ? '500px' : '0px' }"
             :class="activeIndex === index ? ' border-t' : ''"
           >
             <div class="answer p-4">
