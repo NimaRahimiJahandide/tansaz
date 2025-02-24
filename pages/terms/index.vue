@@ -13,7 +13,7 @@ setTimeout(() => {
     <div
       class="flex flex-col max-w-[1200px] text-dark mx-auto px-3 mt-[75px] leading-10 text-justify text-[14px]"
     >
-      <div class="flex flex-col justify-center gap-2 items-center" v-if="loadingState.isLoading">
+      <!-- <div class="flex flex-col justify-center gap-2 items-center" v-if="loadingState.isLoading">
         <div class="w-[150px] h-[24px] bg-gray-300 rounded-4xl animate-pulse"></div>
         <div class="w-full h-[24px] bg-gray-300 rounded-4xl animate-pulse"></div>
         <div class="w-full h-[24px] bg-gray-300 rounded-4xl animate-pulse"></div>
@@ -21,8 +21,8 @@ setTimeout(() => {
         <div class="w-full h-[24px] bg-gray-300 rounded-4xl animate-pulse"></div>
         <div class="w-full h-[24px] bg-gray-300 rounded-4xl animate-pulse"></div>
         <div class="w-full h-[24px] bg-gray-300 rounded-4xl animate-pulse"></div>
-      </div>
-      <div v-else>
+      </div> -->
+      <div>
         <h1 class="text-primary text-center text-[30px] mb-[14px]">
           قوانین سایت
         </h1>

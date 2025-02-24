@@ -24,13 +24,13 @@ setTimeout(() => {
 </script>
 
 <template>
-  <div class="mt-[85px]" v-if="loadingState.isLoading">
+  <!-- <div class="mt-[85px]" v-if="loadingState.isLoading">
     <div>
       <div class="w-full h-[222px] bg-gray-300 rounded animate-pulse">
       </div>
     </div>
-  </div>
-  <div class="mt-[85px] text-dark" v-else>
+  </div> -->
+  <div class="mt-[85px] text-dark">
     <div>
       <div class="bg-primary h-[222px] relative -z-10">
         <h2

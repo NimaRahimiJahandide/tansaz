@@ -8,7 +8,7 @@ setTimeout(() => {
 </script>
 <template>
   <div>
-    <div v-if="loadingState.isLoading">
+    <!-- <div v-if="loadingState.isLoading">
       <div
         class="h-64 w-full bg-gray-300 animate-pulse relative">
        
@@ -32,8 +32,8 @@ setTimeout(() => {
           </div>
         </div>
       </div>
-    </div>
-    <div v-else>
+    </div> -->
+    <div>
       <div
         class="h-64 bg-cover bg-center relative"
         style="

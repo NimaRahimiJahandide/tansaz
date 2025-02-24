@@ -26,9 +26,8 @@ onUnmounted(() => {
 
 <template>
   <div>
-    <div v-if="loadingState.isLoading">
+    <!-- <div v-if="loadingState.isLoading">
       <hr />
-      <!-- bottom of navbar -->
       <ul
         class="md:flex hidden items-center justify-center py-[10px] gap-2 sticky top-0"
       >
@@ -39,8 +38,8 @@ onUnmounted(() => {
         ></li>
       </ul>
       <hr />
-    </div>
-    <ul v-else
+    </div> -->
+    <ul
     :class="['md:flex hidden items-center justify-center py-[10px] w-full sticky top-0 bg-white shadow-md z-50 sticky-nav', isSticky ? 'border-b' : 'border-y']"    >
       <li>
         <NuxtLink to="/" class="text-primary py-2 px-4">صفحه اصلی</NuxtLink>
