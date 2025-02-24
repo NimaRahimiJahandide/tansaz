@@ -233,7 +233,7 @@ watch(
 <template>
   <div class="mt-[75px]">
     <PagesFirstSection :firstSectionData="firstSectionData" />
-    <PagesBannerSection :bannerData="bannerData" />
+    <ServicesSection  />
     <div class="mt-[75px] max-w-[1200px] mx-auto px-3">
       <div class="flex items-center md:flex-row flex-col gap-[20px] mt-[75px]">
         <div class="md:w-1/2">
