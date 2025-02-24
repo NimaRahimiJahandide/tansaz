@@ -137,17 +137,17 @@ const slides = ref([
         <!-- end slider mobile -->
         <div class="flex flex-col gap-5 grow">
           <div>
-            <h1 class="text-[33px] font-light">کلینیک زیبایی و لاغری تن ساز</h1>
-            <p class="text-primary text-[17px] font-medium">
+            <h1 class="sm:text-[33px] text-2xl font-medium">کلینیک زیبایی و لاغری تن ساز</h1>
+            <p class="text-primary sm:text-[17px] text-sm font-medium">
               تندرستی، سلامتی، زیبایی
             </p>
           </div>
-          <p class="text-justify">
+          <p class="text-justify sm:text-base text-sm">
             کلینیک زیبایی و لاغری تن‌ساز، همراه همیشگی شما برای رسیدن به زیبایی
             و اندام ایده‌آل، مفتخر است به‌عنوان مجهزترین و تخصصی‌ترین کلینیک
             زیبایی و لاغری در جنوب کشور، در کنار شما باشد.
           </p>
-          <p class="text-justify">
+          <p class="text-justify sm:text-base text-sm">
             با بهره‌گیری از پیشرفته‌ترین دستگاه‌های روز دنیا و تیمی از پزشکان
             مجرب و متخصص، کلینیک تن‌ساز تجربه‌ای بی‌نظیر از خدمات زیبایی،
             جوان‌سازی و تناسب اندام را به شما اراِئه خواهد داد.
@@ -155,13 +155,13 @@ const slides = ref([
           <div class="flex gap-2.5">
             <NuxtLink
               to="/contact-us"
-              class="text-white  bg-primary focus:outline-none focus:ring-primary shadow-lg shadow-primary/50  rounded-lg py-[18px] px-[25px] flex justify-center items-center max-h-[51px]"
+              class="text-white sm:text-base text-sm bg-primary focus:outline-none focus:ring-primary shadow-lg shadow-primary/50  rounded-lg py-2.5 sm:py-[18px] sm:px-[25px] px-5 flex justify-center items-center max-h-[51px]"
             >
               تماس با ما</NuxtLink
             >
             <NuxtLink
               to="/about-us"
-              class="bg-transparent hover:bg-primary text-primary font-semibold hover:text-white hover:shadow-lg transition-all duration-300 hover:shadow-primary/50 py-[18px] px-[25px] flex justify-center items-center max-h-[51px] border border-primary hover:border-transparent rounded"
+              class="bg-transparent sm:text-base text-sm hover:bg-primary text-primary font-semibold hover:text-white hover:shadow-lg transition-all duration-300 hover:shadow-primary/50 py-2.5 sm:py-[18px] sm:px-[25px] px-5 flex justify-center items-center max-h-[51px] border border-primary hover:border-transparent rounded"
             >
               معرفی مجموعه
             </NuxtLink>
@@ -196,19 +196,19 @@ const slides = ref([
           class="flex md:flex-col md:justify-between justify-center items-center text-center gap-5 grow min-w-[110px] mr-5"
         >
           <div>
-            <span class="text-primary text-[28px] font-semibold leading-8"
+            <span class="text-primary sm:text-[28px] text-2xl font-semibold leading-8"
               >3+</span
             >
             <p>سال فعالیت</p>
           </div>
           <div>
-            <span class="text-primary text-[28px] font-semibold leading-8"
+            <span class="text-primary sm:text-[28px] text-2xl font-semibold leading-8"
               >2000+</span
             >
             <p>مشتری</p>
           </div>
           <div>
-            <span class="text-primary text-[28px] font-semibold leading-8"
+            <span class="text-primary sm:text-[28px] text-2xl font-semibold leading-8"
               >6+</span
             >
             <p>خدمات</p>

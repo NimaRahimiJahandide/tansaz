@@ -2,15 +2,25 @@
 import { useLoadingState } from "@/store/loadingState";
 const service = ref(false);
 const isMenuOpen = ref(false);
+const isServicesMenuOpen = ref(false);
 const loadingState = useLoadingState();
+const route = useRoute();
+
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
-const isServicesMenuOpen = ref(false);
+
+const toggleServicesMenu = () => {
+  isServicesMenuOpen.value = !isServicesMenuOpen.value;
+};
 
 setTimeout(() => {
   loadingState.setLoading(false);
 }, 2000);
+
+watch(() => route.path, () => {
+  isMenuOpen.value = false;
+});
 </script>
 <template>
   <div>
@@ -138,11 +148,13 @@ setTimeout(() => {
               />
             </button>
             <div class="flex items-center justify-center">
-              <img
-                class="size-[117px] object-contain"
-                src="/icons/logo.png"
-                alt="logo"
-              />
+              <NuxtLink to="/">
+                <img
+                  class="size-[117px] object-contain"
+                  src="/icons/logo.png"
+                  alt="logo"
+                />
+              </NuxtLink>
             </div>
             <div class="flex justify-center gap-2.5"></div>
             <ul class="p-4 text-dark" v-if="service">
@@ -180,21 +192,21 @@ setTimeout(() => {
                 >
                   <li>
                     <NuxtLink
-                      to="/services/service1"
+                      to="/services/1"
                       class="block py-2 px-4 hover:text-primary"
                       >هایفوتراپی</NuxtLink
                     >
                   </li>
                   <li>
                     <NuxtLink
-                      to="/services/service2"
+                      to="/services/2"
                       class="block py-2 px-4 hover:text-primary"
                       >لیزر موهای زائد</NuxtLink
                     >
                   </li>
                   <li>
                     <NuxtLink
-                      to="/services/service3"
+                      to="/services/2"
                       class="block py-2 px-4 hover:text-primary"
                       >تزریقات زیبایی</NuxtLink
                     >
@@ -209,12 +221,12 @@ setTimeout(() => {
                 >
               </li>
               <li>
-                <NuxtLink to="#" class="block py-2 px-4 hover:text-primary"
+                <NuxtLink to="/reserve" class="block py-2 px-4 hover:text-primary"
                   >رزو آنلاین نوبت</NuxtLink
                 >
               </li>
               <li>
-                <NuxtLink to="#" class="block py-2 px-4 hover:text-primary"
+                <NuxtLink to="/blogs" class="block py-2 px-4 hover:text-primary"
                   >بلاگ</NuxtLink
                 >
               </li>

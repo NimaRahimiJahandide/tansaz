@@ -94,7 +94,7 @@ const cards = ref([
 </script>
 
 <template>
-  <div>
+  <div class="mt-[75px]">
     <PagesFirstSection :firstSectionData="firstSectionData" />
     <PagesBannerSection :bannerData="bannerData" />
     <div class="mt-[75px] max-w-[1200px] mx-auto px-3">

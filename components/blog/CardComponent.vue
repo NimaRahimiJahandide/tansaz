@@ -18,7 +18,7 @@ defineProps({
         :alt="title" 
       />
     </div>
-    <div class="text-center font-semibold">
+    <div class="text-center font-semibold sm:text-base text-sm">
       {{ title }}
     </div>
   </NuxtLink>

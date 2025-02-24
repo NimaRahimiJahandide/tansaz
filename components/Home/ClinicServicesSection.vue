@@ -4,11 +4,12 @@ interface Card {
   id: number;
   text: string;
   icon: string;
+  route: string;
 }
 
 let cards = ref<Card[]>([
-  { id: 0, text: "پوست، مو، زیبایی", icon: "/icons/zibaii.png" },
-  { id: 1, text: "لاغری بدون جراحی", icon: "/icons/laghari.png" },
+  { id: 0, text: "پوست، مو، زیبایی", icon: "/icons/zibaii.png", route: '/services/1' },
+  { id: 1, text: "لاغری بدون جراحی", icon: "/icons/laghari.png", route: '/services/2' },
 ]);
 
 const loadingState = useLoadingState();
@@ -53,11 +54,11 @@ setTimeout(() => {
         <div
           class="flex gap-5 mt-[75px] md:flex-row flex-col justify-center items-center"
         >
-          <NuxtLink class="rounded-[25px]" to="#">
-            <img class="rounded-[25px]" src="public/images/second.jpg" alt="" />
+          <NuxtLink class="rounded-[25px]" to="/services/1">
+            <img class="rounded-[25px]" src="/images/second.jpg" alt="" />
           </NuxtLink>
-          <NuxtLink class="rounded-[25px]" to="#">
-            <img class="rounded-[25px]" src="public/images/first.jpg" alt="first" />
+          <NuxtLink class="rounded-[25px]" to="/services/2">
+            <img class="rounded-[25px]" src="/images/first.jpg" alt="first" />
           </NuxtLink>
         </div>
         

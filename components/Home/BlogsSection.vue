@@ -30,10 +30,10 @@ const slides = ref([
         جدیدترین <span class="text-primary">مقالات</span> آموزشی
       </h3>
       <NuxtLink
-        class="text-white w-fit bg-primary focus:outline-none whitespace-nowrap gap-1 focus:ring-primary shadow-lg shadow-primary/50 rounded-lg py-[18px] md:px-[25px] px-[5px] flex justify-center items-center max-h-[51px]"
+        class="text-white w-fit bg-primary focus:outline-none whitespace-nowrap gap-1 focus:ring-primary shadow-lg shadow-primary/50 rounded-lg py-[18px] md:px-[25px] px-[10px] flex justify-center items-center max-h-[51px]"
         to="/blogs"
       >
-        <span>خواندن مقالات</span>
+        <span>مقالات</span>
         <Icon name="mingcute:arrow-left-fill" size="20px" style="color: #fff" />
       </NuxtLink>
     </div>
@@ -56,7 +56,7 @@ const slides = ref([
         <swiper-slide
           v-for="slide in slides"
           :key="`slide-basic-${slide.id}`"
-          class="swiper-slide rounded-2xl h-full"
+          class="swiper-slide"
         >
           <BlogCardComponent :title="slide.text" :image="slide.image" />
         </swiper-slide>

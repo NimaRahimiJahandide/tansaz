@@ -52,7 +52,7 @@ const cards = ref([
 </script>
 
 <template>
-  <div>
+  <div class="mt-[75px]">
     <PagesFirstSection :firstSectionData="firstSectionData" />
     <div class="mt-[75px] max-w-[1200px] mx-auto px-3">
       <div class="flex items-center md:flex-row flex-col gap-[20px] mt-[75px]">

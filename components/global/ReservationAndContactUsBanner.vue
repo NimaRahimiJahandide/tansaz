@@ -18,7 +18,7 @@
         <p>حتما با ما تماس بگیرید</p>
       </NuxtLink>
       <NuxtLink
-        to="#"
+        to="#contact-us"
         class="text-white bg-primary flex flex-col p-[25px] md:w-1/4 rounded-[15px]"
       >
         <h4 class="text-[28px] font-semibold">مشاوره</h4>
