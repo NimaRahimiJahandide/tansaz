@@ -3,7 +3,9 @@ import { useLoadingState } from "@/store/loadingState";
 const service = ref(false);
 const isMenuOpen = ref(false);
 const loadingState = useLoadingState();
-
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
 const isServicesMenuOpen = ref(false);
 
 setTimeout(() => {
@@ -61,7 +63,7 @@ setTimeout(() => {
           </div>
           <div class="flex items-center gap-[10px]">
             <NuxtLink
-              to="#"
+              to="/auth/otp"
               class="bg-[#333333] rounded-[10px] size-10 flex items-center justify-center max-h-10"
             >
               <Icon name="mdi:user" size="24px" style="color: #fff" />
@@ -114,7 +116,7 @@ setTimeout(() => {
               />
             </NuxtLink>
             <NuxtLink
-              to="#"
+              to="/auth/otp"
               class="bg-[#333333] rounded-[10px] size-10 flex items-center justify-center max-h-10"
             >
               <Icon name="mdi:user" size="24px" style="color: #fff" />
