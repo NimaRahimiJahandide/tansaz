@@ -13,11 +13,13 @@
       class="w-[400px] h-full bg-[rgba(255,255,255,0.1)] backdrop-blur-[10px] rounded-lg border border-[rgba(255,255,255,0.1)] shadow-lg flex flex-col items-center p-8"
     >
       <div class="relative w-32 h-32 mb-8">
-        <img
-          src="/icons/logo.png"
-          alt="tansaz"
-          class="absolute w-full h-full object-contain"
-        />
+        <a href="/">
+          <img
+            src="/icons/logo.png"
+            alt="tansaz"
+            class="absolute w-full h-full object-contain"
+          />
+        </a>
       </div>
       <form class="w-full space-y-6 text-right">
         <div>
