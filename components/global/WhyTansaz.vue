@@ -7,7 +7,7 @@ defineProps({
 <template>
   <div class="mt-[75px] max-w-[1200px] mx-auto px-3 text-dark">
     <div
-      class="flex flex-col gap-5 mx-auto bg-[#F9F9F9] rounded-[30px] p-[55px]"
+      class="flex flex-col gap-5 mx-auto bg-[#F9F9F9] rounded-[30px] lg:p-[55px] p-4"
     >
       <h4 class="text-[30px]">{{ title }}</h4>
       <div class="grid md:grid-cols-3 gap-5">

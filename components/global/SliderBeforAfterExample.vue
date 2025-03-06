@@ -8,9 +8,9 @@ defineProps({
 
 <template>
   <div class="mt-[75px] max-w-[1200px] mx-auto px-3">
-    <div class="bg-gradient-to-bl from-[#1a1e41] to-[#421A32] text-white rounded-3xl p-[45px]">
+    <div class="bg-dark text-white rounded-3xl p-[45px]">
       <h3 class="text-[30px] font-light">
-        {{ title }}
+        نمونه های <span class="text-primary">قبل</span> و بعد
       </h3>
       <p class="font-light mb-3.5">{{description}}</p>
       <div>

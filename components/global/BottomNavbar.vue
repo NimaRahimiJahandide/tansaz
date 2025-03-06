@@ -54,7 +54,7 @@ onUnmounted(() => {
       </li>
       <li class="relative group">
         <NuxtLink
-          to="/services/beauty-services"
+          to="/services/1"
           class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px] flex items-center justify-center gap-1"
         >
           <span>خدمات زیبایی</span>
@@ -66,7 +66,7 @@ onUnmounted(() => {
         >
           <li class="flex flex-col gap-[20px] flex-grow">
             <NuxtLink
-              to="/services/hyphotherapy"
+              to="/services/2"
               class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
             >
               <Icon
@@ -77,7 +77,7 @@ onUnmounted(() => {
               هایفوتراپی
             </NuxtLink>
             <NuxtLink
-              to="/services/laser-hair-removal"
+              to="/services/1"
               class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
             >
               <Icon
@@ -88,7 +88,7 @@ onUnmounted(() => {
               لیزررفع مو های زائد
             </NuxtLink>
             <NuxtLink
-              to="/services/beauty-injections"
+              to="/services/2"
               class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
             >
               <Icon
@@ -102,20 +102,20 @@ onUnmounted(() => {
               class="list-disc list-inside marker:text-primary flex flex-col gap-1"
             >
               <li class="navbar-children_item">
-                <NuxtLink to="/services/botox"> بوتاکس </NuxtLink>
+                <NuxtLink to="/services/1"> بوتاکس </NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="/services/gel-and-filler">
+                <NuxtLink to="/services/2">
                   ژل، فیلر و آنزیم
                 </NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="/services/hydrating-mesogels">
+                <NuxtLink to="/services/1">
                   مزوژل های آبرسان
                 </NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="/services/mesotherapy"> مزوتراپی و prp </NuxtLink>
+                <NuxtLink to="/services/2"> مزوتراپی و prp </NuxtLink>
               </li>
             </ul>
           </li>

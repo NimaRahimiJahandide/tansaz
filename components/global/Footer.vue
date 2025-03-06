@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="bg-space relative text-white rounded-t-2xl md:pt-[232px] pt-[300px] pb-3.5">
+  <div class="bg-dark relative text-white rounded-t-2xl md:pt-[232px] pt-[300px] pb-3.5">
     <ContactUsComponent/>
     <div class="max-w-[1200px] flex md:flex-row flex-col flex-wrap gap-5 justify-between mx-auto px-3">
       <div class="flex flex-col gap-[20px]">

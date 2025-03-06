@@ -4,10 +4,10 @@
     class="absolute md:-top-44 -top-72 left-1/2 transform -translate-x-1/2 w-full max-w-[950px] px-2.5"
   >
     <div
-      class="md:h-[350px] bg-[#EFEFEF]/30 backdrop-blur-3xl rounded-3xl shadow-lg flex flex-col md:flex-row items-center justify-between p-8 gap-8"
+      class="md:h-[350px] bg-[#EFEFEF] rounded-3xl shadow-lg flex flex-col md:flex-row items-center justify-between p-8 gap-8"
     >
       <div
-        class="bg-gradient-to-br from-[#1a1e41] to-[#ef172e] backdrop-blur-3xl w-full flex-1 grow h-full text-white p-8 flex flex-col justify-center gap-3.5 rounded-2xl md:w-[400px]"
+        class="bg-primary w-full flex-1 grow h-full text-white p-8 flex flex-col justify-center gap-3.5 rounded-2xl md:w-[400px]"
       >
         <h2 class="text-[28px] font-light text-right">مشاوره رایگان</h2>
         <p class="text-sm leading-7 text-right">

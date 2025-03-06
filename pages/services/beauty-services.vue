@@ -8,8 +8,8 @@ const firstSectionData = ref({
 const bannerData = ref({
   title: '" خدمات زیبایی در تن ساز "',
   cards: [
-    { id: 0, text: "جراحی ها", icon: "/icons/laghari.png", route: '/services/surgery' },
-    { id: 1, text: "تزریقات زیبایی", icon: "/icons/cafe.png", route: '/services/beauty-injections' },
+    { id: 0, text: "جراحی ها", icon: "/icons/laghari.png", route: '/services/1' },
+    { id: 1, text: "تزریقات زیبایی", icon: "/icons/cafe.png", route: '/services/' },
     { id: 2, text: "دستگاه ها", icon: "/icons/Equipment.png", route: '/' },
     { id: 3, text: "بوتاکس", icon: "/icons/Dispatch-doctor.png", route: '/services/botox' },
   ],
