@@ -44,7 +44,7 @@ const slides = ref([
 </script>
 
 <template>
-  <div class="max-w-[1200px] mx-auto px-3 text-dark mt-[75px]">
+  <div class="max-w-[1200px] mx-auto px-5 text-dark mt-[75px]">
     <div class="flex items-center justify-between">
       <h3 class="text-[30px] font-light">
         کافه <span class="text-primary">کلینیک</span>

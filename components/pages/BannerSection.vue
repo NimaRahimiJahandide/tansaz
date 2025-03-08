@@ -44,7 +44,7 @@ setTimeout(() => {
           alt="pattern"
         />
       </div>
-      <div class="max-w-[1200px] mx-auto px-3">
+      <div class="max-w-[1200px] mx-auto px-5">
         <div
           class="flex lg:justify-between flex-wrap justify-center lg:-mt-32 gap-5 -mt-10 z-10"
         >

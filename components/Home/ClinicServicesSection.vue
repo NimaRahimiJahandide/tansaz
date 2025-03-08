@@ -39,12 +39,12 @@ setTimeout(() => {
   </div> -->
   <div class="mt-[85px]">
     <div>
-      <ServicesSection />
-      <div class="max-w-[1200px] mx-auto px-3">
+      <ServicesSection class="mb-[5rem]"/>
+      <div class="max-w-[1200px] mx-auto px-5">
         <ReservationAndContactUsBanner />
         <div class="flex md:flex-row flex-col gap-[20px] mt-[75px]">
           <div
-            class="flex flex-col gap-2.5 bg-gradient-to-bl from-[#1a1e41] to-[#ef172e] text-white rounded-[25px] p-[35px] w-full backdrop-blur-md"
+            class="flex flex-col gap-2.5 bg-dark text-white rounded-[25px] p-[35px] w-full backdrop-blur-md"
           >
             <h4 class="text-[30px] font-bold">باشگاه مشتریان</h4>
             <p class="text-[18px] font-light">

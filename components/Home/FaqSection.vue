@@ -37,7 +37,7 @@ const toggleAnswer = (index: number): void => {
 
 <template>
   <div class="bg-gray-100 py-10 px-4 mt-[70px]">
-    <div class="max-w-[1200px] mx-auto px-3 w-full">
+    <div class="max-w-[1200px] mx-auto px-5 w-full">
       <div class="flex items-center flex-col ">
         <h3 class="sm:text-3xl text-2xl font-bold text-center mb-8">سوالات <span class="text-primary">متداول</span> شما از تن ساز</h3>
         <p class="text-gray-600 max-w-2xl  mb-[14px] sm:text-base text-sm leading-relaxed text-justify">
@@ -56,7 +56,7 @@ const toggleAnswer = (index: number): void => {
             class="question flex items-center justify-between p-4 cursor-pointer"
             @click="toggleAnswer(index)"
           >
-            <span class="sm:text-lg text-basef font-semibold">{{ item.question }}</span>
+            <span class="sm:text-lg text-base line-clamp-1 lg:line-clamp-none font-semibold">{{ item.question }}</span>
             <span
               class="icon text-2xl transition-transform duration-500"
               :class="{ 'rotate-45': activeIndex === index }"
