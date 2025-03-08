@@ -9,7 +9,7 @@ setTimeout(() => {
 </script>
 
 <template>
-  <div class="max-w-[1200px] text-dark mx-auto px-3 mt-[75px] mb-36">
+  <div class="max-w-[1200px] text-dark mx-auto px-5 mt-[75px] mb-36">
     <!-- <div v-if="loadingState.isLoading">
       <div
         class="flex w-full flex-col-reverse md:flex-row justify-between gap-5"

@@ -3,7 +3,7 @@
 <template>
   <div class="bg-dark relative text-white rounded-t-2xl md:pt-[232px] pt-[300px] pb-3.5">
     <ContactUsComponent/>
-    <div class="max-w-[1200px] flex md:flex-row flex-col flex-wrap gap-5 justify-between mx-auto px-3">
+    <div class="max-w-[1200px] flex md:flex-row flex-col flex-wrap gap-5 justify-between mx-auto px-5">
       <div class="flex flex-col gap-[20px]">
         <span class="text-[25px] font-extralight">راه های ارتباطی</span>
         <ul class="flex flex-col gap-3.5 text-sm">
@@ -91,7 +91,7 @@
 
     </div>
     <!-- start copyright -->
-     <div class="max-w-[1200px] mx-auto px-3 border-t border-[#FFFFFF38] pt-6 mt-6">
+     <div class="max-w-[1200px] mx-auto px-5 border-t border-[#FFFFFF38] pt-6 mt-6">
       <div class="flex items-center justify-center gap-1">
         <a class="border border-[#FFFFFF38] flex justify-center items-center size-9 rounded-[10px]" href="#">
           <Icon name="ic:baseline-whatsapp" size="24px" style="color: #fff" />

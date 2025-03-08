@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-[75px] max-w-[1200px] mx-auto px-3">
+  <div class="mt-[75px] max-w-[1200px] mx-auto">
     <div
       class="bg-primary bg-[url(/images/pattern.png)] flex gap-5 justify-end mt-[75px] rounded-[25px] p-[25px] md:flex-row flex-col"
     >

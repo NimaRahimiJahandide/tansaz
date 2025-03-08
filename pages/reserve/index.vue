@@ -11,7 +11,7 @@ setTimeout(() => {
 <template>
   <div>
     <div
-      class="flex flex-col md:flex-row max-w-[1200px] text-dark mx-auto px-3 mt-[75px]"
+      class="flex flex-col md:flex-row max-w-[1200px] text-dark mx-auto px-5 mt-[75px]"
     >
       <!-- <div
         v-if="loadingState.isLoading"

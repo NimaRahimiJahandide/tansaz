@@ -25,7 +25,7 @@ const slides = ref([
 </script>
 
 <template>
-  <div class="mt-[75px] max-w-[1200px] mx-auto px-3 text-dark">
+  <div class="mt-[75px] max-w-[1200px] mx-auto px-5 text-dark">
     <div class="flex flex-col md:flex-row justify-center items-center gap-[20px]">
       <div class="flex md:w-1/2 flex-col gap-5">
         <h3 class="text-[30px]">

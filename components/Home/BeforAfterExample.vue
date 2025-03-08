@@ -52,7 +52,7 @@ const slides = ref([
 </script>
 
 <template>
-  <div class="mt-[75px] max-w-[1200px] mx-auto px-3">
+  <div class="mt-[75px] max-w-[1200px] mx-auto px-5">
     <div
       class="h-full w-full bg-dark bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 text-white rounded-3xl md:p-[45px] p-6"
     >

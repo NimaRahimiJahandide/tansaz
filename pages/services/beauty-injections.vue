@@ -97,7 +97,7 @@ const cards = ref([
   <div class="mt-[75px]">
     <PagesFirstSection :firstSectionData="firstSectionData" />
     <PagesBannerSection :bannerData="bannerData" />
-    <div class="mt-[75px] max-w-[1200px] mx-auto px-3">
+    <div class="mt-[75px] max-w-[1200px] mx-auto px-5">
       <div class="flex items-center md:flex-row flex-col gap-[20px] mt-[75px]">
         <div class="md:w-1/2">
           <h3 class="text-primary text-[30px]">
@@ -142,7 +142,7 @@ const cards = ref([
     />
     <ReservationAndContactUsBanner />
     <div
-      class="text-dark flex flex-col gap-3.5 mt-[75px] max-w-[1200px] mx-auto px-3"
+      class="text-dark flex flex-col gap-3.5 mt-[75px] max-w-[1200px] mx-auto px-5"
     >
       <h3 class="text-[28px] font-extrabold leading-8">
         کاربردهای تزریقات زیبایی
@@ -257,7 +257,7 @@ const cards = ref([
     </div>
     <WhyTansaz title="چرا زیبایی و لاغری در کلینیک تن ساز" :cards="cards" />
     <div
-      class="text-dark flex flex-col gap-3.5 mt-[75px] max-w-[1200px] mx-auto px-3"
+      class="text-dark flex flex-col gap-3.5 mt-[75px] max-w-[1200px] mx-auto px-5"
     >
       <p class="text-[21px] font-light leading-10">
         تزریقات زیبایی در کلینیک تن ساز، روشی موثر و ایمن برای جوانسازی پوست،

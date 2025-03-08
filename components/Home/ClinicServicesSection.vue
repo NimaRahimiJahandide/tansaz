@@ -40,7 +40,7 @@ setTimeout(() => {
   <div class="mt-[85px]">
     <div>
       <ServicesSection class="mb-[5rem]"/>
-      <div class="max-w-[1200px] mx-auto px-3">
+      <div class="max-w-[1200px] mx-auto px-5">
         <ReservationAndContactUsBanner />
         <div class="flex md:flex-row flex-col gap-[20px] mt-[75px]">
           <div

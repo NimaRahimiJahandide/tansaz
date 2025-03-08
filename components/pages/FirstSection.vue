@@ -57,7 +57,7 @@ setTimeout(() => {
     </div> -->
 
     <div
-      class="max-w-[1200px] text-dark mx-auto px-3 my-[25px] pt-2.5 flex justify-between w-full gap-[20px]"
+      class="max-w-[1200px] text-dark mx-auto px-5 my-[25px] pt-2.5 flex justify-between w-full gap-[20px]"
     >
       <div class="flex flex-col-reverse items-center md:flex-row gap-5">
         <div class="flex flex-col gap-5 md:w-2/3">

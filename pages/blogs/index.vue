@@ -54,7 +54,7 @@ const newBlogs = ref([
 </script>
 
 <template>
-  <div class="max-w-[1200px] text-dark mx-auto px-3 mt-[75px]">
+  <div class="max-w-[1200px] text-dark mx-auto px-5 mt-[75px]">
     <!-- <div v-if="loadingState.isLoading">
       <div class="flex md:flex-row flex-col gap-8">
         <div class="md:w-3/4 grid md:grid-cols-3 gap-8">
