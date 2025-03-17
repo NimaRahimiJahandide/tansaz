@@ -38,7 +38,7 @@
           required
         />
       </div>
-      <div class="mb-6 flex items-center gap-2">
+      <div class="mb-6 flex items-start gap-2">
         <input
           type="checkbox"
           id="save-info"
