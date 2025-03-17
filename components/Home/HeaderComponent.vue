@@ -172,7 +172,7 @@ const slides = ref([
           class="hidden md:flex w-full min-[852px]:max-w-md max-w-[350px]"
         >
           <swiper-container
-            class="h-full w-full swiper-container"
+            class="h-[44vh] w-full swiper-container"
             :loop="true"
             :pagination="{ clickable: true }"
             :slides-per-view="1"
