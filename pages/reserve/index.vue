@@ -24,11 +24,11 @@ setTimeout(() => {
           class="md:w-1/2 p-8"
         >
           <div class="mb-8">
-            <h2 class="text-2xl mb-2">
+            <h2 class="text-2xl mb-2 text-justify">
               رزرو نوبت <span class="text-primary">آنلاین</span> به چه صورت می
               باشد ؟
             </h2>
-            <p class="text-[14px]">
+            <p class="text-[14px] text-justify">
               برای گرفتن نوبت مشاوره رایگان فرم رو پرکنید و منتظر تماس کارشناسان
               ما باشید .
             </p>
@@ -36,7 +36,7 @@ setTimeout(() => {
           <div class="space-y-6">
             <div class="flex items-start gap-[20px]">
               <span
-                class="bg-primary flex justify-center items-center rounded-[6px] size-[30px]"
+                class="bg-primary flex justify-center items-center rounded-[6px] min-w-[30px] h-[30px]"
               >
                 <Icon
                   name="ic:baseline-phone"
@@ -53,7 +53,7 @@ setTimeout(() => {
             </div>
             <div class="flex items-start gap-[20px]">
               <span
-                class="bg-primary flex justify-center items-center rounded-[6px] size-[30px]"
+                class="bg-primary flex justify-center items-center rounded-[6px] min-w-[30px] h-[30px]"
               >
                 <Icon name="mdi:location" size="17px" style="color: #fff" />
               </span>

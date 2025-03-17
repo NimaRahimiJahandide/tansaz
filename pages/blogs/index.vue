@@ -96,7 +96,7 @@ const newBlogs = ref([
             :image="blog.image"
           />
         </div>
-        <div class="lg:w-1/4 hidden md:block w-full">
+        <div class="lg:w-1/4  w-full">
           <div class="flex items-start gap-[20px]">
             <span
               class="bg-primary flex justify-center items-center rounded-[6px] size-[30px]"

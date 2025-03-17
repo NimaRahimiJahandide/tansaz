@@ -110,12 +110,12 @@ setTimeout(() => {
             درباره کلینیک <span class="text-primary">تن ساز</span>
           </h1>
           <p class="text-gray-500 mb-6">همه‌ی آن چیزی که باید بدانید</p>
-          <p class="mb-8">
+          <p class="mb-8  text-justify">
             این مجموعه با رویکردی نوین در بحث پزشکی زیبایی، بویژه ترمیمی بدون
             جراحی در شیراز راه اندازی شده است.
           </p>
           <p class="mb-4">از مزایای کلینیک تن ساز میتوان به</p>
-          <ul class="space-y-3 mb-8">
+          <ul class="space-y-3 mb-8  text-justify">
             <li class="flex items-center gap-2 md:text-base text-[14px]">
               <Icon name="ei:check" size="17px" style="color: #ef172e" />
               <span>استفاده از کادر پزشکی مجرب، متخصص و فوق تخصص</span>

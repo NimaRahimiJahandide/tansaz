@@ -242,14 +242,14 @@ watch(() => route.path, () => {
                   >فروشگاه</NuxtLink
                 >
               </li>
+              <li>
+                <NuxtLink to="/contact-us" class="block py-2 px-4 hover:text-primary"
+                  >تماس با ما</NuxtLink
+                >
+              </li>
             </ul>
 
             <div class="flex flex-col gap-5 px-4">
-              <NuxtLink
-                to="/contact-us"
-                class="flex w-full py-[17px] bg-space text-white items-center justify-center rounded-[10px]"
-                >تماس با ما</NuxtLink
-              >
               <NuxtLink
                 to="#"
                 class="flex w-full py-[17px] bg-primary text-white items-center justify-center rounded-[10px]"

@@ -4,21 +4,25 @@ const slides = ref([
     id: 0,
     image: "/images/photo_2024-08-21_22-15-45-682x1024.jpg",
     text: "جراحی بوکال فت، ساب سیژن و پیوند چربی",
+    route: '/blogs/1'
   },
   {
     id: 1,
     image: "/images/photo_2024-08-21_22-15-49-682x1024.jpg",
     text: "تزریقات زیبایی بوتاکس، ژل و فیلر و هایفوتراپی",
+    route: '/blogs/1'
   },
   {
     id: 2,
     image: "/images/photo_2024-08-21_22-16-13-682x1024.jpg",
     text: " استفاده از معتبرترین برند مواد برندهای صنعت زیبایی و جراحی",
+    route: '/blogs/1'
   },
   {
     id: 3,
     image: "/images/photo_2024-08-21_22-15-54-682x1024.jpg",
     text: "از پرفروش ترین برند مواد برندهای صنعت زیبایی",
+    route: '/blogs/1'
   },
 ]);
 </script>
@@ -58,7 +62,7 @@ const slides = ref([
           :key="`slide-basic-${slide.id}`"
           class="swiper-slide"
         >
-          <BlogCardComponent :title="slide.text" :image="slide.image" />
+          <BlogCardComponent :title="slide.text" :image="slide.image" :route="slide.route" />
         </swiper-slide>
       </swiper-container>
     </div>

@@ -1,3 +1,16 @@
+<script lang="ts" setup>
+useSchemaOrg([
+  defineWebPage({
+    name: 'تن ساز'
+  }),
+  defineWebSite({
+    name: 'تن ساز'
+  })
+])
+
+</script>
+
+
 <template>
     <div>
         <NuxtRouteAnnouncer />
