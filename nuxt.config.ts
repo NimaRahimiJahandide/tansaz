@@ -10,7 +10,14 @@ export default defineNuxtConfig({
         pageTransition: { name: 'page', mode: 'out-in' }
       },
 
-    modules: ["@vueuse/nuxt", "@pinia/nuxt", "@nuxt/icon", "nuxt-swiper", 'nuxt-aos'],
+    modules: [
+      "@vueuse/nuxt",
+      "@pinia/nuxt",
+      "@nuxt/icon",
+      "nuxt-swiper",
+      'nuxt-aos',
+      "nuxt-schema-org",
+    ],
 
     vite: {
         plugins: [tailwindcss()],
