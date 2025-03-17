@@ -126,15 +126,15 @@ const newBlogs = ref([
           </div>
 
           <article class="mb-8 cursor-pointer group mt-[14px]">
-            <summary class="font-semibold flex items-center gap-2">
+            <div class="font-semibold flex items-center gap-2">
               <span>دسته بندی</span>
-            </summary>
+            </div>
             <div class="mt-4"><div>مقالات</div></div>
           </article>
           <article class="mb-8 cursor-pointer group mt-[14px]">
-            <summary class="font-semibold flex items-center gap-2">
+            <div class="font-semibold flex items-center gap-2">
               <span>آخرین مطالب</span>
-            </summary>
+            </div>
             <div class="mt-4 space-y-4">
               <NuxtLink
                 v-for="blog in newBlogs"
@@ -150,9 +150,9 @@ const newBlogs = ref([
             </div>
           </article>
           <article class="mb-8 cursor-pointer group">
-            <summary class="font-semibold flex items-center gap-2">
+            <div class="font-semibold flex items-center gap-2">
               <span>خدمات ما</span>
-            </summary>
+            </div>
             <div class="mt-4 flex flex-col gap-2">
               <div>زیبایی و لاغری</div>
               <div>کافه کلینیک</div>
