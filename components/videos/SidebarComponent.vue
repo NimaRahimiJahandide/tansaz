@@ -1,5 +1,5 @@
 <template>
-  <aside class="w-64 p-4 border-l border-gray-100  hidden lg:block h-[100vh]">
+  <aside class="w-52 p-4 border-l border-gray-100  hidden lg:block h-[100vh]">
     <div class="mb-6">
       <h2 class="font-bold mb-4 text-lg">ویدیوهای آپارات</h2>
       <ul class="space-y-3">

@@ -2,7 +2,7 @@
   <header class="sticky top-0 z-50 bg-white shadow-sm">
     <div class="flex items-center justify-between p-2 border-b border-b-gray-100">
       <div class="flex items-center gap-2">
-        <button class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+        <!-- <button class="p-2 hover:bg-gray-100 rounded-full transition-colors">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5"
@@ -15,7 +15,7 @@
               clip-rule="evenodd"
             ></path>
           </svg>
-        </button>
+        </button> -->
         <nuxt-link to="/">
           <img width="50" height="50" src="/icons/logo.png" alt="logo">
         </nuxt-link>
