@@ -51,39 +51,94 @@ setTimeout(() => {
           </h1>
         </div>
       </div>
-      <div class="max-w-[1200px] text-dark mx-auto px-5 mb-28">
-        <div class="bg-white rounded-lg overflow-hidden">
+      <div class="container max-w-[1200px] text-dark mx-auto px-5 mb-28">
+        <div class="bg-white rounded-lg min-h-screen">
           <div>
             <div
-              class="flex items-center justify-end gap-4 text-sm text-gray-500 mb-6"
+              class="flex md:flex-row flex-col md:items-center justify-between gap-4 text-sm text-gray-500 my-10"
             >
-              <div class="flex items-center gap-1">
-                <Icon
-                  name="mdi:clock-outline"
-                  size="18"
-                  class="text-gray-500"
-                />
-                <span>9:20</span>
+              <div class="flex gap-1">
+                <nuxt-link to="/">خانه</nuxt-link>
+                >
+                <nuxt-link to="/blogs">مقالات</nuxt-link>
+                >
+                <nuxt-link to="#" class="font-bold"
+                  >استفاده از معتبرترین برند مواد برندهای صنعت زیبایی و
+                  جراحی</nuxt-link
+                >
               </div>
-              <div class="flex items-center gap-1">
-                <Icon name="uis:schedule" size="18" class="text-gray-500" />
-                <span>3 مرداد 1403</span>
-              </div>
-              <div class="flex items-center gap-1">
-                <Icon
-                  name="mage:message-dots-round"
-                  size="18"
-                  class="text-gray-500"
-                />
-                <span>23 دیدگاه</span>
+              <div class="flex gap-4">
+                <div class="flex items-center gap-1">
+                  <Icon
+                    name="mdi:clock-outline"
+                    size="18"
+                    class="text-gray-500"
+                  />
+                  <span>9:20</span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <Icon name="uis:schedule" size="18" class="text-gray-500" />
+                  <span>3 مرداد 1403</span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <Icon
+                    name="mage:message-dots-round"
+                    size="18"
+                    class="text-gray-500"
+                  />
+                  <span>23 دیدگاه</span>
+                </div>
               </div>
             </div>
-            <div class="flex md:flex-row flex-col md:gap-10 gap-5">
-              <img
-                src="/images/photo_2024-08-21_22-16-13-682x1024.jpg"
-                alt="Beauty Product"
-                class="md:w-1/3 max-h-[31rem] rounded-lg"
-              />
+            <section class="flex md:flex-row-reverse flex-col md:gap-10 gap-5">
+              <article class="md:w-1/3 md:sticky md:top-0 w-full">
+                <img
+                  src="/images/photo_2024-08-21_22-16-13-682x1024.jpg"
+                  alt="Beauty Product"
+                  class="w-full max-h-[31rem] rounded-lg"
+                />
+                <div class="pb-10">
+                  <p class="text-lg py-4">اشراک گذاری</p>
+                  <div class="flex gap-3">
+                    <span
+                      class="bg-primary flex justify-center items-center rounded-full w-[30px] h-[30px] cursor-pointer"
+                    >
+                      <Icon
+                        name="ic:baseline-facebook"
+                        size="17px"
+                        style="color: #fff"
+                      />
+                    </span>
+                    <span
+                      class="bg-primary flex justify-center items-center rounded-full w-[30px] h-[30px] cursor-pointer"
+                    >
+                      <Icon
+                        name="ic:baseline-whatsapp"
+                        size="17px"
+                        style="color: #fff"
+                      />
+                    </span>
+                    <span
+                      class="bg-primary flex justify-center items-center rounded-full w-[30px] h-[30px] cursor-pointer"
+                    >
+                      <Icon
+                        name="ic:baseline-telegram"
+                        size="17px"
+                        style="color: #fff"
+                      />
+                    </span>
+                    <span
+                      class="bg-primary flex justify-center items-center rounded-full w-[30px] h-[30px] cursor-pointer"
+                    >
+                      <Icon
+                        name="ic:baseline-email"
+                        size="17px"
+                        style="color: #fff"
+                      />
+                    </span>
+                  </div>
+                </div>
+              </article>
               <div class="md:w-2/3 flex flex-col gap-3.5">
                 <h2 class="text-xl font-bold">
                   از پرفروش ترین برند مواد برندهای صنعت زیبایی
@@ -112,10 +167,12 @@ setTimeout(() => {
                   این برند به عنوان یکی از پیشروان صنعت زیبایی، همواره توجه
                   زیادی به تحقیقات علمی و توسعه محصولات جدید داشته است.
                 </p>
+                <BlogCommentSection class="mt-10"/>
               </div>
-            </div>
+            </section>
           </div>
         </div>
+        <BlogRecentlyBlog />
       </div>
     </div>
   </div>

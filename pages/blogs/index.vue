@@ -96,53 +96,45 @@ const newBlogs = ref([
             :image="blog.image"
           />
         </div>
-        <div class="lg:w-1/4  w-full">
+        <div class="lg:w-1/4 w-full">
           <div class="flex items-start gap-[20px]">
             <span
               class="bg-primary flex justify-center items-center rounded-[6px] size-[30px]"
             >
               <Icon name="lets-icons:insta" size="17px" style="color: #fff" />
             </span>
-            <div class="flex flex-col gap-2.5">
+            <div class="flex flex-col gap-1">
               <p class="font-semibold">صفحه اینستاگرام</p>
+              <strong class="text-neutral-400 font-normal"
+                >tansaz.clinic</strong
+              >
             </div>
           </div>
-          <span class="text-neutral-400">tansaz.clinic</span>
+
           <div class="flex items-start gap-[20px] mt-[14px]">
             <span
-              class="bg-primary flex justify-center items-center rounded-[6px] size-[30px]"
+              class="bg-primary flex justify-center items-center rounded-[6px] min-w-[30px] h-[30px]"
             >
               <Icon name="mdi:location" size="17px" style="color: #fff" />
             </span>
-            <div class="flex flex-col gap-2.5">
+            <div class="flex flex-col gap-1">
               <p class="font-semibold">آدرس کلینیک</p>
+              <strong class="text-neutral-400 text-[14px] font-normal"
+                >شیراز، معالی آباد، نبش دنا، ساختمان هرم نور، طبقه 5 و 6</strong
+              >
             </div>
           </div>
-          <span class="text-neutral-400 text-[14px]"
-            >شیراز، معالی آباد، نبش دنا، ساختمان هرم نور، طبقه 5 و 6</span
-          >
-          <details class="mb-8 cursor-pointer group mt-[14px]">
-            <summary class="font-semibold flex items-center gap-2">
+
+          <article class="mb-8 cursor-pointer group mt-[14px]">
+            <div class="font-semibold flex items-center gap-2">
               <span>دسته بندی</span>
-              <Icon
-                class="group-open:rotate-180 transition-transform"
-                name="ep:arrow-down"
-                size="17px"
-                style="color: #000"
-              />
-            </summary>
+            </div>
             <div class="mt-4"><div>مقالات</div></div>
-          </details>
-          <details class="mb-8 cursor-pointer group mt-[14px]">
-            <summary class="font-semibold flex items-center gap-2">
+          </article>
+          <article class="mb-8 cursor-pointer group mt-[14px]">
+            <div class="font-semibold flex items-center gap-2">
               <span>آخرین مطالب</span>
-              <Icon
-                class="group-open:rotate-180 transition-transform"
-                name="ep:arrow-down"
-                size="17px"
-                style="color: #000"
-              />
-            </summary>
+            </div>
             <div class="mt-4 space-y-4">
               <NuxtLink
                 v-for="blog in newBlogs"
@@ -151,22 +143,16 @@ const newBlogs = ref([
                 class="flex gap-2 items-center"
               >
                 <img :src="blog.image" class="rounded-lg size-[50px]" alt="" />
-                <div class="text-sm">
+                <div class="text-sm text-justify">
                   {{ blog.text }}
                 </div>
               </NuxtLink>
             </div>
-          </details>
-          <details class="mb-8 cursor-pointer group">
-            <summary class="font-semibold flex items-center gap-2">
+          </article>
+          <article class="mb-8 cursor-pointer group">
+            <div class="font-semibold flex items-center gap-2">
               <span>خدمات ما</span>
-              <Icon
-                class="group-open:rotate-180 transition-transform"
-                name="ep:arrow-down"
-                size="17px"
-                style="color: #000"
-              />
-            </summary>
+            </div>
             <div class="mt-4 flex flex-col gap-2">
               <div>زیبایی و لاغری</div>
               <div>کافه کلینیک</div>
@@ -175,7 +161,7 @@ const newBlogs = ref([
               <div>آکادمی و آموزش</div>
               <div>فروشگاه آنلاین</div>
             </div>
-          </details>
+          </article>
         </div>
       </div>
     </div>
