@@ -1,8 +1,4 @@
 <script setup>
-definePageMeta({
-  layout: "videos",
-});
-
 const videos = ref([
   {
     id: 0,

@@ -10,7 +10,7 @@
         class="bg-primary w-full flex-1 grow h-full text-white p-8 flex flex-col justify-center gap-3.5 rounded-2xl md:w-[400px]"
       >
         <h2 class="text-[28px] font-light text-right">مشاوره رایگان</h2>
-        <p class="text-sm leading-7 text-right">
+        <p class="text-sm leading-7  text-justify">
           کافیست که اسم و شماره تماس خود را وارد کنید تا کارشناسان ما با شما
           تماس بگیرند
         </p>

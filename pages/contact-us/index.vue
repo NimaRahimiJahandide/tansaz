@@ -25,7 +25,7 @@ setTimeout(() => {
         <div class="space-y-6">
           <div class="flex items-start gap-[20px]">
             <span
-              class="bg-primary flex justify-center items-center rounded-[6px] size-[30px]"
+              class="bg-primary flex justify-center items-center rounded-[6px] min-w-[30px] h-[30px]"
             >
               <Icon name="ic:baseline-phone" size="17px" style="color: #fff" />
             </span>
@@ -38,7 +38,7 @@ setTimeout(() => {
           </div>
           <div class="flex items-start gap-[20px]">
             <span
-              class="bg-primary flex justify-center items-center rounded-[6px] size-[30px]"
+              class="bg-primary flex justify-center items-center rounded-[6px] min-w-[30px] h-[30px]"
             >
               <Icon name="mdi:location" size="17px" style="color: #fff" />
             </span>
