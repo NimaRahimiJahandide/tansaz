@@ -1,5 +1,0 @@
-User-agent: *
-Disallow:
-Disallow: /dashboard/*
-Allow: /
-Sitemap: https://tansazmed.com/sitemap.xml

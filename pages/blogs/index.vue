@@ -142,7 +142,7 @@ const newBlogs = ref([
                 :key="blog.id"
                 class="flex gap-2 items-center"
               >
-                <img :src="blog.image" class="rounded-lg size-[50px]" alt="" />
+                <img :src="blog.image" class="rounded-lg size-[50px]" :alt="blog.text" />
                 <div class="text-sm text-justify">
                   {{ blog.text }}
                 </div>

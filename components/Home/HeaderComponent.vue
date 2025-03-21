@@ -128,7 +128,7 @@ const slides = ref([
             >
               <img
                 :src="slide.image"
-                alt=""
+                alt="کلینیک-زیبایی-و-لاغری-تن-ساز"
                 class="w-full object-cover rounded-2xl overflow-hidden"
               />
             </swiper-slide>
@@ -185,7 +185,7 @@ const slides = ref([
             >
               <img
                 :src="slide.image"
-                alt=""
+                alt="کلینیک-زیبایی-و-لاغری-تن-ساز"
                 class="w-full object-cover rounded-2xl -z-1"
               />
             </swiper-slide>

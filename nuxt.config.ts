@@ -29,7 +29,9 @@ export default defineNuxtConfig({
       'nuxt-aos',
       "nuxt-schema-org",
       "@nuxtjs/sitemap",
-      "@nuxtjs/seo",
+      // "@nuxtjs/seo",
+      "@nuxt/image",
+      'nuxt-vitalizer',
     ],
 
     site: { 
@@ -37,17 +39,35 @@ export default defineNuxtConfig({
       name: 'تن ساز',
       gzip: true,
       trailingSlash: true,
-      }, 
-      seo: {
-        redirectToCanonicalSiteUrl: true,
-      },
-      sitemap: {
-        defaults: {
-          lastmod: new Date().toISOString(),
-          priority: 0.5,
-          changefreq: 'weekly'
+    }, 
+    // seo: {
+    //   redirectToCanonicalSiteUrl: true,
+    // },
+    sitemap: {
+      defaults: {
+        lastmod: new Date().toISOString(),
+        priority: 0.5,
+        changefreq: 'weekly'
+      }
+    },
+    image: {
+      presets: {
+        default: {
+          modifiers: {
+            format: 'webp'
+          }
         }
-      },
+      }
+    },
+    vitalizer: {
+      disableStylesheets: 'entry',
+      disablePrefetchLinks: true,
+      delayHydration: {
+        hydrateOnEvents: ['mousemove', 'scroll', 'keydown', 'click', 'touchstart', 'wheel'],
+        idleCallbackTimeout: 8000,
+        postIdleTimeout: 4000
+      }
+    },
     vite: {
         plugins: [tailwindcss()],
     },

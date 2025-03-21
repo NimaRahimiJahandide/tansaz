@@ -36,7 +36,7 @@ defineProps({
           >
             <img
               :src="slide.image"
-              alt=""
+              alt="عکس های قبل و بعد کلینیک زیبایی و لاغری تن ساز"
               class="w-full bg-primary object-cover overflow-hidden"
             />
           </swiper-slide>

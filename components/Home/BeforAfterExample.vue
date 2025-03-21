@@ -85,7 +85,7 @@ const slides = ref([
           >
             <img
               :src="slide.image"
-              alt=""
+              alt="عکس-قبل-و-بعد-کلینیک-زیبایی-و-لاغری-تن-ساز"
               class="w-full bg-primary object-cover rounded-2xl overflow-hidden"
             />
           </swiper-slide>
