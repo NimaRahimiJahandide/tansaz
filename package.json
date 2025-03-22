@@ -24,7 +24,8 @@
         "tailwindcss": "^4.0.6",
         "vue": "latest",
         "vue-router": "latest",
-        "vue3-apexcharts": "^1.8.0"
+        "vue3-apexcharts": "^1.8.0",
+        "vue3-compare-image": "^1.2.5"
     },
     "devDependencies": {
         "@nuxt/icon": "^1.10.3",
