@@ -42,7 +42,7 @@ setTimeout(() => {
       <ServicesSection class="mb-[5rem]"/>
       <div class="max-w-[1200px] mx-auto px-5">
         <ReservationAndContactUsBanner />
-        <div class="flex md:flex-row flex-col gap-[20px] mt-[75px]">
+        <!-- <div class="flex md:flex-row flex-col gap-[20px] mt-[75px]">
           <div
             class="flex flex-col gap-2.5 bg-dark text-white rounded-[25px] p-[35px] w-full backdrop-blur-md"
           >
@@ -69,7 +69,7 @@ setTimeout(() => {
               >شرایط ویژه</NuxtLink
             >
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
