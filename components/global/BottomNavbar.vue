@@ -46,10 +46,10 @@ onUnmounted(() => {
       </li>
       <li>
         <NuxtLink
-          to="#"
+          to="/videos"
           class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px]"
         >
-          فروشگاه</NuxtLink
+        ویدیو ها</NuxtLink
         >
       </li>
       <li class="relative group">

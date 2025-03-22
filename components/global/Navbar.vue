@@ -72,13 +72,13 @@ watch(() => route.path, () => {
             />
           </div>
           <div class="flex items-center gap-[10px]">
-            <NuxtLink
+            <!-- <NuxtLink
               to="/auth/otp"
               class="bg-[#333333] rounded-[10px] size-10 flex items-center justify-center max-h-10"
             >
               <Icon name="mdi:user" size="24px" style="color: #fff" />
-            </NuxtLink>
-            <NuxtLink
+            </NuxtLink> -->
+            <!-- <NuxtLink
               to="#"
               class="bg-primary rounded-[10px] size-10 flex items-center justify-center max-h-10"
             >
@@ -87,7 +87,7 @@ watch(() => route.path, () => {
                 size="22px"
                 style="color: #fff"
               />
-            </NuxtLink>
+            </NuxtLink> -->
             <a
               href="tel:07136385004"
               class="bg-[#262626] rounded-lg whitespace-nowrap text-white tracking-[2px] px-6 py-3 max-h-10 flex items-center justify-center"
@@ -115,7 +115,7 @@ watch(() => route.path, () => {
             </button>
           </div>
           <div class="flex gap-[10px]">
-            <NuxtLink
+            <!-- <NuxtLink
               to="#"
               class="bg-primary rounded-[10px] size-10 flex items-center justify-center max-h-10"
             >
@@ -124,13 +124,13 @@ watch(() => route.path, () => {
                 size="22px"
                 style="color: #fff"
               />
-            </NuxtLink>
-            <NuxtLink
+            </NuxtLink> -->
+            <!-- <NuxtLink
               to="/auth/otp"
               class="bg-[#333333] rounded-[10px] size-10 flex items-center justify-center max-h-10"
             >
               <Icon name="mdi:user" size="24px" style="color: #fff" />
-            </NuxtLink>
+            </NuxtLink> -->
           </div>
         </div>
         <!--start hamburger menu -->
@@ -238,8 +238,8 @@ watch(() => route.path, () => {
                 >
               </li>
               <li>
-                <NuxtLink to="#" class="block py-2 px-4 hover:text-primary"
-                  >فروشگاه</NuxtLink
+                <NuxtLink to="/videos" class="block py-2 px-4 hover:text-primary"
+                  >ویدیو ها</NuxtLink
                 >
               </li>
               <li>
