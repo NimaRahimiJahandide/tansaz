@@ -28,12 +28,12 @@
         />
       </div>
       <div class="mb-4">
-        <label for="email" class="block mb-1 text-right text-sm">
-          ایمیل <span class="text-red-500">*</span>
+        <label for="tel" class="block mb-1 text-right text-sm">
+          شماره تلفن <span class="text-red-500">*</span>
         </label>
         <input
-          type="email"
-          id="email"
+          type="tel"
+          id="tel"
           class="w-full border border-gray-300 rounded p-2 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-gray-400"
           required
         />
@@ -45,7 +45,7 @@
           class="w-4 h-4 accent-primary cursor-pointer transition-all hover:scale-105"
         />
         <label for="save-info" class="text-sm text-gray-700 cursor-pointer">
-          ذخیره نام، ایمیل و وبسایت من در مرورگر برای زمانی که دوباره دیدگاهی
+          ذخیره نام و شماره تلفن در مرورگر برای زمانی که دوباره دیدگاهی
           می‌نویسم.
         </label>
       </div>
