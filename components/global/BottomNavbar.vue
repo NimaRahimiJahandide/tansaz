@@ -40,7 +40,7 @@ onUnmounted(() => {
       <hr />
     </div> -->
     <ul
-    :class="['md:flex hidden items-center justify-center py-[10px] w-full sticky top-0 bg-white shadow-md z-50 sticky-nav', isSticky ? 'border-b' : 'border-y']"    >
+    :class="['md:flex hidden items-center justify-center py-[10px] w-full sticky top-0 bg-white shadow-md z-40 sticky-nav', isSticky ? 'border-b' : 'border-y']"    >
       <li>
         <NuxtLink to="/" class="text-primary py-2 px-4">صفحه اصلی</NuxtLink>
       </li>
