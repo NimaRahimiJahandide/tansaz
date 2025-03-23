@@ -128,7 +128,7 @@ const slides = ref([
             >
               <img
                 :src="slide.image"
-                alt=""
+                alt="کلینیک-زیبایی-و-لاغری-تن-ساز"
                 class="w-full object-cover rounded-2xl overflow-hidden"
               />
             </swiper-slide>
@@ -169,10 +169,10 @@ const slides = ref([
         </div>
         <!-- start slider desktop -->
         <div
-          class="hidden md:flex w-full min-[852px]:max-w-md max-w-[350px]"
+          class="hidden md:flex w-full min-[852px]:max-w-md lg:max-w-[552px] max-w-[350px]"
         >
           <swiper-container
-            class="h-[44vh] w-full swiper-container"
+            class="lg:h-[52vh] h-[44vh] w-full swiper-container"
             :loop="true"
             :pagination="{ clickable: true }"
             :slides-per-view="1"
@@ -185,7 +185,7 @@ const slides = ref([
             >
               <img
                 :src="slide.image"
-                alt=""
+                alt="کلینیک-زیبایی-و-لاغری-تن-ساز"
                 class="w-full object-cover rounded-2xl -z-1"
               />
             </swiper-slide>

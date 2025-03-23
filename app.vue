@@ -25,6 +25,7 @@ useSchemaOrg([
     direction: rtl;
     box-sizing: border-box;
     font-family: 'iran-yekan';
+    font-display: swap; 
     scroll-behavior: smooth;
 }
 

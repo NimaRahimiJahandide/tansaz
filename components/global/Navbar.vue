@@ -18,9 +18,84 @@ setTimeout(() => {
   loadingState.setLoading(false);
 }, 2000);
 
-watch(() => route.path, () => {
-  isMenuOpen.value = false;
+// start search function
+interface SearchResult {
+  id: number;
+  name: string;
+}
+
+const searchQuery = ref<string>('');
+const showResults = ref<boolean>(false);
+const searchResults = ref<SearchResult[]>([]);
+const isLoading = ref<boolean>(false); // حالت لودینگ
+
+const debounce = <T extends (...args: any[]) => void>(fn: T, delay: number) => {
+  let timeoutId: ReturnType<typeof setTimeout>;
+  return (...args: Parameters<T>) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn(...args), delay);
+  };
+};
+
+const searchProducts = async (query: string): Promise<void> => {
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    if (query.trim()) {
+      searchResults.value = [
+        { id: 1, name: 'محصول ۱' },
+        { id: 2, name: 'محصول ۲' },
+        { id: 3, name: 'محصول ۳' },
+      ];
+    } else {
+      searchResults.value = [];
+    }
+  } catch (error) {
+    console.error('خطا در جستجو:', error);
+    searchResults.value = [];
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+const debouncedSearch = debounce(searchProducts, 300);
+
+watch(searchQuery, (newQuery: string) => {
+  if (newQuery.trim()) {
+    debouncedSearch(newQuery);
+  } else {
+    searchResults.value = [];
+  }
 });
+
+const handleFocus = (): void => {
+  isLoading.value = true;
+  if (searchQuery.value.trim()) {
+    showResults.value = true;
+  }
+};
+
+const handleInput = (): void => {
+  if (searchQuery.value.trim()) {
+    showResults.value = true;
+  } else {
+    showResults.value = false;
+  }
+};
+
+const hideResults = (): void => {
+  setTimeout(() => {
+    showResults.value = false;
+    isLoading.value = false
+  }, 200); 
+};
+// end search function
+
+watch(
+  () => route.path,
+  () => {
+    isMenuOpen.value = false;
+  }
+);
 </script>
 <template>
   <div>
@@ -65,20 +140,44 @@ watch(() => route.path, () => {
             <NuxtLink to="/" class="flex items-center py-4 px-2">
               <img class="w-[108px]" src="/icons/logo.png" alt="logo" />
             </NuxtLink>
-            <input
-              class="bg-background-input py-4 pr-4 pl-7 w-[200px] lg:w-[420px] focus:border-none focus:outline-none border-none rounded-2xl ml-2"
-              type="text"
-              placeholder="جستجو محصولات"
-            />
+            <div class="relative">
+              <input
+                v-model="searchQuery"
+                @input="handleInput"
+                @focus="handleFocus"
+                @blur="hideResults"
+                class="bg-background-input py-4 pr-4 pl-7 w-[200px] lg:w-[420px] focus:border-none focus:outline-none border-none rounded-2xl ml-2"
+                type="text"
+                placeholder="جستجو محصولات"
+              />
+              <div
+                v-if="showResults && searchQuery.trim() !== ''"
+                class="absolute top-full left-0 w-full bg-white border border-gray-200 rounded-lg shadow-lg mt-2 z-10"
+              >
+              <div v-if="isLoading" class="p-2 text-gray-500">Loading...</div>
+              <div v-else>
+                <div v-if="searchResults.length > 0">
+                  <div
+                    v-for="result in searchResults"
+                    :key="result.id"
+                    class="p-2 hover:bg-gray-100 cursor-pointer"
+                  >
+                    {{ result.name }}
+                  </div>
+                </div>
+                <div v-else class="p-2 text-gray-500">نتیجه‌ای یافت نشد.</div>
+              </div>
+              </div>
+            </div>
           </div>
           <div class="flex items-center gap-[10px]">
-            <NuxtLink
+            <!-- <NuxtLink
               to="/auth/otp"
               class="bg-[#333333] rounded-[10px] size-10 flex items-center justify-center max-h-10"
             >
               <Icon name="mdi:user" size="24px" style="color: #fff" />
-            </NuxtLink>
-            <NuxtLink
+            </NuxtLink> -->
+            <!-- <NuxtLink
               to="#"
               class="bg-primary rounded-[10px] size-10 flex items-center justify-center max-h-10"
             >
@@ -87,7 +186,7 @@ watch(() => route.path, () => {
                 size="22px"
                 style="color: #fff"
               />
-            </NuxtLink>
+            </NuxtLink> -->
             <a
               href="tel:07136385004"
               class="bg-[#262626] rounded-lg whitespace-nowrap text-white tracking-[2px] px-6 py-3 max-h-10 flex items-center justify-center"
@@ -115,7 +214,7 @@ watch(() => route.path, () => {
             </button>
           </div>
           <div class="flex gap-[10px]">
-            <NuxtLink
+            <!-- <NuxtLink
               to="#"
               class="bg-primary rounded-[10px] size-10 flex items-center justify-center max-h-10"
             >
@@ -124,13 +223,13 @@ watch(() => route.path, () => {
                 size="22px"
                 style="color: #fff"
               />
-            </NuxtLink>
-            <NuxtLink
+            </NuxtLink> -->
+            <!-- <NuxtLink
               to="/auth/otp"
               class="bg-[#333333] rounded-[10px] size-10 flex items-center justify-center max-h-10"
             >
               <Icon name="mdi:user" size="24px" style="color: #fff" />
-            </NuxtLink>
+            </NuxtLink> -->
           </div>
         </div>
         <!--start hamburger menu -->
@@ -221,7 +320,9 @@ watch(() => route.path, () => {
                 >
               </li>
               <li>
-                <NuxtLink to="/reserve" class="block py-2 px-4 hover:text-primary"
+                <NuxtLink
+                  to="/reserve"
+                  class="block py-2 px-4 hover:text-primary"
                   >رزو آنلاین نوبت</NuxtLink
                 >
               </li>
@@ -238,12 +339,16 @@ watch(() => route.path, () => {
                 >
               </li>
               <li>
-                <NuxtLink to="#" class="block py-2 px-4 hover:text-primary"
-                  >فروشگاه</NuxtLink
+                <NuxtLink
+                  to="/videos"
+                  class="block py-2 px-4 hover:text-primary"
+                  >ویدیو ها</NuxtLink
                 >
               </li>
               <li>
-                <NuxtLink to="/contact-us" class="block py-2 px-4 hover:text-primary"
+                <NuxtLink
+                  to="/contact-us"
+                  class="block py-2 px-4 hover:text-primary"
                   >تماس با ما</NuxtLink
                 >
               </li>
