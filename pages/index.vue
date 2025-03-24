@@ -35,7 +35,7 @@ useSchemaOrg([
     <HomeClinicServicesSection />
     <HomeImageComparison  />
     <HomeBeforAfterExample data-aos="fade-up" data-aos-once="true" />
-    <HomeFaqSection data-aos="fade-up" data-aos-once="true" />
+    <FaqSection data-aos="fade-up" data-aos-once="true" />
     <!-- <HomeClinicCafeSection data-aos="fade-up" data-aos-once="true" /> -->
     <HomeAboutUsSection data-aos="fade-up" data-aos-once="true" />
     <HomeBlogsSection data-aos="fade-up" data-aos-once="true" />

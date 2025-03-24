@@ -5,7 +5,11 @@ export default defineNuxtConfig({
     compatibilityDate: "2024-11-01",
     devtools: { enabled: false },
     css: ["~/assets/css/tailwind.css"],
-
+    runtimeConfig: {
+      public: {
+        baseURL: process.env.BASE_URL,
+      },
+    },
     app: {
         pageTransition: { name: 'page', mode: 'out-in' },
         head: {

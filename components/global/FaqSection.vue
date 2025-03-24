@@ -1,32 +1,36 @@
-
 <script lang="ts" setup>
+import axios from 'axios'
+const router = useRouter()
+
 interface FaqItem {
+  id: Number,
   question: string;
   answer: string;
 }
 
-const faqItems: FaqItem[] = [
-  {
-    question: "چرا کلینیک تن ساز؟",
-    answer:
-      "زیرا کلینیک تن ساز مجموعه‌ای با تجهیزات و تکنولوژی روز دنیا و مطابق با استانداردهای بین‌المللی مانند FDA و مواد مصرفی مورد تایید اداره کل تجهیزات پزشکی و وزارت بهداشت و درمان و زیر نظر پزشکان متخصص و دوره دیده بین المللی حوزه استتیک که دارای تجربه و مهارت بسیار بالا هستند می‌باشد.",
-  },
-  {
-    question: "هزینه‌های مشاوره لاغری و زیبایی به چه صورت است؟",
-    answer:
-      "مشاوره لاغری و زیبایی در کلینیک تن ساز به صورت رایگان انجام میشود.",
-  },
-  {
-    question: "کلینیک تن ساز در چه زمینه‌هایی فعالیت دارد؟",
-    answer:
-      "کلیه‌ی خدمات مرتبط با جوانسازی و زیبایی پوست و بدن، رژیم غذایی و لاغری صورت و بدن، درمان ریزش موی سر و موی ابرو، لیزر موهای زائد و سایر خدمات مرتبط با لیزر مانند پاک کردن تتو و خالکوبی صورت و بدن، در مجموعه تن ساز انجام می‌شود.",
-  },
-  {
-    question: "ساعت کاری کلینیک‌های تن ساز به چه صورت است؟",
-    answer:
-      "کلینیک تن ساز شنبه تا چهارشنبه ساعت 9 صبح الی 21 و روزهای پنج شنبه 9 الی 13 آماده خدمات رسانی شما عزیزان می‌باشد.",
-  },
-];
+const faqItems = ref<FaqItem[]>([]);
+
+let isResponseOk = ref(false);
+let loading = ref(true);
+
+const getFaq = async () => {
+  loading.value = true;
+  isResponseOk.value = false;
+  await axios
+    .get("/faqs")
+    .then((response) => {
+      if (response.status == 200) {
+        isResponseOk.value = true;
+      }
+      faqItems.value = response.data.data      
+      loading.value = false;
+    })
+    .catch((error) => {
+      console.error("مشکلی در نمایش سوالات متداول پیش آمده!");
+    });
+};
+
+await getFaq();
 
 const activeIndex = ref<number | null>(null);
 
