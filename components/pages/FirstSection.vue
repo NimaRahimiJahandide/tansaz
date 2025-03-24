@@ -59,7 +59,7 @@ setTimeout(() => {
     <div
       class="max-w-[1200px] text-dark mx-auto px-5 my-[25px] pt-2.5 flex justify-between w-full gap-[20px]"
     >
-      <div class="flex flex-col-reverse items-center md:flex-row gap-5">
+      <div class="flex flex-col-reverse items-center md:flex-row gap-10">
         <div class="flex flex-col gap-5 md:w-2/3">
           <div>
             <h1 class="text-[33px] font-light">
@@ -72,17 +72,17 @@ setTimeout(() => {
           </p>
           <div class="flex gap-2.5">
             <NuxtLink
-            to="/contact-us"
-            class="text-white  bg-primary focus:outline-none focus:ring-primary shadow-lg shadow-primary/50  rounded-lg py-[18px] px-[25px] flex justify-center items-center max-h-[51px]"
-          >
-            تماس با ما</NuxtLink
-          >
-          <NuxtLink
-            to="/about-us"
-            class="bg-transparent hover:bg-primary text-primary font-semibold hover:text-white hover:shadow-lg transition-all duration-300 hover:shadow-primary/50 py-[18px] px-[25px] flex justify-center items-center max-h-[51px] border border-primary hover:border-transparent rounded"
-          >
-            معرفی مجموعه
-          </NuxtLink>
+              to="/contact-us"
+              class="text-white bg-primary focus:outline-none focus:ring-primary shadow-lg shadow-primary/50 rounded-lg py-[18px] px-[25px] flex justify-center items-center max-h-[51px]"
+            >
+              تماس با ما</NuxtLink
+            >
+            <NuxtLink
+              to="/about-us"
+              class="bg-transparent hover:bg-primary text-primary font-semibold hover:text-white hover:shadow-lg transition-all duration-300 hover:shadow-primary/50 py-[18px] px-[25px] flex justify-center items-center max-h-[51px] border border-primary hover:border-transparent rounded"
+            >
+              معرفی مجموعه
+            </NuxtLink>
           </div>
         </div>
         <div class="md:w-1/3">
