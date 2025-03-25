@@ -54,7 +54,7 @@ onUnmounted(() => {
       </li>
       <li class="relative group">
         <NuxtLink
-          to="/services/1"
+          to="/services/1/beauty"
           class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px] flex items-center justify-center gap-1"
         >
           <span>خدمات زیبایی</span>
@@ -66,7 +66,7 @@ onUnmounted(() => {
         >
           <li class="flex flex-col gap-[20px] flex-grow">
             <NuxtLink
-              to="/services/2"
+              to="/services/6/hyphotherapy"
               class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
             >
               <Icon
@@ -77,7 +77,7 @@ onUnmounted(() => {
               هایفوتراپی
             </NuxtLink>
             <NuxtLink
-              to="/services/1"
+              to="/services/7/laser-hair-removal"
               class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
             >
               <Icon
