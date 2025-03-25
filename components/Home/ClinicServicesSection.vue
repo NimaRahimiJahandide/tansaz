@@ -6,21 +6,35 @@ interface Card {
   icon: string;
   route: string;
 }
-
-let cards = ref<Card[]>([
-  {
+const banner = ref({
+  title:'" خدمات کلینیک تن ساز "',
+  cards: [
+    {
     id: 0,
-    text: "پوست، مو، زیبایی",
+    title: "پوست، مو، زیبایی",
     icon: "/icons/zibaii.png",
     route: "/services/1",
   },
   {
     id: 1,
-    text: "لاغری بدون جراحی",
+    title: "لاغری بدون جراحی",
     icon: "/icons/laghari.png",
     route: "/services/2",
   },
-]);
+  {
+    id: 2,
+    title: "لاغری بدون جراحی",
+    icon: "/icons/laghari.png",
+    route: "/services/2",
+  },
+  {
+    id: 3,
+    title: "لاغری بدون جراحی",
+    icon: "/icons/laghari.png",
+    route: "/services/2",
+  },
+  ]
+})
 
 const loadingState = useLoadingState();
 
@@ -39,7 +53,7 @@ setTimeout(() => {
   </div> -->
   <div class="mt-[85px]">
     <div>
-      <ServicesSection class="mb-[5rem]"/>
+      <ServicesSection class="mb-[5rem]" :banner="banner"/>
       <div class="max-w-[1200px] mx-auto px-5">
         <ReservationAndContactUsBanner />
         <!-- <div class="flex md:flex-row flex-col gap-[20px] mt-[75px]">
