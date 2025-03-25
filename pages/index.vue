@@ -1,7 +1,35 @@
 <script setup lang="ts">
 import { useLoadingState } from "../store/loadingState";
-
+import axios from "axios";
 const loadingState = useLoadingState();
+
+
+let isResponseOk = ref(false);
+let loading = ref(true);
+
+const sliders = ref([])
+
+const getSlider = async () => {
+  loading.value = true;
+  isResponseOk.value = false;
+  await axios
+    .get("/sliders")
+    .then((response) => {
+      if (response.status == 200) {
+        isResponseOk.value = true;
+      }
+      console.log(response);
+      
+      sliders.value = response.data.data      
+      loading.value = false;
+    })
+    .catch((error) => {
+      console.error("مشکلی در نمایش سوالات متداول پیش آمده!");
+    });
+};
+
+await getSlider();
+
 
 setTimeout(() => {
   loadingState.setLoading(false);
@@ -31,14 +59,17 @@ useSchemaOrg([
       <Meta property="og:image:alt" content="تن ساز | صفحه اصلی" />
       <Meta property="og:url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
     </Head>
-    <HomeHeaderComponent />
-    <HomeClinicServicesSection />
-    <HomeImageComparison  />
-    <HomeBeforAfterExample data-aos="fade-up" data-aos-once="true" />
-    <FaqSection data-aos="fade-up" data-aos-once="true" />
-    <!-- <HomeClinicCafeSection data-aos="fade-up" data-aos-once="true" /> -->
-    <HomeAboutUsSection data-aos="fade-up" data-aos-once="true" />
-    <HomeBlogsSection data-aos="fade-up" data-aos-once="true" />
+    <LoadingComponent v-if="loading"/>
+    <div v-else>
+      <HomeHeaderComponent :sliders="sliders"/>
+      <HomeClinicServicesSection />
+      <HomeImageComparison  />
+      <HomeBeforAfterExample data-aos="fade-up" data-aos-once="true" />
+      <FaqSection data-aos="fade-up" data-aos-once="true" />
+      <!-- <HomeClinicCafeSection data-aos="fade-up" data-aos-once="true" /> -->
+      <HomeAboutUsSection data-aos="fade-up" data-aos-once="true" />
+      <HomeBlogsSection data-aos="fade-up" data-aos-once="true" />
+    </div>
   </div>
 </template>
 

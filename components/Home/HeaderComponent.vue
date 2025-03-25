@@ -2,20 +2,25 @@
 import { useLoadingState } from "@/store/loadingState";
 const loadingState = useLoadingState();
 
+const props = defineProps({
+  sliders: Object
+});
+
+
 setTimeout(() => {
   loadingState.setLoading(false);
 }, 2000);
 
-const slides = ref([
-  {
-    id: 0,
-    image: "/images/3-3.png",
-  },
-  {
-    id: 1,
-    image: "/images/tansaz.png",
-  },
-]);
+// const slides = ref([
+//   {
+//     id: 0,
+//     image: "/images/3-3.png",
+//   },
+//   {
+//     id: 1,
+//     image: "/images/tansaz.png",
+//   },
+// ]);
 </script>
 
 <template>
@@ -122,7 +127,7 @@ const slides = ref([
             :space-between="0"
           >
             <swiper-slide
-              v-for="slide in slides"
+              v-for="slide in sliders"
               :key="`slide-basic-${slide.id}`"
               class="swiper-slide rounded-2xl h-full"
             >
@@ -170,7 +175,7 @@ const slides = ref([
         <!-- start slider desktop -->
         <div
           class="hidden md:flex w-full min-[852px]:max-w-md lg:max-w-[552px] max-w-[350px]"
-        >
+        >        
           <swiper-container
             class="lg:h-[52vh] h-[44vh] w-full swiper-container"
             :loop="true"
@@ -179,7 +184,7 @@ const slides = ref([
             :space-between="0"
           >
             <swiper-slide
-              v-for="slide in slides"
+              v-for="slide in sliders"
               :key="`slide-basic-${slide.id}`"
               class="swiper-slide w-full rounded-2xl h-full -z-10"
             >
