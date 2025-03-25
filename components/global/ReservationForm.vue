@@ -62,7 +62,7 @@ const consultations = () => {
     axios.post("/consultations", formData)
       .then(response => {
         console.log(response);
-        successTitle.value = response.data.data.message
+        successTitle.value = response.data.message
         formData.name = "";
         formData.mobile = "";
         formData.text = "";
@@ -90,6 +90,7 @@ const v$ = useVuelidate(rules, formData);
     <ToastSuccess  :title="successTitle" :description="successDescription" v-if="successTitle.length"/>
     <ToastDanger  :title="dangerTitle" :description="dangerDescription" v-if="dangerTitle.length"/>
     <div class="mt-[75px] max-w-[1200px] mx-auto px-5">
+      {{ v$.$invalid }}
       <div class="w-full bg-neutral-900 p-8 rounded-3xl">
         <div class="flex flex-col md:flex-row justify-between items-start gap-5">
           <div class="text-white text-3xl flex flex-col my-auto font-bold text-right">
@@ -100,6 +101,7 @@ const v$ = useVuelidate(rules, formData);
               گرافیک است.
             </p>
           </div>
+          
           <div class="w-full space-y-6">
             <div class="space-y-2">
               <label class="block text-white text-sm">

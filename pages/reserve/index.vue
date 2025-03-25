@@ -62,7 +62,7 @@ const consultations = () => {
     axios.post("/consultations", formData)
       .then(response => {
         console.log(response);
-        successTitle.value = response.data.data.message
+        successTitle.value = response.data.message
         formData.name = "";
         formData.mobile = "";
         formData.text = "";
