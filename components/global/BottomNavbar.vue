@@ -3,7 +3,7 @@ import { useLoadingState } from "@/store/loadingState";
 const loadingState = useLoadingState();
 const isSticky = ref(false);
 const handleScroll = () => {
-  const navbar = document.querySelector('.sticky-nav');
+  const navbar = document.querySelector(".sticky-nav");
   if (navbar) {
     const rect = navbar.getBoundingClientRect();
     isSticky.value = rect.top <= 0;
@@ -15,13 +15,12 @@ setTimeout(() => {
 }, 2000);
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
+  window.addEventListener("scroll", handleScroll);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
+  window.removeEventListener("scroll", handleScroll);
 });
-
 </script>
 
 <template>
@@ -40,7 +39,11 @@ onUnmounted(() => {
       <hr />
     </div> -->
     <ul
-    :class="['md:flex hidden items-center justify-center py-[10px] w-full sticky top-0 bg-white shadow-md z-40 sticky-nav', isSticky ? 'border-b' : 'border-y']"    >
+      :class="[
+        'md:flex hidden items-center justify-center py-[10px] w-full sticky top-0 bg-white shadow-md z-40 sticky-nav',
+        isSticky ? 'border-b' : 'border-y',
+      ]"
+    >
       <li>
         <NuxtLink to="/" class="text-primary py-2 px-4">صفحه اصلی</NuxtLink>
       </li>
@@ -49,7 +52,7 @@ onUnmounted(() => {
           to="/videos"
           class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px]"
         >
-        ویدیو ها</NuxtLink
+          ویدیو ها</NuxtLink
         >
       </li>
       <li class="relative group">
@@ -62,7 +65,7 @@ onUnmounted(() => {
         </NuxtLink>
         <div class="absolute top-full left-0 right-0 h-4"></div>
         <ul
-          class="hidden group-hover:flex lg:w-[55rem] w-[40rem] gap-[10px] left-1/2 transform -translate-x-1/2 bg-white shadow-[0_0px_35px_rgba(0,0,0,0.12)] absolute top-14 p-[35px] rounded-[10px]"
+          class="duration-300 scale-0 group-hover:scale-100 flex lg:w-[55rem] w-[40rem] gap-[10px] left-1/2 transform -translate-x-1/2 bg-white shadow-[0_0px_35px_rgba(0,0,0,0.12)] absolute top-14 p-[35px] rounded-[10px]"
         >
           <li class="flex flex-col gap-[20px] flex-grow">
             <NuxtLink
@@ -105,14 +108,10 @@ onUnmounted(() => {
                 <NuxtLink to="/services/1"> بوتاکس </NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="/services/2">
-                  ژل، فیلر و آنزیم
-                </NuxtLink>
+                <NuxtLink to="/services/2"> ژل، فیلر و آنزیم </NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="/services/1">
-                  مزوژل های آبرسان
-                </NuxtLink>
+                <NuxtLink to="/services/1"> مزوژل های آبرسان </NuxtLink>
               </li>
               <li class="navbar-children_item">
                 <NuxtLink to="/services/2"> مزوتراپی و prp </NuxtLink>
@@ -169,7 +168,7 @@ onUnmounted(() => {
           </li>
         </ul>
       </li>
-      <li>
+      <li class="relative group">
         <NuxtLink
           to="#"
           class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px] flex items-center justify-center gap-1"
@@ -177,6 +176,49 @@ onUnmounted(() => {
           <span>خدمات لاغری</span>
           <Icon name="dashicons:arrow-down" size="24" class="icon text-black" />
         </NuxtLink>
+
+        <div class="absolute top-full left-0 right-0 h-4"></div>
+        <ul
+          class="duration-300 scale-0 group-hover:scale-100 flex w-[30rem] gap-[10px] right-[-15rem] xl:right-auto xl:left-[50%] xl:translate-x-[-50%] transform bg-white shadow-[0_0px_35px_rgba(0,0,0,0.12)] absolute top-14 p-[35px] rounded-[10px]"
+        >
+          <li class="flex flex-col gap-[20px] flex-grow">
+            <NuxtLink
+              to="/services/6/hyphotherapy"
+              class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
+            >
+              <Icon
+                name="mingcute:arrow-left-circle-fill"
+                size="18"
+                class="text-primary"
+              />
+              پیکرتراشی بدون جراحی
+            </NuxtLink>
+
+            <ul
+              class="list-disc list-inside marker:text-primary flex flex-col gap-1"
+            >
+              <li class="navbar-children_item">
+                <NuxtLink to="/services/1"> مشاور تخصصی تغذیه </NuxtLink>
+              </li>
+              <li class="navbar-children_item">
+                <NuxtLink to="/services/2">
+                  آنالیز کامل بدن با inbody
+                </NuxtLink>
+              </li>
+              <li class="navbar-children_item">
+                <NuxtLink to="/services/1">
+                  دستگاه لاغری و تناسب اندام
+                </NuxtLink>
+              </li>
+              <li class="navbar-children_item">
+                <NuxtLink to="/services/2"> چربی سوز کویتیشن</NuxtLink>
+              </li>
+              <li class="navbar-children_item">
+                <NuxtLink to="/services/2"> درمان سلولیت</NuxtLink>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </li>
     </ul>
   </div>
