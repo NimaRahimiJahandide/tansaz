@@ -1,6 +1,24 @@
 <script setup lang="ts">
 import { useLoadingState } from "@/store/loadingState";
+import axios from "axios";
 const loadingState = useLoadingState();
+const route = useRoute();
+
+const blogDetails = ref({});
+
+const getBlogDetail = async () => {
+  try {
+    const data = await axios.get(`/posts/${route.params.id}`);
+    console.log(data.data)
+    blogDetails.value = data.data.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+onMounted(() => {
+  getBlogDetail();
+});
 
 setTimeout(() => {
   loadingState.setLoading(false);
@@ -36,8 +54,8 @@ setTimeout(() => {
     <div>
       <div
         class="h-64 bg-cover bg-center relative"
-        style="
-          background-image: url('/images/photo_2024-08-21_22-16-13-682x1024.jpg');
+        :style="
+          `background-image: url('${blogDetails?.image}');`
         "
       >
         <div
@@ -47,7 +65,7 @@ setTimeout(() => {
             class="text-white text-2xl text-center px-4 font-semibold"
             dir="rtl"
           >
-            "استفاده از معتبرترین برند مواد برندهای صنعت زیبایی و جراحی"
+         {{ blogDetails?.title}}
           </h1>
         </div>
       </div>
@@ -63,8 +81,8 @@ setTimeout(() => {
                 <nuxt-link to="/blogs">مقالات</nuxt-link>
                 >
                 <nuxt-link to="#" class="font-bold"
-                  >استفاده از معتبرترین برند مواد برندهای صنعت زیبایی و
-                  جراحی</nuxt-link
+                  >  {{ blogDetails?.title }}
+                  </nuxt-link
                 >
               </div>
               <div class="flex gap-4">
@@ -93,7 +111,7 @@ setTimeout(() => {
             <section class="flex md:flex-row-reverse flex-col md:gap-10 gap-5">
               <article class="md:w-1/3 md:sticky md:top-0 w-full">
                 <img
-                  src="/images/photo_2024-08-21_22-16-13-682x1024.jpg"
+                  :src="blogDetails?.image"
                   alt="Beauty Product"
                   class="w-full max-h-[31rem] rounded-lg"
                 />
@@ -140,7 +158,12 @@ setTimeout(() => {
                 </div>
               </article>
               <div class="md:w-2/3 flex flex-col gap-3.5">
-                <h2 class="text-xl font-bold">
+
+                <div v-html="blogDetails?.body">
+
+                </div>
+                
+                <!-- <h2 class="text-xl font-bold">
                   از پرفروش ترین برند مواد برندهای صنعت زیبایی
                 </h2>
                 <p class="text-light-grey leading-7 text-justify">
@@ -166,8 +189,8 @@ setTimeout(() => {
                   زیرمجموعه‌های مشهوری مانند Lancôme، Maybelline، و Kiehl’s است.
                   این برند به عنوان یکی از پیشروان صنعت زیبایی، همواره توجه
                   زیادی به تحقیقات علمی و توسعه محصولات جدید داشته است.
-                </p>
-                <BlogCommentSection class="mt-10"/>
+                </p> -->
+                <BlogCommentSection class="mt-10" />
               </div>
             </section>
           </div>

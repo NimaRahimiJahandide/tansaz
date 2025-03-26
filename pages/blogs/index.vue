@@ -1,33 +1,34 @@
 <script setup lang="ts">
 import { useLoadingState } from "@/store/loadingState";
+import axios from "axios";
 const loadingState = useLoadingState();
 
 setTimeout(() => {
   loadingState.setLoading(false);
 }, 2000);
 
-const blogs = ref([
-  {
-    id: 0,
-    image: "/images/photo_2024-08-21_22-15-45-682x1024.jpg",
-    text: "جراحی بوکال فت، ساب سیژن و پیوند چربی",
-  },
-  {
-    id: 1,
-    image: "/images/photo_2024-08-21_22-15-49-682x1024.jpg",
-    text: "تزریقات زیبایی بوتاکس، ژل و فیلر و هایفوتراپی",
-  },
-  {
-    id: 2,
-    image: "/images/photo_2024-08-21_22-16-13-682x1024.jpg",
-    text: " استفاده از معتبرترین برند مواد برندهای صنعت زیبایی و جراحی",
-  },
-  {
-    id: 3,
-    image: "/images/photo_2024-08-21_22-15-54-682x1024.jpg",
-    text: "از پرفروش ترین برند مواد برندهای صنعت زیبایی",
-  },
-]);
+// const blogs = ref([
+//   {
+//     id: 0,
+//     image: "/images/photo_2024-08-21_22-15-45-682x1024.jpg",
+//     text: "جراحی بوکال فت، ساب سیژن و پیوند چربی",
+//   },
+//   {
+//     id: 1,
+//     image: "/images/photo_2024-08-21_22-15-49-682x1024.jpg",
+//     text: "تزریقات زیبایی بوتاکس، ژل و فیلر و هایفوتراپی",
+//   },
+//   {
+//     id: 2,
+//     image: "/images/photo_2024-08-21_22-16-13-682x1024.jpg",
+//     text: " استفاده از معتبرترین برند مواد برندهای صنعت زیبایی و جراحی",
+//   },
+//   {
+//     id: 3,
+//     image: "/images/photo_2024-08-21_22-15-54-682x1024.jpg",
+//     text: "از پرفروش ترین برند مواد برندهای صنعت زیبایی",
+//   },
+// ]);
 
 const newBlogs = ref([
   {
@@ -51,6 +52,24 @@ const newBlogs = ref([
     text: "از پرفروش ترین برند مواد برندهای صنعت زیبایی",
   },
 ]);
+
+const blogs = ref([]);
+
+const getBlogs = async () => {
+  try {
+    const data = await axios.get(`/categories/1/posts`);
+
+    console.log(data.data.data);
+
+    blogs.value = data.data.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+onMounted(() => {
+  getBlogs();
+});
 </script>
 
 <template>
@@ -91,8 +110,8 @@ const newBlogs = ref([
           <BlogCardComponent
             v-for="blog in blogs"
             :key="blog.id"
-            :title="blog.text"
-            :route="`/blogs/${blog.id}`"
+            :title="blog.title"
+            :route="`/blogs/${blog.id}/${blog.slug}`"
             :image="blog.image"
           />
         </div>
@@ -142,7 +161,11 @@ const newBlogs = ref([
                 :key="blog.id"
                 class="flex gap-2 items-center"
               >
-                <img :src="blog.image" class="rounded-lg size-[50px]" :alt="blog.text" />
+                <img
+                  :src="blog.image"
+                  class="rounded-lg size-[50px]"
+                  :alt="blog.text"
+                />
                 <div class="text-sm text-justify">
                   {{ blog.text }}
                 </div>
