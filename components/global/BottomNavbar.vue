@@ -91,7 +91,7 @@ onUnmounted(() => {
               لیزررفع مو های زائد
             </NuxtLink>
             <NuxtLink
-              to="/services/2"
+              to="/services/4/beauty-injections"
               class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
             >
               <Icon
@@ -105,22 +105,22 @@ onUnmounted(() => {
               class="list-disc list-inside marker:text-primary flex flex-col gap-1"
             >
               <li class="navbar-children_item">
-                <NuxtLink to="/services/1"> بوتاکس </NuxtLink>
+                <NuxtLink to="/services/5/botox"> بوتاکس </NuxtLink>
               </li>
               <li class="navbar-children_item">
                 <NuxtLink to="/services/2"> ژل، فیلر و آنزیم </NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="/services/1"> مزوژل های آبرسان </NuxtLink>
+                <NuxtLink to="/services/9/hydrating-mesogels"> مزوژل های آبرسان </NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="/services/2"> مزوتراپی و prp </NuxtLink>
+                <NuxtLink to="/services/10/mesotherapy"> مزوتراپی و prp </NuxtLink>
               </li>
             </ul>
           </li>
           <li class="flex flex-col gap-[20px] flex-grow">
             <NuxtLink
-              to="#"
+              to="/services/3/surgery"
               class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
             >
               <Icon
@@ -134,28 +134,28 @@ onUnmounted(() => {
               class="list-disc list-inside marker:text-primary flex flex-col gap-1"
             >
               <li class="navbar-children_item">
-                <NuxtLink to="#"> جراحی بوکال فت </NuxtLink>
+                <NuxtLink to="/services/11/fat-buccal-surgery"> جراحی بوکال فت </NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="#"> جراحی سانترال لب </NuxtLink>
+                <NuxtLink to="/services/12/central-lip-surgery"> جراحی سانترال لب </NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="#"> کاشت نخهای لیفت و جوانساز </NuxtLink>
+                <NuxtLink to="/services/13/planting-lifting-and-rejuvenating-threads"> کاشت نخهای لیفت و جوانساز </NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="#"> ساب سیژن تراپی </NuxtLink>
+                <NuxtLink to="/services/14/subcision-therapy"> ساب سیژن تراپی </NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="#"> تزریق و پیوند اتولوگ چربی </NuxtLink>
+                <NuxtLink to="/services/15/autologous-fat-injection-and-transplantation"> تزریق و پیوند اتولوگ چربی </NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="#"> ساکشن غبغب </NuxtLink>
+                <NuxtLink to="/services/16/ghabghab-suction"> ساکشن غبغب </NuxtLink>
               </li>
             </ul>
           </li>
           <li class="flex flex-col gap-[20px] flex-grow">
             <NuxtLink
-              to="#"
+              to="/services/17/facial"
               class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
             >
               <Icon
@@ -198,15 +198,15 @@ onUnmounted(() => {
               class="list-disc list-inside marker:text-primary flex flex-col gap-1"
             >
               <li class="navbar-children_item">
-                <NuxtLink to="/services/1"> مشاور تخصصی تغذیه </NuxtLink>
+                <NuxtLink to="/services/18/expert-advice-on-nutrition"> مشاور تخصصی تغذیه </NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="/services/2">
+                <NuxtLink to="/services/19/full-body-analysis">
                   آنالیز کامل بدن با inbody
                 </NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="/services/1">
+                <NuxtLink to="/services/20/d-actorultra-slimming-and-fitness-device">
                   دستگاه لاغری و تناسب اندام
                 </NuxtLink>
               </li>

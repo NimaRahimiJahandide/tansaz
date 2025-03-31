@@ -305,7 +305,7 @@ watch(
                   </li>
                   <li>
                     <NuxtLink
-                      to="/services/2"
+                      to="/services/4/beauty-injections"
                       class="block py-2 px-4 hover:text-primary"
                       >تزریقات زیبایی</NuxtLink
                     >
