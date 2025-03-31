@@ -112,9 +112,9 @@ watch(
       description="با اطمینانی کامل، زیبایی خود را با ما دو چندان کنید"
     />
     <ReservationAndContactUsBanner />
-    <div v-html="pageState.secondBody.code"></div>
+    <div class="text-justify" v-html="pageState.secondBody.code"></div>
     <WhyTansaz title="چرا زیبایی و لاغری در کلینیک تن ساز" :cards="pageState.cards" />
-    <div v-html="pageState.thirdBody.code"></div>
+    <div class="text-justify" v-html="pageState.thirdBody.code"></div>
     <ReservationForm />
     <FaqSection />
     <YoursSatisfaction />
@@ -122,4 +122,5 @@ watch(
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>
