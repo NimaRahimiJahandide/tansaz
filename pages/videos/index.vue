@@ -1,43 +1,32 @@
 <script setup>
-const videos = ref([
-  {
-    id: 0,
-    thumbnail:'/images/clinic1.jpg',
-    url: "https://www.aparat.com/video/video/embed/videohash/eauv152/vt/frame",
-    title: "عجیب ترین رویدادهای مراسم افتتاحیه المپیک ۲۰۲۴ پاریس!",
-    views: "۲۷۲",
-    updateAt: "۳ روز پیش",
-  },
-  {
-    id: 1,
-    thumbnail:'/images/clinic2.jpg',
-    url: "https://www.aparat.com/video/video/embed/videohash/unrz7l6/vt/frame",
-    title: "تو این شرایط رو ترکش کن!!",
-    views: "۱۵۰",
-    updateAt: "۱ روز پیش",
-  },
-  {
-    id: 2,
-    thumbnail:'/images/clinic3.jpg',
-    url: "https://www.aparat.com/video/video/embed/videohash/haxi66g/vt/frame",
-    title: "چکاب و زیبایی حامد و مجتبی روستایی!!",
-    views: "۱۵۰",
-    updateAt: "۱ روز پیش",
-  },
-  {
-    id: 3,
-    thumbnail:'/images/clinic1.jpg',
-    url: "https://www.aparat.com/video/video/embed/videohash/iahh8hq/vt/frame",
-    title: "چکاب و زیبایی حامد و مجتبی روستایی!!",
-    views: "۱۵۰",
-    updateAt: "۱ روز پیش",
-  },
-]);
+import axios from "axios";
+
+const videos = ref([]);
+const categories = ref([]);
+
+const getVideos = async () => {
+  try {
+    const data = await axios.get("/categories/1/videos");
+    const categoriesData = await axios.get("/categories?isactive=1");
+
+    categories.value = categoriesData.data.data
+
+    videos.value = data.data.data;
+    console.log('categories.value')
+    console.log(categories.value)
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+onMounted(() => {
+  getVideos();
+});
 </script>
 
 <template>
   <section class="flex min-h-screen">
-    <VideosSidebarComponent class="sticky top-10" />
+    <VideosSidebarComponent class="sticky top-10" :list="categories"/>
     <div class="container max-w-[1200px] mx-auto bg-white text-gray-800 rtl">
       <div class="overflow-x-auto max-md:mt-16 scrollbar-hide md:hidden block">
         <ul class="flex items-center px-2 py-1 min-w-max">

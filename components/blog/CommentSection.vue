@@ -9,6 +9,10 @@ import {
   helpers,
 } from "@vuelidate/validators";
 
+const props = defineProps({
+  isVideo: Boolean,
+});
+
 const route = useRoute();
 
 const formData = reactive({
@@ -53,7 +57,7 @@ const loading = ref(false);
 const sendComments = async () => {
   loading.value = true;
   try {
-    await axios.post(`/posts/${route.params.id}/comment`, formData);
+    await axios.post(`/${!props.isVideo ? 'posts' : 'videos'}/${route.params.id}/comment`, formData);
     console.log("sucsuss");
     loading.value = false;
   } catch (err) {
@@ -65,22 +69,18 @@ const sendComments = async () => {
 
 const getPostComments = async () => {
   try {
-
-    const data = await axios.get(`/posts/${route.params.id}/comments?isactive=1`)
-    console.log(data.data)
-
-  } catch(err) {
-    console.log(err)
+    const data = await axios.get(
+      `/${!props.isVideo ? 'posts' : 'videos'}/${route.params.id}/comments?isactive=1`
+    );
+    console.log(data.data);
+  } catch (err) {
+    console.log(err);
   }
-}
-
+};
 
 onMounted(() => {
-  getPostComments()
-})
-
-
-
+  getPostComments();
+});
 
 const v$ = useVuelidate(rules, formData);
 </script>
