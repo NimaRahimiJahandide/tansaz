@@ -8,7 +8,7 @@ defineProps({
   <NuxtLink :to="`/videos/${video.id}`" class="group cursor-pointer">
     <div class="relative rounded-lg overflow-hidden mb-2">
       <div>
-        <img class="" :src="video.image" :alt="video.title">
+        <img class="w-full object-cover" :src="video.image" :alt="video.title">
       </div>
     </div>
     <h3 class="text-sm font-medium mb-1 line-clamp-2">

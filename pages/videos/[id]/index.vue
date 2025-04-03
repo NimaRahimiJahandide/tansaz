@@ -59,7 +59,6 @@ const getVideos = async () => {
     categories.value = categoriesData.data.data;
 
     video.value = data.data.data;
-    console.log(video.value);
   } catch (err) {
     console.log(err);
   }
@@ -78,35 +77,10 @@ onMounted(() => {
     >
       <div class="overflow-x-auto max-md:mt-16 scrollbar-hide md:hidden block">
         <ul class="flex items-center px-2 py-1 min-w-max">
-          <a
+          <a v-for="category in categories" :key="category.id"
             href="#"
             class="whitespace-nowrap px-3 py-1.5 text-xs font-medium hover:bg-gray-100 rounded-md transition-colors"
-            >تبلیغات</a
-          >
-          <a
-            href="#"
-            class="whitespace-nowrap px-3 py-1.5 text-xs font-medium hover:bg-gray-100 rounded-md transition-colors"
-            >فیلم و سریال</a
-          >
-          <a
-            href="#"
-            class="whitespace-nowrap px-3 py-1.5 text-xs font-medium hover:bg-gray-100 rounded-md transition-colors"
-            >آموزشی</a
-          >
-          <a
-            href="#"
-            class="whitespace-nowrap px-3 py-1.5 text-xs font-medium hover:bg-gray-100 rounded-md transition-colors"
-            >طنز</a
-          >
-          <a
-            href="#"
-            class="whitespace-nowrap px-3 py-1.5 text-xs font-medium hover:bg-gray-100 rounded-md transition-colors"
-            >فیلم کودک</a
-          >
-          <a
-            href="#"
-            class="whitespace-nowrap px-3 py-1.5 text-xs font-medium hover:bg-gray-100 rounded-md transition-colors"
-            >مذهبی</a
+            >{{category.name}}</a
           >
         </ul>
       </div>
@@ -114,13 +88,7 @@ onMounted(() => {
         <div class="flex-1 p-5">
           <div class="h_iframe-aparat_embed_frame">
             <span style="display: block; padding-top: 57%"></span
-            ><iframe
-              :src="video?.script"
-              allowFullScreen="true"
-              webkitallowfullscreen="true"
-              mozallowfullscreen="true"
-            ></iframe>
-          </div>
+            >          </div>
           <div class="flex flex-col gap-3 pt-5 pb-20">
             <h1 class="text-[24px] font-bold">{{ video?.title }}</h1>
             <p>{{ video.body }}</p>

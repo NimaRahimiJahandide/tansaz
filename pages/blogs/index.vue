@@ -7,29 +7,6 @@ setTimeout(() => {
   loadingState.setLoading(false);
 }, 2000);
 
-// const blogs = ref([
-//   {
-//     id: 0,
-//     image: "/images/photo_2024-08-21_22-15-45-682x1024.jpg",
-//     text: "جراحی بوکال فت، ساب سیژن و پیوند چربی",
-//   },
-//   {
-//     id: 1,
-//     image: "/images/photo_2024-08-21_22-15-49-682x1024.jpg",
-//     text: "تزریقات زیبایی بوتاکس، ژل و فیلر و هایفوتراپی",
-//   },
-//   {
-//     id: 2,
-//     image: "/images/photo_2024-08-21_22-16-13-682x1024.jpg",
-//     text: " استفاده از معتبرترین برند مواد برندهای صنعت زیبایی و جراحی",
-//   },
-//   {
-//     id: 3,
-//     image: "/images/photo_2024-08-21_22-15-54-682x1024.jpg",
-//     text: "از پرفروش ترین برند مواد برندهای صنعت زیبایی",
-//   },
-// ]);
-
 const newBlogs = ref([
   {
     id: 0,
@@ -58,8 +35,6 @@ const blogs = ref([]);
 const getBlogs = async () => {
   try {
     const data = await axios.get(`/categories/1/posts`);
-
-    console.log(data.data.data);
 
     blogs.value = data.data.data;
   } catch (err) {
@@ -122,12 +97,12 @@ onMounted(() => {
             >
               <Icon name="lets-icons:insta" size="17px" style="color: #fff" />
             </span>
-            <div class="flex flex-col gap-1">
+            <a target="_blank" href="https://www.instagram.com/tansaz.clinic?igsh=a3V5Z2lucTlleXZr" class="flex flex-col gap-1">
               <p class="font-semibold">صفحه اینستاگرام</p>
               <strong class="text-neutral-400 font-normal"
                 >tansaz.clinic</strong
               >
-            </div>
+            </a>
           </div>
 
           <div class="flex items-start gap-[20px] mt-[14px]">
@@ -136,12 +111,12 @@ onMounted(() => {
             >
               <Icon name="mdi:location" size="17px" style="color: #fff" />
             </span>
-            <div class="flex flex-col gap-1">
+            <nuxt-link to="/about-us" class="flex flex-col gap-1">
               <p class="font-semibold">آدرس کلینیک</p>
               <strong class="text-neutral-400 text-[14px] font-normal"
                 >شیراز، معالی آباد، نبش دنا، ساختمان هرم نور، طبقه 5 و 6</strong
               >
-            </div>
+            </nuxt-link>
           </div>
 
           <article class="mb-8 cursor-pointer group mt-[14px]">
@@ -156,18 +131,18 @@ onMounted(() => {
             </div>
             <div class="mt-4 space-y-4">
               <NuxtLink
-                v-for="blog in newBlogs"
+                v-for="blog in blogs"
                 :to="`/blogs/${blog.id}`"
                 :key="blog.id"
                 class="flex gap-2 items-center"
               >
                 <img
                   :src="blog.image"
-                  class="rounded-lg size-[50px]"
-                  :alt="blog.text"
+                  class="rounded-lg size-[50px] object-contain"
+                  :alt="blog.title"
                 />
                 <div class="text-sm text-justify">
-                  {{ blog.text }}
+                  {{ blog.title }}
                 </div>
               </NuxtLink>
             </div>
@@ -177,12 +152,12 @@ onMounted(() => {
               <span>خدمات ما</span>
             </div>
             <div class="mt-4 flex flex-col gap-2">
-              <div>زیبایی و لاغری</div>
-              <div>کافه کلینیک</div>
-              <div>اجاره تجهیزات پزشکی</div>
-              <div>اعزام پزشک به منزل</div>
-              <div>آکادمی و آموزش</div>
-              <div>فروشگاه آنلاین</div>
+              <NuxtLink to="/services/1/beauty">زیبایی</NuxtLink>
+              <NuxtLink to="/services/21/slimming-services">لاغری</NuxtLink>
+              <NuxtLink to="/services/6/hyphotherapy">هایفوتراپی</NuxtLink>
+              <NuxtLink to="/services/7/laser-hair-removal">لیزررفع مو های زائد</NuxtLink>
+              <NuxtLink to="/services/3/surgery">اقدامات جراحی</NuxtLink>
+              <NuxtLink to="/services/17/facial">فشیال تخصصی</NuxtLink>
             </div>
           </article>
         </div>
