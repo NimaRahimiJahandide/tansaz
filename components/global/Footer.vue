@@ -36,7 +36,7 @@
           </li>
           <li class="flex gap-[5px] items-center">
             <Icon name="mdi:clock-outline" size="19px" style="color: #fff" />
-            <span>ساعت : 09:00 الی 21:00</span>
+            <span>پنج شنبه‌ ها 09:00 الی 13:00</span>
           </li>
         </ul>
       </div>
@@ -45,22 +45,22 @@
           <span class="text-[25px] font-extralight">خدمات ما</span>
           <ul class="flex flex-col gap-3.5 text-sm">
             <li class="flex gap-[5px] items-center">
-              <NuxtLink to="/beauty">زیبایی و لاغری</NuxtLink>
+              <NuxtLink to="/services/1/beauty">زیبایی</NuxtLink>
             </li>
             <li class="flex gap-[5px] items-center">
-              <NuxtLink to="#">کافه کلینیک</NuxtLink>
+              <NuxtLink to="/services/21/slimming-services">لاغری</NuxtLink>
             </li>
             <li class="flex gap-[5px] items-center">
-              <NuxtLink to="#">اجاره تجهیزات پزشکی</NuxtLink>
+              <NuxtLink to="/services/6/hyphotherapy">هایفوتراپی</NuxtLink>
             </li>
             <li class="flex gap-[5px] items-center">
-              <NuxtLink to="#">اعزام پزشک به منزل</NuxtLink>
+              <NuxtLink to="/services/7/laser-hair-removal">لیزررفع مو های زائد</NuxtLink>
             </li>
             <li class="flex gap-[5px] items-center">
-              <NuxtLink to="#">آکادمی و آموزش</NuxtLink>
+              <NuxtLink to="/services/3/surgery">اقدامات جراحی</NuxtLink>
             </li>
             <li class="flex gap-[5px] items-center">
-              <NuxtLink to="#">فروشگاه آنلاین غذایی رژیمی</NuxtLink>
+              <NuxtLink to="/services/17/facial">فشیال تخصصی</NuxtLink>
             </li>
           </ul>
         </div>
@@ -98,17 +98,7 @@
       <div
         class="w-full xl:max-h-[252px] xl:max-w-[252px] rounded-[10px] overflow-hidden"
       >
-        <iframe
-          src="https://balad.ir/embed?p=3f4SRsUcRVaEmz"
-          title="مشاهده «آسنادو» روی نقشه بلد"
-          class="w-full h-full"
-          frameborder="0"
-          style="border: 0"
-          allowfullscreen=""
-          aria-hidden="false"
-          tabindex="0"
-        ></iframe>
-        <!-- <CommonMap/> -->
+      <iframe class="w-full" src="https://balad.ir/embed?p=52ZaIGTm98Es6r" title="مشاهده «کلینیک تن ساز» روی نقشه بلد"  height="450" frameborder="0" style="border:0;" aria-hidden="false" tabindex="0"></iframe>
       </div>
     </div>
     <!-- start copyright -->
@@ -116,15 +106,15 @@
       class="max-w-[1200px] mx-auto px-5 border-t border-[#FFFFFF38] pt-6 mt-6"
     >
       <div class="flex items-center justify-center gap-1">
-        <a
+        <a target="_blank"
           class="border border-[#FFFFFF38] flex justify-center items-center size-9 rounded-[10px]"
-          href="#"
+          href="https://wa.me/+989336074147"
         >
           <Icon name="ic:baseline-whatsapp" size="24px" style="color: #fff" />
         </a>
-        <a
+        <a target="_blank"
           class="border border-[#FFFFFF38] flex justify-center items-center size-9 rounded-[10px]"
-          href="#"
+          href="http://instagram.com/tansaz.clinic"
         >
           <Icon
             name="akar-icons:instagram-fill"
@@ -132,9 +122,9 @@
             style="color: #fff"
           />
         </a>
-        <a
+        <a target="_blank"
           class="border border-[#FFFFFF38] flex justify-center items-center size-9 rounded-[10px]"
-          href="#"
+          href="https://t.me/+989336074147"
         >
           <Icon name="ic:baseline-telegram" size="24px" style="color: #fff" />
         </a>
