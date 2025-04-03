@@ -122,12 +122,12 @@ onMounted(() => {
             >
               <Icon name="lets-icons:insta" size="17px" style="color: #fff" />
             </span>
-            <div class="flex flex-col gap-1">
+            <a href="https://www.instagram.com/tansaz.clinic?igsh=a3V5Z2lucTlleXZr" class="flex flex-col gap-1">
               <p class="font-semibold">صفحه اینستاگرام</p>
               <strong class="text-neutral-400 font-normal"
                 >tansaz.clinic</strong
               >
-            </div>
+            </a>
           </div>
 
           <div class="flex items-start gap-[20px] mt-[14px]">
@@ -136,12 +136,12 @@ onMounted(() => {
             >
               <Icon name="mdi:location" size="17px" style="color: #fff" />
             </span>
-            <div class="flex flex-col gap-1">
+            <nuxt-link to="/about-us" class="flex flex-col gap-1">
               <p class="font-semibold">آدرس کلینیک</p>
               <strong class="text-neutral-400 text-[14px] font-normal"
                 >شیراز، معالی آباد، نبش دنا، ساختمان هرم نور، طبقه 5 و 6</strong
               >
-            </div>
+            </nuxt-link>
           </div>
 
           <article class="mb-8 cursor-pointer group mt-[14px]">

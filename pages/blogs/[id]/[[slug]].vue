@@ -96,7 +96,7 @@ setTimeout(() => {
                 </div>
                 <div class="flex items-center gap-1">
                   <Icon name="uis:schedule" size="18" class="text-gray-500" />
-                  <span>3 مرداد 1403</span>
+                  <span>{{ blogDetails?.created_at_fa }}</span>
                 </div>
                 <div class="flex items-center gap-1">
                   <Icon
