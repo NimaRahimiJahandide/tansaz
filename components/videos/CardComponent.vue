@@ -8,15 +8,15 @@ defineProps({
   <NuxtLink :to="`/videos/${video.id}`" class="group cursor-pointer">
     <div class="relative rounded-lg overflow-hidden mb-2">
       <div>
-        <img class="" :src="video.thumbnail" :alt="video.title">
+        <img class="" :src="video.image" :alt="video.title">
       </div>
     </div>
     <h3 class="text-sm font-medium mb-1 line-clamp-2">
         {{video.title}}
     </h3>
     <div class="flex items-center text-gray-500 text-xs">
-      <span>{{ video.views }} بازدید</span> <span class="mx-1">•</span>
-      <span>{{video.updateAt}}</span>
+      <span>{{ video.views ? video.views : '0' }} بازدید</span> <span class="mx-1">•</span>
+      <span>{{video.created_at_fa}}</span>
     </div>
   </NuxtLink>
 </template>
