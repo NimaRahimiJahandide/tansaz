@@ -67,11 +67,14 @@ const sendComments = async () => {
   }
 };
 
+const comments = ref([])
+
 const getPostComments = async () => {
   try {
     const data = await axios.get(
       `/${!props.isVideo ? 'posts' : 'videos'}/${route.params.id}/comments?isactive=1`
     );
+    comments.value = data.data.comments
     console.log(data.data);
   } catch (err) {
     console.log(err);
@@ -90,17 +93,18 @@ const v$ = useVuelidate(rules, formData);
     <div class="w-full">
       <div
         class="flex flex-col gap-[8px] p-[12px] border-[1px] border-[#8f8f8f97] rounded-[4px] mb-[30px]"
+        v-for="x in comments"
       >
         <div class="flex items-center gap-[10px]">
           <div
             class="size-[60px] rounded-full border-[1px] border-[#333333] bg-[#f5f5f5]"
           ></div>
 
-          <p class="text-[16px] font-semibold">نام و نام خانوادگی</p>
+          <p class="text-[16px] font-semibold">{{ x.name }}</p>
         </div>
 
         <p class="text-[14px] font-medium mr-[20px]">
-          نشانی ایمیل شما منتشر نخواهد شد. بخش‌های موردنیاز علامت‌گذاری شده‌اند
+      {{ x.text }}
         </p>
       </div>
 
