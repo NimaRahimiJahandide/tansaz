@@ -205,10 +205,10 @@ onUnmounted(() => {
                 </NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="/services/2"> چربی سوز کویتیشن</NuxtLink>
+                <NuxtLink to="/services/22/cavitation-fat-burner"> چربی سوز کویتیشن</NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="/services/2"> درمان سلولیت</NuxtLink>
+                <NuxtLink to="/services/23/cellulite-treatment"> درمان سلولیت</NuxtLink>
               </li>
             </ul>
           </li>
