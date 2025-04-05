@@ -102,7 +102,7 @@ onUnmounted(() => {
                 <NuxtLink to="/services/5/botox"> بوتاکس </NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="/services/2"> ژل، فیلر و آنزیم </NuxtLink>
+                <NuxtLink to="/services/8/gel-and-filler"> ژل، فیلر و آنزیم </NuxtLink>
               </li>
               <li class="navbar-children_item">
                 <NuxtLink to="/services/9/hydrating-mesogels"> مزوژل های آبرسان </NuxtLink>

@@ -2,36 +2,10 @@
 defineProps({
   blogs:Object,
 })
-const slides = ref([
-  {
-    id: 0,
-    image: "/images/photo_2024-08-21_22-15-45-682x1024.jpg",
-    text: "جراحی بوکال فت، ساب سیژن و پیوند چربی",
-    route: '/blogs/1'
-  },
-  {
-    id: 1,
-    image: "/images/photo_2024-08-21_22-15-49-682x1024.jpg",
-    text: "تزریقات زیبایی بوتاکس، ژل و فیلر و هایفوتراپی",
-    route: '/blogs/1'
-  },
-  {
-    id: 2,
-    image: "/images/photo_2024-08-21_22-16-13-682x1024.jpg",
-    text: " استفاده از معتبرترین برند مواد برندهای صنعت زیبایی و جراحی",
-    route: '/blogs/1'
-  },
-  {
-    id: 3,
-    image: "/images/photo_2024-08-21_22-15-54-682x1024.jpg",
-    text: "از پرفروش ترین برند مواد برندهای صنعت زیبایی",
-    route: '/blogs/1'
-  },
-]);
 </script>
 
 <template>
-  <div class="max-w-[1200px] mx-auto px-5 text-dark mt-[75px] md:mb-28">
+  <div class="max-w-[1240px] mx-auto px-5 text-dark mt-[75px] md:mb-28">
     <div class="flex items-center justify-between">
       <h3 class="md:text-[30px] text-[22px] font-light">
         جدیدترین <span class="text-primary">مقالات</span> آموزشی

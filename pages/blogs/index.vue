@@ -24,7 +24,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="max-w-[1200px] text-dark mx-auto px-5 mt-[75px]">
+  <div class="max-w-[1240px] text-dark mx-auto px-5 mt-[75px]">
     <Head>
       <Title>تن ساز | مقالات</Title>
       <!-- <Link rel="canonical" :href="config.public.websiteURL + decodeURI(route.fullPath)" /> -->

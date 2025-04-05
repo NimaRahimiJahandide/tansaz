@@ -32,7 +32,6 @@ const getVideo = async () => {
     const categoriesData = await axios.get("/categories?isactive=1");
 
     categories.value = categoriesData.data.data;
-
     video.value = data.data.data;
     if(data.status == 200 || categoriesData.status == 200){
       loadingState.setLoading(false);
@@ -69,14 +68,16 @@ onMounted(() => {
     </Head>
     <VideosSidebarComponent class="sticky top-14" :list="categories" />
     <div
-      class="container max-w-[1200px] mx-auto bg-white text-gray-800 rtl mb-28"
+      class="container max-w-[1240px] mx-auto bg-white text-gray-800 rtl mb-28"
     >
       <div class="overflow-x-auto max-md:mt-16 scrollbar-hide md:hidden block">
         <ul class="flex items-center px-2 py-1 min-w-max">
-          <a v-for="category in categories" :key="category.id"
+          <a
+            v-for="category in categories"
+            :key="category.id"
             href="#"
             class="whitespace-nowrap px-3 py-1.5 text-xs font-medium hover:bg-gray-100 rounded-md transition-colors"
-            >{{category.name}}</a
+            >{{ category.name }}</a
           >
         </ul>
       </div>
@@ -88,7 +89,7 @@ onMounted(() => {
             <p>{{ video.body }}</p>
           </div>
           <h2 class="font-bold text-lg mb-3">ویدیوهای مشابه</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="grid grid-cols-1 min-[370px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             <VideosCardComponent
               v-for="video in videos"
               :key="video.id"
@@ -97,8 +98,8 @@ onMounted(() => {
           </div>
         </div>
       </main>
-      <div class="max-w-[1200px] px-5 pt-10">
-        <BlogCommentSection :is-video="true"/>
+      <div class="max-w-[1240px] px-5 pt-10">
+        <BlogCommentSection :is-video="true" />
       </div>
     </div>
   </section>

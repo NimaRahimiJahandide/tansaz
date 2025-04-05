@@ -41,7 +41,7 @@ const toggleAnswer = (index: number): void => {
 
 <template>
   <div class="bg-gray-100 py-10 px-4 mt-[70px]">
-    <div class="max-w-[1200px] mx-auto px-5 w-full">
+    <div class="max-w-[1240px] mx-auto px-5 w-full">
       <div class="flex items-center flex-col ">
         <h3 class="text-3xl font-bold text-center mb-8">سوالات <span class="text-primary">متداول</span> شما از تن ساز</h3>
         <p class="text-gray-600 max-w-2xl  mb-[14px] leading-relaxed text-justify">

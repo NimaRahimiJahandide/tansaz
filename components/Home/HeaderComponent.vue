@@ -3,23 +3,13 @@ const props = defineProps({
   sliders: Object
 });
 
-// const slides = ref([
-//   {
-//     id: 0,
-//     image: "/images/3-3.png",
-//   },
-//   {
-//     id: 1,
-//     image: "/images/tansaz.png",
-//   },
-// ]);
 </script>
 
 <template>
   <div>
     <!-- <div
       v-if="loadingState.isLoading"
-      class="max-w-[1200px] text-dark mx-auto px-3 my-[25px] pt-2.5 flex justify-between w-full gap-[20px]"
+      class="max-w-[1240px] text-dark mx-auto px-3 my-[25px] pt-2.5 flex justify-between w-full gap-[20px]"
     >
       <div class="flex w-full flex-col md:flex-row gap-5">
         <div class="w-[calc(100vw-50px)] md:hidden sm:h-[40vh]">
@@ -106,7 +96,7 @@ const props = defineProps({
     </div> -->
 
     <div
-      class="max-w-[1200px] text-dark mx-auto px-5 my-[25px] pt-2.5 flex justify-between w-full gap-[20px]"
+      class="max-w-[1240px] text-dark mx-auto px-4 my-[25px] pt-2.5 flex justify-between w-full gap-[20px] min-[1080px]:h-[440px]"
     >
       <div class="flex flex-col md:flex-row gap-5">
         <!-- start slider mobile -->
@@ -132,23 +122,25 @@ const props = defineProps({
           </swiper-container>
         </div>
         <!-- end slider mobile -->
-        <div class="flex flex-col gap-5 grow">
+        <div class="flex flex-col justify-between gap-5 grow">
           <div>
             <h1 class="sm:text-[33px] text-2xl font-medium">کلینیک زیبایی و لاغری تن ساز</h1>
             <p class="text-primary sm:text-[17px] text-sm font-medium">
               تندرستی، سلامتی، زیبایی
             </p>
           </div>
-          <p class="text-justify sm:text-base text-sm">
-            کلینیک زیبایی و لاغری تن‌ساز، همراه همیشگی شما برای رسیدن به زیبایی
-            و اندام ایده‌آل، مفتخر است به‌عنوان مجهزترین و تخصصی‌ترین کلینیک
-            زیبایی و لاغری در جنوب کشور، در کنار شما باشد.
-          </p>
-          <p class="text-justify sm:text-base text-sm">
-            با بهره‌گیری از پیشرفته‌ترین دستگاه‌های روز دنیا و تیمی از پزشکان
-            مجرب و متخصص، کلینیک تن‌ساز تجربه‌ای بی‌نظیر از خدمات زیبایی،
-            جوان‌سازی و تناسب اندام را به شما اراِئه خواهد داد.
-          </p>
+          <div>
+            <p class="text-justify sm:text-base !text-[18px]">
+              کلینیک زیبایی و لاغری <b>تن‌ساز</b>، همراه همیشگی شما برای رسیدن به زیبایی
+              و اندام ایده‌آل، مفتخر است به‌عنوان مجهزترین و تخصصی‌ترین کلینیک
+              زیبایی و لاغری در جنوب کشور، در کنار شما باشد.
+            </p>
+            <p class="text-justify sm:text-base !text-[18px]">
+              با بهره‌گیری از پیشرفته‌ترین دستگاه‌های روز دنیا و تیمی از پزشکان
+              مجرب و متخصص، کلینیک تن‌ساز تجربه‌ای بی‌نظیر از خدمات زیبایی،
+              جوان‌سازی و تناسب اندام را به شما اراِئه خواهد داد.
+            </p>
+          </div>
           <div class="flex gap-2.5">
             <NuxtLink
               to="/contact-us"
@@ -169,7 +161,7 @@ const props = defineProps({
           class="hidden md:flex w-full min-[852px]:max-w-md lg:max-w-[552px] max-w-[350px]"
         >        
           <swiper-container
-            class="lg:h-[52vh] h-[44vh] w-full swiper-container"
+            class="h-[44vh] w-full swiper-container"
             :loop="true"
             :pagination="{ clickable: true }"
             :slides-per-view="1"

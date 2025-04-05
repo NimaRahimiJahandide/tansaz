@@ -56,7 +56,7 @@ onMounted(() => {
         class="h-64 w-full bg-gray-300 animate-pulse relative">
        
       </div>
-      <div class="max-w-[1200px] text-dark mx-auto px-3 mb-28">
+      <div class="max-w-[1240px] text-dark mx-auto px-3 mb-28">
         <div class="bg-white rounded-lg overflow-hidden">
           <div>
             <div class="flex md:flex-row flex-col md:gap-10 gap-5 mt-5">
@@ -95,7 +95,7 @@ onMounted(() => {
           </h1>
         </div>
       </div>
-      <div class="container max-w-[1200px] text-dark mx-auto px-5 mb-28">
+      <div class="container max-w-[1240px] text-dark mx-auto px-5 mb-28">
         <div class="bg-white rounded-lg min-h-screen">
           <div>
             <div

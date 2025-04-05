@@ -18,7 +18,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="max-w-[1200px] mx-auto px-5 text-dark mt-[75px] md:mb-28">
+  <div class="max-w-[1240px] mx-auto px-5 text-dark mt-[75px] md:mb-28">
     <div class="flex items-center justify-center">
       <h3 class="md:text-[30px] text-[22px] font-light">
         آخرین <span class="text-primary">مقالات</span>

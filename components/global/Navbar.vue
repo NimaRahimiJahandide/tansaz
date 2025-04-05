@@ -2,6 +2,8 @@
 const service = ref(false);
 const isMenuOpen = ref(false);
 const isServicesMenuOpen = ref(false);
+const beautyMenuOpen = ref(false);
+const fatMenuOpen = ref(false);
 const route = useRoute();
 
 const toggleMenu = () => {
@@ -10,7 +12,26 @@ const toggleMenu = () => {
 
 const toggleServicesMenu = () => {
   isServicesMenuOpen.value = !isServicesMenuOpen.value;
+  if(isServicesMenuOpen.value){
+    beautyMenuOpen.value = false;
+    fatMenuOpen.value = false
+  }
 };
+
+const toggleBeautyMenu = () => {
+  beautyMenuOpen.value = !beautyMenuOpen.value;
+  if(beautyMenuOpen.value){
+    fatMenuOpen.value = false
+  }
+};
+
+const toggleFatMenu = () => {
+  fatMenuOpen.value = !fatMenuOpen.value;
+  if(fatMenuOpen.value){
+    beautyMenuOpen.value = false
+  }
+};
+
 
 // start search function
 interface SearchResult {
@@ -96,7 +117,7 @@ watch(
     <!-- <div v-if="loadingState.isLoading">
       <nav>
         <div
-          class="md:flex hidden justify-between items-center py-[15px] max-w-[1200px] mx-auto px-3"
+          class="md:flex hidden justify-between items-center py-[15px] max-w-[1240px] mx-auto px-3"
         >
           <div class="flex items-center gap-[20px]">
             <div
@@ -128,7 +149,7 @@ watch(
       <nav>
         <!-- top of navbar -->
         <div
-          class="md:flex hidden justify-between items-center py-[15px] max-w-[1200px] mx-auto px-5"
+          class="md:flex hidden justify-between items-center py-[15px] max-w-[1240px] mx-auto px-5"
         >
           <div class="flex items-center gap-[20px]">
             <NuxtLink to="/" class="flex items-center py-4 px-2">
@@ -280,30 +301,191 @@ watch(
                   />
                 </div>
                 <ul
-                  v-if="isServicesMenuOpen"
-                  class="pl-6 transition-all duration-300 overflow-hidden mr-5"
+                  class="pl-6 transition-all duration-500 ease-in-out overflow-hidden mr-5"
+                  :style="{ 'max-height': isServicesMenuOpen ? '1000px' : '0' }"
                 >
-                  <li>
+                  <li @click="toggleBeautyMenu" class="flex cursor-pointer items-center justify-between py-2 px-4 hover:text-primary">
                     <NuxtLink
-                      to="/services/1"
+                      to="/services/1/beauty"
                       class="block py-2 px-4 hover:text-primary"
-                      >هایفوتراپی</NuxtLink
+                      >خدمات زیبایی</NuxtLink
                     >
+                    <Icon
+                    name="dashicons:arrow-down"
+                    size="24"
+                    class="icon text-black transition-transform duration-200"
+                    :class="{ 'rotate-180':  beautyMenuOpen }"
+                  />
                   </li>
-                  <li>
+                  <ul class="pl-6 transition-all duration-500 ease-in-out overflow-hidden mr-8"
+                  :style="{ 'max-height': beautyMenuOpen ? '1000px' : '0' }"
+                  >
+                    <li>
+                      <NuxtLink
+                        to="/services/6/hyphotherapy"
+                        class="block py-2 px-4 hover:text-primary"
+                        >هایفوتراپی</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/7/laser-hair-removal"
+                        class="block py-2 px-4 hover:text-primary"
+                        >لیزررفع مو های زائد</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/4/beauty-injections"
+                        class="block py-2 px-4 hover:text-primary"
+                        >تزریقات زیبایی</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/5/botox"
+                        class="block py-2 px-4 hover:text-primary"
+                        >بوتاکس</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/8/gel-and-filler"
+                        class="block py-2 px-4 hover:text-primary"
+                        >ژل، فیلر و آنزیم</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/9/hydrating-mesogels"
+                        class="block py-2 px-4 hover:text-primary"
+                        >مزوژل های آبرسان</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/10/mesotherapy"
+                        class="block py-2 px-4 hover:text-primary"
+                        >مزوتراپی و prp</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/3/surgery"
+                        class="block py-2 px-4 hover:text-primary"
+                        >اقدامات جراحی</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/11/fat-buccal-surgery"
+                        class="block py-2 px-4 hover:text-primary"
+                        >جراحی بوکال فت</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/12/central-lip-surgery"
+                        class="block py-2 px-4 hover:text-primary"
+                        >جراحی سانترال لب</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/13/planting-lifting-and-rejuvenating-threads"
+                        class="block py-2 px-4 hover:text-primary"
+                        >کاشت نخهای لیفت و جوانساز</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/14/subcision-therapy"
+                        class="block py-2 px-4 hover:text-primary"
+                        >ساب سیژن تراپی</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/15/autologous-fat-injection-and-transplantation"
+                        class="block py-2 px-4 hover:text-primary"
+                        >تزریق و پیوند اتولوگ چربی</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/16/ghabghab-suction"
+                        class="block py-2 px-4 hover:text-primary"
+                        >ساکشن غبغب</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/17/facial"
+                        class="block py-2 px-4 hover:text-primary"
+                        >فشیال تخصصی</NuxtLink
+                      >
+                    </li>
+                  </ul>
+                  <li @click="toggleFatMenu" class="flex cursor-pointer items-center justify-between py-2 px-4 hover:text-primary">
                     <NuxtLink
-                      to="/services/2"
+                      to="/services/21/slimming-services"
                       class="block py-2 px-4 hover:text-primary"
-                      >لیزر موهای زائد</NuxtLink
+                      >خدمات لاغری</NuxtLink
                     >
+                    <Icon
+                    name="dashicons:arrow-down"
+                    size="24"
+                    class="icon text-black transition-transform duration-200"
+                    :class="{ 'rotate-180':  fatMenuOpen }"
+                  />
                   </li>
-                  <li>
-                    <NuxtLink
-                      to="/services/4/beauty-injections"
-                      class="block py-2 px-4 hover:text-primary"
-                      >تزریقات زیبایی</NuxtLink
-                    >
-                  </li>
+                  <ul class="pl-6 transition-all duration-500 ease-in-out overflow-hidden mr-8"
+                  :style="{ 'max-height': fatMenuOpen ? '1000px' : '0' }"
+
+                  >
+                    <li>
+                      <NuxtLink
+                        to="#"
+                        class="block py-2 px-4 hover:text-primary"
+                        >پیکرتراشی بدون جراحی</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/18/expert-advice-on-nutrition"
+                        class="block py-2 px-4 hover:text-primary"
+                        >مشاور تخصصی تغذیه</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/19/full-body-analysis"
+                        class="block py-2 px-4 hover:text-primary"
+                        >آنالیز کامل بدن با inbody</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/20/d-actorultra-slimming-and-fitness-device"
+                        class="block py-2 px-4 hover:text-primary"
+                        >دستگاه لاغری و تناسب اندام</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/22/cavitation-fat-burner"
+                        class="block py-2 px-4 hover:text-primary"
+                        >چربی سوز کویتیشن</NuxtLink
+                      >
+                    </li>
+                    <li>
+                      <NuxtLink
+                        to="/services/23/cellulite-treatment"
+                        class="block py-2 px-4 hover:text-primary"
+                        >درمان سلولیت</NuxtLink
+                      >
+                    </li>
+                  </ul>
                 </ul>
               </li>
               <li>
@@ -317,7 +499,7 @@ watch(
                 <NuxtLink
                   to="/reserve"
                   class="block py-2 px-4 hover:text-primary"
-                  >رزو آنلاین نوبت</NuxtLink
+                  >رزرو آنلاین نوبت</NuxtLink
                 >
               </li>
               <li>
@@ -348,7 +530,7 @@ watch(
               </li>
             </ul>
 
-            <div class="flex flex-col gap-5 px-4">
+            <div class="flex flex-col gap-5 px-4 mb-5">
               <NuxtLink
                 to="#"
                 class="flex w-full py-[17px] bg-primary text-white items-center justify-center rounded-[10px]"

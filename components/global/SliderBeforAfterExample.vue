@@ -7,7 +7,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="mt-[75px] max-w-[1200px] mx-auto px-5">
+  <div class="mt-[75px] max-w-[1240px] mx-auto px-5">
     <div class="bg-dark text-white rounded-3xl p-[45px]">
       <h3 class="text-[30px] font-light">
         نمونه های <span class="text-primary">قبل</span> و بعد

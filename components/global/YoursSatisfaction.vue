@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-[1200px] mx-auto px-5 mt-[75px]">
+  <div class="max-w-[1240px] mx-auto px-5 mt-[75px]">
     <div class="w-full bg-white">
       <h2 class="text-[30px] text-start mb-10 font-semibold">
         رضایت شما عزیزان از <span class="text-primary">کلینیک تن ساز</span>
