@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useLoadingState } from "@/store/loadingState";
+import CardServicesSection from "./CardServicesSection.vue";
 interface Card {
   id: number;
   text: string;
@@ -13,27 +14,15 @@ const banner = ref({
     id: 0,
     title: "پوست، مو، زیبایی",
     icon: "/icons/zibaii.png",
-    route: "/services/1",
+    route: "/services/1/beauty",
   },
   {
     id: 1,
     title: "لاغری بدون جراحی",
     icon: "/icons/laghari.png",
-    route: "/services/2",
+    route: "/services/21/slimming-services",
   },
-  {
-    id: 2,
-    title: "لاغری بدون جراحی",
-    icon: "/icons/laghari.png",
-    route: "/services/2",
-  },
-  {
-    id: 3,
-    title: "لاغری بدون جراحی",
-    icon: "/icons/laghari.png",
-    route: "/services/2",
-  },
-  ]
+  ],
 })
 
 const loadingState = useLoadingState();
@@ -53,7 +42,29 @@ setTimeout(() => {
   </div> -->
   <div class="mt-[85px]">
     <div>
-      <ServicesSection class="mb-[5rem]" :banner="banner"/>
+      <!-- <ServicesSection class="mb-[5rem]" :banner="banner"/> -->
+      <div class="bg-primary bg-[url(/images/pattern.png)]">
+        <div class="mt-[75px] max-w-[1200px] mx-auto px-5">
+          <div class="py-10 px-8">
+            <h2
+              class="md:text-3xl text-xl text-white font-semibold text-center mb-16"
+            >
+              {{ banner.title }}
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div class="max-w-[1200px] mx-auto px-5">
+        <div
+          class="flex justify-between lg:-mt-10 gap-5 -mt-10 z-10"
+        >
+          <HomeCardServicesSection class="max-md:w-full"
+            v-for="card in banner.cards"
+            :key="card.id"
+            :card="card"
+          />
+        </div>
+      </div>
       <div class="max-w-[1200px] mx-auto px-5">
         <ReservationAndContactUsBanner />
         <!-- <div class="flex md:flex-row flex-col gap-[20px] mt-[75px]">
