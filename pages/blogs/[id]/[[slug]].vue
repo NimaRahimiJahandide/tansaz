@@ -5,24 +5,52 @@ const loadingState = useLoadingState();
 const route = useRoute();
 
 const blogDetails = ref({});
+const comments  = ref([]);
 
 const getBlogDetail = async () => {
-  try {
-    const data = await axios.get(`/posts/${route.params.id}`);
-    console.log(data.data)
-    blogDetails.value = data.data.data;
-  } catch (err) {
+  loadingState.setLoading(true);
+  await axios.get(`/posts/${route.params.id}`)
+  .then(response=>{
+    blogDetails.value = response.data.data;
+  loadingState.setLoading(false);
+  }) .catch(err=>{
     console.log(err);
-  }
+  }) 
+};
+
+const getPostComments = async () => {
+  loadingState.setLoading(true);
+  await axios.get(
+      `/posts/${route.params.id}/comments?isactive=1`
+    )
+    .then(response=>{
+      comments.value = response.data.comments
+      loadingState.setLoading(false);
+    }).catch(err=>{
+      console.log(err);
+    }) 
 };
 
 onMounted(() => {
   getBlogDetail();
+  getPostComments()
 });
 
 </script>
 <template>
   <div>
+    <Head>
+      <Title>تن ساز | {{blogDetails.slug}}</Title>
+      <!-- <Link rel="canonical" :href="config.public.websiteURL + decodeURI(route.fullPath)" /> -->
+      <Meta name="description" content="کلینیک زیبایی و لاغری تن ساز" />
+      <Meta property="og:description" content="کلینیک زیبایی و لاغری تن ساز" />
+      <Meta property="og:image" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+      <Meta property="og:image:secure_url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+      <Meta property="og:image:width" content="400" />
+      <Meta property="og:image:height" content="300" />
+      <Meta property="og:image:alt" content="تن ساز | مقالات" />
+      <Meta property="og:url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+    </Head>
     <!-- <div v-if="loadingState.isLoading">
       <div
         class="h-64 w-full bg-gray-300 animate-pulse relative">
@@ -48,7 +76,8 @@ onMounted(() => {
         </div>
       </div>
     </div> -->
-    <div>
+    <LoadingComponent v-if="loadingState.isLoading"/>
+    <div v-else>
       <div
         class="h-64 bg-cover bg-center relative"
         :style="
@@ -83,25 +112,25 @@ onMounted(() => {
                 >
               </div>
               <div class="flex gap-4">
-                <div class="flex items-center gap-1">
+                <div class="flex gap-1">
                   <Icon
                     name="mdi:clock-outline"
                     size="18"
                     class="text-gray-500"
                   />
-                  <span>9:20</span>
+                  <span>{{ blogDetails?.created_at_fa?.split(' ')[1] }}</span>
                 </div>
-                <div class="flex items-center gap-1">
+                <div class="flex gap-1">
                   <Icon name="uis:schedule" size="18" class="text-gray-500" />
-                  <span>{{ blogDetails?.created_at_fa }}</span>
+                  <span>{{ blogDetails?.created_at_fa?.split(' ')[0] }}</span>
                 </div>
-                <div class="flex items-center gap-1">
+                <div class="flex gap-1">
                   <Icon
                     name="mage:message-dots-round"
                     size="18"
                     class="text-gray-500"
                   />
-                  <span>23 دیدگاه</span>
+                  <span>{{ comments.length }} دیدگاه</span>
                 </div>
               </div>
             </div>
@@ -109,7 +138,7 @@ onMounted(() => {
               <article class="md:w-1/3 md:sticky md:top-0 w-full">
                 <img
                   :src="blogDetails?.image"
-                  alt="Beauty Product"
+                  :alt="blogDetails?.title"
                   class="w-full max-h-[31rem] rounded-lg"
                 />
                 <div class="pb-10">
@@ -159,34 +188,6 @@ onMounted(() => {
                 <div v-html="blogDetails?.body">
 
                 </div>
-                
-                <!-- <h2 class="text-xl font-bold">
-                  از پرفروش ترین برند مواد برندهای صنعت زیبایی
-                </h2>
-                <p class="text-light-grey leading-7 text-justify">
-                  در صنعت زیبایی، انتخاب محصولات مناسب برای مراقبت از پوست، مو و
-                  زیبایی به‌طور کلی، از اهمیت بسیاری برخوردار است. برندهای
-                  بسیاری در این حوزه فعالیت می‌کنند، اما تنها تعداد محدودی از
-                  آن‌ها توانسته‌اند به عنوان پرفروش‌ترین و محبوب‌ترین برندها
-                  شناخته شوند. در اینجا به بررسی برخی از این برندها می‌پردازیم
-                  که در سراسر جهان محبوبیت بسیاری دارند.
-                </p>
-                <h3 class="text-lg font-semibold">
-                  از پرفروش ترین برند مواد برندهای صنعت زیبایی
-                </h3>
-                <p class="text-light-grey leading-7 text-justify">
-                  ### ۱. **L’Oréal**
-                </p>
-                <p class="text-light-grey leading-7 text-justify">
-                  شرکت فرانسوی L’Oréal یکی از بزرگترین و معروف‌ترین برندهای
-                  زیبایی در جهان است. این برند با بیش از صد سال سابقه، طیف
-                  گسترده‌ای از محصولات زیبایی از جمله محصولات مراقبت از پوست،
-                  مو، و لوازم آرایشی را تولید می‌کند. L’Oréal همیشه به دلیل
-                  نوآوری در تولید محصولات با کیفیت بالا شناخته شده و دارای
-                  زیرمجموعه‌های مشهوری مانند Lancôme، Maybelline، و Kiehl’s است.
-                  این برند به عنوان یکی از پیشروان صنعت زیبایی، همواره توجه
-                  زیادی به تحقیقات علمی و توسعه محصولات جدید داشته است.
-                </p> -->
                 <BlogCommentSection class="mt-10" />
               </div>
             </section>

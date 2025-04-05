@@ -14,6 +14,7 @@ const props = defineProps({
 });
 
 const route = useRoute();
+const router = useRouter();
 
 const formData = reactive({
   name: "",
@@ -57,8 +58,8 @@ const loading = ref(false);
 const sendComments = async () => {
   loading.value = true;
   try {
-    await axios.post(`/${!props.isVideo ? 'posts' : 'videos'}/${route.params.id}/comment`, formData);
-    console.log("sucsuss");
+    await axios.post(`/${!props.isVideo ? 'posts' : 'videos'}/${route.params.id}/comments`, formData);
+    router.go(0);
     loading.value = false;
   } catch (err) {
     loading.value = false;
@@ -75,7 +76,6 @@ const getPostComments = async () => {
       `/${!props.isVideo ? 'posts' : 'videos'}/${route.params.id}/comments?isactive=1`
     );
     comments.value = data.data.comments
-    console.log(data.data);
   } catch (err) {
     console.log(err);
   }
@@ -96,11 +96,8 @@ const v$ = useVuelidate(rules, formData);
         v-for="x in comments"
       >
         <div class="flex items-center gap-[10px]">
-          <div
-            class="size-[60px] rounded-full border-[1px] border-[#333333] bg-[#f5f5f5]"
-          ></div>
-
-          <p class="text-[16px] font-semibold">{{ x.name }}</p>
+          <Icon name="stash:user-avatar" size="60" style="color: #333333" />
+          <p cass="text-[16px] font-semibold">{{ x.name }}</p>
         </div>
 
         <p class="text-[14px] font-medium mr-[20px]">
@@ -136,7 +133,6 @@ const v$ = useVuelidate(rules, formData);
         <label for="name" class="block mb-1 text-right text-sm">
           نام <span class="text-red-500">*</span>
         </label>
-        {{ v$.name.$invalid }}
         <input
           v-model="formData.name"
           type="text"

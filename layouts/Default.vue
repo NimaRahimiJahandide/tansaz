@@ -2,6 +2,9 @@
 import { useLoadingState } from "../store/loadingState";
 
 const loadingState = useLoadingState();
+setTimeout(() => {
+  loadingState.setLoading(false);
+}, 2000);
 </script>
 
 <template>

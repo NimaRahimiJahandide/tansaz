@@ -35,10 +35,6 @@ onMounted(() => {
   getSlider()
 });
 
-setTimeout(() => {
-  loadingState.setLoading(false);
-}, 2000);
-
 useSchemaOrg([
   defineWebSite({
     name: "تن ساز",
