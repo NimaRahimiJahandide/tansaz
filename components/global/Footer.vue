@@ -1,11 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useLoadingState } from "../../store/loadingState";
+
+const loadingState = useLoadingState();
+</script>
 
 <template>
-  <div
+  <div v-if="!loadingState.isLoading"
     class="bg-dark relative text-white rounded-t-2xl md:pt-[232px] pt-[320px] pb-3.5"
   >
     <ContactUsComponent />
-    <div
+    <div 
       class="max-w-[1200px] flex md:flex-row flex-col flex-wrap  gap-5 justify-between mx-auto px-5"
     >
       <div class="flex flex-col gap-[20px]">
@@ -107,7 +111,7 @@
       </div>
     </div>
     <!-- start copyright -->
-    <div
+    <div 
       class="max-w-[1200px] mx-auto px-5 border-t border-[#FFFFFF38] pt-6 mt-6"
     >
       <div class="flex items-center justify-center gap-1">
