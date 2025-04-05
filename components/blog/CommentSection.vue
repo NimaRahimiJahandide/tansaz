@@ -96,7 +96,7 @@ const v$ = useVuelidate(rules, formData);
         v-for="x in comments"
       >
         <div class="flex items-center gap-[10px]">
-          <Icon name="stash:user-avatar" size="60" style="color: #333333" />
+          <Icon name="carbon:user-avatar" size="60px" class="text-[#333333]" style="color: #333333" />
           <p cass="text-[16px] font-semibold">{{ x.name }}</p>
         </div>
 

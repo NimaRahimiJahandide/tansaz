@@ -2,13 +2,30 @@
 import { useLoadingState } from "@/store/loadingState";
 
 const loadingState = useLoadingState();
+setTimeout(() => {
+  loadingState.setLoading(false);
+}, 1000);
 </script>
 
 <template>
   <div>
-    <div
+  <LoadingComponent v-if="loadingState.isLoading"/>
+
+    <div v-else
       class="flex flex-col max-w-[1200px] text-dark mx-auto px-5 mt-[75px] leading-10 text-justify text-[14px]"
     >
+    <Head>
+      <Title>تن ساز | قوانین سایت</Title>
+      <!-- <Link rel="canonical" :href="config.public.websiteURL + decodeURI(route.fullPath)" /> -->
+      <Meta name="description" content="کلینیک زیبایی و لاغری تن ساز" />
+      <Meta property="og:description" content="کلینیک زیبایی و لاغری تن ساز" />
+      <Meta property="og:image" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+      <Meta property="og:image:secure_url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+      <Meta property="og:image:width" content="400" />
+      <Meta property="og:image:height" content="300" />
+      <Meta property="og:image:alt" content="تن ساز | قوانین سایت" />
+      <Meta property="og:url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+    </Head>
       <!-- <div class="flex flex-col justify-center gap-2 items-center" v-if="loadingState.isLoading">
         <div class="w-[150px] h-[24px] bg-gray-300 rounded-4xl animate-pulse"></div>
         <div class="w-full h-[24px] bg-gray-300 rounded-4xl animate-pulse"></div>

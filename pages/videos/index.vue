@@ -1,14 +1,19 @@
 <script setup>
 import axios from "axios";
+import { useLoadingState } from "@/store/loadingState";
 
+const loadingState = useLoadingState();
 const videos = ref([]);
 const categories = ref([]);
 
 const getVideos = async () => {
+  loadingState.setLoading(true);
   try {
     const data = await axios.get("/categories/1/videos");
     const categoriesData = await axios.get("/categories?isactive=1");
-
+    if(data.status == 200 || categoriesData.status == 200){
+      loadingState.setLoading(false);
+    }
     categories.value = categoriesData.data.data
 
     videos.value = data.data.data;
@@ -23,7 +28,21 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="flex min-h-screen">
+  <LoadingComponent v-if="loadingState.isLoading"/>
+
+  <section class="flex min-h-screen" v-else>
+    <Head>
+      <Title>تن ساز | ویدیوهای تن ساز</Title>
+      <!-- <Link rel="canonical" :href="config.public.websiteURL + decodeURI(route.fullPath)" /> -->
+      <Meta name="description" content="کلینیک زیبایی و لاغری تن ساز" />
+      <Meta property="og:description" content="کلینیک زیبایی و لاغری تن ساز" />
+      <Meta property="og:image" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+      <Meta property="og:image:secure_url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+      <Meta property="og:image:width" content="400" />
+      <Meta property="og:image:height" content="300" />
+      <Meta property="og:image:alt" content="تن ساز | ویدیوهای تن ساز" />
+      <Meta property="og:url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+    </Head>
     <VideosSidebarComponent class="sticky top-10" :list="categories"/>
     <div class="container max-w-[1200px] mx-auto bg-white text-gray-800 rtl">
       <div class="overflow-x-auto max-md:mt-16 scrollbar-hide md:hidden block">
