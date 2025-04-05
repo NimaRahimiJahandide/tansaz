@@ -57,7 +57,6 @@ const getVideos = async () => {
     const categoriesData = await axios.get("/categories?isactive=1");
 
     categories.value = categoriesData.data.data;
-
     video.value = data.data.data;
   } catch (err) {
     console.log(err);
@@ -77,18 +76,20 @@ onMounted(() => {
     >
       <div class="overflow-x-auto max-md:mt-16 scrollbar-hide md:hidden block">
         <ul class="flex items-center px-2 py-1 min-w-max">
-          <a v-for="category in categories" :key="category.id"
+          <a
+            v-for="category in categories"
+            :key="category.id"
             href="#"
             class="whitespace-nowrap px-3 py-1.5 text-xs font-medium hover:bg-gray-100 rounded-md transition-colors"
-            >{{category.name}}</a
+            >{{ category.name }}</a
           >
         </ul>
       </div>
       <main class="flex flex-row-reverse">
         <div class="flex-1 p-5">
           <div class="h_iframe-aparat_embed_frame">
-            <span style="display: block; padding-top: 57%"></span
-            >          </div>
+            <span style="display: block; padding-top: 57%"></span>
+          </div>
           <div class="flex flex-col gap-3 pt-5 pb-20">
             <h1 class="text-[24px] font-bold">{{ video?.title }}</h1>
             <p>{{ video.body }}</p>
@@ -104,7 +105,7 @@ onMounted(() => {
         </div>
       </main>
       <div class="max-w-[1200px] px-5 pt-10">
-        <BlogCommentSection :is-video="true"/>
+        <BlogCommentSection :is-video="true" />
       </div>
     </div>
   </section>
