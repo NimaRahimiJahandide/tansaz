@@ -89,7 +89,7 @@ onMounted(() => {
             <p>{{ video.body }}</p>
           </div>
           <h2 class="font-bold text-lg mb-3">ویدیوهای مشابه</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="grid grid-cols-1 min-[370px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             <VideosCardComponent
               v-for="video in videos"
               :key="video.id"

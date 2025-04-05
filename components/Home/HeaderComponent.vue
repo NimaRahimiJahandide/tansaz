@@ -106,7 +106,7 @@ const props = defineProps({
     </div> -->
 
     <div
-      class="max-w-[1200px] text-dark mx-auto px-5 my-[25px] pt-2.5 flex justify-between w-full gap-[20px]"
+      class="max-w-[1200px] text-dark mx-auto px-4 my-[25px] pt-2.5 flex justify-between w-full gap-[20px]"
     >
       <div class="flex flex-col md:flex-row gap-5">
         <!-- start slider mobile -->
@@ -139,12 +139,12 @@ const props = defineProps({
               تندرستی، سلامتی، زیبایی
             </p>
           </div>
-          <p class="text-justify sm:text-base text-sm">
+          <p class="text-justify sm:text-base !text-[18px]">
             کلینیک زیبایی و لاغری تن‌ساز، همراه همیشگی شما برای رسیدن به زیبایی
             و اندام ایده‌آل، مفتخر است به‌عنوان مجهزترین و تخصصی‌ترین کلینیک
             زیبایی و لاغری در جنوب کشور، در کنار شما باشد.
           </p>
-          <p class="text-justify sm:text-base text-sm">
+          <p class="text-justify sm:text-base !text-[18px]">
             با بهره‌گیری از پیشرفته‌ترین دستگاه‌های روز دنیا و تیمی از پزشکان
             مجرب و متخصص، کلینیک تن‌ساز تجربه‌ای بی‌نظیر از خدمات زیبایی،
             جوان‌سازی و تناسب اندام را به شما اراِئه خواهد داد.

@@ -10,11 +10,10 @@ defineProps({
       <h2 class="font-bold mb-4 text-sm">دسته‌بندی</h2>
       <ul class="space-y-2">
         <li v-for="x in list">
-          <a href="#" class="text-xs hover:text-red-600 transition-colors"
-            >{{ x.name }}</a
-          >
+          <nuxt-link :to="`/videos?category=${x?.id}`" class="text-xs hover:text-red-600 transition-colors">{{
+            x.name
+          }}</nuxt-link>
         </li>
-
       </ul>
     </div>
   </aside>

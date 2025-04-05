@@ -74,9 +74,9 @@ const loadingState = useLoadingState();
             <li class="flex gap-[5px] items-center">
               <NuxtLink to="/">صفحه اصلی</NuxtLink>
             </li>
-            <li class="flex gap-[5px] items-center">
+            <!-- <li class="flex gap-[5px] items-center">
               <NuxtLink to="#">حساب کاربری</NuxtLink>
-            </li>
+            </li> -->
             <li class="flex gap-[5px] items-center">
               <NuxtLink to="/contact-us">تماس با ما</NuxtLink>
             </li>
