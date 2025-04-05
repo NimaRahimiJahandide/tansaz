@@ -541,23 +541,19 @@
         "slides": [
           {
             "id": 0,
-            "image": "/images/exmple1.png"
-          },
-          {
-            "id": 1,
             "image": "/images/exmple2.png"
           },
           {
-            "id": 2,
+            "id": 1,
             "image": "/images/exmple3.png"
           },
           {
-            "id": 3,
+            "id": 2,
             "image": "/images/exmple4.png"
           },
           {
-            "id":4,
-            "image": "/images/exmple5.png"
+            "id": 3,
+            "image": "/images/exmple13.png"
           }
         ],
         "secondBody": {
@@ -849,23 +845,19 @@
         "slides": [
           {
             "id": 0,
-            "image": "/images/exmple1.png"
+            "image": "/images/lab1.jpg"
           },
           {
             "id": 1,
-            "image": "/images/exmple2.png"
+            "image": "/images/lab2.jpg"
           },
           {
             "id": 2,
-            "image": "/images/exmple3.png"
+            "image": "/images/lab3.jpg"
           },
           {
             "id": 3,
-            "image": "/images/exmple4.png"
-          },
-          {
-            "id": 4,
-            "image": "/images/exmple5.png"
+            "image": "/images/lab4.jpg"
           }
         ],
         "secondBody": {
@@ -952,23 +944,19 @@
         "slides": [
           {
             "id": 0,
-            "image": "/images/exmple1.png"
+            "image": "/images/lab1.jpg"
           },
           {
             "id": 1,
-            "image": "/images/exmple2.png"
+            "image": "/images/lab2.jpg"
           },
           {
             "id": 2,
-            "image": "/images/exmple3.png"
+            "image": "/images/lab3.jpg"
           },
           {
             "id": 3,
-            "image": "/images/exmple4.png"
-          },
-          {
-            "id": 4,
-            "image": "/images/exmple5.png"
+            "image": "/images/lab4.jpg"
           }
         ],
         "secondBody": {
@@ -1055,23 +1043,19 @@
         "slides": [
           {
             "id": 0,
-            "image": "/images/exmple1.png"
+            "image": "/images/lab1.jpg"
           },
           {
             "id": 1,
-            "image": "/images/exmple2.png"
+            "image": "/images/lab2.jpg"
           },
           {
             "id": 2,
-            "image": "/images/exmple3.png"
+            "image": "/images/lab3.jpg"
           },
           {
             "id": 3,
-            "image": "/images/exmple4.png"
-          },
-          {
-            "id": 4,
-            "image": "/images/exmple5.png"
+            "image": "/images/lab4.jpg"
           }
         ],
         "secondBody": {
@@ -1158,23 +1142,19 @@
         "slides": [
           {
             "id": 0,
-            "image": "/images/exmple1.png"
+            "image": "/images/lab1.jpg"
           },
           {
             "id": 1,
-            "image": "/images/exmple2.png"
+            "image": "/images/lab2.jpg"
           },
           {
             "id": 2,
-            "image": "/images/exmple3.png"
+            "image": "/images/lab3.jpg"
           },
           {
             "id": 3,
-            "image": "/images/exmple4.png"
-          },
-          {
-            "id": 4,
-            "image": "/images/exmple5.png"
+            "image": "/images/lab4.jpg"
           }
         ],
         "secondBody": {
@@ -1261,23 +1241,19 @@
         "slides": [
           {
             "id": 0,
-            "image": "/images/exmple1.png"
+            "image": "/images/lab1.jpg"
           },
           {
             "id": 1,
-            "image": "/images/exmple2.png"
+            "image": "/images/lab2.jpg"
           },
           {
             "id": 2,
-            "image": "/images/exmple3.png"
+            "image": "/images/lab3.jpg"
           },
           {
             "id": 3,
-            "image": "/images/exmple4.png"
-          },
-          {
-            "id": 4,
-            "image": "/images/exmple5.png"
+            "image": "/images/lab4.jpg"
           }
         ],
         "secondBody": {
@@ -1364,23 +1340,19 @@
         "slides": [
           {
             "id": 0,
-            "image": "/images/exmple1.png"
+            "image": "/images/lab1.jpg"
           },
           {
             "id": 1,
-            "image": "/images/exmple2.png"
+            "image": "/images/lab2.jpg"
           },
           {
             "id": 2,
-            "image": "/images/exmple3.png"
+            "image": "/images/lab3.jpg"
           },
           {
             "id": 3,
-            "image": "/images/exmple4.png"
-          },
-          {
-            "id": 4,
-            "image": "/images/exmple5.png"
+            "image": "/images/lab4.jpg"
           }
         ],
         "secondBody": {
@@ -1569,23 +1541,19 @@
         "slides": [
           {
             "id": 0,
-            "image": "/images/exmple1.png"
+            "image": "/images/lab1.jpg"
           },
           {
             "id": 1,
-            "image": "/images/exmple2.png"
+            "image": "/images/lab2.jpg"
           },
           {
             "id": 2,
-            "image": "/images/exmple3.png"
+            "image": "/images/lab3.jpg"
           },
           {
             "id": 3,
-            "image": "/images/exmple4.png"
-          },
-          {
-            "id": 4,
-            "image": "/images/exmple5.png"
+            "image": "/images/lab4.jpg"
           }
         ],
         "secondBody": {
@@ -1672,23 +1640,19 @@
         "slides": [
           {
             "id": 0,
-            "image": "/images/exmple1.png"
+            "image": "/images/lab1.jpg"
           },
           {
             "id": 1,
-            "image": "/images/exmple2.png"
+            "image": "/images/lab2.jpg"
           },
           {
             "id": 2,
-            "image": "/images/exmple3.png"
+            "image": "/images/lab3.jpg"
           },
           {
             "id": 3,
-            "image": "/images/exmple4.png"
-          },
-          {
-            "id": 4,
-            "image": "/images/exmple5.png"
+            "image": "/images/lab4.jpg"
           }
         ],
         "secondBody": {
@@ -1775,23 +1739,19 @@
         "slides": [
           {
             "id": 0,
-            "image": "/images/exmple1.png"
+            "image": "/images/lab1.jpg"
           },
           {
             "id": 1,
-            "image": "/images/exmple2.png"
+            "image": "/images/lab2.jpg"
           },
           {
             "id": 2,
-            "image": "/images/exmple3.png"
+            "image": "/images/lab3.jpg"
           },
           {
             "id": 3,
-            "image": "/images/exmple4.png"
-          },
-          {
-            "id": 4,
-            "image": "/images/exmple5.png"
+            "image": "/images/lab4.jpg"
           }
         ],
         "secondBody": {
@@ -1878,23 +1838,19 @@
         "slides": [
           {
             "id": 0,
-            "image": "/images/exmple1.png"
+            "image": "/images/lab1.jpg"
           },
           {
             "id": 1,
-            "image": "/images/exmple2.png"
+            "image": "/images/lab2.jpg"
           },
           {
             "id": 2,
-            "image": "/images/exmple3.png"
+            "image": "/images/lab3.jpg"
           },
           {
             "id": 3,
-            "image": "/images/exmple4.png"
-          },
-          {
-            "id": 4,
-            "image": "/images/exmple5.png"
+            "image": "/images/lab4.jpg"
           }
         ],
         "secondBody": {
@@ -2084,23 +2040,19 @@
         "slides": [
           {
             "id": 0,
-            "image": "/images/exmple1.png"
+            "image": "/images/lab1.jpg"
           },
           {
             "id": 1,
-            "image": "/images/exmple2.png"
+            "image": "/images/lab2.jpg"
           },
           {
             "id": 2,
-            "image": "/images/exmple3.png"
+            "image": "/images/lab3.jpg"
           },
           {
             "id": 3,
-            "image": "/images/exmple4.png"
-          },
-          {
-            "id": 4,
-            "image": "/images/exmple5.png"
+            "image": "/images/lab4.jpg"
           }
         ],
         "secondBody": {
@@ -2187,23 +2139,19 @@
         "slides": [
           {
             "id": 0,
-            "image": "/images/exmple1.png"
+            "image": "/images/exmple8.png"
           },
           {
             "id": 1,
-            "image": "/images/exmple2.png"
+            "image": "/images/exmple9.png"
           },
           {
             "id": 2,
-            "image": "/images/exmple3.png"
+            "image": "/images/exmple10.png"
           },
           {
             "id": 3,
-            "image": "/images/exmple4.png"
-          },
-          {
-            "id": 4,
-            "image": "/images/exmple5.png"
+            "image": "/images/exmple11.jpg"
           }
         ],
         "secondBody": {
@@ -2289,23 +2237,19 @@
         "slides": [
           {
             "id": 0,
-            "image": "/images/exmple1.png"
+            "image": "/images/lab1.jpg"
           },
           {
             "id": 1,
-            "image": "/images/exmple2.png"
+            "image": "/images/lab2.jpg"
           },
           {
             "id": 2,
-            "image": "/images/exmple3.png"
+            "image": "/images/lab3.jpg"
           },
           {
             "id": 3,
-            "image": "/images/exmple4.png"
-          },
-          {
-            "id": 4,
-            "image": "/images/exmple5.png"
+            "image": "/images/lab4.jpg"
           }
         ],
         "secondBody": {
@@ -2392,23 +2336,19 @@
         "slides": [
           {
             "id": 0,
-            "image": "/images/exmple1.png"
+            "image": "/images/exmple8.png"
           },
           {
             "id": 1,
-            "image": "/images/exmple2.png"
+            "image": "/images/exmple9.png"
           },
           {
             "id": 2,
-            "image": "/images/exmple3.png"
+            "image": "/images/exmple10.png"
           },
           {
             "id": 3,
-            "image": "/images/exmple4.png"
-          },
-          {
-            "id": 4,
-            "image": "/images/exmple5.png"
+            "image": "/images/exmple11.jpg"
           }
         ],
         "secondBody": {
@@ -2495,23 +2435,19 @@
         "slides": [
           {
             "id": 0,
-            "image": "/images/exmple1.png"
+            "image": "/images/lab1.jpg"
           },
           {
             "id": 1,
-            "image": "/images/exmple2.png"
+            "image": "/images/lab2.jpg"
           },
           {
             "id": 2,
-            "image": "/images/exmple3.png"
+            "image": "/images/lab3.jpg"
           },
           {
             "id": 3,
-            "image": "/images/exmple4.png"
-          },
-          {
-            "id": 4,
-            "image": "/images/exmple5.png"
+            "image": "/images/lab4.jpg"
           }
         ],
         "secondBody": {

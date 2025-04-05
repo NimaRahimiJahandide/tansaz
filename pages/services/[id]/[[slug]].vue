@@ -1,6 +1,17 @@
 <script setup lang="ts">
+import axios from "axios";
 import pageData from '@/assets/data/pageData.json';
 import { useLoadingState } from "@/store/loadingState";
+
+const blogs = ref([]);
+const getBlogs = async () => {
+    await axios.get(`/categories/1/posts`)
+    .then(response=>{
+      blogs.value = response.data.data;
+    }).catch(err=>{
+      console.log(err);
+    }) 
+};
 
 const loadingState = useLoadingState();
 
@@ -88,6 +99,10 @@ watch(
   },
   { immediate: true }
 );
+
+onMounted(() => {
+  getBlogs();
+});
 </script>
 
 <template>
@@ -138,8 +153,8 @@ watch(
     <div class="text-justify" v-html="pageState.thirdBody.code"></div>
     <ReservationForm />
     <FaqSection />
-    <YoursSatisfaction />
-    <HomeBlogsSection />
+    <!-- <YoursSatisfaction /> -->
+    <HomeBlogsSection :blogs="blogs" />
   </div>
 </template>
 
