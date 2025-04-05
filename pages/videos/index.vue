@@ -78,7 +78,7 @@ onMounted(() => {
       <main class="flex flex-row-reverse">
         <div class="flex-1 p-5">
           <h1 class="font-bold text-lg mb-3">ویدیوهای تن ساز</h1>
-          <div
+          <div v-if="videos.length"
             class="grid grid-cols-1 min-[370px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"
           >
             <VideosCardComponent
@@ -86,6 +86,10 @@ onMounted(() => {
               :key="video.id"
               :video="video"
             />
+          </div>
+          <div class="flex flex-col items-center justify-center h-100 gap-10" v-else>
+            <Icon name="lucide:search-x" size="60px"  style="color: #333333" />
+            ویدیویی یافت نشد
           </div>
         </div>
       </main>

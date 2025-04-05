@@ -15,7 +15,6 @@ defineProps({
         {{video.title}}
     </h3>
     <div class="flex items-center text-gray-500 text-xs">
-      <span>{{ video.views ? video.views : '0' }} بازدید</span> <span class="mx-1">•</span>
       <span>{{video.created_at_fa}}</span>
     </div>
   </NuxtLink>
