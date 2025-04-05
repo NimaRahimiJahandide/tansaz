@@ -3,37 +3,37 @@ import { useLoadingState } from "../store/loadingState";
 import axios from "axios";
 const loadingState = useLoadingState();
 
-
-let isResponseOk = ref(false);
-let loading = ref(true);
-
+const blogs = ref([]);
 const sliders = ref([])
 
 const getSlider = async () => {
-  loading.value = true;
-  isResponseOk.value = false;
+  loadingState.setLoading(true);
   await axios
     .get("/sliders")
     .then((response) => {
-      if (response.status == 200) {
-        isResponseOk.value = true;
-      }
-      console.log(response);
-      
       sliders.value = response.data.data      
-      loading.value = false;
+      loadingState.setLoading(false);
     })
     .catch((error) => {
       console.error("مشکلی در نمایش سوالات متداول پیش آمده!");
     });
 };
 
-await getSlider();
+const getBlogs = async () => {
+  loadingState.setLoading(true);
+    await axios.get(`/categories/1/posts`)
+    .then(response=>{
+      blogs.value = response.data.data;
+      loadingState.setLoading(false);
+    }).catch(err=>{
+      console.log(err);
+    }) 
+};
 
-
-setTimeout(() => {
-  loadingState.setLoading(false);
-}, 2000);
+onMounted(() => {
+  getBlogs();
+  getSlider()
+});
 
 useSchemaOrg([
   defineWebSite({
@@ -59,7 +59,7 @@ useSchemaOrg([
       <Meta property="og:image:alt" content="تن ساز | صفحه اصلی" />
       <Meta property="og:url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
     </Head>
-    <LoadingComponent v-if="loading"/>
+    <LoadingComponent v-if="loadingState.isLoading"/>
     <div v-else>
       <HomeHeaderComponent :sliders="sliders"/>
       <HomeClinicServicesSection />
@@ -68,7 +68,7 @@ useSchemaOrg([
       <FaqSection data-aos="fade-up" data-aos-once="true" />
       <!-- <HomeClinicCafeSection data-aos="fade-up" data-aos-once="true" /> -->
       <HomeAboutUsSection data-aos="fade-up" data-aos-once="true" />
-      <HomeBlogsSection data-aos="fade-up" data-aos-once="true" />
+      <HomeBlogsSection data-aos="fade-up" data-aos-once="true" :blogs="blogs" />
     </div>
   </div>
 </template>

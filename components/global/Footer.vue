@@ -1,11 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useLoadingState } from "../../store/loadingState";
+
+const loadingState = useLoadingState();
+</script>
 
 <template>
-  <div
+  <div v-show="!loadingState.isLoading"
     class="bg-dark relative text-white rounded-t-2xl md:pt-[232px] pt-[320px] pb-3.5"
   >
     <ContactUsComponent />
-    <div
+    <div 
       class="max-w-[1200px] flex md:flex-row flex-col flex-wrap  gap-5 justify-between mx-auto px-5"
     >
       <div class="flex flex-col gap-[20px]">
@@ -92,7 +96,12 @@
         <span class="text-[25px] font-extralight text-center md:text-start"
           >نماد اعتماد</span
         >
-        <ul class="flex flex-col gap-3.5 text-sm"></ul>
+        <ul class="flex flex-col gap-3.5 text-sm">
+          <div class="elementor-widget-container">
+            <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=462981&Code=BK5taBm8Wuwv5X28BhHubofa5HWaWwPv'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=462981&Code=BK5taBm8Wuwv5X28BhHubofa5HWaWwPv' alt='' style='cursor:pointer' code='BK5taBm8Wuwv5X28BhHubofa5HWaWwPv'></a>		
+      		</div>
+          
+        </ul>
       </div>
 
       <div

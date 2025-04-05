@@ -3,43 +3,19 @@ import { useLoadingState } from "@/store/loadingState";
 import axios from "axios";
 const loadingState = useLoadingState();
 
-setTimeout(() => {
-  loadingState.setLoading(false);
-}, 2000);
-
-const newBlogs = ref([
-  {
-    id: 0,
-    image: "/images/photo_2024-08-21_22-15-45-682x1024.jpg",
-    text: "جراحی بوکال فت، ساب سیژن و پیوند چربی",
-  },
-  {
-    id: 1,
-    image: "/images/photo_2024-08-21_22-15-49-682x1024.jpg",
-    text: "تزریقات زیبایی بوتاکس، ژل و فیلر و هایفوتراپی",
-  },
-  {
-    id: 2,
-    image: "/images/photo_2024-08-21_22-16-13-682x1024.jpg",
-    text: " استفاده از معتبرترین برند مواد برندهای صنعت زیبایی و جراحی",
-  },
-  {
-    id: 3,
-    image: "/images/photo_2024-08-21_22-15-54-682x1024.jpg",
-    text: "از پرفروش ترین برند مواد برندهای صنعت زیبایی",
-  },
-]);
+const newBlogs = ref([]);
 
 const blogs = ref([]);
 
 const getBlogs = async () => {
-  try {
-    const data = await axios.get(`/categories/1/posts`);
-
-    blogs.value = data.data.data;
-  } catch (err) {
+loadingState.setLoading(true);
+ await axios.get(`/categories/1/posts`)
+  .then(response=>{
+    loadingState.setLoading(false);
+    blogs.value = response.data.data;
+  }).catch(err=>{
     console.log(err);
-  }
+  })
 };
 
 onMounted(() => {
@@ -49,6 +25,18 @@ onMounted(() => {
 
 <template>
   <div class="max-w-[1200px] text-dark mx-auto px-5 mt-[75px]">
+    <Head>
+      <Title>تن ساز | مقالات</Title>
+      <!-- <Link rel="canonical" :href="config.public.websiteURL + decodeURI(route.fullPath)" /> -->
+      <Meta name="description" content="کلینیک زیبایی و لاغری تن ساز" />
+      <Meta property="og:description" content="کلینیک زیبایی و لاغری تن ساز" />
+      <Meta property="og:image" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+      <Meta property="og:image:secure_url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+      <Meta property="og:image:width" content="400" />
+      <Meta property="og:image:height" content="300" />
+      <Meta property="og:image:alt" content="تن ساز | مقالات" />
+      <Meta property="og:url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+    </Head>
     <!-- <div v-if="loadingState.isLoading">
       <div class="flex md:flex-row flex-col gap-8">
         <div class="md:w-3/4 grid md:grid-cols-3 gap-8">
@@ -77,7 +65,8 @@ onMounted(() => {
         </div>
       </div>
     </div> -->
-    <div>
+    <LoadingComponent v-if="loadingState.isLoading"/>
+    <div v-else>
       <div class="flex lg:flex-row flex-col gap-8 mb-28">
         <div
           class="lg:w-3/4 w-full grid min-[378px]:grid-cols-2 md:grid-cols-3 lg:grid-col-3 gap-8 justify-items-center"

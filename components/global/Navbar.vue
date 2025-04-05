@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { useLoadingState } from "@/store/loadingState";
 const service = ref(false);
 const isMenuOpen = ref(false);
 const isServicesMenuOpen = ref(false);
-const loadingState = useLoadingState();
 const route = useRoute();
 
 const toggleMenu = () => {
@@ -13,10 +11,6 @@ const toggleMenu = () => {
 const toggleServicesMenu = () => {
   isServicesMenuOpen.value = !isServicesMenuOpen.value;
 };
-
-setTimeout(() => {
-  loadingState.setLoading(false);
-}, 2000);
 
 // start search function
 interface SearchResult {

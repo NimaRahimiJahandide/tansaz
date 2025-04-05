@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import pageData from '@/assets/data/pageData.json';
+import { useLoadingState } from "@/store/loadingState";
+
+const loadingState = useLoadingState();
+
+setTimeout(() => {
+  loadingState.setLoading(false);
+}, 1000);
 
 const route = useRoute();
 
@@ -84,7 +91,21 @@ watch(
 </script>
 
 <template>
-  <div class="mt-[75px]">
+  <LoadingComponent v-if="loadingState.isLoading"/>
+
+  <div class="mt-[75px]" v-else>
+    <Head>
+      <Title>تن ساز | {{pageState.firstSection.title}} تن ساز</Title>
+      <!-- <Link rel="canonical" :href="config.public.websiteURL + decodeURI(route.fullPath)" /> -->
+      <Meta name="description" content="کلینیک زیبایی و لاغری تن ساز" />
+      <Meta property="og:description" content="کلینیک زیبایی و لاغری تن ساز" />
+      <Meta property="og:image" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+      <Meta property="og:image:secure_url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+      <Meta property="og:image:width" content="400" />
+      <Meta property="og:image:height" content="300" />
+      <Meta property="og:image:alt" :content="`تن ساز | ${pageState.firstSection.title}`" />
+      <Meta property="og:url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+    </Head>
     <PagesFirstSection :firstSectionData="pageState.firstSection" />
     <ServicesSection :banner="pageState.banner" v-if="!pageState.banner.dontShow" />
     <div class="mt-[75px] max-w-[1200px] mx-auto px-5 text-justify">
