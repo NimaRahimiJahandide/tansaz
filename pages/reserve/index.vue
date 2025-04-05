@@ -95,14 +95,28 @@ useSchemaOrg([
   })
 ]);
 
+const v$ = useVuelidate(rules, formData);
 setTimeout(() => {
   loadingState.setLoading(false);
-}, 2000);
-const v$ = useVuelidate(rules, formData);
+}, 1000);
 </script>
 
 <template>
-  <div>
+  <LoadingComponent v-if="loadingState.isLoading"/>
+
+  <div v-else>
+    <Head>
+      <Title>تن ساز | رزرو آنلاین</Title>
+      <!-- <Link rel="canonical" :href="config.public.websiteURL + decodeURI(route.fullPath)" /> -->
+      <Meta name="description" content="کلینیک زیبایی و لاغری تن ساز" />
+      <Meta property="og:description" content="کلینیک زیبایی و لاغری تن ساز" />
+      <Meta property="og:image" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+      <Meta property="og:image:secure_url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+      <Meta property="og:image:width" content="400" />
+      <Meta property="og:image:height" content="300" />
+      <Meta property="og:image:alt" content="تن ساز | رزرو آنلاین" />
+      <Meta property="og:url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+    </Head>
     <ToastSuccess  :title="successTitle" :description="successDescription" v-if="successTitle.length"/>
     <ToastDanger  :title="dangerTitle" :description="dangerDescription" v-if="dangerTitle.length"/>
     <div

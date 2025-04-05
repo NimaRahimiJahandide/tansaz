@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useLoadingState } from "@/store/loadingState";
 interface Card {
   id: number;
   icon: string;
@@ -15,12 +14,6 @@ interface BannerData {
 defineProps<{
   bannerData: BannerData; 
 }>();
-
-const loadingState = useLoadingState();
-
-setTimeout(() => {
-  loadingState.setLoading(false);
-}, 2000);
 </script>
 
 <template>

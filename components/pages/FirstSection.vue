@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useLoadingState } from "@/store/loadingState";
-
 interface FirstSectionDataType {
   title: string;
   description: string;
@@ -8,12 +6,6 @@ interface FirstSectionDataType {
 defineProps<{
   firstSectionData: FirstSectionDataType;
 }>();
-
-const loadingState = useLoadingState();
-
-setTimeout(() => {
-  loadingState.setLoading(false);
-}, 2000);
 </script>
 
 <template>

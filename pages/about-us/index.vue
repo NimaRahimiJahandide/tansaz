@@ -5,11 +5,13 @@ const loadingState = useLoadingState();
 
 setTimeout(() => {
   loadingState.setLoading(false);
-}, 2000);
+}, 1000);
 </script>
 
 <template>
-  <div class="max-w-[1200px] text-dark mx-auto px-5 mt-[75px] mb-36">
+  <LoadingComponent v-if="loadingState.isLoading"/>
+
+  <div class="max-w-[1200px] text-dark mx-auto px-5 mt-[75px] mb-36" v-else>
     <!-- <div v-if="loadingState.isLoading">
       <div
         class="flex w-full flex-col-reverse md:flex-row justify-between gap-5"
@@ -52,6 +54,18 @@ setTimeout(() => {
         </div>
       </div>
     </div> -->
+    <Head>
+      <Title>تن ساز | درباره ما</Title>
+      <!-- <Link rel="canonical" :href="config.public.websiteURL + decodeURI(route.fullPath)" /> -->
+      <Meta name="description" content="کلینیک زیبایی و لاغری تن ساز" />
+      <Meta property="og:description" content="کلینیک زیبایی و لاغری تن ساز" />
+      <Meta property="og:image" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+      <Meta property="og:image:secure_url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+      <Meta property="og:image:width" content="400" />
+      <Meta property="og:image:height" content="300" />
+      <Meta property="og:image:alt" content="تن ساز | درباره ما" />
+      <Meta property="og:url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+    </Head>
     <div>
       <div
         class="flex w-full flex-col-reverse md:flex-row justify-between gap-5"

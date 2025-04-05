@@ -1,4 +1,7 @@
 <script setup lang="ts">
+defineProps({
+  blogs:Object,
+})
 const slides = ref([
   {
     id: 0,
@@ -58,11 +61,11 @@ const slides = ref([
         }"
       >
         <swiper-slide
-          v-for="slide in slides"
-          :key="`slide-basic-${slide.id}`"
+          v-for="blog in blogs"
+          :key="blog.id"
           class="swiper-slide pt-2 px-2"
         >
-          <BlogCardComponent :title="slide.text" :image="slide.image" :route="slide.route" />
+          <BlogCardComponent :title="blog.title" :image="blog.image" :route="`/blogs/${blog.id}`" />
         </swiper-slide>
       </swiper-container>
     </div>

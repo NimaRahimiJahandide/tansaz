@@ -13,7 +13,13 @@ const props = defineProps({
   isVideo: Boolean,
 });
 
+const successTitle = ref("");
+const successDescription = ref("");
+const dangerTitle = ref("");
+const dangerDescription = ref("");
+
 const route = useRoute();
+const router = useRouter();
 
 const formData = reactive({
   name: "",
@@ -57,25 +63,38 @@ const loading = ref(false);
 const sendComments = async () => {
   loading.value = true;
   try {
-    await axios.post(`/${!props.isVideo ? 'posts' : 'videos'}/${route.params.id}/comment`, formData);
-    console.log("sucsuss");
+    await axios.post(`/${!props.isVideo ? 'posts' : 'videos'}/${route.params.id}/comments`, formData);
+    successTitle.value = 'نظر شما ثبت شد'
+    successDescription.value = 'نظر شما با موفقیت ثبت شد'
+    setTimeout(() => {
+      successTitle.value = "";
+      router.go(0);
+    }, 1500);
     loading.value = false;
   } catch (err) {
     loading.value = false;
-
-    console.log(err);
+    dangerTitle.value ="مشکلی پیش آمده!";
+    dangerDescription.value ="دوباره تلاش کنید.";
+    setTimeout(() => {
+      dangerTitle.value = "";
+    }, 3000);
   }
 };
+
+const comments = ref([])
 
 const getPostComments = async () => {
   try {
     const data = await axios.get(
       `/${!props.isVideo ? 'posts' : 'videos'}/${route.params.id}/comments?isactive=1`
     );
-    console.log(data.data);
+    comments.value = data.data.comments
   } catch (err) {
-    console.log(err);
-  }
+    dangerTitle.value ="مشکلی پیش آمده!";
+    dangerDescription.value ="مشکلی در نمایش کامنت ها پیش آمده.";
+    setTimeout(() => {
+      dangerTitle.value = "";
+    }, 3000);  }
 };
 
 onMounted(() => {
@@ -87,20 +106,20 @@ const v$ = useVuelidate(rules, formData);
 
 <template>
   <div>
+    <ToastSuccess  :title="successTitle" :description="successDescription" v-if="successTitle.length"/>
+    <ToastDanger  :title="dangerTitle" :description="dangerDescription" v-if="dangerTitle.length"/>
     <div class="w-full">
       <div
         class="flex flex-col gap-[8px] p-[12px] border-[1px] border-[#8f8f8f97] rounded-[4px] mb-[30px]"
+        v-for="x in comments"
       >
         <div class="flex items-center gap-[10px]">
-          <div
-            class="size-[60px] rounded-full border-[1px] border-[#333333] bg-[#f5f5f5]"
-          ></div>
-
-          <p class="text-[16px] font-semibold">نام و نام خانوادگی</p>
+          <Icon name="carbon:user-avatar" size="60px" class="text-[#333333]" style="color: #333333" />
+          <p cass="text-[16px] font-semibold">{{ x.name }}</p>
         </div>
 
         <p class="text-[14px] font-medium mr-[20px]">
-          نشانی ایمیل شما منتشر نخواهد شد. بخش‌های موردنیاز علامت‌گذاری شده‌اند
+      {{ x.text }}
         </p>
       </div>
 
@@ -132,7 +151,6 @@ const v$ = useVuelidate(rules, formData);
         <label for="name" class="block mb-1 text-right text-sm">
           نام <span class="text-red-500">*</span>
         </label>
-        {{ v$.name.$invalid }}
         <input
           v-model="formData.name"
           type="text"

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useLoadingState } from "@/store/loadingState";
-const loadingState = useLoadingState();
 const isSticky = ref(false);
 const handleScroll = () => {
   const navbar = document.querySelector(".sticky-nav");
@@ -9,10 +7,6 @@ const handleScroll = () => {
     isSticky.value = rect.top <= 0;
   }
 };
-
-setTimeout(() => {
-  loadingState.setLoading(false);
-}, 2000);
 
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
@@ -170,7 +164,7 @@ onUnmounted(() => {
       </li>
       <li class="relative group">
         <NuxtLink
-          to="#"
+          to="/services/21/slimming-services"
           class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px] flex items-center justify-center gap-1"
         >
           <span>خدمات لاغری</span>
@@ -183,7 +177,7 @@ onUnmounted(() => {
         >
           <li class="flex flex-col gap-[20px] flex-grow">
             <NuxtLink
-              to="/services/6/hyphotherapy"
+              to="#"
               class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
             >
               <Icon
@@ -211,10 +205,10 @@ onUnmounted(() => {
                 </NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="/services/2"> چربی سوز کویتیشن</NuxtLink>
+                <NuxtLink to="/services/22/cavitation-fat-burner"> چربی سوز کویتیشن</NuxtLink>
               </li>
               <li class="navbar-children_item">
-                <NuxtLink to="/services/2"> درمان سلولیت</NuxtLink>
+                <NuxtLink to="/services/23/cellulite-treatment"> درمان سلولیت</NuxtLink>
               </li>
             </ul>
           </li>
