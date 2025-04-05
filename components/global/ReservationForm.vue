@@ -60,14 +60,12 @@ const consultations = () => {
     loading.value = true
     axios.post("/consultations", formData)
       .then(response => {
-        console.log(response);
         successTitle.value = response.data.message
         formData.name = "";
         formData.mobile = "";
         formData.text = "";
         loading.value = false;
       }).catch(error => {
-        console.log(error);
         dangerTitle.value ="مشکلی پیش آمده!";
         dangerDescription.value ="دوباره تلاش کنید.";
         setTimeout(() => {

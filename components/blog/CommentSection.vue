@@ -13,6 +13,11 @@ const props = defineProps({
   isVideo: Boolean,
 });
 
+const successTitle = ref("");
+const successDescription = ref("");
+const dangerTitle = ref("");
+const dangerDescription = ref("");
+
 const route = useRoute();
 const router = useRouter();
 
@@ -59,12 +64,20 @@ const sendComments = async () => {
   loading.value = true;
   try {
     await axios.post(`/${!props.isVideo ? 'posts' : 'videos'}/${route.params.id}/comments`, formData);
-    router.go(0);
+    successTitle.value = 'نظر شما ثبت شد'
+    successDescription.value = 'نظر شما با موفقیت ثبت شد'
+    setTimeout(() => {
+      successTitle.value = "";
+      router.go(0);
+    }, 1500);
     loading.value = false;
   } catch (err) {
     loading.value = false;
-
-    console.log(err);
+    dangerTitle.value ="مشکلی پیش آمده!";
+    dangerDescription.value ="دوباره تلاش کنید.";
+    setTimeout(() => {
+      dangerTitle.value = "";
+    }, 3000);
   }
 };
 
@@ -77,8 +90,11 @@ const getPostComments = async () => {
     );
     comments.value = data.data.comments
   } catch (err) {
-    console.log(err);
-  }
+    dangerTitle.value ="مشکلی پیش آمده!";
+    dangerDescription.value ="مشکلی در نمایش کامنت ها پیش آمده.";
+    setTimeout(() => {
+      dangerTitle.value = "";
+    }, 3000);  }
 };
 
 onMounted(() => {
@@ -90,6 +106,8 @@ const v$ = useVuelidate(rules, formData);
 
 <template>
   <div>
+    <ToastSuccess  :title="successTitle" :description="successDescription" v-if="successTitle.length"/>
+    <ToastDanger  :title="dangerTitle" :description="dangerDescription" v-if="dangerTitle.length"/>
     <div class="w-full">
       <div
         class="flex flex-col gap-[8px] p-[12px] border-[1px] border-[#8f8f8f97] rounded-[4px] mb-[30px]"
