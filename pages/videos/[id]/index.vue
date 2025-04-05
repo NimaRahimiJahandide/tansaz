@@ -48,9 +48,24 @@ const route = useRoute();
 // });
 
 const video = ref({});
+const videos = ref({});
 const categories = ref([]);
+const srcValue= ref('')
 
 const getVideos = async () => {
+  try {
+    const data = await axios.get("/categories/1/videos");
+    const categoriesData = await axios.get("/categories?isactive=1");
+
+    categories.value = categoriesData.data.data
+
+    videos.value = data.data.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getVideo = async () => {
   try {
     const data = await axios.get(`/videos/${route.params.id}`);
 
@@ -59,6 +74,10 @@ const getVideos = async () => {
     categories.value = categoriesData.data.data;
 
     video.value = data.data.data;
+    
+    const divCode = video.value.script
+    srcValue.value = divCode.match(/src="https:\/\/www\.aparat\.com\/embed\/([^?]+)/)[1];    
+
   } catch (err) {
     console.log(err);
   }
@@ -66,6 +85,7 @@ const getVideos = async () => {
 
 onMounted(() => {
   getVideos();
+  getVideo();
 });
 </script>
 
@@ -86,20 +106,18 @@ onMounted(() => {
       </div>
       <main class="flex flex-row-reverse">
         <div class="flex-1 p-5">
-          <div class="h_iframe-aparat_embed_frame">
-            <span style="display: block; padding-top: 57%"></span
-            >          </div>
+         <div class="h_iframe-aparat_embed_frame"><span style="display: block;padding-top: 57%"></span><iframe :src="`https://www.aparat.com/video/video/embed/videohash/${srcValue}/vt/frame`"  allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe></div>
           <div class="flex flex-col gap-3 pt-5 pb-20">
             <h1 class="text-[24px] font-bold">{{ video?.title }}</h1>
             <p>{{ video.body }}</p>
           </div>
           <h2 class="font-bold text-lg mb-3">ویدیوهای مشابه</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <!-- <VideosCardComponent
+            <VideosCardComponent
               v-for="video in videos"
               :key="video.id"
               :video="video"
-            /> -->
+            />
           </div>
         </div>
       </main>
@@ -109,3 +127,4 @@ onMounted(() => {
     </div>
   </section>
 </template>
+<style>.h_iframe-aparat_embed_frame{position:relative;}.h_iframe-aparat_embed_frame .ratio{display:block;width:100%;height:auto;}.h_iframe-aparat_embed_frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;}</style>
