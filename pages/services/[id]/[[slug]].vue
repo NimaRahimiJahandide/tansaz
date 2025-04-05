@@ -123,7 +123,7 @@ onMounted(() => {
     </Head>
     <PagesFirstSection :firstSectionData="pageState.firstSection" />
     <ServicesSection :banner="pageState.banner" v-if="!pageState.banner.dontShow" />
-    <div class="mt-[75px] max-w-[1200px] mx-auto px-5 text-justify">
+    <div class="mt-[75px] max-w-[1240px] mx-auto px-5 text-justify">
       <div class="flex items-center md:flex-row flex-col gap-[20px] mt-[75px]">
         <div class="md:w-1/2">
           <h3 class="text-primary text-[30px]">

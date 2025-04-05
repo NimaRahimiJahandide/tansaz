@@ -19,7 +19,7 @@ const props = defineProps({
   <div>
     <!-- <div
       v-if="loadingState.isLoading"
-      class="max-w-[1200px] text-dark mx-auto px-3 my-[25px] pt-2.5 flex justify-between w-full gap-[20px]"
+      class="max-w-[1240px] text-dark mx-auto px-3 my-[25px] pt-2.5 flex justify-between w-full gap-[20px]"
     >
       <div class="flex w-full flex-col md:flex-row gap-5">
         <div class="w-[calc(100vw-50px)] md:hidden sm:h-[40vh]">
@@ -106,7 +106,7 @@ const props = defineProps({
     </div> -->
 
     <div
-      class="max-w-[1200px] text-dark mx-auto px-4 my-[25px] pt-2.5 flex justify-between w-full gap-[20px]"
+      class="max-w-[1240px] text-dark mx-auto px-4 my-[25px] pt-2.5 flex justify-between w-full gap-[20px]"
     >
       <div class="flex flex-col md:flex-row gap-5">
         <!-- start slider mobile -->

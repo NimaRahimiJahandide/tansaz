@@ -68,7 +68,7 @@ onMounted(() => {
     </Head>
     <VideosSidebarComponent class="sticky top-14" :list="categories" />
     <div
-      class="container max-w-[1200px] mx-auto bg-white text-gray-800 rtl mb-28"
+      class="container max-w-[1240px] mx-auto bg-white text-gray-800 rtl mb-28"
     >
       <div class="overflow-x-auto max-md:mt-16 scrollbar-hide md:hidden block">
         <ul class="flex items-center px-2 py-1 min-w-max">
@@ -98,7 +98,7 @@ onMounted(() => {
           </div>
         </div>
       </main>
-      <div class="max-w-[1200px] px-5 pt-10">
+      <div class="max-w-[1240px] px-5 pt-10">
         <BlogCommentSection :is-video="true" />
       </div>
     </div>

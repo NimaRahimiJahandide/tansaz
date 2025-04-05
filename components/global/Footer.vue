@@ -10,7 +10,7 @@ const loadingState = useLoadingState();
   >
     <ContactUsComponent />
     <div 
-      class="max-w-[1200px] flex md:flex-row flex-col flex-wrap  gap-5 justify-between mx-auto px-5"
+      class="max-w-[1240px] flex md:flex-row flex-col flex-wrap  gap-5 justify-between mx-auto px-5"
     >
       <div class="flex flex-col gap-[20px]">
         <span class="text-[25px] font-extralight">راه های ارتباطی</span>
@@ -112,7 +112,7 @@ const loadingState = useLoadingState();
     </div>
     <!-- start copyright -->
     <div
-      class="max-w-[1200px] mx-auto px-5 border-t border-[#FFFFFF38] pt-6 mt-6"
+      class="max-w-[1240px] mx-auto px-5 border-t border-[#FFFFFF38] pt-6 mt-6"
     >
       <div class="flex items-center justify-center gap-1">
         <a target="_blank"

@@ -23,12 +23,12 @@ setTimeout(() => {
       <Meta property="og:url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
     </Head>
     <!-- <div v-if="loadingState.isLoading"
-      class="flex flex-col md:flex-row max-w-[1200px] text-dark mx-auto px-3 mt-[75px]"
+      class="flex flex-col md:flex-row max-w-[1240px] text-dark mx-auto px-3 mt-[75px]"
     >
       <div class="w-full h-[500px] bg-gray-300 rounded animate-pulse"></div>
     </div> -->
     <div
-      class="flex flex-col md:flex-row max-w-[1200px] rounded-4xl bg-background-input text-dark mx-auto px-5 mt-[75px] shadow-2xl"
+      class="flex flex-col md:flex-row max-w-[1240px] rounded-4xl bg-background-input text-dark mx-auto px-5 mt-[75px] shadow-2xl"
     >
       <div class="md:w-1/2 p-8">
         <h2 class="text-2xl mb-8">

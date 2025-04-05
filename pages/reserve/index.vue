@@ -120,11 +120,11 @@ setTimeout(() => {
     <ToastSuccess  :title="successTitle" :description="successDescription" v-if="successTitle.length"/>
     <ToastDanger  :title="dangerTitle" :description="dangerDescription" v-if="dangerTitle.length"/>
     <div
-      class="flex flex-col md:flex-row max-w-[1200px] text-dark mx-auto px-5 mt-[75px]"
+      class="flex flex-col md:flex-row max-w-[1240px] text-dark mx-auto px-5 mt-[75px]"
     >
       <!-- <div
         v-if="loadingState.isLoading"
-        class="flex flex-col md:flex-row max-w-[1200px] text-dark mx-auto w-full px-3 mt-[75px]"
+        class="flex flex-col md:flex-row max-w-[1240px] text-dark mx-auto w-full px-3 mt-[75px]"
       >
         <div class="w-full h-[500px] bg-gray-300 rounded animate-pulse"></div>
       </div> -->

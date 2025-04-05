@@ -63,7 +63,7 @@ onMounted(() => {
       />
     </Head>
     <VideosSidebarComponent class="sticky top-10" :list="categories" />
-    <div class="container max-w-[1200px] mx-auto bg-white text-gray-800 rtl">
+    <div class="container max-w-[1240px] mx-auto bg-white text-gray-800 rtl">
       <div class="overflow-x-auto max-md:mt-16 scrollbar-hide md:hidden block">
         <ul class="flex items-center px-2 py-1 min-w-max">
           <nuxt-link

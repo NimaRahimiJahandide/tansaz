@@ -97,7 +97,7 @@ const cards = ref([
   <div class="mt-[75px]">
     <PagesFirstSection :firstSectionData="firstSectionData" />
     <PagesBannerSection :bannerData="bannerData" />
-    <div class="mt-[75px] max-w-[1200px] mx-auto px-5">
+    <div class="mt-[75px] max-w-[1240px] mx-auto px-5">
       <div class="flex items-center md:flex-row flex-col gap-[20px] mt-[75px]">
         <div class="md:w-1/2">
           <h3 class="text-primary text-[30px]">
@@ -142,7 +142,7 @@ const cards = ref([
     />
     <ReservationAndContactUsBanner />
     <div
-      class="text-dark flex flex-col gap-3.5 mt-[75px] max-w-[1200px] mx-auto px-5"
+      class="text-dark flex flex-col gap-3.5 mt-[75px] max-w-[1240px] mx-auto px-5"
     >
     <h2 class="sm:text-[24px] text-[14px] font-bold">
       ویژگی‌ها و مزایای دستگاه mc1plus:
@@ -182,7 +182,7 @@ const cards = ref([
     </div>
     <WhyTansaz title="چرا زیبایی و لاغری در کلینیک تن ساز" :cards="cards" />
     <div
-      class="text-dark flex flex-col gap-3.5 mt-[75px] max-w-[1200px] mx-auto px-5"
+      class="text-dark flex flex-col gap-3.5 mt-[75px] max-w-[1240px] mx-auto px-5"
     >
       <p class="sm:text-[21px] text-[14px] font-light leading-10">
         تزریق پیوند اتولوگ چربی یک روش موثر، طبیعی و کم‌تهاجم برای جوان‌سازی پوست، افزایش حجم و رفع چین و چروک‌ها است. با این حال، برای رسیدن به بهترین نتایج و جلوگیری از عوارض احتمالی، بسیار مهم است که این درمان تحت نظر پزشک متخصص و در یک مرکز معتبر مانند کلینیک تن ساز شیراز انجام شود. مراقبت‌های قبل و بعد از تزریق نیز نقش مهمی در بهبود نتایج و کاهش عوارض ایفا می‌کنند. بنابراین، با انتخاب کلینیک تن ساز و پیروی از توصیه‌های پزشک، می‌توانید از نتایج این درمان بهره‌مند شوید و به ظاهر و اعتماد به نفس خود افزوده کنید.

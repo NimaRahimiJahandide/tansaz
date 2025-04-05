@@ -38,7 +38,7 @@ const banner = ref({
     <div>
       <!-- <ServicesSection class="mb-[5rem]" :banner="banner"/> -->
       <div class="bg-primary bg-[url(/images/pattern.png)]">
-        <div class="mt-[75px] max-w-[1200px] mx-auto px-5">
+        <div class="mt-[75px] max-w-[1240px] mx-auto px-5">
           <div class="py-10 px-8">
             <h2
               class="md:text-3xl text-xl text-white font-semibold text-center mb-16"
@@ -48,7 +48,7 @@ const banner = ref({
           </div>
         </div>
       </div>
-      <div class="max-w-[1200px] mx-auto px-5">
+      <div class="max-w-[1240px] mx-auto px-5">
         <div
           class="flex justify-between lg:-mt-10 gap-5 -mt-10 z-10"
         >
@@ -59,7 +59,7 @@ const banner = ref({
           />
         </div>
       </div>
-      <div class="max-w-[1200px] mx-auto px-5">
+      <div class="max-w-[1240px] mx-auto px-5">
         <ReservationAndContactUsBanner />
         <!-- <div class="flex md:flex-row flex-col gap-[20px] mt-[75px]">
           <div

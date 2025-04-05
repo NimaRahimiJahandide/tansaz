@@ -12,7 +12,7 @@ setTimeout(() => {
   <LoadingComponent v-if="loadingState.isLoading"/>
 
     <div v-else
-      class="flex flex-col max-w-[1200px] text-dark mx-auto px-5 mt-[75px] leading-10 text-justify text-[14px]"
+      class="flex flex-col max-w-[1240px] text-dark mx-auto px-5 mt-[75px] leading-10 text-justify text-[14px]"
     >
     <Head>
       <Title>تن ساز | قوانین سایت</Title>

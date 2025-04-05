@@ -5,7 +5,7 @@ import before from "/images/before.jpg";
 
 <template>
   <div
-    class="container max-w-[1200px] mx-auto px-5 mt-12"
+    class="container max-w-[1240px] mx-auto px-5 mt-12"
   >
     <div
       class="max-w-xl mx-auto rounded-lg overflow-hidden relative"

@@ -86,7 +86,7 @@ const v$ = useVuelidate(rules, formData);
   <div>
     <ToastSuccess  :title="successTitle" :description="successDescription" v-if="successTitle.length"/>
     <ToastDanger  :title="dangerTitle" :description="dangerDescription" v-if="dangerTitle.length"/>
-    <div class="mt-[75px] max-w-[1200px] mx-auto px-5">
+    <div class="mt-[75px] max-w-[1240px] mx-auto px-5">
       <div class="w-full bg-neutral-900 p-8 rounded-3xl">
         <div class="flex flex-col md:flex-row justify-between items-start gap-5">
           <div class="text-white text-3xl flex flex-col my-auto font-bold text-right">

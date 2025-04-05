@@ -96,7 +96,7 @@ watch(
     <!-- <div v-if="loadingState.isLoading">
       <nav>
         <div
-          class="md:flex hidden justify-between items-center py-[15px] max-w-[1200px] mx-auto px-3"
+          class="md:flex hidden justify-between items-center py-[15px] max-w-[1240px] mx-auto px-3"
         >
           <div class="flex items-center gap-[20px]">
             <div
@@ -128,7 +128,7 @@ watch(
       <nav>
         <!-- top of navbar -->
         <div
-          class="md:flex hidden justify-between items-center py-[15px] max-w-[1200px] mx-auto px-5"
+          class="md:flex hidden justify-between items-center py-[15px] max-w-[1240px] mx-auto px-5"
         >
           <div class="flex items-center gap-[20px]">
             <NuxtLink to="/" class="flex items-center py-4 px-2">
