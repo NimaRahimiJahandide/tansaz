@@ -7,6 +7,7 @@ const loadingState = useLoadingState();
 let isResponseOk = ref(false);
 let loading = ref(true);
 
+const blogs = ref([]);
 const sliders = ref([])
 
 const getSlider = async () => {
@@ -28,8 +29,20 @@ const getSlider = async () => {
     });
 };
 
-await getSlider();
+const getBlogs = async () => {
+  try {
+    const data = await axios.get(`/categories/1/posts`);
 
+    blogs.value = data.data.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+onMounted(() => {
+  getBlogs();
+  getSlider()
+});
 
 setTimeout(() => {
   loadingState.setLoading(false);
@@ -68,7 +81,7 @@ useSchemaOrg([
       <FaqSection data-aos="fade-up" data-aos-once="true" />
       <!-- <HomeClinicCafeSection data-aos="fade-up" data-aos-once="true" /> -->
       <HomeAboutUsSection data-aos="fade-up" data-aos-once="true" />
-      <HomeBlogsSection data-aos="fade-up" data-aos-once="true" />
+      <HomeBlogsSection data-aos="fade-up" data-aos-once="true" :blogs="blogs" />
     </div>
   </div>
 </template>
