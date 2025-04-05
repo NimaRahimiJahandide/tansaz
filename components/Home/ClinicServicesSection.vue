@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useLoadingState } from "@/store/loadingState";
 import CardServicesSection from "./CardServicesSection.vue";
 interface Card {
   id: number;
@@ -25,11 +24,6 @@ const banner = ref({
   ],
 })
 
-const loadingState = useLoadingState();
-
-setTimeout(() => {
-  loadingState.setLoading(false);
-}, 2000);
 </script>
 
 <template>

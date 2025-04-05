@@ -95,9 +95,6 @@ useSchemaOrg([
   })
 ]);
 
-setTimeout(() => {
-  loadingState.setLoading(false);
-}, 2000);
 const v$ = useVuelidate(rules, formData);
 </script>
 

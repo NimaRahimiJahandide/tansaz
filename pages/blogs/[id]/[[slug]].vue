@@ -20,9 +20,6 @@ onMounted(() => {
   getBlogDetail();
 });
 
-setTimeout(() => {
-  loadingState.setLoading(false);
-}, 2000);
 </script>
 <template>
   <div>

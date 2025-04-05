@@ -1,15 +1,7 @@
 <script setup lang="ts">
-import { useLoadingState } from "@/store/loadingState";
-const loadingState = useLoadingState();
-
 const props = defineProps({
   sliders: Object
 });
-
-
-setTimeout(() => {
-  loadingState.setLoading(false);
-}, 2000);
 
 // const slides = ref([
 //   {

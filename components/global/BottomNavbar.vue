@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useLoadingState } from "@/store/loadingState";
-const loadingState = useLoadingState();
 const isSticky = ref(false);
 const handleScroll = () => {
   const navbar = document.querySelector(".sticky-nav");
@@ -9,10 +7,6 @@ const handleScroll = () => {
     isSticky.value = rect.top <= 0;
   }
 };
-
-setTimeout(() => {
-  loadingState.setLoading(false);
-}, 2000);
 
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
@@ -183,7 +177,7 @@ onUnmounted(() => {
         >
           <li class="flex flex-col gap-[20px] flex-grow">
             <NuxtLink
-              to="/services/6/hyphotherapy"
+              to="#"
               class="flex items-center w-fit text-primary bg-light-red font-semibold gap-2 py-[6px] pr-[12px] pl-[16px] rounded-[10px]"
             >
               <Icon

@@ -1,12 +1,4 @@
-<script setup lang="ts">
-import { useLoadingState } from "@/store/loadingState";
-
-const loadingState = useLoadingState();
-
-setTimeout(() => {
-  loadingState.setLoading(false);
-}, 2000);
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="max-w-[1200px] text-dark mx-auto px-5 mt-[75px] mb-36">
