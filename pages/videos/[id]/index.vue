@@ -51,9 +51,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <LoadingComponent v-if="loadingState.isLoading"/>
+  <LoadingComponent v-show="loadingState.isLoading"/>
 
-  <section class="flex min-h-screen" v-else>
+  <section class="flex min-h-screen" v-show="!loadingState.isLoading">
     <Head>
       <Title>تن ساز | {{video.title}}</Title>
       <!-- <Link rel="canonical" :href="config.public.websiteURL + decodeURI(route.fullPath)" /> -->
