@@ -65,8 +65,8 @@ onMounted(() => {
         </div>
       </div>
     </div> -->
-    <LoadingComponent v-if="loadingState.isLoading"/>
-    <div v-else>
+    <LoadingComponent v-show="loadingState.isLoading"/>
+    <div v-show="!loadingState.isLoading">
       <div class="flex lg:flex-row flex-col gap-8 mb-28">
         <div
           class="lg:w-3/4 w-full grid min-[378px]:grid-cols-2 md:grid-cols-3 lg:grid-col-3 gap-8 justify-items-center"

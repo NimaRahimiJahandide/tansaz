@@ -76,8 +76,8 @@ onMounted(() => {
         </div>
       </div>
     </div> -->
-    <LoadingComponent v-if="loadingState.isLoading"/>
-    <div v-else>
+    <LoadingComponent v-show="loadingState.isLoading"/>
+    <div v-show="!loadingState.isLoading">
       <div
         class="h-64 bg-cover bg-center relative"
         :style="

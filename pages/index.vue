@@ -59,8 +59,8 @@ useSchemaOrg([
       <Meta property="og:image:alt" content="تن ساز | صفحه اصلی" />
       <Meta property="og:url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
     </Head>
-    <LoadingComponent v-if="loadingState.isLoading"/>
-    <div v-else>
+    <LoadingComponent v-show="loadingState.isLoading"/>
+    <div v-show="!loadingState.isLoading">
       <HomeHeaderComponent :sliders="sliders"/>
       <HomeClinicServicesSection />
       <HomeImageComparison  />

@@ -102,9 +102,9 @@ setTimeout(() => {
 </script>
 
 <template>
-  <LoadingComponent v-if="loadingState.isLoading"/>
+  <LoadingComponent v-show="loadingState.isLoading"/>
 
-  <div v-else>
+  <div v-show="!loadingState.isLoading">
     <Head>
       <Title>تن ساز | رزرو آنلاین</Title>
       <!-- <Link rel="canonical" :href="config.public.websiteURL + decodeURI(route.fullPath)" /> -->

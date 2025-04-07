@@ -8,8 +8,8 @@ setTimeout(() => {
 </script>
 
 <template>
-  <LoadingComponent v-if="loadingState.isLoading"/>
-  <div v-else>
+  <LoadingComponent v-show="loadingState.isLoading"/>
+  <div v-show="!loadingState.isLoading">
     <Head>
       <Title>تن ساز | ارتباط با ما</Title>
       <!-- <Link rel="canonical" :href="config.public.websiteURL + decodeURI(route.fullPath)" /> -->

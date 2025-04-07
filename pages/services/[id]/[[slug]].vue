@@ -106,9 +106,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <LoadingComponent v-if="loadingState.isLoading"/>
+  <LoadingComponent v-show="loadingState.isLoading"/>
 
-  <div class="mt-[75px]" v-else>
+  <div class="mt-[75px]" v-show="!loadingState.isLoading">
     <Head>
       <Title>تن ساز | {{pageState.firstSection.title}} تن ساز</Title>
       <!-- <Link rel="canonical" :href="config.public.websiteURL + decodeURI(route.fullPath)" /> -->
