@@ -15,7 +15,7 @@
            <!-- Navigation Arrows -->
            <button 
              @click="prevSlide" 
-             class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 rounded-full p-1"
+             class="absolute cursor-pointer left-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 rounded-full p-1"
              aria-label="Previous slide"
            >
              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left">
@@ -45,7 +45,7 @@
               v-for="(_, index) in groupedSlides" 
               :key="index"
               @click="currentSlide = index"
-              class="w-2 h-2 rounded-full transition-all duration-300"
+              class="w-2 h-2 cursor-pointer rounded-full transition-all duration-300"
               :class="currentSlide === index ? 'bg-white w-6' : 'bg-white/50'"
               :aria-label="`Go to slide ${index + 1}`"
             ></button>

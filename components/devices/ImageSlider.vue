@@ -19,55 +19,102 @@
         {
             src: 'https://swiperjs.com/demos/images/nature-5.jpg',
             id: 5
-        }
-        ,
+        },
         {
             src: 'https://swiperjs.com/demos/images/nature-6.jpg',
             id: 6
-        }
-        ,
+        },
         {
             src: 'https://swiperjs.com/demos/images/nature-7.jpg',
             id: 7
         }
     ];
 
-    const clickedImageId = ref(null);
+    const clickedImageId = ref(1);
+    const scrollContainer = ref(null);
 
     function imageClick(id) {
         clickedImageId.value = id;
     }
+    
     function getImageSrc(id) {
-    const image = images.find(image => image.id === id);
-    if (image) {
-        return image.src;
+        const image = images.find(image => image.id === id);
+        return image ? image.src : images[0].src;
     }
-    return null; // or any default value if the image is not found
+    
+    function scrollUp() {
+        if (scrollContainer.value) {
+            scrollContainer.value.scrollBy({
+                top: -100,
+                behavior: 'smooth'
+            });
+        }
+    }
+    
+    function scrollDown() {
+        if (scrollContainer.value) {
+            scrollContainer.value.scrollBy({
+                top: 100,
+                behavior: 'smooth'
+            });
+        }
+    }
+    
+    function nextImage() {
+        const currentIndex = images.findIndex(img => img.id === clickedImageId.value);
+        const nextIndex = (currentIndex + 1) % images.length;
+        clickedImageId.value = images[nextIndex].id;
+    }
+    
+    function prevImage() {
+        const currentIndex = images.findIndex(img => img.id === clickedImageId.value);
+        const prevIndex = (currentIndex - 1 + images.length) % images.length;
+        clickedImageId.value = images[prevIndex].id;
     }
 </script>
+
 <template>
-    <div class="flex gap-[10px] overflow-hidden  h-[510px] flex-row">
-        <div class="flex flex-col gap-[10px] max-h-[410px] overflow-scroll small-images">
-            <img 
-            v-for="image in images" 
-            :key="image.id"  
-            :src="image.src"
-            class="w-[100px] h-[90px] cursor-pointer"
-            @click="imageClick(image.id)"
-        >
+    <div class="flex gap-[10px] overflow-hidden items-center h-[510px] flex-row">
+        <div class="flex flex-col items-center gap-1">
+            <Icon 
+                name="gg:arrow-up-o" 
+                size="24" 
+                style="color: #333333" 
+                class="cursor-pointer"
+                @click="scrollUp"
+            />
+            <div 
+                ref="scrollContainer"
+                class="flex flex-col gap-[10px] max-h-[410px] overflow-scroll small-images"
+            >
+                <img 
+                    v-for="image in images" 
+                    :key="image.id"  
+                    :src="image.src"
+                    class="w-[100px] h-[90px] cursor-pointer"
+                    :class="{ '': clickedImageId === image.id }"
+                    @click="imageClick(image.id)"
+                >
+            </div>
+            <Icon 
+                name="gg:arrow-down-o" 
+                size="24" 
+                style="color: #333333" 
+                class="cursor-pointer"
+                @click="scrollDown"
+            />
         </div>
-        <div class="w-full">
-            <img v-show="clickedImageId === null" src='https://swiperjs.com/demos/images/nature-1.jpg' alt="scissors" class="w-full h-[410px]">
-            <img v-show="clickedImageId !== null" :src="getImageSrc(clickedImageId)" alt="" class="w-full h-[410px]">
+        <div class="w-full flex flex-col items-center gap-4">
+            <img :src="getImageSrc(clickedImageId)" alt="Main image" class="w-full h-[410px] object-cover">
         </div>
     </div>
 </template>
-<style>
 
+<style>
 ::-webkit-scrollbar {
   display: none;
 }
-.small-images{
+.small-images {
     scrollbar-width: none;
     -ms-overflow-style: none;
 }

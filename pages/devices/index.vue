@@ -63,7 +63,7 @@ onMounted(() => {
       </section>
       <div class="flex gap-8 w-full">
         <DevicesImageSlider class="md:w-1/2 w-full" />
-        <article class="md:flex flex-col hidden md:w-1/2 gap-8">
+        <article class="md:flex mt-10 flex-col hidden md:w-1/2 gap-8">
           <h1 class="font-bold md:text-3xl text-xl">دستگاه کویتیشن CM Slime</h1>
           <p class="text-justify leading-8">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
             طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
