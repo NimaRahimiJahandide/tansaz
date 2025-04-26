@@ -58,11 +58,10 @@ const toggleAnswer = (index: number): void => {
             <span class="text-lg font-semibold line-clamp-1 lg:line-clamp-none">{{ item.question }}</span>
             
             <span
-              class="icon text-2xl transition-transform duration-500 rotate-90"
-              :class="{ 'rotate-[270deg]': activeIndex === index }"
+              class="icon text-2xl transition-transform duration-500"
+              :class="{ 'rotate-[180deg]': activeIndex === index }"
             >
-            <Icon name="mingcute:arrow-left-fill" size="20px" style="color: #000" />
-
+            <Icon name="fe:arrow-down" size="24" style="color: #000" />
             </span>
           </div>
           <div

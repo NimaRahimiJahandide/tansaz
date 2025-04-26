@@ -1,7 +1,40 @@
-<script setup>
-import { useLoadingState } from "../store/loadingState";
+<script setup lang="ts">
+import { useLoadingState } from "@/store/loadingState";
 import axios from "axios";
 const loadingState = useLoadingState();
+const route = useRoute();
+
+const deviceDetails = ref({});
+const comments  = ref([]);
+
+const getBlogDetail = async () => {
+  loadingState.setLoading(true);
+  await axios.get(`/device-infos/1`)
+  .then(response=>{
+    deviceDetails.value = response.data.data;
+  loadingState.setLoading(false);
+  }) .catch(err=>{
+    console.log(err);
+  }) 
+};
+
+// const getPostComments = async () => {
+//   loadingState.setLoading(true);
+//   await axios.get(
+//       `/posts/${route.params.id}/comments?isactive=1`
+//     )
+//     .then(response=>{
+//       comments.value = response.data.comments
+//       loadingState.setLoading(false);
+//     }).catch(err=>{
+//       console.log(err);
+//     }) 
+// };
+
+onMounted(() => {
+  // getBlogDetail();
+  // getPostComments()
+});
 </script>
 
 <template>
@@ -18,7 +51,7 @@ const loadingState = useLoadingState();
     <Meta property="og:url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
   </Head>
   <LoadingComponent v-show="loadingState.isLoading"/>
-  <main class="container max-w-[1240px] text-dark mx-auto px-5 mb-28 mt-[75px]" v-show="!loadingState.isLoading">
+  <main class="container text-dark mx-auto px-5 mb-28 mt-[40px]" v-show="!loadingState.isLoading">
     <!-- start slider -->
     <section>
       <section class="md:flex hidden gap-1 mb-4">
@@ -63,7 +96,7 @@ const loadingState = useLoadingState();
       </div>
       <DevicesDescriptionSection />
       <DevicesVideosSlider class="mt-9" />
-      <DevicesCustomerSatisfaction class="mt-9 hidden md:block" />
+      <DevicesCustomerSatisfaction class="mt-9" />
       <div class="h_iframe-aparat_embed_frame">
         <span style="display: block;padding-top: 57%"></span>
         <iframe class="w-full 2xl:h-[75vh] mt-9" src="https://www.aparat.com/video/video/embed/videohash/r85lx69/vt/frame" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>

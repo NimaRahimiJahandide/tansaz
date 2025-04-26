@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-primary rounded-tr-3xl rounded-bl-3xl p-6 text-white relative overflow-hidden">
+    <div class="bg-[linear-gradient(129deg,_#BE4F4F,_#9D5759,_#884E51)] rounded-tr-3xl rounded-bl-3xl p-6 text-white relative overflow-hidden">
       <!-- Right-aligned title text -->
       <div class="text-right mb-6">
         <h2 class="text-3xl font-black">رضایت مشتریان</h2>
@@ -78,13 +78,17 @@ const slides = ref([
   { src: 'https://swiperjs.com/demos/images/nature-7.jpg', id: 7 }
 ]);
 
-// گروه‌بندی عکس‌ها به صورت ۳تایی
 const groupedSlides = computed(() => {
-  const groups = [];
-  for (let i = 0; i < slides.value.length; i += 3) {
-    groups.push(slides.value.slice(i, i + 3));
+  if (process.client) {
+    const isMobile = window.innerWidth < 768; // بررسی حالت موبایل
+    const groupSize = isMobile ? 1 : 3; // در حالت موبایل 1 آیتم، در سایر حالت‌ها 3 آیتم
+    const groups = [];
+    for (let i = 0; i < slides.value.length; i += groupSize) {
+      groups.push(slides.value.slice(i, i + groupSize));
+    }
+    return groups;
   }
-  return groups;
+  return []; // در صورتی که در سمت سرور باشد، یک آرایه خالی برگردانید.
 });
 
 const currentSlide = ref(0);
@@ -101,7 +105,7 @@ const prevSlide = () => {
 const startAutoplay = () => {
   autoplayInterval.value = setInterval(() => {
     nextSlide();
-  }, 5000);
+  }, 8000);
 };
 
 const stopAutoplay = () => {
@@ -117,3 +121,17 @@ onMounted(() => {
   };
 });
 </script>
+
+<style scoped>
+/* تنظیمات برای حالت موبایل */
+@media (max-width: 768px) {
+  .flex.space-x-4 {
+    gap: 0; /* حذف فاصله بین آیتم‌ها */
+  }
+
+  .w-24.h-24 {
+    width: 100%; /* پر کردن تمام عرض در حالت موبایل */
+    height: auto; /* ارتفاع خودکار */
+  }
+}
+</style>
