@@ -1,11 +1,14 @@
 <template>
-  <div class="bg-gray-100 md:h-[70vh] p-4 my-8">
-    <div class="rounded-lg overflow-hidden">
+  <div class="bg-gray-100  p-4 my-8">
+    <div class="rounded-lg container px-5 mx-auto overflow-hidden">
       <div class="md:flex w-full">
-        <!-- Left Side -->
-        <div class="p-4 md:p-8 md:w-1/2">
-          <h1 class="text-2xl font-bold mb-4">دیدگاه کاربران</h1>
-          <form class="" @submit.prevent="handleSubmit">
+        <!-- Right Side -->
+        <div class="p-4 flex flex-col md:p-8 md:w-1/2">
+          <div class="flex flex-col md:gap-5 gap-2.5 pb-8">
+            <h3 class="md:text-[40px] text-xl font-bold">دیدگاه کاربران</h3>
+            <p class="md:text-xl text-sm font-bold">با ثبت دیدگاه خود ما را در ارائه خدمات بهتر یاری کنید</p>
+          </div>
+          <form class="flex flex-col" @submit.prevent="handleSubmit">
             <!-- Name Input -->
             <div class="mb-4">
               <label for="name" class="block text-gray-700 font-medium mb-2">نام</label>
@@ -22,14 +25,14 @@
 
             <!-- Submit Button -->
             <button type="submit"
-              class="w-28 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4 text-center items-center flex justify-center">
+              class="w-28 self-end bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4 text-center items-center flex justify-center">
               ثبت دیدگاه
             </button>
           </form>
         </div>
 
-        <!-- Right Side (Optional: Image or Instructions) -->
-        <div class="flex flex-col gap-5 md:w-1/2 ">
+        <!-- Left Side -->
+        <div class="flex flex-col items-center justify-center gap-5 md:w-1/2 ">
           <DevicesCardComment />
           <DevicesCardComment />
         </div>

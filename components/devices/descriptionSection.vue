@@ -9,7 +9,7 @@ let active= ref(true)
           <!-- Red sidebar -->
           <div class="w-10 md:w-16 h-[25vh] flex flex-col">
             <div @click="active = !active" :class="active ? 'bg-red-200' : ''" class="flex-1 rounded-r-2xl border border-l-0 cursor-pointer border-red-500 flex items-center justify-center">
-              <span class="text-lg  font-bold transform rotate-90 text-center">
+              <span class="text-base  font-bold transform rotate-90 text-center">
                 توضیحات
               </span>
             </div>
@@ -19,7 +19,7 @@ let active= ref(true)
           </div>
           <!-- Main content area -->
           <div class="flex-1 shadow-md bg-gray-50 p-6 md:p-8">
-            <h1 class="md:text-2xl text-xl font-bold mb-6 text-right">
+            <h1 class="md:text-xl text-sm font-bold mb-6 text-right">
               دستگاه کوتیشن CM Slime
             </h1>
             <p class="text-justify mb-4 leading-8" v-if="active">

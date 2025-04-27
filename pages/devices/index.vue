@@ -51,41 +51,43 @@ onMounted(() => {
     <Meta property="og:url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
   </Head>
   <LoadingComponent v-show="loadingState.isLoading"/>
-  <main class="container text-dark mx-auto px-5 mb-28 mt-[40px]" v-show="!loadingState.isLoading">
-    <!-- start slider -->
-    <section>
-      <section class="md:flex hidden gap-1 mb-4">
+  <main class="text-dark mx-auto  mb-28 mt-[20px]" v-show="!loadingState.isLoading">
+    <div class="container px-5 mx-auto">
+      <!-- start slider -->
+      <section>
+        <section class="md:flex hidden text-xs gap-1">
+          <nuxt-link to="/" class="underline">خانه</nuxt-link>
+          /
+          <nuxt-link to="/" class="underline">همه محصولات</nuxt-link>
+          /
+          <nuxt-link to="#">دستگاه کویتیشن CM Slime</nuxt-link>
+        </section>
+        <div class="flex gap-8 w-full">
+          <DevicesImageSlider class="md:w-1/2 w-full" />
+          <article class="md:flex mt-10 flex-col hidden md:w-1/2 gap-8">
+            <h1 class="font-bold md:text-[44px] text-xl">دستگاه کویتیشن CM Slime</h1>
+            <p class="text-justify leading-8">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
+              طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
+              تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد
+              گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان
+              رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که
+              تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای
+              اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
+          </article>
+        </div>
+      </section>
+      <!-- end slider -->
+      <section class="flex text-xs gap-1 mt-8 md:hidden">
         <nuxt-link to="/" class="underline">خانه</nuxt-link>
         /
-        <nuxt-link to="/" class="underline">همه محصولات</nuxt-link>
+        <nuxt-link to="/" class="underline whitespace-nowrap">همه محصولات</nuxt-link>
         /
         <nuxt-link to="#">دستگاه کویتیشن CM Slime</nuxt-link>
       </section>
-      <div class="flex gap-8 w-full">
-        <DevicesImageSlider class="md:w-1/2 w-full" />
-        <article class="md:flex mt-10 flex-col hidden md:w-1/2 gap-8">
-          <h1 class="font-bold md:text-3xl text-xl">دستگاه کویتیشن CM Slime</h1>
-          <p class="text-justify leading-8">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
-            طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
-            تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد
-            گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان
-            رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که
-            تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای
-            اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
-        </article>
-      </div>
-    </section>
-    <!-- end slider -->
-    <section class="flex text-sm gap-1 mt-8 md:hidden">
-      <nuxt-link to="/" class="underline">خانه</nuxt-link>
-      /
-      <nuxt-link to="/" class="underline whitespace-nowrap">همه محصولات</nuxt-link>
-      /
-      <nuxt-link to="#">دستگاه کویتیشن CM Slime</nuxt-link>
-    </section>
+    </div>
     <section>
-      <div class="flex md:hidden flex-col gap-8 my-8">
-        <h2 class="font-bold md:text-3xl text-xl">دستگاه کویتیشن CM Slime</h2>
+      <div class="flex md:hidden flex-col gap-8 my-8 container px-5 mx-auto">
+        <h2 class="font-bold md:text-[44px] text-xl">دستگاه کویتیشن CM Slime</h2>
         <p class="text-justify leading-8">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
           طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
           تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد
@@ -94,12 +96,14 @@ onMounted(() => {
           و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و
           جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
       </div>
-      <DevicesDescriptionSection />
-      <DevicesVideosSlider class="mt-9" />
-      <DevicesCustomerSatisfaction class="mt-9" />
-      <div class="h_iframe-aparat_embed_frame">
-        <span style="display: block;padding-top: 57%"></span>
-        <iframe class="w-full 2xl:h-[75vh] mt-9" src="https://www.aparat.com/video/video/embed/videohash/r85lx69/vt/frame" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+      <div class="container px-5 mx-auto">
+        <DevicesDescriptionSection />
+        <DevicesVideosSlider class="mt-9" />
+        <DevicesCustomerSatisfaction class="mt-9" />
+        <div class="h_iframe-aparat_embed_frame">
+          <span style="display: block;padding-top: 57%"></span>
+          <iframe class="w-full 2xl:h-[75vh] mt-9" src="https://www.aparat.com/video/video/embed/videohash/r85lx69/vt/frame" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+        </div>
       </div>
       <DevicesCommentsSection class="mt-14" />
       <DevicesFaqSection  />

@@ -1,13 +1,13 @@
 <template>
-    <div class="bg-[linear-gradient(129deg,_#BE4F4F,_#9D5759,_#884E51)] rounded-tr-3xl rounded-bl-3xl p-6 text-white relative overflow-hidden">
+    <div class="bg-[url(/icons/bg-devices.png)] object-cover bg-center rounded-tr-[80px] rounded-bl-[80px] p-6 text-white relative overflow-hidden">
       <!-- Right-aligned title text -->
-      <div class="text-right mb-6">
-        <h2 class="text-3xl font-black">رضایت مشتریان</h2>
+      <div class="text-center md:text-right mb-6 md:pr-16">
+        <h2 class="md:text-[40px] text-2xl font-black">رضایت مشتریان</h2>
       </div>
   
       <!-- Testimonial Carousel -->
        <div class="flex max-md:flex-col gap-10">
-        <p class="text-lg mt-2 font-bold leading-8">
+        <p class="text-lg mt-2 font-bold leading-8 md:pr-16 md:w-60">
           با اطمینان کامل زیبایی
           خود را با ما دنبال کنید
         </p>
@@ -33,9 +33,9 @@
                <div 
                  v-for="(slide, slideIndex) in group" 
                  :key="slideIndex"
-                 class="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden border-2 border-white"
+                 class="rounded-2xl overflow-hidden"
                >
-                 <img :src="slide.src" alt="Before and after comparison" class="w-full h-full object-cover" />
+                 <img :src="slide.src" alt="Before and after comparison" class="max-w-[242px] max-h-[161px] md:w-60 md:h-60 object-contain" />
                </div>
              </div>
            </div>
@@ -69,13 +69,13 @@
   
 <script setup>  
 const slides = ref([
-  { src: 'https://swiperjs.com/demos/images/nature-1.jpg', id: 1 },
+  { src: '/images/customer-devices.png', id: 1 },
   { src: 'https://swiperjs.com/demos/images/nature-2.jpg', id: 2 },
-  { src: 'https://swiperjs.com/demos/images/nature-3.jpg', id: 3 },
+  { src: '/images/customer-devices.png', id: 3 },
   { src: 'https://swiperjs.com/demos/images/nature-4.jpg', id: 4 },
-  { src: 'https://swiperjs.com/demos/images/nature-5.jpg', id: 5 },
+  { src: '/images/customer-devices.png', id: 5 },
   { src: 'https://swiperjs.com/demos/images/nature-6.jpg', id: 6 },
-  { src: 'https://swiperjs.com/demos/images/nature-7.jpg', id: 7 }
+  { src: '/images/customer-devices.png', id: 7 }
 ]);
 
 const groupedSlides = computed(() => {

@@ -1,6 +1,6 @@
 <template>
-    <div class="max-w-md mx-auto" dir="rtl">
-      <div class="bg-white rounded-3xl rounded-tr-none p-6 shadow-md border border-gray-100">
+    <div class="mx-auto" dir="rtl">
+      <div class="bg-white rounded-3xl rounded-tr-none p-6 shadow-md border border-[#8080808C]">
         <!-- User Name Header -->
         <h3 class="text-lg font-bold mb-2 text-gray-800">نام کاربر</h3>
         

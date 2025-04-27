@@ -40,34 +40,34 @@ const toggleAnswer = (index: number): void => {
 </script>
 
 <template>
-  <div class="py-10">
+  <div class="py-10 container px-5 mx-auto">
     <div>
       <div class="flex flex-col">
-        <h3 class="text-3xl font-bold mb-8">سوالات پر تکرار</h3>
+        <h3 class="md:text-[40px] text-3xl font-bold md:mb-12 mb-8">سوالات پر تکرار</h3>
       </div>
-      <div class="mx-auto space-y-6">
+      <div class="mx-auto space-y-6 max-w-[1240px]">
         <div
           v-for="(item, index) in faqItems"
           :key="index"
-          class="container rounded-lg shadow-md transition-all duration-500"
+          class="container rounded-lg transition-all duration-500"
         >
           <div
-            class="question flex items-center justify-between p-4 cursor-pointer"
+            class="question border-[.5px] border-[rgba(153,153,153,.3)] transition-all duration-500 flex items-center justify-between p-4 cursor-pointer"
+            :class="activeIndex === index ? 'rounded-t-[16px]' : 'rounded-[16px]'"
             @click="toggleAnswer(index)"
           >
             <span class="text-lg font-semibold line-clamp-1 lg:line-clamp-none">{{ item.question }}</span>
             
             <span
               class="icon text-2xl transition-transform duration-500"
-              :class="{ 'rotate-[180deg]': activeIndex === index }"
             >
-            <Icon name="fe:arrow-down" size="24" style="color: #000" />
+            <Icon v-if="activeIndex === index" name="fe:arrow-down" size="24" style="color: #000" />
+            <Icon v-else name="fe:arrow-up" size="24" style="color: #000" />
             </span>
           </div>
           <div
-            class="answercont bg-gray-100 overflow-hidden rounded-b-lg transition-max-h duration-500"
+            class="answercont mt-1 bg-gray-100 overflow-hidden rounded-b-lg transition-max-h duration-500"
             :style="{ maxHeight: activeIndex === index ? '50vh' : '0px' }"
-            :class="activeIndex === index ? ' border-t border-t-gray-200' : ''"
           >
             <div class="answer p-4">
               <p v-html="item.answer"></p>
@@ -84,9 +84,7 @@ const toggleAnswer = (index: number): void => {
 .container {
   border-radius: 0.5rem;
 }
-.question:hover {
-  border-radius: 0.5rem;
-}
+
 .icon.rotate-45 {
   transform: rotate(45deg);
 }
