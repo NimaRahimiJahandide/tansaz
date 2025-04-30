@@ -93,7 +93,6 @@ onMounted(() => {
         <DevicesVideosSlider :clips="deviceDetails.clips" class="mt-9" />
         <DevicesCustomerSatisfaction :pics="deviceDetails.beforeAfters" class="mt-9" />
         <div class="h_iframe-aparat_embed_frame">
-          {{ srcValue }}
           <span style="display: block;padding-top: 57%"></span>
           <iframe class="w-full 2xl:h-[75vh] mt-9" :src="`https://www.aparat.com/video/video/embed/videohash/${srcValue}/vt/frame`" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
         </div>
