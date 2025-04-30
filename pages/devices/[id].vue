@@ -10,7 +10,7 @@ const srcValue= ref('')
 
 const getDevices = async () => {
   loadingState.setLoading(true);
-  await axios.get(`/device-infos/1`)
+  await axios.get(`/device-infos/${route.params.id}`)
   .then(response=>{
     deviceDetails.value = response.data.data;
     // console.log(deviceDetails.value.satisfactions[0].script);
@@ -22,28 +22,28 @@ const getDevices = async () => {
   }) 
 };
 
-// const getPostComments = async () => {
-//   loadingState.setLoading(true);
-//   await axios.get(
-//       `/posts/${route.params.id}/comments?isactive=1`
-//     )
-//     .then(response=>{
-//       comments.value = response.data.comments
-//       loadingState.setLoading(false);
-//     }).catch(err=>{
-//       console.log(err);
-//     }) 
-// };
+const getPostComments = async () => {
+  loadingState.setLoading(true);
+  await axios.get(
+      `/device-infos/${route.params.id}/comments?isactive=1`
+    )
+    .then(response=>{        
+      comments.value = response.data.comments
+      loadingState.setLoading(false);
+    }).catch(err=>{
+      console.log(err);
+    }) 
+};
 
 onMounted(() => {
   getDevices();
-  // getPostComments()
+  getPostComments()
 });
 </script>
 
 <template>
   <Head>
-    <Title>تن ساز | کلینیک زیبایی و لاغری تن ساز</Title>
+    <Title>تن ساز | {{deviceDetails.title}}</Title>
     <!-- <Link rel="canonical" :href="config.public.websiteURL + decodeURI(route.fullPath)" /> -->
     <Meta name="description" content="کلینیک زیبایی و لاغری تن ساز" />
     <Meta property="og:description" content="کلینیک زیبایی و لاغری تن ساز" />
@@ -98,7 +98,7 @@ onMounted(() => {
           <iframe class="w-full 2xl:h-[75vh] mt-9" :src="`https://www.aparat.com/video/video/embed/videohash/${srcValue}/vt/frame`" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
         </div>
       </div>
-      <DevicesCommentsSection class="mt-14" />
+      <DevicesCommentsSection :comments="comments" class="mt-14" />
       <DevicesFaqSection  />
     </section>
   </main>

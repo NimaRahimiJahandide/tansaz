@@ -1,4 +1,16 @@
 <script setup>
+const props = defineProps({
+  slider: Object
+})
+
+let pics = ref([])
+
+const slider = toRef(props, 'slider')
+
+watch(slider, (newVal) => {
+  pics.value = props.slider
+}, { deep: true })
+
 const images = [
   {
     src: '/images/cms-slime.png',
@@ -74,14 +86,14 @@ function prevImage() {
 </script>
 
 <template>
-  <div class="flex gap-[10px] overflow-hidden items-center h-[510px] flex-row">
-    <div class="flex flex-col items-center gap-1 relative">
-      <img class="cursor-pointer absolute -top-2.5" @click="scrollUp" src="/icons/arrow-circle-left.svg" alt="arrow-circle-left">
+  <div class="flex gap-[10px] overflow-hidden h-[510px] flex-row">
+    <div class="flex flex-col h-full gap-1 relative">
+      <!-- <img class="cursor-pointer absolute -top-2.5" @click="scrollUp" src="/icons/arrow-circle-left.svg" alt="arrow-circle-left"> -->
       <div ref="scrollContainer" class="flex flex-col gap-[10px] max-h-[410px] overflow-scroll small-images">
-        <img v-for="image in images" :key="image.id" :src="image.src" class="w-[100px] h-[90px] cursor-pointer"
+        <img v-for="image in pics" :key="image.id" :src="image.image" class="w-[100px] h-[90px] cursor-pointer"
           :class="{ '': clickedImageId === image.id }" @click="imageClick(image.id)">
       </div>
-      <img class="cursor-pointer absolute -bottom-2.5 transform rotate-180" @click="scrollDown" src="/icons/arrow-circle-left.svg" alt="arrow-circle-left">
+      <!-- <img class="cursor-pointer absolute -bottom-2.5 transform rotate-180" @click="scrollDown" src="/icons/arrow-circle-left.svg" alt="arrow-circle-left"> -->
 
     </div>
     <div class="w-full flex flex-col items-center gap-4">

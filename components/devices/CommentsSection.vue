@@ -33,32 +33,27 @@
 
         <!-- Left Side -->
         <div class="flex flex-col items-center justify-center gap-5 md:w-1/2 ">
-          <DevicesCardComment />
-          <DevicesCardComment />
+          <DevicesCardComment v-for="comment in comments" :key="comment.id" :comment="comment" />
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      formData: {
-        name: '',
-        comment: ''
-      }
-    };
-  },
-  methods: {
-    handleSubmit() {
-      // Handle form submission logic here
-      console.log('Form Data:', this.formData);
-      alert('دیدگاه شما با موفقیت ثبت شد!');
-    }
-  }
-};
+<script setup>
+defineProps({
+  comments: Object
+})
+
+const formData = reactive({
+  name: '',
+  comment: ''
+})
+
+const handleSubmit = ()=> {
+  console.log('Form Data:', this.formData);
+  alert('دیدگاه شما با موفقیت ثبت شد!');
+}
 </script>
 
 <style scoped>
