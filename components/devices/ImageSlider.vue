@@ -9,38 +9,9 @@ const slider = toRef(props, 'slider')
 
 watch(slider, (newVal) => {
   pics.value = props.slider
+  
 }, { deep: true })
 
-const images = [
-  {
-    src: '/images/cms-slime.png',
-    id: 1
-  },
-  {
-    src: 'https://swiperjs.com/demos/images/nature-2.jpg',
-    id: 2
-  },
-  {
-    src: '/images/cms-slime.png',
-    id: 3
-  },
-  {
-    src: 'https://swiperjs.com/demos/images/nature-4.jpg',
-    id: 4
-  },
-  {
-    src: '/images/cms-slime.png',
-    id: 5
-  },
-  {
-    src: 'https://swiperjs.com/demos/images/nature-6.jpg',
-    id: 6
-  },
-  {
-    src: '/images/cms-slime.png',
-    id: 7
-  }
-];
 
 const clickedImageId = ref(1);
 const scrollContainer = ref(null);
@@ -50,8 +21,8 @@ function imageClick(id) {
 }
 
 function getImageSrc(id) {
-  const image = images.find(image => image.id === id);
-  return image ? image.src : images[0].src;
+  const image = pics.value.find(image => image.id === id);
+  return image ? image.image : pics?.value[0]?.image;
 }
 
 function scrollUp() {
@@ -73,15 +44,15 @@ function scrollDown() {
 }
 
 function nextImage() {
-  const currentIndex = images.findIndex(img => img.id === clickedImageId.value);
-  const nextIndex = (currentIndex + 1) % images.length;
-  clickedImageId.value = images[nextIndex].id;
+  const currentIndex = pics.value.findIndex(img => img.id === clickedImageId.value);
+  const nextIndex = (currentIndex + 1) % pics.value.length;
+  clickedImageId.value = pics.value[nextIndex].id;
 }
 
 function prevImage() {
-  const currentIndex = images.findIndex(img => img.id === clickedImageId.value);
-  const prevIndex = (currentIndex - 1 + images.length) % images.length;
-  clickedImageId.value = images[prevIndex].id;
+  const currentIndex = pics.value.findIndex(img => img.id === clickedImageId.value);
+  const prevIndex = (currentIndex - 1 + pics.value.length) % pics.value.length;
+  clickedImageId.value = pics.value[prevIndex].id;
 }
 </script>
 
@@ -97,7 +68,7 @@ function prevImage() {
 
     </div>
     <div class="w-full flex flex-col items-center gap-4">
-      <img :src="getImageSrc(clickedImageId)" alt="Main image" class="w-full h-[410px] object-cover">
+      <img :src="getImageSrc(clickedImageId)" alt="Main image" class="w-full h-[410px]">
     </div>
   </div>
 </template>
