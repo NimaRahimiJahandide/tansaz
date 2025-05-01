@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import { useLoadingState } from "@/store/loadingState";
+import axios from "axios";
 const service = ref(false);
 const isMenuOpen = ref(false);
 const isServicesMenuOpen = ref(false);
 const beautyMenuOpen = ref(false);
 const fatMenuOpen = ref(false);
 const route = useRoute();
+
+const loadingState = useLoadingState();
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
@@ -111,6 +115,30 @@ watch(
     isMenuOpen.value = false;
   }
 );
+
+const devices = ref({});
+
+const getDevices = async () => {
+  // loadingState.setLoading(true);
+  await axios.get(`/device-infos`)
+  .then(response=>{
+    devices.value = response.data.data;
+    loadingState.setLoading(false);
+  }) .catch(err=>{
+    console.log(err);
+  }) 
+};
+
+const isDevicesMenuOpen = ref(false);
+
+const toggleDevicesMenu = () => {
+  isDevicesMenuOpen.value = !isDevicesMenuOpen.value;
+};
+
+
+onMounted(() => {
+  getDevices();
+});
 </script>
 <template>
   <div>
@@ -483,6 +511,36 @@ watch(
                         to="/services/23/cellulite-treatment"
                         class="block py-2 px-4 hover:text-primary"
                         >درمان سلولیت</NuxtLink
+                      >
+                    </li>
+                  </ul>
+                </ul>
+              </li>
+              <li>
+                <div
+                  class="flex cursor-pointer items-center justify-between py-2 px-4 hover:text-primary"
+                  @click="toggleDevicesMenu"
+                >
+                  <span>محصولات</span>
+                  <Icon
+                    name="dashicons:arrow-down"
+                    size="24"
+                    class="icon text-black transition-transform duration-200"
+                    :class="{ 'rotate-180': isDevicesMenuOpen }"
+                  />
+                </div>
+                <ul
+                  class="pl-6 transition-all duration-500 ease-in-out overflow-hidden mr-5"
+                  :style="{ 'max-height': isDevicesMenuOpen ? '1000px' : '0' }"
+                >
+                  <ul class="pl-6 transition-all duration-500 ease-in-out overflow-hidden mr-8"
+                  :style="{ 'max-height': isDevicesMenuOpen ? '1000px' : '0' }"
+                  >
+                    <li v-for="device in devices" :key="device.id">
+                      <NuxtLink
+                        :to="`/devices/${device.id}`"
+                        class="block py-2 px-4 hover:text-primary"
+                        >{{device.title}}</NuxtLink
                       >
                     </li>
                   </ul>
