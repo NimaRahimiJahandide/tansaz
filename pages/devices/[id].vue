@@ -56,7 +56,7 @@ onMounted(() => {
     <Meta property="og:url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
   </Head>
   <LoadingComponent v-show="loadingState.isLoading" />
-  <main class="text-dark mx-auto  mb-28 mt-[20px]" v-show="!loadingState.isLoading">
+  <main class="text-dark mx-auto  mb-28 md:mt-[20px] mt-14" v-show="!loadingState.isLoading">
     <div class="container px-5 mx-auto">
       <!-- start slider -->
       <section>

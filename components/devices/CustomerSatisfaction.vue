@@ -1,20 +1,20 @@
 <template>
   <div
-    class="bg-[url(/icons/bg-devices.png)] object-cover bg-center rounded-tr-[80px] rounded-bl-[80px] p-6 text-white relative">
+    class="bg-[url(/icons/bg-devices.png)] object-cover bg-center rounded-tr-[80px] rounded-bl-[80px] p-6 text-white relative overflow-hidden">
     <!-- Right-aligned title text -->
     <div class="text-center md:text-right mb-6 md:pr-16">
       <h2 class="md:text-[40px] text-2xl font-black">رضایت مشتریان</h2>
     </div>
 
     <!-- Testimonial Carousel -->
-    <div class="flex justify-between max-md:flex-col gap-10">
+    <div class="flex max-md:flex-col gap-10">
       <p class="text-lg mt-2 font-bold leading-8 md:pr-16 md:w-60">
         با اطمینان کامل زیبایی
         خود را با ما دنبال کنید
       </p>
-      <div class="relative w-full">
+      <div class="relative md:w-2/3 w-full">
         <!-- Navigation Arrows -->
-        <!-- <button @click="prevSlide"
+        <button @click="prevSlide"
           class="absolute cursor-pointer left-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 rounded-full p-1"
           aria-label="Previous slide">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -22,37 +22,46 @@
             class="lucide lucide-chevron-left">
             <path d="m15 18-6-6 6-6" />
           </svg>
-        </button> -->
+        </button>
 
-        <swiper-container class="wiper-container mt-12 w-full" :loop="true" :pagination="{ clickable: true }"
-          :slides-per-view="3" :space-between="30" :breakpoints="{
-            0: {
-              slidesPerView: 1,
-            },
-            768: {
-              slidesPerView: 3,
-            },
-          }">
-          <swiper-slide v-for="pic in pics" :key="pic.id" class="swiper-slide relative text-dark w-full -z-10">
-            <article class="absolute -top-[38px] -right-[38px]">
-              <div class="flex items-end z-20">
-                <img :src="pic.original" alt="before"
-                  class="w-[117px] h-[117px] border border-white rounded-full shadow-[0px_4px_4px_0px_#00000033] z-20" />
-                <span class="absolute right-[48px] bottom-1 z-20">قبل</span>
+        <div class="flex justify-center w-full pt-4">
+          <div v-for="(group, groupIndex) in groupedSlides" :key="groupIndex"
+            class="transition-opacity duration-300 ease-in-out flex  space-x-20"
+            :class="{ 'opacity-100': currentSlide === groupIndex, 'opacity-0 hidden': currentSlide !== groupIndex }">
+            <div v-for="(slide, slideIndex) in group" :key="slideIndex" class="rounded-2xl w-full">
+              <article class="w-full relative">
+                <div class="absolute -top-[38px] -right-[38px] z-20">
+                  <div class="flex items-end z-20">
+                    <img :src="slide.original" alt="before comparison"
+                      class="w-[117px] h-[117px] border border-white rounded-full shadow-[0px_4px_4px_0px_#00000033] z-20" />
+                    <span class="absolute right-[48px] text-dark bottom-1 z-20">قبل</span>
+                  </div>
+                </div>
+                <div class="relative flex w-full justify-center items-end">
+                  <img :src="slide.image" alt="after comparison"
+                    class="w-60 h-60 rounded-2xl" />
+                  <span class="text-dark absolute bottom-0">بعد</span>
+                </div>
+              </article>
               </div>
-            </article>
-            <img :src="pic.image" alt="Before and after comparison"
-              class="max-w-[242px] max-h-[161px] md:w-60 md:h-60 rounded-[16px]  z-10" />
-          </swiper-slide>
-        </swiper-container>
+          </div>
+        </div>
         <!-- Dots Navigation -->
-        <!-- <div class="flex justify-center mt-6 space-x-1">
+        <div class="flex justify-center mt-6 space-x-1">
           <button v-for="(_, index) in groupedSlides" :key="index" @click="currentSlide = index"
             class="w-2 h-2 cursor-pointer rounded-full transition-all duration-300"
             :class="currentSlide === index ? 'bg-white w-6' : 'bg-white/50'"
             :aria-label="`Go to slide ${index + 1}`"></button>
-        </div> -->
+        </div>
 
+        <button @click="nextSlide" class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 rounded-full p-1"
+          aria-label="Next slide">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-chevron-right">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
       </div>
     </div>
 
@@ -75,7 +84,7 @@ watch(pics, (newVal) => {
 
 const groupedSlides = computed(() => {
   if (process.client) {
-    const isMobile = window.innerWidth < 768; // بررسی حالت موبایل
+    const isMobile = window.innerWidth < 1300; // بررسی حالت موبایل
     const groupSize = isMobile ? 1 : 3; // در حالت موبایل 1 آیتم، در سایر حالت‌ها 3 آیتم
     const groups = [];
     for (let i = 0; i < sliders.value.length; i += groupSize) {
@@ -116,20 +125,3 @@ onMounted(() => {
   };
 });
 </script>
-
-<style scoped>
-/* تنظیمات برای حالت موبایل */
-@media (max-width: 768px) {
-  .flex.space-x-4 {
-    gap: 0;
-    /* حذف فاصله بین آیتم‌ها */
-  }
-
-  .w-24.h-24 {
-    width: 100%;
-    /* پر کردن تمام عرض در حالت موبایل */
-    height: auto;
-    /* ارتفاع خودکار */
-  }
-}
-</style>
