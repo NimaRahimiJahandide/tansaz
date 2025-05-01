@@ -26,9 +26,23 @@ const getDevices = async () => {
   }) 
 };
 
+const services = ref({});
+
+const getServices = async () => {
+  // loadingState.setLoading(true);
+  await axios.get(`/service-infos`)
+  .then(response=>{
+    services.value = response.data.data;
+    loadingState.setLoading(false);
+  }) .catch(err=>{
+    console.log(err);
+  }) 
+};
+
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
   getDevices();
+  getServices();
 });
 
 onUnmounted(() => {
@@ -235,7 +249,7 @@ onUnmounted(() => {
       </li>
       <li class="relative group">
         <NuxtLink
-          to="/services/21/slimming-services"
+          to="#"
           class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px] flex items-center justify-center gap-1"
         >
           <span>محصولات</span>
@@ -252,6 +266,30 @@ onUnmounted(() => {
             >
               <li class="navbar-children_item" v-for="device in devices" :key="device.id">
                 <NuxtLink :to="`/devices/${device.id}`">{{device.title}}</NuxtLink>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li class="relative group">
+        <NuxtLink
+          to="#"
+          class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px] flex items-center justify-center gap-1"
+        >
+          <span>معرفی خدمات</span>
+          <Icon name="dashicons:arrow-down" size="24" class="icon text-black" />
+        </NuxtLink>
+
+        <div class="absolute top-full left-0 right-0 h-4"></div>
+        <ul
+          class="duration-300 scale-0 group-hover:scale-100 flex w-[30rem] gap-[10px] right-[-15rem] xl:right-auto xl:left-[50%] xl:translate-x-[-50%] transform bg-white shadow-[0_0px_35px_rgba(0,0,0,0.12)] absolute top-14 p-[35px] rounded-[10px]"
+        >
+          <li class="flex flex-col gap-[20px] flex-grow">
+            <ul
+              class="list-disc list-inside marker:text-primary flex flex-col gap-1"
+            >
+              <li class="navbar-children_item" v-for="service in services" :key="service.id">
+                <NuxtLink :to="`/service/${service.id}`">{{service.title}}</NuxtLink>
               </li>
             </ul>
           </li>
