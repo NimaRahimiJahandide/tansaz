@@ -75,6 +75,7 @@ const props = defineProps({
 })
 
 let sliders = ref([])
+const windowWidth = ref(process.client ? window.innerWidth : 0) // اضافه کردن رف برای پیگیری عرض پنجره
 
 const pics = toRef(props, 'pics')
 
@@ -82,46 +83,66 @@ watch(pics, (newVal) => {
   sliders.value = props.pics
 }, { deep: true })
 
+onMounted(() => {
+  if (process.client) {
+    window.addEventListener('resize', updateWindowWidth)
+    startAutoplay()
+  }
+})
+
+onBeforeUnmount(() => {
+  if (process.client) {
+    window.removeEventListener('resize', updateWindowWidth)
+    stopAutoplay()
+  }
+})
+
+const updateWindowWidth = () => {
+  windowWidth.value = window.innerWidth
+}
+
 const groupedSlides = computed(() => {
   if (process.client) {
-    const isMobile = window.innerWidth < 1300; // بررسی حالت موبایل
-    const groupSize = isMobile ? 1 : 3; // در حالت موبایل 1 آیتم، در سایر حالت‌ها 3 آیتم
-    const groups = [];
+    const isMobile = windowWidth.value < 1300 // حالا از windowWidth استفاده می‌کنیم
+    const groupSize = isMobile ? 1 : 3
+    const groups = []
     for (let i = 0; i < sliders.value.length; i += groupSize) {
-      groups.push(sliders.value.slice(i, i + groupSize));
+      groups.push(sliders.value.slice(i, i + groupSize))
     }
-    return groups;
+    return groups
   }
-  return []; // در صورتی که در سمت سرور باشد، یک آرایه خالی برگردانید.
-});
+  return []
+})
 
-const currentSlide = ref(0);
-const autoplayInterval = ref(null);
+const currentSlide = ref(0)
+const autoplayInterval = ref(null)
 
 const nextSlide = () => {
-  currentSlide.value = (currentSlide.value - 1 + groupedSlides.value.length) % groupedSlides.value.length;
-};
+  currentSlide.value = (currentSlide.value - 1 + groupedSlides.value.length) % groupedSlides.value.length
+}
 
 const prevSlide = () => {
-  currentSlide.value = (currentSlide.value + 1) % groupedSlides.value.length;
-};
+  currentSlide.value = (currentSlide.value + 1) % groupedSlides.value.length
+}
 
 const startAutoplay = () => {
+  stopAutoplay()
   autoplayInterval.value = setInterval(() => {
-    nextSlide();
-  }, 8000);
-};
+    nextSlide()
+  }, 8000)
+}
 
 const stopAutoplay = () => {
   if (autoplayInterval.value) {
-    clearInterval(autoplayInterval.value);
+    clearInterval(autoplayInterval.value)
+    autoplayInterval.value = null
   }
-};
+}
 
-onMounted(() => {
-  startAutoplay();
-  return () => {
-    stopAutoplay();
-  };
-});
+// اگر تعداد گروه‌ها تغییر کرد، currentSlide را ریست کنیم
+watch(groupedSlides, (newGroups, oldGroups) => {
+  if (newGroups.length !== oldGroups.length) {
+    currentSlide.value = 0
+  }
+})
 </script>
