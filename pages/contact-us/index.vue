@@ -8,139 +8,141 @@ setTimeout(() => {
 </script>
 
 <template>
-  <LoadingComponent v-show="loadingState.isLoading"/>
-  <div v-show="!loadingState.isLoading">
-    <Head>
-      <Title>تن ساز | ارتباط با ما</Title>
-      <!-- <Link rel="canonical" :href="config.public.websiteURL + decodeURI(route.fullPath)" /> -->
-      <Meta name="description" content="کلینیک زیبایی و لاغری تن ساز" />
-      <Meta property="og:description" content="کلینیک زیبایی و لاغری تن ساز" />
-      <Meta property="og:image" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
-      <Meta property="og:image:secure_url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
-      <Meta property="og:image:width" content="400" />
-      <Meta property="og:image:height" content="300" />
-      <Meta property="og:image:alt" content="تن ساز | ارتباط با ما" />
-      <Meta property="og:url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
-    </Head>
-    <!-- <div v-if="loadingState.isLoading"
-      class="flex flex-col md:flex-row max-w-[1240px] text-dark mx-auto px-3 mt-[75px]"
-    >
-      <div class="w-full h-[500px] bg-gray-300 rounded animate-pulse"></div>
-    </div> -->
-    <div
-      class="flex flex-col md:flex-row max-w-[1240px] rounded-4xl bg-background-input text-dark mx-auto px-5 mt-[75px] shadow-2xl"
-    >
-      <div class="md:w-1/2 p-8">
-        <h2 class="text-2xl mb-8">
-          راه های <span class="text-primary">ارتباطی</span> با ما
-        </h2>
-        <div class="space-y-6">
-          <div class="flex items-start gap-[20px]">
-            <span
-              class="bg-primary flex justify-center items-center rounded-[6px] min-w-[30px] h-[30px]"
-            >
-              <Icon name="ic:baseline-phone" size="17px" style="color: #fff" />
-            </span>
-            <div class="flex flex-col gap-2.5">
-              <p class="text-[20px] font-semibold">شماره های تماس</p>
-              <span class="text-neutral-400"
-                >07136383752، 07136383751، 07136385004</span
+  <div>
+    <LoadingComponent v-show="loadingState.isLoading"/>
+    <div v-show="!loadingState.isLoading">
+      <Head>
+        <Title>تن ساز | ارتباط با ما</Title>
+        <!-- <Link rel="canonical" :href="config.public.websiteURL + decodeURI(route.fullPath)" /> -->
+        <Meta name="description" content="کلینیک زیبایی و لاغری تن ساز" />
+        <Meta property="og:description" content="کلینیک زیبایی و لاغری تن ساز" />
+        <Meta property="og:image" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+        <Meta property="og:image:secure_url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+        <Meta property="og:image:width" content="400" />
+        <Meta property="og:image:height" content="300" />
+        <Meta property="og:image:alt" content="تن ساز | ارتباط با ما" />
+        <Meta property="og:url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+      </Head>
+      <!-- <div v-if="loadingState.isLoading"
+        class="flex flex-col md:flex-row max-w-[1240px] text-dark mx-auto px-3 mt-[75px]"
+      >
+        <div class="w-full h-[500px] bg-gray-300 rounded animate-pulse"></div>
+      </div> -->
+      <div
+        class="flex flex-col md:flex-row max-w-[1240px] rounded-4xl bg-background-input text-dark mx-auto px-5 mt-[75px] shadow-2xl"
+      >
+        <div class="md:w-1/2 p-8">
+          <h2 class="text-2xl mb-8">
+            راه های <span class="text-primary">ارتباطی</span> با ما
+          </h2>
+          <div class="space-y-6">
+            <div class="flex items-start gap-[20px]">
+              <span
+                class="bg-primary flex justify-center items-center rounded-[6px] min-w-[30px] h-[30px]"
               >
+                <Icon name="ic:baseline-phone" size="17px" style="color: #fff" />
+              </span>
+              <div class="flex flex-col gap-2.5">
+                <p class="text-[20px] font-semibold">شماره های تماس</p>
+                <span class="text-neutral-400"
+                  >07136383752، 07136383751، 07136385004</span
+                >
+              </div>
             </div>
-          </div>
-          <div class="flex items-start gap-[20px]">
-            <span
-              class="bg-primary flex justify-center items-center rounded-[6px] min-w-[30px] h-[30px]"
-            >
-              <Icon name="mdi:location" size="17px" style="color: #fff" />
-            </span>
-            <div class="flex flex-col gap-2.5">
-              <p class="text-[20px] font-semibold">آدرس کلینیک</p>
-              <span class="text-neutral-400"
-                >شیراز، معالی آباد، نبش دنا، ساختمان هرم نور، طبقه 5 و 6</span
+            <div class="flex items-start gap-[20px]">
+              <span
+                class="bg-primary flex justify-center items-center rounded-[6px] min-w-[30px] h-[30px]"
               >
+                <Icon name="mdi:location" size="17px" style="color: #fff" />
+              </span>
+              <div class="flex flex-col gap-2.5">
+                <p class="text-[20px] font-semibold">آدرس کلینیک</p>
+                <span class="text-neutral-400"
+                  >شیراز، معالی آباد، نبش دنا، ساختمان هرم نور، طبقه 5 و 6</span
+                >
+              </div>
             </div>
-          </div>
-          <div class="flex items-start gap-[20px]">
-            <span
-              class="bg-primary flex justify-center items-center rounded-[6px] size-[30px]"
-            >
-              <Icon name="lets-icons:insta" size="17px" style="color: #fff" />
-            </span>
-            <div class="flex flex-col gap-2.5">
-              <p class="text-[20px] font-semibold">صفحه اینستاگرام</p>
-              <span class="text-neutral-400">tansaz.clinic</span>
+            <div class="flex items-start gap-[20px]">
+              <span
+                class="bg-primary flex justify-center items-center rounded-[6px] size-[30px]"
+              >
+                <Icon name="lets-icons:insta" size="17px" style="color: #fff" />
+              </span>
+              <div class="flex flex-col gap-2.5">
+                <p class="text-[20px] font-semibold">صفحه اینستاگرام</p>
+                <span class="text-neutral-400">tansaz.clinic</span>
+              </div>
             </div>
-          </div>
-          <div class="flex items-start gap-[20px]">
-            <span
-              class="bg-primary flex justify-center items-center rounded-[6px] size-[30px]"
-            >
-              <Icon
-                name="ic:baseline-telegram"
-                size="17px"
-                style="color: #fff"
-              />
-            </span>
-            <div class="flex flex-col gap-2.5">
-              <p class="text-[20px] font-semibold">تلگرام</p>
-              <span class="text-neutral-400">09336074147</span>
+            <div class="flex items-start gap-[20px]">
+              <span
+                class="bg-primary flex justify-center items-center rounded-[6px] size-[30px]"
+              >
+                <Icon
+                  name="ic:baseline-telegram"
+                  size="17px"
+                  style="color: #fff"
+                />
+              </span>
+              <div class="flex flex-col gap-2.5">
+                <p class="text-[20px] font-semibold">تلگرام</p>
+                <span class="text-neutral-400">09336074147</span>
+              </div>
             </div>
-          </div>
-          <div class="flex items-start gap-[20px]">
-            <span
-              class="bg-primary flex justify-center items-center rounded-[6px] size-[30px]"
-            >
-              <Icon
-                name="ic:baseline-whatsapp"
-                size="17px"
-                style="color: #fff"
-              />
-            </span>
-            <div class="flex flex-col gap-2.5">
-              <p class="text-[20px] font-semibold">واتس اپ</p>
-              <span class="text-neutral-400">09336074147</span>
+            <div class="flex items-start gap-[20px]">
+              <span
+                class="bg-primary flex justify-center items-center rounded-[6px] size-[30px]"
+              >
+                <Icon
+                  name="ic:baseline-whatsapp"
+                  size="17px"
+                  style="color: #fff"
+                />
+              </span>
+              <div class="flex flex-col gap-2.5">
+                <p class="text-[20px] font-semibold">واتس اپ</p>
+                <span class="text-neutral-400">09336074147</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="md:w-1/2  p-8">
-        <form>
-          <div class="mb-6">
-            <label class="block mb-2 text-sm">
-              نام و نام خانوادگی <span class="text-primary">*</span>
-            </label>
-            <input
-              type="text"
-              class="w-full p-3 rounded bg-white focus:border-primary focus:outline-primary"
-              required=""
-            />
-          </div>
-          <div class="mb-6">
-            <label class="block mb-2 text-sm">
-              شماره موبایل <span class="text-primary">*</span>
-            </label>
-            <input type="tel" class="w-full p-3 rounded bg-white focus:border-primary focus:outline-primary" required="" />
-          </div>
-          <div class="mb-6">
-            <label class="block mb-2 text-sm">
-              توضیحات شما <span class="text-primary">*</span>
-            </label>
-            <textarea
-              class="w-full p-3 resize-none rounded bg-white focus:border-primary focus:outline-primary h-40"
-              required=""
-            ></textarea>
-          </div>
-          <div class="mb-6">
-            <label class="block mb-2 text-white text-sm">کپچا</label>
-            <div class="g-recaptcha"></div>
-          </div>
-          <button
-            class="w-full bg-primary text-white py-3 rounded hover:bg-red-700 transition duration-200 shadow-lg"
-          >
-            ثبت نظر
-          </button>
-        </form>
+        <div class="md:w-1/2  p-8">
+          <form>
+            <div class="mb-6">
+              <label class="block mb-2 text-sm">
+                نام و نام خانوادگی <span class="text-primary">*</span>
+              </label>
+              <input
+                type="text"
+                class="w-full p-3 rounded bg-white focus:border-primary focus:outline-primary"
+                required=""
+              />
+            </div>
+            <div class="mb-6">
+              <label class="block mb-2 text-sm">
+                شماره موبایل <span class="text-primary">*</span>
+              </label>
+              <input type="tel" class="w-full p-3 rounded bg-white focus:border-primary focus:outline-primary" required="" />
+            </div>
+            <div class="mb-6">
+              <label class="block mb-2 text-sm">
+                توضیحات شما <span class="text-primary">*</span>
+              </label>
+              <textarea
+                class="w-full p-3 resize-none rounded bg-white focus:border-primary focus:outline-primary h-40"
+                required=""
+              ></textarea>
+            </div>
+            <div class="mb-6">
+              <label class="block mb-2 text-white text-sm">کپچا</label>
+              <div class="g-recaptcha"></div>
+            </div>
+            <button
+              class="w-full bg-primary text-white py-3 rounded hover:bg-red-700 transition duration-200 shadow-lg"
+            >
+              ثبت نظر
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

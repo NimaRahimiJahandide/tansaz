@@ -84,7 +84,7 @@ onUnmounted(() => {
       </li>
       <li class="relative group">
         <NuxtLink
-          to="/services/1/beauty"
+          to="#"
           class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px] flex items-center justify-center gap-1"
         >
           <span>خدمات زیبایی</span>
@@ -197,7 +197,7 @@ onUnmounted(() => {
       </li>
       <li class="relative group">
         <NuxtLink
-          to="/services/21/slimming-services"
+          to="#"
           class="navbar-item hover:bg-primary hover:text-white transition-all duration-150 py-2 px-4 rounded-[10px] flex items-center justify-center gap-1"
         >
           <span>خدمات لاغری</span>
