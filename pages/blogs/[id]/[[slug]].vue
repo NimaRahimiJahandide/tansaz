@@ -51,31 +51,6 @@ onMounted(() => {
       <Meta property="og:image:alt" content="تن ساز | مقالات" />
       <Meta property="og:url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
     </Head>
-    <!-- <div v-if="loadingState.isLoading">
-      <div
-        class="h-64 w-full bg-gray-300 animate-pulse relative">
-       
-      </div>
-      <div class="max-w-[1240px] text-dark mx-auto px-3 mb-28">
-        <div class="bg-white rounded-lg overflow-hidden">
-          <div>
-            <div class="flex md:flex-row flex-col md:gap-10 gap-5 mt-5">
-              <div class="md:w-1/3 w-full h-[31rem] bg-gray-300 animate-pulse"></div>
-              <div class="md:w-2/3 flex flex-col gap-3.5">
-                <div class="w-80 h-[24px] bg-gray-300 rounded-4xl animate-pulse"></div>
-                <div class="w-full h-[24px] bg-gray-300 rounded-4xl animate-pulse"></div>
-                <div class="w-full h-[24px] bg-gray-300 rounded-4xl animate-pulse"></div>
-                <div class="w-full h-[24px] bg-gray-300 rounded-4xl animate-pulse"></div>
-                <div class="w-80 h-[24px] bg-gray-300 rounded-4xl animate-pulse"></div>
-                <div class="w-full h-[24px] bg-gray-300 rounded-4xl animate-pulse"></div>
-                <div class="w-full h-[24px] bg-gray-300 rounded-4xl animate-pulse"></div>
-                <div class="w-full h-[24px] bg-gray-300 rounded-4xl animate-pulse"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
     <LoadingComponent v-show="loadingState.isLoading"/>
     <div v-show="!loadingState.isLoading">
       <div
@@ -141,47 +116,6 @@ onMounted(() => {
                   :alt="blogDetails?.title"
                   class="w-full max-h-[31rem] rounded-lg"
                 />
-                <div class="pb-10">
-                  <p class="text-lg py-4">اشراک گذاری</p>
-                  <div class="flex gap-3">
-                    <span
-                      class="bg-primary flex justify-center items-center rounded-full w-[30px] h-[30px] cursor-pointer"
-                    >
-                      <Icon
-                        name="ic:baseline-facebook"
-                        size="17px"
-                        style="color: #fff"
-                      />
-                    </span>
-                    <span
-                      class="bg-primary flex justify-center items-center rounded-full w-[30px] h-[30px] cursor-pointer"
-                    >
-                      <Icon
-                        name="ic:baseline-whatsapp"
-                        size="17px"
-                        style="color: #fff"
-                      />
-                    </span>
-                    <span
-                      class="bg-primary flex justify-center items-center rounded-full w-[30px] h-[30px] cursor-pointer"
-                    >
-                      <Icon
-                        name="ic:baseline-telegram"
-                        size="17px"
-                        style="color: #fff"
-                      />
-                    </span>
-                    <span
-                      class="bg-primary flex justify-center items-center rounded-full w-[30px] h-[30px] cursor-pointer"
-                    >
-                      <Icon
-                        name="ic:baseline-email"
-                        size="17px"
-                        style="color: #fff"
-                      />
-                    </span>
-                  </div>
-                </div>
               </article>
               <div class="md:w-2/3 flex flex-col gap-3.5">
 
