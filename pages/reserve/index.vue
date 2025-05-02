@@ -61,7 +61,6 @@ const consultations = () => {
     loading.value = true
     axios.post("/consultations", formData)
       .then(response => {
-        console.log(response);
         successTitle.value = response.data.message
         formData.name = "";
         formData.mobile = "";

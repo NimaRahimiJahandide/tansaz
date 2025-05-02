@@ -6,16 +6,25 @@ const route = useRoute();
 
 const deviceDetails = ref({});
 const comments = ref([]);
-const srcValue = ref('')
+const srcValue = ref(null)
 
 const getDevices = async () => {
   // loadingState.setLoading(true);
   await axios.get(`/service-infos/${route.params.id}`)
     .then(response => {
       deviceDetails.value = response.data.data;
-      // console.log(deviceDetails.value.satisfactions[0].script);
-
-      srcValue.value = deviceDetails.value.satisfactions[0].script.match(/src="https:\/\/www\.aparat\.com\/embed\/([^?]+)/)[1]
+      const script = deviceDetails.value.clips[0].script;
+      if (script.includes("aparat.com/v/")) {
+        srcValue.value = script.split("/").pop().replace(/["',]/, '').trim();
+      }
+      else if (script.includes("aparat.com/embed/")) {
+        const match = script.match(/aparat\.com\/embed\/([^?&"]+)/);
+        srcValue.value = match ? match[1] : null;
+      }
+      else {
+        srcValue.value = null;
+        console.error("قالب شناسه ویدیو نامعتبر است!");
+      }      
       loadingState.setLoading(false);
     }).catch(err => {
       console.log(err);
@@ -42,6 +51,7 @@ onMounted(() => {
 </script>
 
 <template>
+
   <Head>
     <Title>تن ساز | {{ deviceDetails.title }}</Title>
     <!-- <Link rel="canonical" :href="config.public.websiteURL + decodeURI(route.fullPath)" /> -->
@@ -49,7 +59,7 @@ onMounted(() => {
     <Meta property="og:description" content="کلینیک زیبایی و لاغری تن ساز" />
     <Meta property="og:image" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
     <Meta property="og:image:secure_url"
-    content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
+      content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
     <Meta property="og:image:width" content="400" />
     <Meta property="og:image:height" content="300" />
     <Meta property="og:image:alt" content="تن ساز | " />
@@ -92,7 +102,9 @@ onMounted(() => {
       <div class="container px-5 mx-auto">
         <DevicesDescriptionSection :title="deviceDetails.title" :shortDescription="deviceDetails.short_description"
           :functionality="deviceDetails.functionality" />
-        <DevicesVideosSlider :clips="deviceDetails.clips" class="mt-9" />
+          <div>
+            <DevicesVideosSlider v-if="deviceDetails.satisfactions" :clips="deviceDetails.satisfactions" class="mt-9" />
+          </div>
         <DevicesCustomerSatisfaction :pics="deviceDetails.beforeAfters" class="mt-9" />
         <div class="h_iframe-aparat_embed_frame">
           <span style="display: block;padding-top: 57%"></span>

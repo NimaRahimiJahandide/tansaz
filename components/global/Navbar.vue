@@ -129,15 +129,35 @@ const getDevices = async () => {
   }) 
 };
 
+const services = ref({});
+
+const getServices = async () => {
+  // loadingState.setLoading(true);
+  await axios.get(`/service-infos`)
+  .then(response=>{
+    services.value = response.data.data;
+    loadingState.setLoading(false);
+  }) .catch(err=>{
+    console.log(err);
+  }) 
+};
+
 const isDevicesMenuOpen = ref(false);
 
 const toggleDevicesMenu = () => {
   isDevicesMenuOpen.value = !isDevicesMenuOpen.value;
 };
 
+const isServiceMenuOpen = ref(false);
+
+const toggleServiceMenu = () => {
+  isServiceMenuOpen.value = !isServiceMenuOpen.value;
+};
+
 
 onMounted(() => {
   getDevices();
+  getServices();
 });
 </script>
 <template>
@@ -541,6 +561,36 @@ onMounted(() => {
                         :to="`/devices/${device.id}`"
                         class="block py-2 px-4 hover:text-primary"
                         >{{device.title}}</NuxtLink
+                      >
+                    </li>
+                  </ul>
+                </ul>
+              </li>
+              <li>
+                <div
+                  class="flex cursor-pointer items-center justify-between py-2 px-4 hover:text-primary"
+                  @click="toggleServiceMenu"
+                >
+                  <span>معرفی خدمات</span>
+                  <Icon
+                    name="dashicons:arrow-down"
+                    size="24"
+                    class="icon text-black transition-transform duration-200"
+                    :class="{ 'rotate-180': isServiceMenuOpen }"
+                  />
+                </div>
+                <ul
+                  class="pl-6 transition-all duration-500 ease-in-out overflow-hidden mr-5"
+                  :style="{ 'max-height': isServiceMenuOpen ? '1000px' : '0' }"
+                >
+                  <ul class="pl-6 transition-all duration-500 ease-in-out overflow-hidden mr-8"
+                  :style="{ 'max-height': isServiceMenuOpen ? '1000px' : '0' }"
+                  >
+                    <li v-for="service in services" :key="service.id">
+                      <NuxtLink
+                        :to="`/service/${service.id}`"
+                        class="block py-2 px-4 hover:text-primary"
+                        >{{service.title}}</NuxtLink
                       >
                     </li>
                   </ul>

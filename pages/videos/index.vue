@@ -24,8 +24,6 @@ const getVideos = async () => {
     }
     categories.value = categoriesData.data.data;
 
-    console.log(categories.value);
-
     videos.value = data.data.data;
   } catch (err) {
     console.log(err);
