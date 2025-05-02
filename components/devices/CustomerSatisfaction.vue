@@ -1,11 +1,10 @@
 <template>
-  <div
+  <div v-if="pics?.length>0"
     class="bg-[url(/icons/bg-devices.png)] object-cover bg-center rounded-tr-[80px] rounded-bl-[80px] p-6 text-white relative overflow-hidden">
     <!-- Right-aligned title text -->
     <div class="text-center md:text-right mb-6 md:pr-16">
       <h2 class="md:text-[40px] text-2xl font-black">رضایت مشتریان</h2>
     </div>
-
     <!-- Testimonial Carousel -->
     <div class="flex max-md:flex-col gap-10">
       <p class="text-lg mt-2 font-bold leading-8 md:pr-16 md:w-60">

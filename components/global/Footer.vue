@@ -98,7 +98,7 @@ const loadingState = useLoadingState();
         >
         <ul class="flex flex-col gap-3.5 text-sm">
           <div class="elementor-widget-container">
-            <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=462981&Code=BK5taBm8Wuwv5X28BhHubofa5HWaWwPv'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=462981&Code=BK5taBm8Wuwv5X28BhHubofa5HWaWwPv' alt='' style='cursor:pointer' code='BK5taBm8Wuwv5X28BhHubofa5HWaWwPv'></a>		
+            <!-- <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=462981&Code=BK5taBm8Wuwv5X28BhHubofa5HWaWwPv'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=462981&Code=BK5taBm8Wuwv5X28BhHubofa5HWaWwPv' alt='' style='cursor:pointer' code='BK5taBm8Wuwv5X28BhHubofa5HWaWwPv'></a>		 -->
       		</div>
           
         </ul>
