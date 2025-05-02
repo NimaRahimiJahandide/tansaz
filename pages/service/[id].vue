@@ -9,7 +9,7 @@ const comments = ref([]);
 const srcValue = ref(null)
 
 const getDevices = async () => {
-  // loadingState.setLoading(true);
+  loadingState.setLoading(true);
   await axios.get(`/service-infos/${route.params.id}`)
     .then(response => {
       deviceDetails.value = response.data.data;
@@ -38,11 +38,13 @@ const getPostComments = async () => {
   )
     .then(response => {
       comments.value = response.data.comments
-      loadingState.setLoading(false);
+      // loadingState.setLoading(false);
     }).catch(err => {
       console.log(err);
     })
 };
+
+let isExtend = ref(true)
 
 onMounted(() => {
   getDevices();
@@ -82,7 +84,12 @@ onMounted(() => {
             <DevicesImageSlider :slider="deviceDetails.images" class="md:w-1/2 w-full" />
             <article class="md:flex flex-col hidden md:w-1/2 gap-8 mb-4">
               <h1 class="font-bold md:text-[44px] text-xl">{{ deviceDetails.title }}</h1>
-              <p class="text-justify leading-8">{{ deviceDetails.full_description }}</p>
+              <div>
+                <p class="text-justify leading-8" v-if="isExtend">{{ deviceDetails?.full_description?.substring(0, 500) + '...' }}</p>
+                <p class="text-justify leading-8" v-else>{{ deviceDetails?.full_description }}</p>
+                <span @click="isExtend = !isExtend" class="cursor-pointer text-primary">{{isExtend ? 'مشاهده کمتر': 'مشاهده بیشتر'}}</span>
+              </div>
+
             </article>
           </div>
         </section>
@@ -98,7 +105,11 @@ onMounted(() => {
       <section>
         <div class="flex md:hidden flex-col gap-8 my-8 container px-5 mx-auto">
           <h2 class="font-bold md:text-[44px] text-xl">{{ deviceDetails.title }}</h2>
-          <p class="text-justify leading-8">{{ deviceDetails.full_description }}</p>
+          <div>
+            <p class="text-justify leading-8" v-if="isExtend">{{ deviceDetails?.full_description?.substring(0, 500) + '...' }}</p>
+            <p class="text-justify leading-8" v-else>{{ deviceDetails?.full_description }}</p>
+            <span @click="isExtend = !isExtend" class="cursor-pointer text-primary">{{isExtend ? 'مشاهده کمتر': 'مشاهده بیشتر'}}</span>
+          </div>
         </div>
         <div class="container px-5 mx-auto">
           <DevicesDescriptionSection :title="deviceDetails.title" :shortDescription="deviceDetails.short_description"
