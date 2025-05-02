@@ -203,7 +203,7 @@ onMounted(() => {
             <NuxtLink to="/" class="flex items-center py-4 px-2">
               <img class="w-[108px]" src="/icons/logo.png" alt="logo" />
             </NuxtLink>
-            <div class="relative">
+            <!-- <div class="relative">
               <input
                 v-model="searchQuery"
                 @input="handleInput"
@@ -231,7 +231,7 @@ onMounted(() => {
                 <div v-else class="p-2 text-gray-500">نتیجه‌ای یافت نشد.</div>
               </div>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="flex items-center gap-[10px]">
             <!-- <NuxtLink
