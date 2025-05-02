@@ -5,7 +5,7 @@
     <div class="rounded-lg container px-5 mx-auto overflow-hidden">
       <div class="md:flex w-full">
         <!-- Right Side -->
-        <div class="p-4 flex flex-col md:p-8 md:w-1/2">
+        <div :class="comments.length > 0 ? 'md:w-1/2' : ' w-full'" class="p-4 flex flex-col md:p-8">
           <div class="flex flex-col md:gap-5 gap-2.5 pb-8">
             <h3 class="md:text-[40px] text-xl font-bold">دیدگاه کاربران</h3>
             <p class="md:text-xl text-sm font-bold">با ثبت دیدگاه خود ما را در ارائه خدمات بهتر یاری کنید</p>
@@ -60,9 +60,8 @@
             </button>
           </form>
         </div>
-
         <!-- Left Side -->
-        <div class="flex flex-col items-center justify-center gap-5 md:w-1/2 ">
+        <div v-if="comments.length > 0" class="flex flex-col items-center justify-start gap-5 md:w-1/2 md:mt-8 pt-5 h-[66vh] overflow-y-auto">
           <DevicesCardComment v-for="comment in comments" :key="comment.id" :comment="comment" />
         </div>
       </div>
