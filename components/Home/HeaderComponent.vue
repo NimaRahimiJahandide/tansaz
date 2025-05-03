@@ -103,7 +103,7 @@ const props = defineProps({
         <div class="w-[calc(100vw-50px)] md:hidden sm:h-[40vh]">
           <swiper-container
             class="h-full swiper-container mt-12 pb-[50px]"
-            :loop="true"
+            :loop="false"
             :pagination="true"
             :slides-per-view="1"
             :space-between="0"
