@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-white md:mb-20">
+  <div class="min-h-screen bg-white">
     <LoadingComponent v-show="loadingState.isLoading" />
 
     <main class="container px-8 mx-auto pt-16" v-show="!loadingState.isLoading">
@@ -11,10 +11,10 @@
         <article class="flex flex-col items-center flex-1 justify-center">
           <img class="object-cover md:h-[85vh] h-[467px] max-md:w-[400px]" src="/images/flower.png" alt="flower">
           <ul class="flex md:pt-5 pt-10 gap-5">
-            <li><img class="size-[80px] md:size-[100px]" src="/icons/Asclepion Logo_page-0001.jpg" alt="Asclepion Logo_page-0001"></li>
-            <li><img class="size-[80px] md:size-[100px]" src="/icons/003-APTOS-new.png" alt="003-APTOS-new"></li>
-            <li><img class="size-[80px] md:size-[100px]" src="/icons/Mehrashkar_Logo.png" alt="Mehrashkar_Logo"></li>
-            <li><img class="size-[80px] md:size-[100px]" src="/icons/TansazClinic.png" alt="TansazClinic"></li>
+            <li class="size-[80px] md:size-[100px]"><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px]" src="/icons/Asclepion Logo_page-0001.jpg" alt="Asclepion Logo_page-0001"></li>
+            <li class="size-[80px] md:size-[100px]"><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px]" src="/icons/003-APTOS-new.png" alt="003-APTOS-new"></li>
+            <li class="size-[80px] md:size-[100px]"><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px]" src="/icons/Mehrashkar_Logo.png" alt="Mehrashkar_Logo"></li>
+            <li class="size-[80px] md:size-[100px]"><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px]" src="/icons/TansazClinic.png" alt="TansazClinic"></li>
           </ul>
         </article>
         <article class="flex-1">
@@ -23,7 +23,7 @@
               class="md:text-[64px] leading-[140%] font-bold bg-gradient-to-r from-[#EF172E] via-[#EF172E] to-[#3D0C11] text-transparent bg-clip-text text-border">{{guests?.seminar?.title}}</h2>
           </div>
           <div class="md:pt-20 pt-8 flex flex-col">
-            <h3 class="text-[20px] font-bold">{{ guests?.gender == 'آقا' ? 'جناب' : 'سرکار' }} {{ guests.gender }} {{ guests.name }} عزیز</h3>
+            <h3 class="text-[20px] font-bold">{{ guests?.gender == 'آقا' ? 'آقای' : 'سرکار خانم' }} {{ guests.gender }} {{ guests.name }} عزیز</h3>
             <p class="text-[20px] pt-6">{{ guests?.seminar?.question }}</p>
             <button @click="guestsReady" :disabled="guests?.is_ready"
               :class="guests?.is_ready ? 'bg-[#FF9EA8] cursor-not-allowed' : 'bg-primary cursor-pointer'"

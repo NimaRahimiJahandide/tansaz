@@ -14,7 +14,7 @@ setTimeout(() => {
       <main class="w-full min-h-screen md:mb-[7rem] mb-[22rem]">
         <slot />
       </main>
-      <Footer />
+      <Footer v-if="$route.name != 'seminars-id'" />
   </div>
 </template>
 
