@@ -65,7 +65,7 @@ const slides = ref([
       <div>
         <swiper-container
           class="h-full swiper-container sm:mt-12 mt-5 sm:pb-[50px] pb-5"
-          :loop="true"
+          :loop="false"
           :navigation="true"
           :slides-per-view="4"
           :space-between="30"
@@ -80,7 +80,7 @@ const slides = ref([
         >
           <swiper-slide
             v-for="slide in slides"
-            :key="`slide-basic-${slide.id}`"
+            :key="slide.id"
             class="swiper-slide rounded-2xl h-full"
           >
             <img

@@ -354,7 +354,7 @@ onMounted(() => {
                 >
                   <li @click="toggleBeautyMenu" class="flex cursor-pointer items-center justify-between py-2 px-4 hover:text-primary">
                     <NuxtLink
-                      to="/services/1/beauty"
+                      to="#"
                       class="block py-2 px-4 hover:text-primary"
                       >خدمات زیبایی</NuxtLink
                     >
@@ -476,7 +476,7 @@ onMounted(() => {
                   </ul>
                   <li @click="toggleFatMenu" class="flex cursor-pointer items-center justify-between py-2 px-4 hover:text-primary">
                     <NuxtLink
-                      to="/services/21/slimming-services"
+                      to="#"
                       class="block py-2 px-4 hover:text-primary"
                       >خدمات لاغری</NuxtLink
                     >

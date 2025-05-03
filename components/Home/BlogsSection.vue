@@ -21,7 +21,7 @@ defineProps({
     <div>
       <swiper-container
         class="h-full swiper-container mt-12"
-        :loop="true"
+        :loop="false"
         :navigation="true"
         :slides-per-view="4"
         :space-between="30"

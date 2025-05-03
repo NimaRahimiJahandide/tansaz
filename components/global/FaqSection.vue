@@ -69,8 +69,8 @@ const toggleAnswer = (index: number): void => {
             </span>
           </div>
           <div
-            class="answercont text-white overflow-hidden rounded-b-2xl transition-max-h duration-500"
-            :style="{ maxHeight: activeIndex === index ? '50vh' : '0px' }"
+            class="answercont text-white overflow-hidden rounded-b-2xl transition-max-h duration-500 text-justify"
+            :style="{ maxHeight: activeIndex === index ? '100vh' : '0px' }"
             :class="activeIndex === index ? ' border-t' : ''"
           >
             <div class="answer p-4">
