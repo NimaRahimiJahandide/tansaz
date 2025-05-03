@@ -8,7 +8,7 @@ const loadingState = useLoadingState();
   <div v-show="!loadingState.isLoading"
     class="bg-dark relative text-white rounded-t-2xl md:pt-[232px] pt-[320px] pb-3.5"
   >
-    <ContactUsComponent />
+    <ContactUsComponent v-if="$route.name != 'seminars-id'"  />
     <div 
       class="max-w-[1240px] flex md:flex-row flex-col flex-wrap  gap-5 justify-between mx-auto px-5"
     >
