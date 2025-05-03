@@ -1,6 +1,6 @@
 <template>
     <div class="w-full h-screen">
-        <div role="status" class="flex flex-col gap-10 items-center absolute left-[calc(50%-10px)] top-[calc(50%-10px)]">
+        <div role="status" class="flex flex-col gap-10 items-center absolute left-[calc(50%-10px)] translate-x-[-50%] top-[calc(50%-10px)]">
             <img class="w-20" src="/icons/logo.png" alt="tansaz">
             <svg class="h-6 inline w-6 animate-spin" viewBox="3 3 18 18">
               <path class="fill-transparent"
