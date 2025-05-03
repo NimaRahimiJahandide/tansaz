@@ -7,24 +7,21 @@ let videos = ref([])
 const srcValue = ref('')
 let firstUrl = ref('')
 const clips = toRef(props, 'clips')
-watch(clips, (newVal) => {
-  videos.value = props.clips
-  if(props.clips.length >0){
-    const script = videos.value[0]?.script;
-    if (script.includes("aparat.com/v/")) {
-      firstUrl.value = script.split("/").pop().replace(/["',]/, '').trim();
-    }
-    else if (script.includes("aparat.com/embed/")) {
-      const match = script.match(/aparat\.com\/embed\/([^?&"]+)/);
-      firstUrl.value = match ? match[1] : null;
-    }
-    else {
-      firstUrl.value = null;
-      console.error("قالب شناسه ویدیو نامعتبر است!");
-    }
+videos.value = props.clips
+if (props.clips.length > 0) {
+  const script = videos.value[0]?.script;
+  if (script.includes("aparat.com/v/")) {
+    firstUrl.value = script.split("/").pop().replace(/["',]/, '').trim();
   }
-
-}, { deep: true })
+  else if (script.includes("aparat.com/embed/")) {
+    const match = script.match(/aparat\.com\/embed\/([^?&"]+)/);
+    firstUrl.value = match ? match[1] : null;
+  }
+  else {
+    firstUrl.value = null;
+    console.error("قالب شناسه ویدیو نامعتبر است!");
+  }
+}
 
 const clickedImageId = ref(null);
 
