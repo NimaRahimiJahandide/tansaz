@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-white">
     <LoadingComponent v-show="loadingState.isLoading" />
 
-    <main class="container px-8 mx-auto pt-16" v-show="!loadingState.isLoading">
+    <main class="max-w-[1446px] md:px-8 px-8 mx-auto pt-16" v-show="!loadingState.isLoading">
       <section class="flex flex-col md:flex-row gap-10">
         <div class="flex md:hidden flex-col gap-6 pb-6 pt-7">
           <h2
@@ -10,11 +10,11 @@
         </div>
         <article class="flex flex-col items-center flex-1 justify-center">
           <img class="object-cover md:h-[85vh] h-[467px] max-md:w-[400px]" src="/images/flower.png" alt="flower">
-          <ul class="flex md:pt-5 pt-10 gap-5">
-            <li class="size-[80px] md:size-[100px]"><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px]" src="/icons/Asclepion Logo_page-0001.jpg" alt="Asclepion Logo_page-0001"></li>
-            <li class="size-[80px] md:size-[100px]"><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px]" src="/icons/003-APTOS-new.png" alt="003-APTOS-new"></li>
-            <li class="size-[80px] md:size-[100px]"><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px]" src="/icons/Mehrashkar_Logo.png" alt="Mehrashkar_Logo"></li>
-            <li class="size-[80px] md:size-[100px]"><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px]" src="/icons/TansazClinic.png" alt="TansazClinic"></li>
+          <ul class="grid md:pt-5 pt-10 md:gap-5 gap-2.5 grid-cols-4">
+            <li><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px]" src="/icons/Asclepion Logo_page-0001.jpg" alt="Asclepion Logo_page-0001"></li>
+            <li><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px]" src="/icons/003-APTOS-new.png" alt="003-APTOS-new"></li>
+            <li><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px]" src="/icons/Mehrashkar_Logo.png" alt="Mehrashkar_Logo"></li>
+            <li><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px]" src="/icons/TansazClinic.png" alt="TansazClinic"></li>
           </ul>
         </article>
         <article class="flex-1">
