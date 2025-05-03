@@ -31,8 +31,10 @@ const getPostComments = async () => {
     }) 
 };
 
+await getBlogDetail();
+
+
 onMounted(() => {
-  getBlogDetail();
   getPostComments()
 });
 
