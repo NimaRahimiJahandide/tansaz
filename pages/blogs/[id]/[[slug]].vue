@@ -19,13 +19,11 @@ const getBlogDetail = async () => {
 };
 
 const getPostComments = async () => {
-  loadingState.setLoading(true);
   await axios.get(
       `/posts/${route.params.id}/comments?isactive=1`
     )
     .then(response=>{
       comments.value = response.data.comments
-      loadingState.setLoading(false);
     }).catch(err=>{
       console.log(err);
     }) 

@@ -64,19 +64,30 @@ const slides = ref([
       </p>
       <div>
         <swiper-container
-          class="h-full swiper-container sm:mt-12 mt-5 sm:pb-[50px] pb-5"
-          :loop="false"
+          class="h-full md:block hidden swiper-container sm:mt-12 mt-5 sm:pb-[50px] pb-5"
+          :loop="true"
           :navigation="true"
           :slides-per-view="4"
           :space-between="30"
-          :breakpoints="{
-            0: {
-              slidesPerView: 1,
-            },
-            768: {
-              slidesPerView: 4,
-            },
-          }"
+        >
+          <swiper-slide
+            v-for="slide in slides"
+            :key="slide.id"
+            class="swiper-slide rounded-2xl h-full"
+          >
+            <img
+              :src="slide.image"
+              alt="عکس-قبل-و-بعد-کلینیک-زیبایی-و-لاغری-تن-ساز"
+              class="w-full bg-primary object-cover rounded-2xl overflow-hidden"
+            />
+          </swiper-slide>
+        </swiper-container>
+        <swiper-container
+          class="h-full md:hidden block swiper-container sm:mt-12 mt-5 sm:pb-[50px] pb-5"
+          :loop="true"
+          :navigation="true"
+          :slides-per-view="1"
+          :space-between="30"
         >
           <swiper-slide
             v-for="slide in slides"

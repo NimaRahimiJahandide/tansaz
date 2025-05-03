@@ -74,6 +74,6 @@ export default defineNuxtConfig({
       }
     },
     vite: {
-        plugins: [tailwindcss()],
+        plugins: [tailwindcss(), require("@tailwindcss/typography")],
     },
 });
