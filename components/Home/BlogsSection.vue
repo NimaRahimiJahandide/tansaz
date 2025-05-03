@@ -20,19 +20,26 @@ defineProps({
     </div>
     <div>
       <swiper-container
-        class="h-full swiper-container mt-12"
+        class="h-full md:block hidden swiper-container mt-12"
         :loop="false"
         :navigation="true"
         :slides-per-view="4"
         :space-between="30"
-        :breakpoints="{
-          0: {
-            slidesPerView: 1,
-          },
-          768: {
-            slidesPerView: 4,
-          },
-        }"
+      >
+        <swiper-slide
+          v-for="blog in blogs"
+          :key="blog.id"
+          class="swiper-slide pt-2 px-2"
+        >
+          <BlogCardComponent :title="blog.title" :image="blog.image" :route="`/blogs/${blog.id}`" />
+        </swiper-slide>
+      </swiper-container>
+      <swiper-container
+        class="h-full md:hidden block swiper-container mt-12"
+        :loop="false"
+        :navigation="true"
+        :slides-per-view="1"
+        :space-between="30"
       >
         <swiper-slide
           v-for="blog in blogs"
