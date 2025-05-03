@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-white">
     <LoadingComponent v-show="loadingState.isLoading" />
 
-    <main class="max-w-[1446px] md:px-8 px-8 mx-auto pt-16" v-show="!loadingState.isLoading">
+    <main class="max-w-[1440px] md:px-8 px-8 mx-auto pt-16" v-show="!loadingState.isLoading">
       <section class="flex flex-col md:flex-row gap-10">
         <div class="flex md:hidden flex-col gap-6 pb-6 pt-7">
           <h2
