@@ -49,8 +49,8 @@ const loadingState = useLoadingState();
 const route = useRoute();
 
 const guests = ref([]);
-const qrValue = ref(guests.value.qr_message);
 const qrSize = ref(210);
+const qrValue = ref('');
 
 const getGuests = async () => {
   loadingState.setLoading(true);
@@ -59,6 +59,7 @@ const getGuests = async () => {
   )
     .then(response => {
       guests.value = response.data.data
+      qrValue.value = guests.value.seminar.qr_message
       loadingState.setLoading(false);
     }).catch(err => {
       console.log(err);
