@@ -201,7 +201,7 @@ onMounted(() => {
         >
           <div class="flex items-center gap-[20px]">
             <NuxtLink to="/" class="flex items-center py-4 px-2">
-              <img class="w-[108px]" src="/icons/logo.png" alt="logo" />
+              <img class="w-[108px]" src="/icons/TansazClinic.png" alt="logo" />
             </NuxtLink>
             <!-- <div class="relative">
               <input
@@ -313,7 +313,7 @@ onMounted(() => {
               <NuxtLink to="/">
                 <img
                   class="size-[117px] object-contain"
-                  src="/icons/logo.png"
+                  src="/icons/TansazClinic.png"
                   alt="logo"
                 />
               </NuxtLink>
