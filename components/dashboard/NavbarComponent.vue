@@ -9,7 +9,7 @@ const toggleMenu = () => {
     <div class="flex justify-between bg-white shadow-lg items-center h-20 px-10">
       <div class="flex md:gap-5 gap-1 items-center">
         <a href="/">
-          <img src="/icons/TansazClinic.png" alt="Logo" class="w-16 object-cover" />
+          <img src="/icons/TansazClinic.png" alt="Logo" class="w-16" />
         </a>
         <button @click="toggleMenu"
           class="group w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center mr-2 cursor-pointer hover:bg-primary transition duration-300"
