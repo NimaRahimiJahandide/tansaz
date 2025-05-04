@@ -9,12 +9,12 @@
             class="text-[32px] self-end leading-[140%] font-bold bg-gradient-to-r from-[#EF172E] via-[#EF172E] to-[#3D0C11] text-transparent bg-clip-text text-border">{{guests?.seminar?.title}}</h2>
         </div>
         <article class="flex flex-col items-center flex-1 justify-center">
-          <img class="object-cover md:h-[85vh] h-[467px] max-md:w-[400px]" src="/images/flower.png" alt="flower">
+          <img class="object-center flex items-center justify-center md:h-[73vh] h-[467px] w-[600px] max-md:w-[400px]" src="/images/flower.png" alt="flower">
           <ul class="grid md:pt-5 pt-10 md:gap-5 gap-2.5 grid-cols-4">
-            <li><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px]" src="/icons/Asclepion Logo_page-0001.jpg" alt="Asclepion Logo_page-0001"></li>
-            <li><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px]" src="/icons/003-APTOS-new.png" alt="003-APTOS-new"></li>
-            <li><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px]" src="/icons/Mehrashkar_Logo.png" alt="Mehrashkar_Logo"></li>
-            <li><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px]" src="/icons/TansazClinic.png" alt="TansazClinic"></li>
+            <li><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px] object-center object-contain" src="/icons/Asclepion Logo_page-0001.jpg" alt="Asclepion Logo_page-0001"></li>
+            <li><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px] object-center object-contain" src="/icons/003-APTOS-new.png" alt="003-APTOS-new"></li>
+            <li><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px] object-center object-contain" src="/icons/Mehrashkar_Logo.png" alt="Mehrashkar_Logo"></li>
+            <li><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px] object-center object-contain" src="/icons/TansazClinic.png" alt="TansazClinic"></li>
           </ul>
         </article>
         <article class="flex-1">
@@ -32,7 +32,7 @@
           <div v-if="guests?.is_ready" class="pt-11 flex flex-col md:flex-row max-md:items-center gap-14 justify-between">
             <span class="text-[20px]">{{ guests?.seminar?.final_message }}</span>
             <div class="border h-fit p-5 w-fit border-primary rounded-[8px]">
-              <qrcode-vue :value="qrValue" :size="qrSize" level="M" class="mt-4" />
+              <qrcode-vue :value="qrValue" :size="qrSize" level="M" />
             </div>
           </div>
         </article>
