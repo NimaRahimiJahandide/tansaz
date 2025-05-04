@@ -67,9 +67,8 @@ const getGuests = async () => {
     .then(response => {
       guests.value = response.data.data
       qrValue.value = guests.value.seminar.qr_message
-      if (guests.value.is_ready) {
-        scrollToBottom();
-      }
+      scrollToBottom();
+      
       loadingState.setLoading(false);
     }).catch(err => {
       console.log(err);
