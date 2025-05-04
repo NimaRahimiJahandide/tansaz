@@ -17,7 +17,7 @@
           </svg>
         </button> -->
         <nuxt-link to="/">
-          <img width="50" height="50" src="/icons/logo.png" alt="logo">
+          <img width="50" height="50" src="/icons/TansazClinic.png" alt="logo">
         </nuxt-link>
       </div>
       <div class="relative flex-grow max-w-[400px] mx-4">
