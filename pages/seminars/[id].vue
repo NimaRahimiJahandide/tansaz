@@ -23,7 +23,7 @@
               class="md:text-[64px] leading-[140%] font-bold bg-gradient-to-r from-[#EF172E] via-[#EF172E] to-[#3D0C11] text-transparent bg-clip-text text-border">{{guests?.seminar?.title}}</h2>
           </div>
           <div class="md:pt-20 pt-8 flex flex-col">
-            <h3 class="text-[20px] font-bold">{{ guests?.gender == 'آقا' ? 'آقای' : 'سرکار خانم' }} {{ guests.name }} عزیز</h3>
+            <h3 class="text-[20px] font-bold">{{ guests?.gender == 'آقا' ? 'جناب آقای' : 'سرکار خانم' }} {{ guests.name }} عزیز</h3>
             <p class="text-[20px] pt-6" v-html="guests?.seminar?.question"></p>
             <button @click="guestsReady" :disabled="guests?.is_ready"
               :class="guests?.is_ready ? 'bg-[#FF9EA8] cursor-not-allowed' : 'bg-primary cursor-pointer'"
