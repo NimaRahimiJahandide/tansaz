@@ -85,7 +85,7 @@ onMounted(() => {
               <div>
                 <p class="text-justify leading-8" v-if="isExtend && deviceDetails?.full_description?.length > 500">{{ deviceDetails?.full_description?.substring(0, 500) + '...' }}</p>
                 <p class="text-justify leading-8" v-else>{{ deviceDetails?.full_description }}</p>
-                <span v-if="deviceDetails?.full_description?.length > 500" @click="isExtend = !isExtend" class="cursor-pointer text-primary">{{isExtend ? 'مشاهده کمتر': 'مشاهده بیشتر'}}</span>
+                <span v-if="deviceDetails?.full_description?.length > 500" @click="isExtend = !isExtend" class="cursor-pointer text-primary">{{isExtend ? 'مشاهده بیشتر': 'مشاهده کمتر'}}</span>
               </div>
 
             </article>

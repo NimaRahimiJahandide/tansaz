@@ -9,9 +9,11 @@ setTimeout(() => {
 
 <template>
   <div class="flex flex-col w-full">
-      <Navbar class="z-50" v-if="!loadingState.isLoading"/>
+    <div v-if="$route.name != 'seminars-id'">
+      <Navbar class="z-50" v-if="!loadingState.isLoading" />
       <BottomNavbar  class="sticky top-0 z-40" v-if="!loadingState.isLoading" />
-      <main class="w-full min-h-screen md:mb-[7rem] mb-[22rem]">
+    </div>
+      <main :class="$route.name != 'seminars-id' ? 'min-h-screen md:mb-[7rem] mb-[22rem]' : 'mb-[1rem]'" class="w-full ">
         <slot />
       </main>
       <Footer v-if="$route.name != 'seminars-id'" />
