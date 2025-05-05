@@ -3,7 +3,7 @@
     <LoadingComponent v-show="loadingState.isLoading" />
 
     <main class="max-w-[1440px] md:px-8 px-8 mx-auto md:pt-16 pt-8" v-show="!loadingState.isLoading">
-      <section class="flex flex-col md:flex-row gap-10">
+      <section class="flex flex-col md:flex-row md:gap-10">
         <div class="flex md:hidden flex-col gap-6 pb-6 pt-7">
           <h2
             class="text-[32px] leading-[140%] font-bold bg-gradient-to-r from-[#EF172E] via-[#EF172E] to-[#3D0C11] text-transparent bg-clip-text text-border">
@@ -57,9 +57,11 @@ const qrValue = ref('');
 const targetElement = ref(null);
 
 const scrollToBottom = () => {
-  setTimeout(() => {
-    targetElement.value?.scrollIntoView({ behavior: 'smooth' });
-  }, 500);
+  if (window.innerWidth < 768) {
+    setTimeout(() => {
+      targetElement.value?.scrollIntoView({ behavior: 'smooth' });
+    }, 500);
+  }
 };
 
 const getGuests = async () => {
