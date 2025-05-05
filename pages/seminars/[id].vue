@@ -10,7 +10,7 @@
             {{ guests?.seminar?.title }}</h2>
         </div>
         <article class="flex flex-col items-center flex-1 justify-center">
-          <img class="object-center flex items-center justify-center md:h-[73vh] h-[467px] w-[600px] max-md:w-[400px]" src="/images/flower.png" alt="flower">
+          <img class="object-center md:flex hidden items-center justify-center md:h-[73vh] h-[467px] w-[600px] max-md:w-[400px]" src="/images/flower.png" alt="flower">
           <ul class="grid md:pt-5 pt-10 md:gap-5 gap-2.5 grid-cols-4">
             <li><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px] object-center object-contain" src="/icons/Asclepion Logo_page-0001.jpg" alt="Asclepion Logo_page-0001"></li>
             <li><img class="max-w-[80px] md:max-w-[100px] h-[80px] md:h-[100px] object-center object-contain" src="/icons/003-APTOS-new.png" alt="003-APTOS-new"></li>
