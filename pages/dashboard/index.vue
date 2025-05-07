@@ -69,14 +69,6 @@
 definePageMeta({
 	layout: 'dashboard'
 });
-const menuItems = [
-	'داشبورد',
-	'پروفایل کاربری',
-	'امتیازات',
-	'کیف پول',
-	'سوابق و پرونده ها',
-	'لیست پرداخت ها'
-]
 
 const transactions = [
 	{
@@ -101,25 +93,8 @@ const transactions = [
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap');
-
-body {
-	font-family: 'Vazirmatn', sans-serif;
-	direction: rtl;
-}
-
-/* Fix table border collapse */
 table {
 	border-collapse: separate;
 	border-spacing: 0;
-}
-
-th,
-td {
-	border-bottom: 1px solid #e5e7eb;
-}
-
-tr:last-child td {
-	border-bottom: none;
 }
 </style>
