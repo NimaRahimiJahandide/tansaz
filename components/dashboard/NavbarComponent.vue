@@ -1,15 +1,35 @@
 <script setup>
+import axios from 'axios'
+import { useUserStore } from '@/store/user'
+
+const userStore = useUserStore()
+
+const getUser = async () => {
+  try {
+    const { data } = await axios.get(`/user`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+    })    
+    userStore.setUser(data.data) 
+  } catch (error) {
+    console.error('خطا در دریافت اطلاعات کاربر:', error)
+  }
+}
 const isMenuOpen = ref(false);
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
+
+onMounted(() => {
+  getUser()
+});
 </script>
 <template>
   <div class="bg-[#F1F1F1]">
     <header class="bg-white p-4 shadow-sm rounded-2xl mx-6 mt-2 flex justify-between items-center">
       <div class="flex items-center gap-9">
-        <div class="size-[70px] rounded-full bg-gray-200 overflow-hidden"></div>
-        <span class="font-bold text-xl text-gray-800">ثریا محمدی</span>
+        <!-- <div class="size-[70px] rounded-full bg-gray-200 overflow-hidden"></div> -->
+         <img class="size-[70px] rounded-full" :src="userStore.thumb_avatar" :alt="userStore.first_name ">
+        <span class="font-bold text-xl text-gray-800">{{userStore.first_name}} {{userStore.last_name}}</span>
       </div>
       <div>
         <button class="p-2 rounded-full hover:bg-gray-100">
