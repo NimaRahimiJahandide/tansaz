@@ -1,4 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const router = useRouter()
+onMounted(() => {
+  if (!localStorage.getItem("token")) {
+    router.push("/auth/login");
+    return;
+  }
+});
+</script>
 
 <template>
   <div class="flex">
