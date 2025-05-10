@@ -7,32 +7,15 @@
 
       <!-- Main Content -->
       <div class="w-full md:w-3/4">
-        <!-- Info Cards -->
-        <div class="flex items-center max-md:justify-center gap-4 mb-6">
-          <div class="bg-white flex items-center justify-center w-[236px] md:h-[100px] h-[51px] rounded-[16px]">
-            <div class="flex justify-between items-center md:gap-6 gap-1">
-              <div class="text-black md:text-[20px] text-[14px] md:font-bold font-semibold">امتیاز فعلی:</div>
-              <div class="text-black md:text-[20px] text-[14px] md:font-bold font-semibold">{{userStore.point}}</div>
-            </div>
-          </div>
-          <div class="bg-white flex items-center justify-center w-[236px] md:h-[100px] h-[51px] rounded-[16px]">
-            <div class="flex justify-between items-center md:gap-6 gap-1">
-              <div class="text-black md:text-[20px] text-[14px] md:font-bold font-semibold">کیف پول:</div>
-              <div class="text-black flex gap-1 md:text-[20px] text-[14px] md:font-bold font-semibold"><span style="direction: ltr ;">{{ formatPrice(userStore.credit) }}</span><span class="font-normal text-base">تومان</span>
-              </div>
-            </div>
-          </div> 
-        </div>
-        <!-- Points Earned Section -->
-        <div class="flex justify-between items-center mb-4">
-          <div class="text-black md:text-[20px] md:font-bold text-[14px] font-semibold">امتیازات کسب شده:</div>
-          <NuxtLink to="dashboard/points" class="md:text-md text-[12px] text-black md:font-semibold cursor-pointer">مشاهده همه ></NuxtLink>
+        <!-- payments Earned Section -->
+        <div class="flex justify-between items-center py-6">
+          <div class="text-black md:text-[40px] font-bold text-[20px]">لیست پرداخت ها</div>
         </div>
         <div class="py-5 container md:px-5 mx-auto">
           <div>
             <div class="mx-auto space-y-6 max-w-[1240px]">
               <div
-                v-for="(point, index) in points"
+                v-for="(payment, index) in payments"
                 :key="index"
                 class="container bg-white rounded-[16px] transition-all duration-300"
               >
@@ -41,10 +24,13 @@
                   :class="activeIndex === index ? 'rounded-t-[16px] border-b-[.5px] border-[rgba(153,153,153,.3)]' : 'rounded-[16px]'"
                   @click="toggleAnswer(index)"
                 >
-                  <span class="md:text-[20px] text-[12px]  line-clamp-1 lg:line-clamp-none">{{point.point}} امتیاز بابت {{point.description}}</span>
+                  <div class="md:text-[20px] text-[12px] flex justify-between w-full  line-clamp-1">
+                    <span>{{payment.description}}</span>
+                    <span class="self-end pl-5">مبلغ کل:{{formatPrice(payment.amount)}} تومان</span>
+                  </div>
                   
                   <span
-                    class="icon text-2xl transition-transform duration-300"
+                    class="icon text-2xl flex transition-transform duration-300"
                   >
                   <Icon v-if="activeIndex === index" name="fe:arrow-down" size="24" style="color: #999999" />
                   <Icon v-else name="fe:arrow-up" size="24" style="color: #999999" />
@@ -57,15 +43,25 @@
                   <article class="answer p-4 md:text-[20px] text-[12px] leading-[180%]">
                     <div class="flex gap-5">
                       <span class="font-semibold">تاریخ:</span>
-                      <span>{{point.created_at_fa}}</span>
+                      <span>{{payment.created_at_fa}}</span>
                     </div>
-                    <div class="flex gap-5">
-                      <span class="font-semibold">امتیاز :</span>
-                      <span>{{point.point}}</span>
-                    </div>
-                    <div class="flex gap-5">
-                      <span class="font-semibold">توضیحات:</span>
-                      <span>{{point.description }}</span>
+                    <div class="flex md:flex-row flex-col">
+                      <!-- right -->
+                      <div class="flex flex-col flex-1">
+                        <div class="flex gap-5">
+                          <span class="font-semibold">مبلغ کل: </span>
+                          <span>{{formatPrice(payment.amount)}}</span>
+                        </div>
+                        <div class="flex gap-5">
+                          <span class="font-semibold">توضیحات: </span>
+                          <span>{{formatPrice(payment.description)}}</span>
+                        </div>
+                      </div>
+                      <!-- left -->
+                      <div class="flex gap-5 flex-1">
+                        <span class="font-semibold">درصد کش بک: </span>
+                        <span> %{{payment.cash_back}}</span>
+                      </div>
                     </div>
                   </article>
                 </div>
@@ -84,7 +80,6 @@ import axios from "axios";
 import { useLoadingState } from "@/store/loadingState";
 const loadingState = useLoadingState();
 
-import { useUserStore } from '@/store/user'
 definePageMeta({
   layout: 'dashboard'
 });
@@ -95,17 +90,16 @@ const toggleAnswer = (index: number): void => {
   activeIndex.value = activeIndex.value === index ? null : index;
 };
 
-const userStore = useUserStore()
 
-const points = ref({});
+const payments = ref({});
 
-const getPoints = async () => {
+const getPayments = async () => {
   loadingState.isLoading = true
-  await axios.get(`/points`, {
+  await axios.get(`/payments`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     })
     .then(response => {
-      points.value = response.data.data;
+      payments.value = response.data.data;
       loadingState.isLoading = false
     }).catch(err => {
       console.log(err);
@@ -118,6 +112,6 @@ const formatPrice = (price) => {
 };
 
 onMounted(async  () => {
-  await getPoints();
+  await getPayments();
 });
 </script>

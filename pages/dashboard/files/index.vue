@@ -7,32 +7,15 @@
 
       <!-- Main Content -->
       <div class="w-full md:w-3/4">
-        <!-- Info Cards -->
-        <div class="flex items-center max-md:justify-center gap-4 mb-6">
-          <div class="bg-white flex items-center justify-center w-[236px] md:h-[100px] h-[51px] rounded-[16px]">
-            <div class="flex justify-between items-center md:gap-6 gap-1">
-              <div class="text-black md:text-[20px] text-[14px] md:font-bold font-semibold">امتیاز فعلی:</div>
-              <div class="text-black md:text-[20px] text-[14px] md:font-bold font-semibold">{{userStore.point}}</div>
-            </div>
-          </div>
-          <div class="bg-white flex items-center justify-center w-[236px] md:h-[100px] h-[51px] rounded-[16px]">
-            <div class="flex justify-between items-center md:gap-6 gap-1">
-              <div class="text-black md:text-[20px] text-[14px] md:font-bold font-semibold">کیف پول:</div>
-              <div class="text-black flex gap-1 md:text-[20px] text-[14px] md:font-bold font-semibold"><span style="direction: ltr ;">{{ formatPrice(userStore.credit) }}</span><span class="font-normal text-base">تومان</span>
-              </div>
-            </div>
-          </div> 
-        </div>
-        <!-- Points Earned Section -->
-        <div class="flex justify-between items-center mb-4">
-          <div class="text-black md:text-[20px] md:font-bold text-[14px] font-semibold">امتیازات کسب شده:</div>
-          <NuxtLink to="dashboard/points" class="md:text-md text-[12px] text-black md:font-semibold cursor-pointer">مشاهده همه ></NuxtLink>
+        <!-- files Earned Section -->
+        <div class="flex justify-between items-center py-6">
+          <div class="text-black md:text-[40px] font-bold text-[20px]">سوابق و پرونده ها</div>
         </div>
         <div class="py-5 container md:px-5 mx-auto">
           <div>
             <div class="mx-auto space-y-6 max-w-[1240px]">
               <div
-                v-for="(point, index) in points"
+                v-for="(file, index) in files"
                 :key="index"
                 class="container bg-white rounded-[16px] transition-all duration-300"
               >
@@ -41,10 +24,12 @@
                   :class="activeIndex === index ? 'rounded-t-[16px] border-b-[.5px] border-[rgba(153,153,153,.3)]' : 'rounded-[16px]'"
                   @click="toggleAnswer(index)"
                 >
-                  <span class="md:text-[20px] text-[12px]  line-clamp-1 lg:line-clamp-none">{{point.point}} امتیاز بابت {{point.description}}</span>
+                  <div class="md:text-[20px] text-[12px] flex justify-between w-full  line-clamp-1">
+                    <span>پرونده {{file.number}}</span>
+                  </div>
                   
                   <span
-                    class="icon text-2xl transition-transform duration-300"
+                    class="icon text-2xl flex transition-transform duration-300"
                   >
                   <Icon v-if="activeIndex === index" name="fe:arrow-down" size="24" style="color: #999999" />
                   <Icon v-else name="fe:arrow-up" size="24" style="color: #999999" />
@@ -54,18 +39,21 @@
                   class="answercont bg-[#FAFAFA] overflow-hidden rounded-b-[16px] transition-max-h duration-300"
                   :style="{ maxHeight: activeIndex === index ? '50vh' : '0px' }"
                 >
-                  <article class="answer p-4 md:text-[20px] text-[12px] leading-[180%]">
+                  <article class="answer flex lg:flex-row flex-col gap-2.5 md:items-center justify-between p-4 md:text-[20px] text-[12px] leading-[180%]">
                     <div class="flex gap-5">
                       <span class="font-semibold">تاریخ:</span>
-                      <span>{{point.created_at_fa}}</span>
+                      <span>{{file.created_at_fa}}</span>
                     </div>
                     <div class="flex gap-5">
-                      <span class="font-semibold">امتیاز :</span>
-                      <span>{{point.point}}</span>
+                      <span class="font-semibold">شماره پرونده :</span>
+                      <span>{{file.number}}</span>
                     </div>
                     <div class="flex gap-5">
-                      <span class="font-semibold">توضیحات:</span>
-                      <span>{{point.description }}</span>
+                      <span class="font-semibold">نوع خدمت:</span>
+                      <span>{{file.service.name}}</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-5">
+                      <NuxtLink :to="`/dashboard/files/${file.number} `" class="bg-primary flex items-center justify-center text-white text-[12px] font-semibold w-[91px] h-[25px] rounded-lg" to="/">جزییات</NuxtLink>
                     </div>
                   </article>
                 </div>
@@ -84,7 +72,6 @@ import axios from "axios";
 import { useLoadingState } from "@/store/loadingState";
 const loadingState = useLoadingState();
 
-import { useUserStore } from '@/store/user'
 definePageMeta({
   layout: 'dashboard'
 });
@@ -95,17 +82,16 @@ const toggleAnswer = (index: number): void => {
   activeIndex.value = activeIndex.value === index ? null : index;
 };
 
-const userStore = useUserStore()
 
-const points = ref({});
+const files = ref({});
 
-const getPoints = async () => {
+const getFiles = async () => {
   loadingState.isLoading = true
-  await axios.get(`/points`, {
+  await axios.get(`/files`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     })
     .then(response => {
-      points.value = response.data.data;
+      files.value = response.data.data;
       loadingState.isLoading = false
     }).catch(err => {
       console.log(err);
@@ -118,6 +104,6 @@ const formatPrice = (price) => {
 };
 
 onMounted(async  () => {
-  await getPoints();
+  await getFiles();
 });
 </script>
