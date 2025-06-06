@@ -12,6 +12,9 @@ const startWebsite = useStartWebsite();
     <main>
       <slot />
     </main>
+     <transition name="fade-slide" appear>
+      <Footer v-if="startWebsite.isStart" />
+    </transition>
   </div>
 </template>
 
