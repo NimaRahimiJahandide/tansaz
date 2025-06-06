@@ -61,6 +61,7 @@
       <div v-if="startWebsite.isStart">
         <HomeServiceSection />
         <HomeFaqSection  />
+        <HomeTourSection />
       </div>
     </transition>
   </div>
