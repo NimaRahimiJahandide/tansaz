@@ -60,6 +60,7 @@
     <transition name="fade">
       <div v-if="startWebsite.isStart">
         <HomeServiceSection />
+        <HomeBeforAfterExample  />
         <HomeFaqSection  />
         <HomeTourSection />
         <HomeLuckSection  />
