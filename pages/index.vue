@@ -63,6 +63,7 @@
         <HomeBeforAfterExample  />
         <HomeFaqSection  />
         <HomeTourSection />
+        <HomeCommentsSection  />
         <HomeLuckSection  />
         <HomeBlogsSection  />
       </div>
