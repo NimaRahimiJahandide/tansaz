@@ -1,54 +1,125 @@
-<script setup lang="ts">
-defineProps({
-  blogs:Object,
-})
-</script>
-
 <template>
-  <div class="max-w-[1240px] mx-auto px-5 text-dark mt-[75px] md:mb-28">
-    <div class="flex items-center justify-between">
-      <h3 class="md:text-[30px] text-[22px] font-light">
-        جدیدترین <span class="text-primary">مقالات</span> آموزشی
-      </h3>
-      <NuxtLink
-        class="text-white w-fit bg-primary focus:outline-none whitespace-nowrap gap-1 focus:ring-primary shadow-lg shadow-primary/50 rounded-lg py-[18px] md:px-[25px] px-[10px] flex justify-center items-center max-h-[51px]"
-        to="/blogs"
-      >
-        <span>مقالات</span>
-        <Icon name="mingcute:arrow-left-fill" size="20px" style="color: #fff" />
-      </NuxtLink>
-    </div>
-    <div>
-      <swiper-container
-        class="h-full md:block hidden swiper-container mt-12"
-        :loop="false"
-        :navigation="true"
-        :slides-per-view="4"
-        :space-between="30"
-      >
-        <swiper-slide
-          v-for="blog in blogs"
-          :key="blog.id"
-          class="swiper-slide pt-2 px-2"
-        >
-          <BlogCardComponent :title="blog.title" :image="blog.image" :route="`/blogs/${blog.id}`" />
-        </swiper-slide>
-      </swiper-container>
-      <swiper-container
-        class="h-full md:hidden block swiper-container mt-12"
-        :loop="false"
-        :navigation="true"
-        :slides-per-view="1"
-        :space-between="30"
-      >
-        <swiper-slide
-          v-for="blog in blogs"
-          :key="blog.id"
-          class="swiper-slide pt-2 px-2"
-        >
-          <BlogCardComponent :title="blog.title" :image="blog.image" :route="`/blogs/${blog.id}`" />
-        </swiper-slide>
-      </swiper-container>
+  <div class="bg-white">
+    <img class="px-4 pt-[30px]" src="/images/blog-banner.png" alt="blog-banner">
+    <h2 class="text-xl font-bold leading-7 text-center pb-4 pt-[30px]"><span class="text-brand">مقالات کاربردی</span> برای شما عزیزان</h2>
+    <div class="container mx-auto px-4 pb-8">
+      <div class="rounded-2xl overflow-hidden  relative">
+        <transition name="fade" mode="out-in">
+          <div :key="activeIndex" class="relative" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
+            <!-- Image -->
+            <img :src="slides[activeIndex].image" :alt="slides[activeIndex].title" class="w-full h-80 object-cover" />
+
+            <!-- Overlay and Text -->
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-[#151515] via-[#15151596] to-transparent via-[20.35%] from-[1.3%] flex flex-col justify-end p-4">
+              <h3 class="text-lg font-bold text-white leading-6 mb-2">{{ slides[activeIndex].title }}</h3>
+              <p class="flex text-xs font-medium text-white justify-between">
+                <span class="mr-2">زمان مطالعه: {{ slides[activeIndex].duration }}</span>
+                <span>تاریخ نشر: {{ slides[activeIndex].date }}</span>
+              </p>
+            </div>
+          </div>
+        </transition>
+      </div>
+
+      <!-- ناوبری -->
+      <div class="flex justify-between items-center mt-4">
+        <!-- دکمه قبلی -->
+        <button @click="prevSlide"
+          class="bg-brand size-10 flex items-center justify-center text-white font-bold rounded-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        <!-- دایره‌های شماره صفحه -->
+        <div class="flex items-center">
+          <div v-for="(slide, index) in slides.length" :key="index" @click="activeIndex = index"
+            class="w-[10px] h-2 rounded-full mx-1 bg-[#D4D4D4] cursor-pointer transition duration-300 ease-in-out"
+            :class="{ 'bg-brand w-[30px]': activeIndex === index }"></div>
+        </div>
+
+        <!-- دکمه بعدی -->
+        <button @click="nextSlide"
+          class="bg-[#D4D4D4] text-[#929DAC] font-bold size-10 flex items-center justify-center rounded-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 rotate-180" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+
+const activeIndex = ref(0)
+
+const slides = ref([
+  {
+    image: '/images/blog1.png',
+    title: 'مراقبت پس از درمان ریزش مو',
+    duration: '2 دقیقه',
+    date: '1404/01/04'
+  },
+  {
+    image: '/images/blog1.png',
+    title: 'تغذیه مناسب برای رشد مو',
+    duration: '3 دقیقه',
+    date: '1404/01/10'
+  },
+  {
+    image: '/images/blog1.png',
+    title: 'راهکارهای جلوگیری از ریزش مو',
+    duration: '4 دقیقه',
+    date: '1404/01/18'
+  }
+])
+
+const nextSlide = () => {
+  activeIndex.value = (activeIndex.value + 1) % slides.value.length
+}
+
+const prevSlide = () => {
+  activeIndex.value = (activeIndex.value - 1 + slides.value.length) % slides.value.length
+}
+
+const touchStartX = ref(0)
+const touchEndX = ref(0)
+
+const handleTouchStart = (e) => {
+  touchStartX.value = e.changedTouches[0].screenX
+}
+
+const handleTouchEnd = (e) => {
+  touchEndX.value = e.changedTouches[0].screenX
+  handleSwipe()
+}
+
+const handleSwipe = () => {
+  const diff = touchStartX.value - touchEndX.value
+  if (Math.abs(diff) > 50) {
+    if (diff > 0) {
+      // کشیدن به چپ → بعدی
+      prevSlide()
+    } else {
+      // کشیدن به راست ← قبلی
+      nextSlide()
+    }
+  }
+}
+</script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
