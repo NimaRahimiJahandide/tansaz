@@ -1,149 +1,107 @@
-<script setup lang="ts">
-import { useLoadingState } from "../../store/loadingState";
-
-const loadingState = useLoadingState();
-</script>
-
 <template>
-  <div v-show="!loadingState.isLoading"
-    class="bg-dark relative text-white rounded-t-2xl md:pt-[232px] pt-[320px] pb-3.5"
-  >
-    <ContactUsComponent  />
-    <div 
-      class="max-w-[1240px] flex md:flex-row flex-col flex-wrap  gap-5 justify-between mx-auto px-5"
-    >
-      <div class="flex flex-col gap-[20px]">
-        <span class="text-[25px] font-extralight">راه های ارتباطی</span>
-        <ul class="flex flex-col gap-3.5 text-sm">
-          <li class="flex gap-[5px] items-center">
-            <Icon name="mdi:location" size="19px" style="color: #fff" />
-            <span
-              >آدرس : شیراز، معالی آباد، نبش خیابان دنا، مجتمع هرم نور، طبقه
-              5و6</span
-            >
-          </li>
-          <li class="flex gap-[5px] items-center">
-            <Icon name="solar:phone-bold" size="19px" style="color: #fff" />
-            <a href="tel:07136385004">071-36385004</a>
-          </li>
-          <li class="flex gap-[5px] items-center">
-            <Icon name="oi:phone" size="19px" style="color: #fff" />
-            <a href="tel:09336074147">0933-6074147</a>
-          </li>
-          <li class="flex gap-[5px] items-center">
-            <Icon name="uil:calender" size="19px"" style="color: #fff" />
-            <span>شنبه تا چهارشنبه</span>
-          </li>
-          <li class="flex gap-[5px] items-center">
-            <Icon name="mdi:clock-outline" size="19px" style="color: #fff" />
-            <span>ساعت : 09:00 الی 21:00</span>
-          </li>
-          <li class="flex gap-[5px] items-center">
-            <Icon name="mdi:clock-outline" size="19px" style="color: #fff" />
-            <span>پنج شنبه‌ ها 09:00 الی 13:00</span>
-          </li>
+  <div class="bg-black text-white min-h-screen">
+    <!-- Header -->
+    <header class="flex justify-center items-center py-6">
+      <img src="/icons/web-logo2.svg" alt="Tansaz Logo" class="h-12 w-auto" />
+    </header>
+
+    <!-- Social Media Icons -->
+    <div class="flex justify-center space-x-4 mb-8">
+      <a href="#">
+        <img src="/icons/x.svg" alt="x">
+      </a>
+      <a href="#">
+        <img src="/icons/threads.svg" alt="x">
+      </a>
+      <a href="#">
+        <img src="/icons/whatsapp.svg" alt="x">
+      </a>
+      <a href="#">
+        <img src="/icons/instagram.svg" alt="x">
+      </a>
+
+    </div>
+
+    <!-- Services Section -->
+    <section class="container mx-auto px-4">
+      <!-- Zebaii Services -->
+      <div class="mb-5">
+        <h2 class="text-lg font-medium leading-[24px] mb-[11px]"><span class="text-brand">خدمات</span> زیبایی</h2>
+        <ul class="grid text-[#D4D4D4] text-sm leading-[26px] grid-cols-2 gap-4">
+          <li>پزشکان زیبایی</li>
+          <li>اقدامات جراحی</li>
+          <li>جوان سازی</li>
+          <li>تزريقات زيبايي</li>
+          <li>هايفو ترابي</li>
+          <li>آنالیز چهره</li>
         </ul>
-      </div>
-      <div class="flex justify-between gap-5">
-        <div class="flex flex-col gap-[20px]">
-          <span class="text-[25px] font-extralight">خدمات ما</span>
-          <ul class="flex flex-col gap-3.5 text-sm">
-            <li class="flex gap-[5px] items-center">
-              <NuxtLink to="/services/1/beauty">زیبایی</NuxtLink>
-            </li>
-            <li class="flex gap-[5px] items-center">
-              <NuxtLink to="/services/21/slimming-services">لاغری</NuxtLink>
-            </li>
-            <li class="flex gap-[5px] items-center">
-              <NuxtLink to="/services/6/hyphotherapy">هایفوتراپی</NuxtLink>
-            </li>
-            <li class="flex gap-[5px] items-center">
-              <NuxtLink to="/services/7/laser-hair-removal">لیزررفع مو های زائد</NuxtLink>
-            </li>
-            <li class="flex gap-[5px] items-center">
-              <NuxtLink to="/services/3/surgery">اقدامات جراحی</NuxtLink>
-            </li>
-            <li class="flex gap-[5px] items-center">
-              <NuxtLink to="/services/17/facial">فشیال تخصصی</NuxtLink>
-            </li>
-          </ul>
-        </div>
-        <div class="flex flex-col gap-[20px]">
-          <span class="text-[25px] font-extralight">لینک مفید</span>
-          <ul class="flex flex-col gap-3.5 text-sm">
-            <li class="flex gap-[5px] items-center">
-              <NuxtLink to="/">صفحه اصلی</NuxtLink>
-            </li>
-            <!-- <li class="flex gap-[5px] items-center">
-              <NuxtLink to="#">حساب کاربری</NuxtLink>
-            </li> -->
-            <li class="flex gap-[5px] items-center">
-              <NuxtLink to="/contact-us">تماس با ما</NuxtLink>
-            </li>
-            <li class="flex gap-[5px] items-center">
-              <NuxtLink to="/blogs">مقالات آموزشی</NuxtLink>
-            </li>
-            <li class="flex gap-[5px] items-center">
-              <NuxtLink to="/about-us">درباره ما</NuxtLink>
-            </li>
-            <li class="flex gap-[5px] items-center">
-              <NuxtLink to="/terms">قوانین سایت</NuxtLink>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="flex flex-col gap-[20px]">
-        <span class="text-[25px] font-extralight text-center md:text-start"
-          >نماد اعتماد</span
-        >
-        <ul class="flex flex-col gap-3.5 text-sm">
-          <div class="elementor-widget-container">
-            <!-- <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=462981&Code=BK5taBm8Wuwv5X28BhHubofa5HWaWwPv'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=462981&Code=BK5taBm8Wuwv5X28BhHubofa5HWaWwPv' alt='' style='cursor:pointer' code='BK5taBm8Wuwv5X28BhHubofa5HWaWwPv'></a>		 -->
-      		</div>
-          
-        </ul>
+        <hr class="my-5 border-[#FFFFFF40]" />
       </div>
 
-      <div
-        class="w-full xl:max-h-[252px] xl:max-w-[252px] rounded-[10px] overflow-hidden"
-      >
-      <iframe class="w-full" src="https://balad.ir/embed?p=52ZaIGTm98Es6r" title="مشاهده «کلینیک تن ساز» روی نقشه بلد"  height="450" frameborder="0" style="border:0;" aria-hidden="false" tabindex="0"></iframe>
+      <!-- Fit Services -->
+      <div class="mb-5">
+        <h2 class="text-lg font-medium leading-[24px] mb-[11px]"><span class="text-brand">خدمات</span> لاغری</h2>
+        <ul class="grid text-[#D4D4D4] text-sm leading-[26px] grid-cols-2 gap-4">
+          <li>پزشکان</li>
+          <li>شبیه ساز ورزش</li>
+          <li>آنالیز اندام</li>
+          <li>عضله ساز</li>
+          <li>کویشن چربی سوز</li>
+          <li>چربی سوزی موضعی</li>
+        </ul>
+        <hr class="my-5 border-[#FFFFFF40]" />
       </div>
-    </div>
-    <!-- start copyright -->
-    <div
-      class="max-w-[1240px] mx-auto px-5 border-t border-[#FFFFFF38] pt-6 mt-6"
-    >
-      <div class="flex items-center justify-center gap-1">
-        <a target="_blank"
-          class="border border-[#FFFFFF38] flex justify-center items-center size-9 rounded-[10px]"
-          href="https://wa.me/+989336074147"
-        >
-          <Icon name="ic:baseline-whatsapp" size="24px" style="color: #fff" />
-        </a>
-        <a target="_blank"
-          class="border border-[#FFFFFF38] flex justify-center items-center size-9 rounded-[10px]"
-          href="http://instagram.com/tansaz.clinic"
-        >
-          <Icon
-            name="akar-icons:instagram-fill"
-            size="24px"
-            style="color: #fff"
-          />
-        </a>
-        <a target="_blank"
-          class="border border-[#FFFFFF38] flex justify-center items-center size-9 rounded-[10px]"
-          href="https://t.me/+989336074147"
-        >
-          <Icon name="ic:baseline-telegram" size="24px" style="color: #fff" />
-        </a>
+
+      <!-- Laser Services -->
+      <div class="mb-5">
+        <h2 class="text-lg font-medium leading-[24px] mb-[11px]"><span class="text-brand">خدمات</span> لیزر</h2>
+        <ul class="grid text-[#D4D4D4] text-sm leading-[26px] grid-cols-2 gap-4">
+          <li>لیزر ضایعات پوستی</li>
+          <li>لیزر ضایعات عروقی</li>
+          <li>لیزر موهای زائد</li>
+          <li>لیزر ضایعات پوستی</li>
+        </ul>
+        <hr class="my-5 border-[#FFFFFF40]" />
       </div>
-      <div class="text-center text-[14px] pt-6">
-        تمامی حقوق برای کلینیک تن ساز محفوظ می باشد
+
+      <!-- Articles and Resources -->
+      <div class="mb-5">
+        <h2 class="text-lg font-medium leading-[24px] mb-[11px]"><span class="text-brand">دسترسی</span> آسان</h2>
+        <ul class="grid text-[#D4D4D4] text-sm leading-[26px] grid-cols-2 gap-4">
+          <li>باشگاه مشتریان</li>
+          <li>مقالات</li>
+          <li>گالری تصاویر</li>
+          <li>درباره ما</li>
+          <li>تور مجازی</li>
+          <li>ارتباط با ما</li>
+          <li>پرسش های متداول</li>
+        </ul>
+        <hr class="my-5 border-[#FFFFFF40]" />
       </div>
-    </div>
-    <!-- end copyright -->
+
+      <!-- Contact Information -->
+      <div class="text-[#D4D4D4]">
+        <h2 class="text-lg font-medium mb-4"><span class="text-brand">ارتباط</span> با ما</h2>
+        <p class="text-sm mb-1">071-36385004</p>
+        <p class="text-sm mb-1">info@tansaz.com</p>
+        <p class="text-sm mb-1">
+          شیراز، معاون آباد، نبش دنا، ساختمان هرم نور، طبقه 5
+        </p>
+      </div>
+      <hr class="my-5 border-[#FFFFFF40]" />
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-[#D4D4D4] py-[10px] text-sm leading-[23px]">
+      <div class="container mx-auto px-4 text-center ">
+        <p class="ltr">copyright 2022 publisher representatives limited.</p>
+      </div>
+    </footer>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.ltr{
+  direction: ltr;
+}
+</style>

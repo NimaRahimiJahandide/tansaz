@@ -1,23 +1,33 @@
 <script setup lang="ts">
-import { useLoadingState } from "../store/loadingState";
+import { useStartWebsite } from '@/store/initWebsite'
 
-const loadingState = useLoadingState();
-setTimeout(() => {
-  loadingState.setLoading(false);
-}, 5000);
+const startWebsite = useStartWebsite();
 </script>
 
 <template>
   <div class="flex flex-col w-full">
-    <div v-if="$route.name != 'seminars-id'">
-      <Navbar class="z-50" v-if="!loadingState.isLoading" />
-      <BottomNavbar  class="sticky top-0 z-40" v-if="!loadingState.isLoading" />
-    </div>
-      <main :class="$route.name != 'seminars-id' ? 'min-h-screen md:mb-[7rem] mb-[22rem]' : 'mb-[1rem]'" class="w-full ">
-        <slot />
-      </main>
-      <Footer v-if="$route.name != 'seminars-id'" />
+    <transition name="fade-slide" appear>
+      <NavbarComponent v-if="startWebsite.isStart" />
+    </transition>
+    <main>
+      <slot />
+    </main>
+     <transition name="fade-slide" appear>
+      <Footer v-if="startWebsite.isStart" />
+    </transition>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.fade-slide-enter-active, .fade-slide-leave-active {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.fade-slide-enter-from, .fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+.fade-slide-enter-to, .fade-slide-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
