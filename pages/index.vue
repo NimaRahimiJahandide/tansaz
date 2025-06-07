@@ -62,6 +62,7 @@
         <HomeServiceSection />
         <HomeFaqSection  />
         <HomeTourSection />
+        <HomeLuckSection  />
         <HomeBlogsSection  />
       </div>
     </transition>
