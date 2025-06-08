@@ -23,15 +23,11 @@
 
     <!-- Pagination Thumbnails -->
     <div ref="paginationWrapper" class="relative mt-10 overflow-x-auto whitespace-nowrap scrollbar-hide px-10">
-      <!-- Container با ارتفاع ثابت -->
       <div class="flex items-center justify-center h-[90px]">
         <div class="inline-flex items-center gap-4 transition-transform duration-300 ease-in-out">
           <div v-for="(person, index) in teamMembers" :key="'pagination-' + index"
             class="transition-all duration-300 flex-shrink-0 cursor-pointer rounded-2xl overflow-hidden relative"
-            :class="{
-              'w-[90px] h-[70px] active-pagination z-10 shadow-lg': index === activeIndex,
-              'w-[50px] h-[50px] hover:scale-110': index !== activeIndex,
-            }" @click="selectMember(index)">
+            :class="getThumbnailClass(index)" @click="selectMember(index)">
             <img :src="person.image" :alt="person.name" class="w-full h-full object-cover object-top" />
             <!-- Ring برای active -->
             <div v-if="index === activeIndex"
@@ -54,8 +50,6 @@
 </template>
 
 <script setup>
-import { ref, nextTick, onMounted, onUnmounted } from 'vue'
-
 const activeIndex = ref(2)
 const progressValue = ref(0)
 const itemWidth = 240
@@ -129,35 +123,44 @@ const nextSlide = () => {
   scrollActiveThumbnailIntoCenter()
 }
 
+let startTime = null;
+
 const startAutoPlay = () => {
-  if (!isAutoPlaying) return
+  if (!isAutoPlaying) return;
 
-  progressValue.value = 0
+  pauseAutoPlay(); // پاکسازی تایمرهای قبلی
 
-  // شروع progress bar
-  progressTimer = setInterval(() => {
-    if (progressValue.value < 100) {
-      progressValue.value += (100 / (autoPlayDuration / progressInterval))
+  progressValue.value = 0;
+  startTime = performance.now();
+
+  const animate = (time) => {
+    const elapsed = time - startTime;
+    const percentage = Math.min((elapsed / autoPlayDuration) * 100, 100);
+    progressValue.value = percentage;
+
+    if (percentage < 100) {
+      progressTimer = requestAnimationFrame(animate);
+    } else {
+      nextSlide();
+      startAutoPlay();
     }
-  }, progressInterval)
+  };
 
-  // تغییر اسلاید بعد از مدت زمان مشخص
-  autoPlayTimer = setTimeout(() => {
-    nextSlide()
-    startAutoPlay() // شروع مجدد برای اسلاید بعدی
-  }, autoPlayDuration)
-}
+  progressTimer = requestAnimationFrame(animate);
+};
+
 
 const pauseAutoPlay = () => {
   if (autoPlayTimer) {
-    clearTimeout(autoPlayTimer)
-    autoPlayTimer = null
+    clearTimeout(autoPlayTimer);
+    autoPlayTimer = null;
   }
   if (progressTimer) {
-    clearInterval(progressTimer)
-    progressTimer = null
+    cancelAnimationFrame(progressTimer);
+    progressTimer = null;
   }
-}
+};
+
 
 const resumeAutoPlay = () => {
   isAutoPlaying = true
@@ -172,15 +175,28 @@ const stopAutoPlay = () => {
 
 const getItemClass = (index) => {
   if (index === activeIndex.value) {
-    return 'scale-100 rotate-0 opacity-100'
+    return 'scale-100 rotate-0 opacity-100 z-20';
   } else if (index === activeIndex.value - 1) {
-    return 'scale-90 rotate-y-12 opacity-80'
+    return 'scale-90 opacity-80 z-10 card-skew-left';
   } else if (index === activeIndex.value + 1) {
-    return 'scale-90 -rotate-y-12 opacity-80'
+    return 'scale-90 opacity-80 z-10 card-skew-right';
   } else {
-    return 'scale-85 opacity-60'
+    return 'scale-85 opacity-60 z-0';
   }
-}
+};
+
+const getThumbnailClass = (index) => {
+  if (index === activeIndex.value) {
+    return 'w-[90px] h-[70px] active-pagination z-10 shadow-lg';
+  } else if (
+    index === activeIndex.value - 1 ||
+    index === activeIndex.value + 1
+  ) {
+    return 'w-[50px] h-[50px]';
+  } else {
+    return 'w-[40px] h-[40px] opacity-70';
+  }
+};
 
 const paginationWrapper = ref(null)
 
@@ -246,5 +262,12 @@ defineExpose({
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.card-skew-left {
+  clip-path: polygon(90% 2%, 100% 0%, 100% 100%, 90% 98%);
+}
+.card-skew-right {
+  clip-path: polygon(0% 0%, 10% 2%, 10% 98%, 0% 100%);
 }
 </style>
