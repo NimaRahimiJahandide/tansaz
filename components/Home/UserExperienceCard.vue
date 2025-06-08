@@ -8,7 +8,7 @@
             <img 
               :src="image" 
               :alt="`${name} ${lastName}`"
-              class="w-full h-[150px] object-cover object-top rounded-2xl transition-transform duration-300"
+              class="w-full h-[150px] object-cover object-top rounded-t-2xl transition-transform duration-300"
             />
           </div>
         </div>
