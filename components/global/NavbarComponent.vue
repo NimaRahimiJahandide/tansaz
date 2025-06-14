@@ -1,17 +1,28 @@
 <template>
-  <nav class="bg-white flex items-center shadow-md h-16 fixed w-full z-50">
+  <nav
+    class="flex items-center shadow-md h-16 fixed w-full z-50"
+    :class="
+      route.matched[0].path == '/services/beauty/:slug?'
+        ? ''
+        : 'bg-white'
+    "
+  >
     <div class="container mx-auto px-4 py-2 flex justify-between items-center">
       <div class="flex gap-8 items-center">
         <!-- Hamburger Menu -->
         <div class="md:hidden">
-          <button type="button" class="focus:outline-none flex items-center" @click="toggleMenu">
-            <img src="/icons/Menu_Alt_01.svg" alt="Menu_Alt_01">
+          <button
+            type="button"
+            class="focus:outline-none flex items-center"
+            @click="toggleMenu"
+          >
+            <img src="/icons/Menu_Alt_01.svg" alt="Menu_Alt_01" />
           </button>
         </div>
         <!-- Profile Icon -->
         <div>
           <button class="focus:outline-none flex items-center">
-            <Icon name="bx:user" size="24" style="color: #2E2E2E" />
+            <Icon name="bx:user" size="24" style="color: #2e2e2e" />
           </button>
         </div>
       </div>
@@ -24,85 +35,161 @@
 
     <!-- Mobile Menu -->
     <transition name="mobile-menu">
-      <div v-if="isMenuOpen"
-        class="fixed top-0 left-0 w-full  bg-white h-full overflow-y-auto z-50 transform translate-x-0 transition-transform duration-300 ease-in-out"
-        :class="{ 'translate-x-0': isMenuOpen, '-translate-x-full': !isMenuOpen }">
-        <div class="flex sticky bg-white top-0 z-[60] justify-between items-center p-4 border-b border-[#E1E1E1]">
+      <div
+        v-if="isMenuOpen"
+        class="fixed top-0 left-0 w-full bg-white h-full overflow-y-auto z-50 transform translate-x-0 transition-transform duration-300 ease-in-out"
+        :class="{
+          'translate-x-0': isMenuOpen,
+          '-translate-x-full': !isMenuOpen,
+        }"
+      >
+        <div
+          class="flex sticky bg-white top-0 z-[60] justify-between items-center p-4 border-b border-[#E1E1E1]"
+        >
           <h2 class="text-[20px] text-[#2E2E2ECC]">فهرست منو</h2>
-          <Icon @click="isMenuOpen = !isMenuOpen" name="formkit:arrowleft" size="14" style="color: #2E2E2E" />
+          <Icon
+            @click="isMenuOpen = !isMenuOpen"
+            name="formkit:arrowleft"
+            size="14"
+            style="color: #2e2e2e"
+          />
         </div>
 
         <ul class="flex flex-col gap-[10px] mb-[90px]">
-          <li class="py-2 px-4" :class="{ 'bg-[#EFEFEF] border-r-4 border-brand': activeItem === 'support' }"
-            @click="activeItems('support')">
+          <li
+            class="py-2 px-4"
+            :class="{
+              'bg-[#EFEFEF] border-r-4 border-brand': activeItem === 'support',
+            }"
+            @click="activeItems('support')"
+          >
             <NuxtLink to="#" class="flex items-center gap-4">
               <img src="/icons/user.svg" alt="user" />
-              <span class="text-[#2E2E2E] leading-[34px]">پشتیبانی مشتریان</span>
+              <span class="text-[#2E2E2E] leading-[34px]"
+                >پشتیبانی مشتریان</span
+              >
             </NuxtLink>
           </li>
 
           <!-- Services Dropdown -->
           <div>
-            <li class="flex justify-between items-center w-full py-2 px-4"
-              :class="{ 'bg-[#EFEFEF] border-r-4 border-brand': isServicesOpen || activeItem === 'services' }"
-              @click="toggleServices">
+            <li
+              class="flex justify-between items-center w-full py-2 px-4"
+              :class="{
+                'bg-[#EFEFEF] border-r-4 border-brand':
+                  isServicesOpen || activeItem === 'services',
+              }"
+              @click="toggleServices"
+            >
               <div class="flex items-center gap-4">
                 <img src="/icons/services.svg" alt="services" />
-                <span class="text-[#2E2E2E] leading-[34px] font-medium">معرفی خدمات</span>
+                <span class="text-[#2E2E2E] leading-[34px] font-medium"
+                  >معرفی خدمات</span
+                >
               </div>
-              <Icon :name="isServicesOpen ? 'uil:angle-up' : 'uil:angle-down'" size="24" style="color: #000" />
+              <Icon
+                :name="isServicesOpen ? 'uil:angle-up' : 'uil:angle-down'"
+                size="24"
+                style="color: #000"
+              />
             </li>
             <transition name="submenu" @enter="onEnter" @leave="onLeave">
-
-              <ul v-if="isServicesOpen" class="mr-8 mt-3 border-r-2 border-[#E1E1E1] transition-all duration-300">
-                <li class="py-2 px-4 "
-                  :class="{ 'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand': activeItem === 'beauty' }"
-                  @click="activeItems('beauty')">
+              <ul
+                v-if="isServicesOpen"
+                class="mr-8 mt-3 border-r-2 border-[#E1E1E1] transition-all duration-300"
+              >
+                <li
+                  class="py-2 px-4"
+                  :class="{
+                    'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand':
+                      activeItem === 'beauty',
+                  }"
+                  @click="activeItems('beauty')"
+                >
                   <NuxtLink to="#">
-                    <span class="text-[#2E2E2ECC] leading-[34px]">خدمات زیبایی</span>
+                    <span class="text-[#2E2E2ECC] leading-[34px]"
+                      >خدمات زیبایی</span
+                    >
                   </NuxtLink>
                 </li>
-                <li class="py-2 px-4"
-                  :class="{ 'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand': activeItem === 'slimming' }"
-                  @click="activeItems('slimming')">
+                <li
+                  class="py-2 px-4"
+                  :class="{
+                    'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand':
+                      activeItem === 'slimming',
+                  }"
+                  @click="activeItems('slimming')"
+                >
                   <NuxtLink to="#">
-                    <span class="text-[#2E2E2ECC] leading-[34px]">خدمات لاغری</span>
+                    <span class="text-[#2E2E2ECC] leading-[34px]"
+                      >خدمات لاغری</span
+                    >
                   </NuxtLink>
                 </li>
-                <li class="py-2 px-4"
-                  :class="{ 'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand': activeItem === 'laser' }"
-                  @click="activeItems('laser')">
+                <li
+                  class="py-2 px-4"
+                  :class="{
+                    'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand':
+                      activeItem === 'laser',
+                  }"
+                  @click="activeItems('laser')"
+                >
                   <NuxtLink to="#">
-                    <span class="leading-[34px] text-[#2E2E2ECC]">خدمات لیزر</span>
+                    <span class="leading-[34px] text-[#2E2E2ECC]"
+                      >خدمات لیزر</span
+                    >
                   </NuxtLink>
                 </li>
               </ul>
             </transition>
-
           </div>
-          <li class="py-2 px-4" :class="{ 'bg-[#EFEFEF] border-r-4 border-brand': activeItem === 'gallery' }"
-            @click="activeItems('gallery')">
+          <li
+            class="py-2 px-4"
+            :class="{
+              'bg-[#EFEFEF] border-r-4 border-brand': activeItem === 'gallery',
+            }"
+            @click="activeItems('gallery')"
+          >
             <NuxtLink to="#" class="flex items-center gap-4">
               <img src="/icons/gallery.svg" alt="gallery" />
-              <span class="text-[#2E2E2E] leading-[34px]">گالری تصاویر و تور مجازی</span>
+              <span class="text-[#2E2E2E] leading-[34px]"
+                >گالری تصاویر و تور مجازی</span
+              >
             </NuxtLink>
           </li>
-          <li class="py-2 px-4" :class="{ 'bg-[#EFEFEF] border-r-4 border-brand': activeItem === 'faq' }"
-            @click="activeItems('faq')">
+          <li
+            class="py-2 px-4"
+            :class="{
+              'bg-[#EFEFEF] border-r-4 border-brand': activeItem === 'faq',
+            }"
+            @click="activeItems('faq')"
+          >
             <NuxtLink to="#" class="flex items-center gap-4">
               <img src="/icons/question.svg" alt="question" />
-              <span class="text-[#2E2E2E] leading-[34px]">پرسش های متداول </span>
+              <span class="text-[#2E2E2E] leading-[34px]"
+                >پرسش های متداول
+              </span>
             </NuxtLink>
           </li>
-          <li class="py-2 px-4" :class="{ 'bg-[#EFEFEF] border-r-4 border-brand': activeItem === 'contact' }"
-            @click="activeItems('contact')">
+          <li
+            class="py-2 px-4"
+            :class="{
+              'bg-[#EFEFEF] border-r-4 border-brand': activeItem === 'contact',
+            }"
+            @click="activeItems('contact')"
+          >
             <NuxtLink to="#" class="flex items-center gap-4">
               <img src="/icons/phone.svg" alt="phone" />
               <span class="text-[#2E2E2E] leading-[34px]">ارتباط با ما</span>
             </NuxtLink>
           </li>
-          <li class="py-2 px-4" :class="{ 'bg-[#EFEFEF] border-r-4 border-brand': activeItem === 'articles' }"
-            @click="activeItems('articles')">
+          <li
+            class="py-2 px-4"
+            :class="{
+              'bg-[#EFEFEF] border-r-4 border-brand': activeItem === 'articles',
+            }"
+            @click="activeItems('articles')"
+          >
             <NuxtLink to="#" class="flex items-center gap-4">
               <img src="/icons/file.svg" alt="file" />
               <span class="text-[#2E2E2E] leading-[34px]">آخرین مقالات</span>
@@ -112,44 +199,47 @@
 
         <!-- Buttons -->
         <div class="px-4 py-5">
-          <button class="w-full h-12 font-semibold bg-brand text-white px-4 py-2 rounded-full">
+          <button
+            class="w-full h-12 font-semibold bg-brand text-white px-4 py-2 rounded-full"
+          >
             ثبت نام
           </button>
-          <button class="w-full h-12 font-semibold mt-4 bg-[#EFEFEF] text-[#2E2E2E] px-4 py-2 rounded-full">
+          <button
+            class="w-full h-12 font-semibold mt-4 bg-[#EFEFEF] text-[#2E2E2E] px-4 py-2 rounded-full"
+          >
             ورود
           </button>
         </div>
       </div>
     </transition>
-
   </nav>
 </template>
 
 <script setup>
-const isMenuOpen = ref(false)
-const activeItem = ref(null)
-const isServicesOpen = ref(false)
-
+const isMenuOpen = ref(false);
+const activeItem = ref(null);
+const isServicesOpen = ref(false);
+const route = useRoute();
 const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value
-}
+  isMenuOpen.value = !isMenuOpen.value;
+};
 
 const toggleServices = () => {
-  isServicesOpen.value = !isServicesOpen.value
-  activeItem.value = 'services'
-}
+  isServicesOpen.value = !isServicesOpen.value;
+  activeItem.value = "services";
+};
 
 const activeItems = (item) => {
-  activeItem.value = item
+  activeItem.value = item;
 
   // اگر آیتم انتخاب شده غیر از services یا زیرمجموعه‌هاش بود، منو بسته شود
-  const serviceItems = ['services', 'beauty', 'slimming', 'laser']
+  const serviceItems = ["services", "beauty", "slimming", "laser"];
   if (!serviceItems.includes(item)) {
-    isServicesOpen.value = false
+    isServicesOpen.value = false;
   } else {
-    isServicesOpen.value = true
+    isServicesOpen.value = true;
   }
-}
+};
 </script>
 
 <style scoped>
