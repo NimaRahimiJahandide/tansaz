@@ -36,6 +36,7 @@ useSchemaOrg([
     --swiper-pagination-bullet-inactive-opacity: 1 !important;
     --swiper-navigation-background-color: gray;
     --swiper-navigation-color:#fff;
+    
 }
 
 .page-enter-active,
