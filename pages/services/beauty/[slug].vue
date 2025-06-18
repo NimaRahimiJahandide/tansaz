@@ -61,10 +61,9 @@ onMounted(() => {
     <div
       class="flex flex-col w-full mt-[30px] bg-[#F5F5F5] px-[16px] py-[30px] relative"
     >
-
-    <div class="absolute bottom-0 right-0 w-full bg-gradient-to-t h-[200px] from-[#00000016] to-[#00000000]">
-
-    </div>
+      <div
+        class="absolute bottom-0 right-0 w-full bg-gradient-to-t h-[200px] from-[#00000016] to-[#00000000]"
+      ></div>
 
       <p class="text-[20px] font-bold">
         <span class="text-[#ED1C24]"> متریال درجه یک </span>
@@ -85,6 +84,7 @@ onMounted(() => {
     </div>
 
     <Comments />
+    <HomeBlogsSection />
   </div>
 </template>
 

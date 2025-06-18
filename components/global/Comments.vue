@@ -45,7 +45,7 @@
     </button>
   </div>
 
-  <div class="flex flex-col pt-[30px] bg-[#ffffff]">
+  <div class="flex flex-col pt-[30px] bg-[#ffffff] px-[16px]">
     <p class="text-[20px] font-bold">
       <span class="text-[#ED1C24]"> نظرات</span>
 
