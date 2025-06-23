@@ -3,13 +3,23 @@ import { useStartWebsite } from "@/store/initWebsite";
 
 const startWebsite = useStartWebsite();
 
+const router = useRouter()
+
+const goBack = () => {
+  if (window.history.length > 1) {
+    router.back()
+  } else {
+    router.push('/')
+  }
+}
+
 onMounted(() => {
   startWebsite.setImageClicked(true);
 });
 </script>
 
 <template>
-  <div class="flex flex-col pt-[20px] px-[16px] mt-[64px] bg-[#EFEFEF]">
+  <div class="flex flex-col pt-[20px] px-[16px] mt-[64px] pb-[30px] bg-[#EFEFEF]">
     <div class="flex items-center justify-between">
       <p class="text-[20px] text-center font-bold">
         <span class="text-[rgb(237,28,36)]"> خدمات </span>
@@ -19,7 +29,7 @@ onMounted(() => {
       <div
         class="flex items-center justify-center rounded-full border-[1px] border-[#D4D4D4] size-[34px]"
       >
-        <Icon name="formkit:arrowleft" size="14" style="color: #2e2e2e" />
+        <Icon @click="goBack" name="formkit:arrowleft" size="14" style="color: #2e2e2e" />
       </div>
     </div>
 

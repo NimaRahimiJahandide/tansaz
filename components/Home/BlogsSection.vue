@@ -6,8 +6,12 @@
       <div class="rounded-2xl overflow-hidden  relative">
         <transition name="fade" mode="out-in">
           <div :key="activeIndex" class="relative" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
+            <!-- Heart image -->
+             <!-- <span class="absolute right-4 top-3">
+               <img src="/icons/Heart.svg" alt="Heart">
+               <img src="/icons/Heart-white.svg" alt="Heart-white">
+             </span> -->
             <!-- Image -->
-             <img src="" alt="">
             <img :src="slides[activeIndex].image" :alt="slides[activeIndex].title" class="w-full h-80 object-cover" />
 
             <!-- Overlay and Text -->
