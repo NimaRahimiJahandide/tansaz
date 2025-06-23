@@ -4,8 +4,9 @@
     <!-- Header -->
     <div class="text-center mb-8">
       <h2
-        class="text-white w-[240px] bg-[#2E2E2E] px-[15px] py-[10px] rounded-[12px] text-base font-semibold mb-2 mx-auto">
-        <span class="text-brand">6 نفر</span> تجربه‌شان را ثبت کرده‌اند
+        class="text-white flex-col gap-2.5 flex items-center justify-center px-[15px] py-[10px] text-xl font-bold mb-2 mx-auto">
+        <img src="/icons/Vector.svg" alt="Vector">
+        <span>تجربه مراجعه کننده ها</span>
       </h2>
     </div>
 
@@ -21,36 +22,46 @@
       </div>
     </div>
 
-    <!-- Pagination Thumbnails -->
-    <div ref="paginationWrapper" class="relative mt-10 overflow-x-auto whitespace-nowrap scrollbar-hide px-10">
-      <div class="flex items-center justify-center h-[90px]">
-        <div class="inline-flex items-center gap-4 transition-transform duration-300 ease-in-out">
-          <div v-for="(person, index) in teamMembers" :key="'pagination-' + index"
-            class="transition-all duration-300 flex-shrink-0 cursor-pointer rounded-2xl overflow-hidden relative"
-            :class="getThumbnailClass(index)" @click="selectMember(index)">
-            <img :src="person.image" :alt="person.name" class="w-full h-full object-cover object-top" />
-            <!-- Ring برای active -->
-            <div v-if="index === activeIndex"
-              class="absolute inset-0 ring-2 ring-red-500 rounded-2xl pointer-events-none"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- ProgressBar -->
     <div class="flex items-center justify-center mt-6">
       <HomeProgressBar :value="progressValue" />
     </div>
 
-    <!-- Logo -->
-    <div class="flex flex-col items-center mt-10">
-      <img src="/icons/little-logo.svg" alt="little-logo" />
+    <!-- pagination -->
+    <div class="flex justify-between items-center mt-4 px-4">
+      <!-- دکمه قبلی -->
+      <button @click="prevSlide"
+        class="bg-brand size-10 flex items-center justify-center text-white font-bold rounded-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      <!-- شماره‌های صفحه -->
+      <div class="flex items-center gap-2 text-white font-bold">
+        <button v-for="(slide, index) in teamMembers.length" :key="index" @click="selectMember(index)"
+          class="w-8 h-8 flex items-center justify-center rounded-lg  transition duration-300 ease-in-out"
+          :class="activeIndex === index ? 'bg-[#FFFFFF0D] text-white' : ''">
+          {{ index + 1 }}
+        </button>
+      </div>
+
+
+      <!-- دکمه بعدی -->
+      <button @click="nextSlide"
+        class="bg-[#2E2E2E] text-[#929DAC] font-bold size-10 flex items-center justify-center rounded-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 rotate-180" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
     </div>
+
   </div>
 </template>
 
 <script setup>
-const activeIndex = ref(2)
+const activeIndex = ref(0)
 const progressValue = ref(0)
 const itemWidth = 240
 const itemMargin = 32 // mx-4 = 16px در هر طرف = 32px کل
@@ -63,43 +74,51 @@ let autoPlayTimer = null
 let progressTimer = null
 let isAutoPlaying = true
 
-const teamMembers = [
+const teamMembers = ref([
   {
     name: 'نازنین',
     lastName: 'بیاتی',
     image: '/images/comment3.png',
     role: 'عمل زیبایی بوکال فت',
-    experience: 'لورم ایپسوم متن ساختگی یا پیوند لورم از صنعت چاپ و یا استفاده از طراحان گرافیک است.',
+    experience: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد',
   },
   {
     name: 'امیر',
     lastName: 'کاظمی',
     image: '/images/comment1.png',
     role: 'پیکر تراشی',
-    experience: 'لورم ایپسوم متن ساختگی یا پیوند لورم از صنعت چاپ و یا استفاده از طراحان گرافیک است.',
+    experience: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد',
   },
   {
     name: 'سارا',
     lastName: 'کریمی',
     image: '/images/comment2.png',
     role: 'لیفت ابرو',
-    experience: 'لورم ایپسوم متن ساختگی یا پیوند لورم از صنعت چاپ و یا استفاده از طراحان گرافیک است.',
+    experience: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد',
   },
   {
     name: 'محسن',
     lastName: 'رضایی',
     image: '/images/comment4.png',
     role: 'زاویه فک',
-    experience: 'لورم ایپسوم متن ساختگی یا پیوند لورم از صنعت چاپ و یا استفاده از طراحان گرافیک است.',
+    experience: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد',
   },
   {
     name: 'الهام',
     lastName: 'نوری',
     image: '/images/comment5.png',
     role: 'زاویه‌سازی صورت',
-    experience: 'لورم ایپسوم متن ساختگی یا پیوند لورم از صنعت چاپ و یا استفاده از طراحان گرافیک است.',
+    experience: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد',
   },
-]
+])
+
+const nextSlide = () => {
+  activeIndex.value = (activeIndex.value + 1) % teamMembers.value.length
+}
+
+const prevSlide = () => {
+  activeIndex.value = (activeIndex.value - 1 + teamMembers.value.length) % teamMembers.value.length
+}
 
 const selectMember = async (index) => {
   // توقف auto-play موقت هنگام کلیک دستی
@@ -115,12 +134,6 @@ const selectMember = async (index) => {
   setTimeout(() => {
     startAutoPlay()
   }, 3000)
-}
-
-const nextSlide = () => {
-  const nextIndex = (activeIndex.value + 1) % teamMembers.length
-  activeIndex.value = nextIndex
-  scrollActiveThumbnailIntoCenter()
 }
 
 let startTime = null;
@@ -267,6 +280,7 @@ defineExpose({
 .card-skew-left {
   clip-path: polygon(90% 2%, 100% 0%, 100% 100%, 90% 98%);
 }
+
 .card-skew-right {
   clip-path: polygon(0% 0%, 10% 2%, 10% 98%, 0% 100%);
 }
