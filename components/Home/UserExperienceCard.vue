@@ -1,19 +1,6 @@
 <template>
   <div class="flex">
     <div class="max-w-[250px] w-full rounded-3xl overflow-hidden ">
-      <!-- Image Section -->
-      <div class="relative w-full">
-        <div class="flex justify-center">
-          <div class="relative w-full">
-            <img 
-              :src="image" 
-              :alt="`${name} ${lastName}`"
-              class="w-full h-[150px] object-cover object-top rounded-t-2xl transition-transform duration-300"
-            />
-          </div>
-        </div>
-      </div>
-
       <!-- Content Section -->
       <div class="bg-[#2E2E2E] text-white p-4">
         <!-- Name and Role -->
@@ -31,7 +18,7 @@
           <h3 class="text-brand text-sm font-medium">
             تجربه و دیدگاه
           </h3>
-          <p class="text-white text-sm leading-[25px]">
+          <p class="text-white text-sm leading-[25px] text-justify">
             {{ experience }}
           </p>
         </div>

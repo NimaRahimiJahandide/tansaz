@@ -7,12 +7,13 @@
         <transition name="fade" mode="out-in">
           <div :key="activeIndex" class="relative" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
             <!-- Image -->
+             <img src="" alt="">
             <img :src="slides[activeIndex].image" :alt="slides[activeIndex].title" class="w-full h-80 object-cover" />
 
             <!-- Overlay and Text -->
             <div
               class="absolute inset-0 bg-gradient-to-t from-[#151515] via-[#15151596] to-transparent via-[20.35%] from-[1.3%] flex flex-col justify-end p-4">
-              <h3 class="text-lg font-bold text-white leading-6 mb-2">{{ slides[activeIndex].title }}</h3>
+              <h3 class="text-lg font-bold text-white leading-6 mb-5">{{ slides[activeIndex].title }}</h3>
               <p class="flex text-xs font-medium text-white justify-between">
                 <span class="mr-2">زمان مطالعه: {{ slides[activeIndex].duration }}</span>
                 <span>تاریخ نشر: {{ slides[activeIndex].date }}</span>
@@ -22,7 +23,7 @@
         </transition>
       </div>
 
-      <!-- ناوبری -->
+      <!-- pagination -->
       <div class="flex justify-between items-center mt-4">
         <!-- دکمه قبلی -->
         <button @click="prevSlide"
@@ -53,8 +54,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
 const activeIndex = ref(0)
 
 const slides = ref([

@@ -1,5 +1,6 @@
 <template>
   <div class="bg-[#EFEFEF] p-4 py-[30px] w-full">
+    <img class=" object-cover pb-[30px]" src="/images/Faq-Banner.png" alt="Faq-Banner">
     <!-- Header -->
     <header class="mb-8">
       <h1 class="text-xl font-bold"><span class="text-brand">پرسش</span> های متداول</h1>

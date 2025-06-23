@@ -25,7 +25,7 @@
         <!-- Answer -->
         <transition name="slide-fade">
             <div v-if="showAnswer"
-                class="mt-4 text-[#2E2E2E] text-sm leading-[26px] pt-[15px] border-t border-[#E1E1E1]">
+                class="mt-4 text-[#2E2E2E] text-sm text-justify leading-[26px] pt-[15px] border-t border-[#E1E1E1]">
                 <p>{{ answer }}</p>
             </div>
         </transition>
