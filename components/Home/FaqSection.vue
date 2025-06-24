@@ -14,7 +14,7 @@
 
     <!-- Button to navigate to FAQ Category Page -->
     <button class="mt-8 w-full bg-brand text-center rounded-full h-[48px]">
-      <NuxtLink to="#" class="bg-brand text-white font-semibold leading-[26px] rounded-full w-full">صفحه دسته بندی پرسش
+      <NuxtLink to="/faqs" class="bg-brand text-white font-semibold leading-[26px] rounded-full w-full">صفحه دسته بندی پرسش
         های متداول</NuxtLink>
     </button>
   </div>

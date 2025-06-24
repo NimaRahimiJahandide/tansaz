@@ -1,7 +1,7 @@
 <template>
   <nav class="flex items-center  h-16 fixed w-full z-50 transition-colors duration-300" :class="{
-    'bg-white shadow-md': !route.path.startsWith('/services/'),
-    'bg-white shadow-md': route.path.startsWith('/services/') && isScrolled
+    'bg-transparent': route.path.startsWith('/services/') && !isScrolled,
+    'bg-white shadow-md': !route.path.startsWith('/services/') || isScrolled,
   }">
     <div class="container mx-auto px-4 py-2 flex justify-between items-center">
       <div class="flex gap-8 items-center">
@@ -25,7 +25,7 @@
 
       <!-- Logo -->
       <div class="flex items-center space-x-2">
-        <img :src="(route.path.startsWith('/services/') && !isScrolled)
+        <img @click="$router.push('/')" :src="(route.path.startsWith('/services/') && !isScrolled)
           ? '/icons/new-logo-white.png'
           : '/icons/new-logo.png'" alt="Logo" class="w-[144px]" />
 
@@ -73,7 +73,7 @@
                   'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand':
                     activeItem === 'beauty',
                 }" @click="activeItems('beauty')">
-                  <NuxtLink to="#">
+                  <NuxtLink to="/services/1/test">
                     <span class="text-[#2E2E2ECC] leading-[34px]">خدمات زیبایی</span>
                   </NuxtLink>
                 </li>
@@ -81,7 +81,7 @@
                   'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand':
                     activeItem === 'slimming',
                 }" @click="activeItems('slimming')">
-                  <NuxtLink to="#">
+                  <NuxtLink to="/services/1/test">
                     <span class="text-[#2E2E2ECC] leading-[34px]">خدمات لاغری</span>
                   </NuxtLink>
                 </li>
@@ -89,7 +89,7 @@
                   'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand':
                     activeItem === 'laser',
                 }" @click="activeItems('laser')">
-                  <NuxtLink to="#">
+                  <NuxtLink to="/services/1/test">
                     <span class="leading-[34px] text-[#2E2E2ECC]">خدمات لیزر</span>
                   </NuxtLink>
                 </li>
@@ -105,9 +105,9 @@
             </NuxtLink>
           </li>
           <li class="py-2 px-4" :class="{
-            'bg-[#EFEFEF] border-r-4 border-brand': activeItem === 'faq',
-          }" @click="activeItems('faq')">
-            <NuxtLink to="#" class="flex items-center gap-4">
+            'bg-[#EFEFEF] border-r-4 border-brand': activeItem === 'faqs',
+          }" @click="activeItems('faqs')">
+            <NuxtLink to="/faqs" class="flex items-center gap-4">
               <img src="/icons/question.svg" alt="question" />
               <span class="text-[#2E2E2E] leading-[34px]">پرسش های متداول
               </span>
@@ -152,6 +152,7 @@ const isServicesOpen = ref(false);
 const isScrolled = ref(false);
 
 const route = useRoute();
+
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
@@ -184,6 +185,10 @@ onBeforeUnmount(() => {
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 10;
 };
+
+watch(() => route.fullPath, () => {
+  isMenuOpen.value = false;
+});
 </script>
 
 <style scoped>
