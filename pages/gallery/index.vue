@@ -1,7 +1,31 @@
 <script setup>
 import { useStartWebsite } from "@/store/initWebsite";
 const startWebsite = useStartWebsite();
-const isModalOpen = ref(true);
+const isModalOpen = ref(false);
+const router = useRouter()
+
+const goBack = () => {
+  if (window.history.length > 1) {
+    router.back()
+  } else {
+    router.push('/')
+  }
+}
+
+const items = ref([
+  {
+    image: '/images/tour1.png'
+  },
+  {
+    image: '/images/tour2.png'
+  },
+  {
+    image: '/images/tour3.png'
+  },
+  {
+    image: '/images/tour4.png'
+  },
+])
 
 onMounted(() => {
   startWebsite.setImageClicked(true);
@@ -9,17 +33,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    class="flex flex-col items-center bg-[#EFEFEF] pt-[84px] pb-[50px] px-[16px]"
-  >
+  <div class="flex flex-col items-center bg-[#EFEFEF] pt-[84px] pb-[50px] px-[16px]">
     <div class="flex items-center justify-between w-full">
       <header class="">
         <h1 class="text-xl font-bold">
-          <span class="text-brand">گالری</span>تصاویر و تور مجازی
+          <span class="text-brand">گالری </span>تصاویر و تور مجازی
         </h1>
       </header>
 
-      <img src="/icons/left-arrow.svg" alt="" />
+      <img @click="goBack" src="/icons/left-arrow.svg" alt="" />
     </div>
 
     <div class="flex flex-col gap-[10px] w-full mt-[25px]">
@@ -27,16 +49,13 @@ onMounted(() => {
         ویدیو از نمای بیرونی و داخلی ساختمان کلینیک تن ساز
       </p>
 
-      <!-- <div class="relative">
-<img src="/images/example.png" alt="" class="w-full rounded-[22px]">
-        </div> -->
+      <div class="relative">
+        <img src="/images/gallery-video.png" alt="" class="w-full rounded-[22px]">
+      </div>
 
-      <button class="mt-8 w-full bg-brand text-center rounded-full h-[48px]">
-        <NuxtLink
-          to="#"
-          class="bg-brand text-white font-semibold leading-[26px] rounded-full w-full"
-          >تور مجازی کلینیک تن ساز</NuxtLink
-        >
+      <button class="mt-[22px] w-full bg-brand text-center rounded-full h-[48px]">
+        <NuxtLink to="#" class="bg-brand text-white font-semibold leading-[26px] rounded-full w-full">تور مجازی
+          کلینیک تن ساز</NuxtLink>
       </button>
     </div>
 
@@ -51,25 +70,20 @@ onMounted(() => {
     </div>
 
     <div class="grid grid-cols-2 gap-[16px] mt-[15px]">
-      <img
-        src="/images/before.jpg"
-        alt=""
-        class="rounded-[10px] w-full aspect-square"
-        v-for="x in 7"
-      />
+      <img :src="item.image" alt="" class="rounded-[10px] w-full aspect-square" v-for="item in items" />
     </div>
+
+    <button class="mt-[22px] w-full bg-brand text-center rounded-full h-[48px]">
+      <NuxtLink to="#" class="bg-brand text-white font-semibold leading-[26px] rounded-full w-full">مشاهده بیشتر</NuxtLink>
+    </button>
   </div>
 
-  <div
-    class="fixed top-0 left-0 w-screen h-screen bg-[#0000004a] duration-300 z-[2] pointer-events-none"
-    :class="isModalOpen ? ' opacity-100' : 'opacity-0'"
-  />
+  <div class="fixed top-0 left-0 w-screen h-screen bg-[#0000004a] duration-300 z-[2] pointer-events-none"
+    :class="isModalOpen ? ' opacity-100' : 'opacity-0'" />
 
   <div
     class="z-[99] flex flex-col py-[20px] bg-[#ffffff] fixed translate-x-[-50%] translate-y-[-50%] left-[50%] top-[50%] rounded-[22px] duration-300"
-    style="width: calc(100vw - 32px)"
-    :class="isModalOpen ? 'scale-100' : 'scale-0'"
-  >
+    style="width: calc(100vw - 32px)" :class="isModalOpen ? 'scale-100' : 'scale-0'">
     <div class="flex justify-between items-center px-[16px]">
       <div class="flex items-center justify-between w-full">
         <header class="">
@@ -82,11 +96,7 @@ onMounted(() => {
       </div>
     </div>
 
-    <img
-      src="/images/before.jpg"
-      alt=""
-      class="w-full aspect-square mt-[20px]"
-    />
+    <img src="/images/before.jpg" alt="" class="w-full aspect-square mt-[20px]" />
 
     <div class="flex flex-col gap-[6px] mt-[14px] px-[16px]">
       <div class="flex justify-between items-center">
