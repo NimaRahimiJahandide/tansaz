@@ -1,14 +1,14 @@
 <template>
   <nav class="flex items-center  h-16 fixed w-full z-50 transition-colors duration-300" :class="{
-    'bg-transparent': route.path.startsWith('/services/') && !isScrolled,
-    'bg-white shadow-md': !route.path.startsWith('/services/') || isScrolled,
+    'bg-transparent': isServiceRoute  && !isScrolled,
+    'bg-white shadow-md': !isServiceRoute || isScrolled,
   }">
     <div class="container mx-auto px-4 py-2 flex justify-between items-center">
       <div class="flex gap-8 items-center">
         <!-- Hamburger Menu -->
         <div class="md:hidden">
           <button type="button" class="focus:outline-none flex items-center" @click="toggleMenu">
-            <img :src="(route.path.startsWith('/services/') && !isScrolled)
+            <img :src="(isServiceRoute && !isScrolled)
               ? '/icons/Menu_Alt_01-white.svg'
               : '/icons/Menu_Alt_01.svg'" alt="Menu_Alt_01" />
           </button>
@@ -17,7 +17,7 @@
         <div>
           <button class="focus:outline-none flex items-center">
             <Icon name="bx:user" size="24"
-              :style="{ color: (route.path.startsWith('/services/') && !isScrolled) ? '#ffffff' : '#2e2e2e' }" />
+              :style="{ color: (isServiceRoute && !isScrolled) ? '#ffffff' : '#2e2e2e' }" />
 
           </button>
         </div>
@@ -25,7 +25,7 @@
 
       <!-- Logo -->
       <div class="flex items-center space-x-2">
-        <img @click="$router.push('/')" :src="(route.path.startsWith('/services/') && !isScrolled)
+        <img @click="$router.push('/')" :src="(isServiceRoute && !isScrolled)
           ? '/icons/new-logo-white.png'
           : '/icons/new-logo.png'" alt="Logo" class="w-[144px]" />
 
@@ -114,9 +114,9 @@
             </NuxtLink>
           </li>
           <li class="py-2 px-4" :class="{
-            'bg-[#EFEFEF] border-r-4 border-brand': activeItem === 'contact',
-          }" @click="activeItems('contact')">
-            <NuxtLink to="#" class="flex items-center gap-4">
+            'bg-[#EFEFEF] border-r-4 border-brand': activeItem === 'contact-us',
+          }" @click="activeItems('contact-us')">
+            <NuxtLink to="/contact-us" class="flex items-center gap-4">
               <img src="/icons/phone.svg" alt="phone" />
               <span class="text-[#2E2E2E] leading-[34px]">ارتباط با ما</span>
             </NuxtLink>
@@ -186,6 +186,9 @@ const handleScroll = () => {
   isScrolled.value = window.scrollY > 10;
 };
 
+const isServiceRoute = computed(() => {
+  return route.value?.path?.startsWith('/services/');
+});
 watch(() => route.fullPath, () => {
   isMenuOpen.value = false;
 });
