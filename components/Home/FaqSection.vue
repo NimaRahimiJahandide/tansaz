@@ -1,6 +1,6 @@
 <template>
   <div class="bg-[#EFEFEF] p-4 py-[30px] w-full">
-    <img class=" object-cover pb-[30px]" src="/images/Faq-Banner.png" alt="Faq-Banner">
+    <img v-if="$route.path === '/'" class="object-cover pb-[30px]" src="/images/Faq-Banner.png" alt="Faq-Banner" />
     <!-- Header -->
     <header class="mb-8">
       <h1 class="text-xl font-bold"><span class="text-brand">پرسش</span> های متداول</h1>
@@ -9,21 +9,13 @@
     <!-- FAQ Section -->
     <section class="space-y-4">
       <!-- FAQ Items -->
-      <HomeFaqItem
-        v-for="(faq, index) in faqs"
-        :key="index"
-        :question="faq.question"
-        :answer="faq.answer"
-      />
+      <HomeFaqItem v-for="(faq, index) in faqs" :key="index" :question="faq.question" :answer="faq.answer" />
     </section>
 
     <!-- Button to navigate to FAQ Category Page -->
     <button class="mt-8 w-full bg-brand text-center rounded-full h-[48px]">
-      <NuxtLink
-        to="#"
-        class="bg-brand text-white font-semibold leading-[26px] rounded-full w-full"
-        >صفحه دسته بندی پرسش های متداول</NuxtLink
-      >
+      <NuxtLink to="#" class="bg-brand text-white font-semibold leading-[26px] rounded-full w-full">صفحه دسته بندی پرسش
+        های متداول</NuxtLink>
     </button>
   </div>
 </template>

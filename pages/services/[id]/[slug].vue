@@ -44,19 +44,19 @@ onMounted(() => {
         پوست، محو کردن خطوط پوست، بهبود ، روشنایی پوست ملتهب و قرمز، سفت کردن
         پوست شل می باشد.
       </p>
-      
+
       <div class="flex items-center justify-end">
         <ServicesFastSupport />
       </div>
     </div>
 
     <HomeBeforAfterExample />
-    <ServicesVideoSlider :data="['/images/blog1.png']" />
+    <ServicesVideoSlider :data="['/images/services2.png']" />
     <HomeFaqSection />
 
-    <div class="flex flex-col w-full mt-[30px] bg-[#F5F5F5] px-[16px] py-[30px] relative">
+    <!-- slider -->
+    <section class="flex flex-col w-full bg-[#F5F5F5] px-[16px] py-[30px] relative">
       <div class="absolute bottom-0 right-0 w-full bg-gradient-to-t h-[200px] from-[#00000016] to-[#00000000]"></div>
-
       <p class="text-[20px] font-bold">
         <span class="text-[#ED1C24]"> متریال درجه یک </span>
 
@@ -64,7 +64,10 @@ onMounted(() => {
 
         <span class="text-[#ED1C24]"> ! </span>
       </p>
-      <p class="text-[20px] font-bold mt-[40px]">
+
+      <ServicesSliderComponent />
+
+      <p class="text-[20px] font-bold">
         <span class="text-[#000000]"> مزو تراپی در کمتر از 20 دقیقه، </span>
 
         <span class="text-[#ED1C24]"> بدون درد </span>
@@ -73,7 +76,7 @@ onMounted(() => {
         <span class="text-[#ED1C24]"> بی حسی </span>
         <span class="text-[#000000]"> موضعی انجام می شود. </span>
       </p>
-    </div>
+    </section>
 
     <Comments />
     <HomeBlogsSection />
@@ -81,7 +84,10 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* .custom-shadow {
-  box-shadow: inset;
-} */
+.custom-gradient {
+  @apply bg-no-repeat bg-cover;
+  background-image:
+    linear-gradient(0deg, #F5F5F5, #F5F5F5),
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 90.73%, rgba(0, 0, 0, 0.2) 110.4%);
+}
 </style>
