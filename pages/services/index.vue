@@ -96,7 +96,7 @@ const goBack = () => {
 
       <div class="flex gap-[16px] mt-[35px]">
         <div class="flex flex-col gap-[23px] w-[171px]">
-          <ServicesCard v-for="x in 4" />
+          <ServicesCard @click="$router.push('/services/1/test')" v-for="x in 4" />
         </div>
         <div class="flex flex-col gap-[23px] w-[171px]">
           <p class="text-[16px] font-semibold">
@@ -105,7 +105,7 @@ const goBack = () => {
             <span class="text-[#2E2E2E]"> مورد نظرتـان را انتخاب کنید </span>
           </p>
 
-          <ServicesCard v-for="x in 3" />
+          <ServicesCard @click="$router.push('/services/1/test')" v-for="x in 3" />
         </div>
       </div>
     </div>
