@@ -7,10 +7,10 @@
         <transition name="fade" mode="out-in">
           <div :key="activeIndex" class="relative" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
             <!-- Heart image -->
-             <!-- <span class="absolute right-4 top-3">
-               <img src="/icons/Heart.svg" alt="Heart">
-               <img src="/icons/Heart-white.svg" alt="Heart-white">
-             </span> -->
+             <span class="absolute right-4 top-3 cursor-pointer z-10" @click="toggleLike">
+               <img v-if="isLiked" src="/icons/Heart-white.svg" alt="Heart-white">
+               <img v-else src="/icons/Heart.svg" alt="Heart">
+             </span>
             <!-- Image -->
             <img :src="slides[activeIndex].image" :alt="slides[activeIndex].title" class="w-full h-80 object-cover" />
 
@@ -112,6 +112,12 @@ const handleSwipe = () => {
       nextSlide()
     }
   }
+}
+
+const isLiked = ref(false)
+
+const toggleLike = () => {
+  isLiked.value = !isLiked.value
 }
 </script>
 
