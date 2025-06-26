@@ -1,206 +1,148 @@
-<script setup lang="ts">
-import { useLoadingState } from "@/store/loadingState";
+<script setup>
+import { useStartWebsite } from "@/store/initWebsite";
+const startWebsite = useStartWebsite();
+const router = useRouter();
+const selectedImage = ref(0);
 
-const loadingState = useLoadingState();
+const goBack = () => {
+  if (window.history.length > 1) {
+    router.back();
+  } else {
+    router.push("/");
+  }
+};
+const gallery = [
+  "/images/Surgery1.png",
 
-setTimeout(() => {
-  loadingState.setLoading(false);
-}, 1000);
+  "/images/Surgery2.png",
+
+  "/images/Surgery1.png",
+
+  "/images/Surgery1.png",
+];
+
+onMounted(() => {
+  startWebsite.setImageClicked(true);
+});
 </script>
-
 <template>
-  <div>
-    <LoadingComponent v-show="loadingState.isLoading"/>
-  
-    <div class="max-w-[1240px] text-dark mx-auto px-5 mt-[75px] mb-36" v-show="!loadingState.isLoading">
-      <!-- <div v-if="loadingState.isLoading">
-        <div
-          class="flex w-full flex-col-reverse md:flex-row justify-between gap-5"
+  <div class="flex flex-col items-center bg-[#EFEFEF] pt-[84px] pb-[50px]">
+    <div class="flex items-center justify-between w-full px-[16px]">
+      <header class="">
+        <h1 class="text-xl font-bold">
+          <span class="text-brand">ما</span> درباره
+        </h1>
+      </header>
+
+      <img @click="goBack" src="/icons/left-arrow.svg" alt="" />
+    </div>
+
+    <div
+      class="relative w-full aspect-square rounded-[16px] overflow-hidden mt-[20px] px-[16px]"
+    >
+      <img
+        v-for="(x, i) in gallery"
+        :src="x"
+        alt=""
+        class="duration-300 absolute w-full aspect-square"
+        :class="i == selectedImage ? 'opacity-100' : 'opacity-0'"
+      />
+    </div>
+    <div
+      class="flex items-center gap-[16px] max-w-full overflow-x-auto justify-center px-[16px]"
+    >
+      <img
+        v-for="(x, i) in gallery"
+        :src="x"
+        alt=""
+        class="size-[62px] aspect-square rounded-[10px] mt-[16px] cursor-pointer shadow-[0px_1px_8px_0px_#00000059]"
+        :class="selectedImage == i ? 'border-[2px] border-[#ffffff]' : ''"
+        @click="selectedImage = i"
+      />
+    </div>
+
+    <div class="flex flex-col px-[16px]">
+      <h2 class="text-xl font-bold mt-[30px]">
+        <span class="text-brand">کلینیک تــــن ساز</span> متن معرفی
+      </h2>
+
+      <p class="mt-[12px] text-[14px]">
+        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده
+        از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و
+        سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای
+        متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه
+        درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با
+        نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان
+        خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید
+        داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان
+        رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
+        پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+      </p>
+
+      <button
+        class="mt-[33px] w-full bg-brand text-center rounded-full h-[48px]"
+      >
+        <NuxtLink
+          to="#"
+          class="bg-brand text-white font-semibold leading-[26px] rounded-full w-full"
+          >تور مجازی کلینیک تن ساز</NuxtLink
         >
-          <div class="md:w-1/2 w-full flex flex-col justify-center space-y-4 text-right">
-            <div
-              class="md:w-1/2 h-[24px] bg-gray-300 rounded-4xl animate-pulse"
-            ></div>
-            <ul class="space-y-3 text-[14px] list-disc list-inside">
-              <div
-                class="md:w-1/2 h-[24px] bg-gray-300 rounded-4xl animate-pulse"
-              ></div>
-              <div
-                class="md:w-1/2 h-[24px] bg-gray-300 rounded-4xl animate-pulse"
-              ></div>
-              <div
-                class="md:w-1/2 h-[24px] bg-gray-300 rounded-4xl animate-pulse"
-              ></div>
-              <div
-                class="md:w-1/2 h-[24px] bg-gray-300 rounded-4xl animate-pulse"
-              ></div>
-              <div
-                class="md:w-1/2 h-[24px] bg-gray-300 rounded-4xl animate-pulse"
-              ></div>
-              <div
-                class="md:w-1/2 h-[24px] bg-gray-300 rounded-4xl animate-pulse"
-              ></div>
-              <div
-                class="md:w-1/2 h-[24px] bg-gray-300 rounded-4xl animate-pulse"
-              ></div>
-              <div
-                class="md:w-1/2 h-[24px] bg-gray-300 rounded-4xl animate-pulse"
-              ></div>
-            </ul>
-          </div>
-          <div class="md:w-1/2 w-full flex md:justify-end">
-            <div
-              class="md:w-1/2 w-full h-[400px] bg-gray-300 rounded-4xl animate-pulse"
-            ></div>
-          </div>
-        </div>
-      </div> -->
-      <Head>
-        <Title>تن ساز | درباره ما</Title>
-        <!-- <Link rel="canonical" :href="config.public.websiteURL + decodeURI(route.fullPath)" /> -->
-        <Meta name="description" content="کلینیک زیبایی و لاغری تن ساز" />
-        <Meta property="og:description" content="کلینیک زیبایی و لاغری تن ساز" />
-        <Meta property="og:image" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
-        <Meta property="og:image:secure_url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
-        <Meta property="og:image:width" content="400" />
-        <Meta property="og:image:height" content="300" />
-        <Meta property="og:image:alt" content="تن ساز | درباره ما" />
-        <Meta property="og:url" content="https://tansazmed.com/wp-content/uploads/2024/08/IMG_5022-1024x646.png" />
-      </Head>
-      <div>
-        <div
-          class="flex w-full flex-col-reverse md:flex-row justify-between gap-5"
-        >
-          <div class="md:w-1/2 flex flex-col justify-center space-y-4 text-right">
-            <h1 class="text-3xl font-bold mb-4">
-              دکتر <b class="text-primary">سروش باقری</b>
-            </h1>
-            <ul class="space-y-3 text-[14px] list-disc list-inside">
-              <li class="flex items-center text-justify gap-2">
-                فارغ التحصیل پزشکی شیراز1377
-              </li>
-              <li class="flex items-center text-justify gap-2">
-                <span>عضو انجمن علمی آموزش پزشکی ایران</span>
-              </li>
-              <li class="flex items-center text-justify gap-2">
-                <span>عضو انجمن علمی پزشکی لیزر ایران</span>
-              </li>
-              <li class="flex items-center text-justify gap-2">
-                <span>عضو انجمن علمی تغذیه ایران</span>
-              </li>
-              <li class="flex items-center text-justify gap-2">
-                <span>مدرس دوره های استتیک</span>
-              </li>
-              <li class="flex items-center text-justify gap-2">
-                <span
-                  >بیش از 6 سال تجربه طبابت تخصصی در حوزه استتیک و زیبایی و
-                  اقدامات جراحی</span
-                >
-              </li>
-              <li class="flex items-center text-justify gap-2">
-                <span
-                  >دارای مدارک بین المللی حرفه استتیک از آلمان، انگلستان، کانادا و
-                  جمهوری چک</span
-                >
-              </li>
-              <li class="flex items-center text-justify gap-2">
-                <span
-                  >دارای مدارک معتبر دوره های تخصصی استتیک و تکنولوژی زیبایی از
-                  دانشگاه شهید بهشتی، انجمن علمی پزشکی ایران</span
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="md:w-1/2 flex justify-end">
-            <img
-              src="/images/dr-sorosh-eghbali.jpg"
-              alt="دکتر سروش باقری"
-              class="rounded-[35px] md:w-[300px]"
-            />
-          </div>
-        </div>
-        <div class="mt-[60px]">
-          <div class="text-right">
-            <h1 class="text-3xl font-bold mb-2">
-              درباره کلینیک <span class="text-primary">تن ساز</span>
-            </h1>
-            <p class="text-gray-500 mb-6">همه‌ی آن چیزی که باید بدانید</p>
-            <p class="mb-8  text-justify">
-              این مجموعه با رویکردی نوین در بحث پزشکی زیبایی، بویژه ترمیمی بدون
-              جراحی در شیراز راه اندازی شده است.
+      </button>
+    </div>
+
+    <div
+      class="flex flex-col py-[60px] px-[16px] gap-[30px] w-full bg-[#1D1D1D] mt-[43px]"
+    >
+      <p class="text-[20px] font-bold text-[#ffffff]">
+        <span>مزیت های کلینیک </span>
+        <span class="text-brand">تــــــن ســـــــــــــاز </span>
+        <span>؟</span>
+      </p>
+
+      <div class="flex flex-col gap-[25px]">
+        <div class="flex gap-[8px] items-start" v-for="x in 5">
+          <img src="/icons/red-hearth.svg" alt="" class="mt-[2px]" />
+
+          <div class="flex flex-col gap-[2px]">
+            <p class="text-[16px] font-semibold leading-[26px] text-[#ffffff]">
+              مواد با کیفیت
             </p>
-            <p class="mb-4">از مزایای کلینیک تن ساز میتوان به</p>
-            <ul class="space-y-3 mb-8  text-justify">
-              <li class="flex items-center gap-2 md:text-base text-[14px]">
-                <Icon name="ei:check" size="17px" style="color: #ef172e" />
-                <span>استفاده از کادر پزشکی مجرب، متخصص و فوق تخصص</span>
-              </li>
-              <li class="flex items-center gap-2 md:text-base text-[14px]">
-                <Icon name="ei:check" size="17px" style="color: #ef172e" />
-                <span
-                  >استفاده از دستگاه های روز دنیا با پیشرفته ترین تکنولوژی (دارای
-                  FDA و CE)</span
-                >
-              </li>
-              <li class="flex items-center gap-2 md:text-base text-[14px]">
-                <Icon name="ei:check" size="17px" style="color: #ef172e" />
-                <span
-                  >استفاده از مواد تزریقی با کیفیت (برند های معتبر اروپایی)</span
-                >
-              </li>
-              <li class="flex items-center gap-2 md:text-base text-[14px]">
-                <Icon name="ei:check" size="17px" style="color: #ef172e" />
-                <span>محیط لوکس و کاملا بهداشتی</span>
-              </li>
-            </ul>
-            <p class="mb-8">اشاره کرد.</p>
-            <div class="grid md:grid-cols-3 sm:grid-cols-2 gap-6">
-              <div
-                class="relative rounded-xl overflow-hidden group hover:shadow-xl transition-all duration-300"
-              >
-                <img
-                  src="/images/clinic1.jpg"
-                  alt="کلینیک زیبایی تن ساز شیراز"
-                  class="w-full h-[230px] object-cover"
-                />
-                <div
-                  class="absolute bottom-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4"
-                >
-                  <p class="text-white text-center">کلینیک زیبایی تن ساز شیراز</p>
-                </div>
-              </div>
-              <div
-                class="relative rounded-xl overflow-hidden group hover:shadow-xl transition-all duration-300"
-              >
-                <img
-                  src="/images/clinic2.jpg"
-                  alt="کلینیک زیبایی تن ساز شیراز"
-                  class="w-full h-[230px] object-cover"
-                />
-                <div
-                  class="absolute bottom-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4"
-                >
-                  <p class="text-white text-center">کلینیک زیبایی تن ساز شیراز</p>
-                </div>
-              </div>
-              <div
-                class="relative rounded-xl overflow-hidden group hover:shadow-xl transition-all duration-300"
-              >
-                <img
-                  src="/images/clinic3.jpg"
-                  alt="کلینیک زیبایی تن ساز شیراز"
-                  class="w-full h-[230px] object-cover"
-                />
-                <div
-                  class="absolute bottom-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4"
-                >
-                  <p class="text-white text-center">کلینیک زیبایی تن ساز شیراز</p>
-                </div>
-              </div>
-            </div>
+
+            <p class="text-[12px] leading-[22px] text-[#ffffff]">
+              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+              استفاده با تولید سادگی از طراحان گرافیک است.
+            </p>
           </div>
         </div>
       </div>
     </div>
+
+    <div class="flex flex-col gap-[40px] w-full px-[16px] mb-[40px]">
+      <div class="flex flex-col mt-[43px] w-full">
+        <p class="text-[20px] font-bold text-[#ffffff]">
+          <span class="text-brand">متخصصان </span>
+          <span class="text-[#000000]">ما</span>
+        </p>
+        <p class="text-[14px] text-[#000000]">
+          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم است.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-x-[16px] gap-y-[30px]">
+        <div class="flex flex-col items-center" v-for="x in 6">
+          <img
+            src="/images/Surgery1.png"
+            alt=""
+            class="w-full rounded-[22px]"
+          />
+
+          <p class="mt-[16px] text-[16px] font-semibold text-[#2E2E2E]">
+            ساغر میرعباسی
+          </p>
+          <p class="text-[14px] font-medium text-brand">متخصص زیبایی</p>
+        </div>
+      </div>
+    </div>
+    <HomeBlogsSection :is-transparent="true" />
   </div>
 </template>
