@@ -2,10 +2,13 @@
   <div :class="!isTransparent ? 'bg-white' : ''">
     <img
       class="px-4 pt-[30px]"
-      src="/images/blog-banner.png"
+      :src="isBlogDetailPage ? '/images/contact-us.png' : '/images/blog-banner.png'"
       alt="blog-banner"
     />
-    <h2 class="text-xl font-bold leading-7 text-center pb-4 pt-[30px]">
+    <h2 v-if="isBlogDetailPage" class="text-xl font-bold leading-7 text-center pb-4 pt-[30px]">
+      <span class="text-brand">پربازدیدترین</span> مقالات
+    </h2>
+    <h2 v-else class="text-xl font-bold leading-7 text-center pb-4 pt-[30px]">
       <span class="text-brand">مقالات کاربردی</span> برای شما عزیزان
     </h2>
     <div class="container mx-auto px-4 pb-8">
@@ -117,6 +120,11 @@
 const props = defineProps({
   isTransparent: Boolean,
 });
+
+const route = useRoute();
+
+const isBlogDetailPage = computed(() => route.path.startsWith('/blogs/'));
+
 
 const activeIndex = ref(0);
 

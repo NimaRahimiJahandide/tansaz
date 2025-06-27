@@ -70,16 +70,18 @@ onMounted(() => {
     </div>
 
     <div class="grid grid-cols-2 gap-[16px] mt-[15px]">
-      <img :src="item.image" alt="" class="rounded-[10px] w-full aspect-square" v-for="item in items" />
+      <img @click="isModalOpen = !isModalOpen" :src="item.image" alt="" class="rounded-[10px] w-full aspect-square"
+        v-for="item in items" />
     </div>
 
     <button class="mt-[22px] w-full bg-brand text-center rounded-full h-[48px]">
-      <NuxtLink to="#" class="bg-brand text-white font-semibold leading-[26px] rounded-full w-full">مشاهده بیشتر</NuxtLink>
+      <NuxtLink to="#" class="bg-brand text-white font-semibold leading-[26px] rounded-full w-full">مشاهده بیشتر
+      </NuxtLink>
     </button>
   </div>
 
-  <div class="fixed top-0 left-0 w-screen h-screen bg-[#0000004a] duration-300 z-[2] pointer-events-none"
-    :class="isModalOpen ? ' opacity-100' : 'opacity-0'" />
+  <div v-if="isModalOpen"
+    class="fixed top-0 left-0 w-screen h-screen bg-black/40 backdrop-blur-sm z-[50] transition-opacity duration-300" />
 
   <div
     class="z-[99] flex flex-col py-[20px] bg-[#ffffff] fixed translate-x-[-50%] translate-y-[-50%] left-[50%] top-[50%] rounded-[22px] duration-300"
@@ -88,7 +90,7 @@ onMounted(() => {
       <div class="flex items-center justify-between w-full">
         <header class="">
           <h1 class="text-[16px] font-bold">
-            <span class="text-brand">تصاویر</span>مجموعه
+            <span class="text-brand">تصاویر</span>فضایی برای
           </h1>
         </header>
 
@@ -96,7 +98,7 @@ onMounted(() => {
       </div>
     </div>
 
-    <img src="/images/before.jpg" alt="" class="w-full aspect-square mt-[20px]" />
+    <img src="/images/tour1.png" alt="" class="w-full aspect-square mt-[20px]" />
 
     <div class="flex flex-col gap-[6px] mt-[14px] px-[16px]">
       <div class="flex justify-between items-center">
