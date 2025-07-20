@@ -143,11 +143,11 @@ onBeforeUnmount(() => {
       </div>
     </section>
 
-    <section class="bg-[#EFEFEF] pb-[30px] pt-[18px] w-full px-[16px] flex flex-col gap-4">
+    <section class="bg-[#EFEFEF] pb-[30px] pt-[18px] w-full px-[16px] flex flex-col gap-4" >
       <h2 class="text-lg font-semibold">
         <span class="text-brand">110</span> مقاله وجود دارد
       </h2>
-      <article class="rounded-2xl overflow-hidden relative" v-for="blog in blogs" :key="blog"  @click="goToBlog(blog.id)">
+      <article class="rounded-2xl overflow-hidden relative" v-for="blog in blogs" :key="blog"  @click="goToBlog(blog.id)" data-aos="fade-up">
         <!-- Heart image -->
         <span class="absolute right-4 top-3 cursor-pointer z-10" @click.stop="toggleLike(blog.id)">
           <img v-if="blog.liked" src="/icons/Heart-white.svg" alt="Heart-white" />
