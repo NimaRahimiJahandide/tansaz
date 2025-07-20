@@ -65,7 +65,8 @@
                 <img src="/icons/services.svg" alt="services" />
                 <span class="text-[#2E2E2E] leading-[34px] font-medium">معرفی خدمات</span>
               </div>
-              <Icon :name="isServicesOpen ? 'uil:angle-up' : 'uil:angle-down'" size="24" style="color: #000" />
+              <Icon v-if="isServicesOpen" name="flowbite:angle-up-outline" size="16" style="color: #000" />
+              <Icon v-if="!isServicesOpen" name="uil:angle-down"  size="24" style="color: #000" />
             </li>
             <transition name="submenu" @enter="onEnter" @leave="onLeave">
               <ul v-if="isServicesOpen" class="mr-8 mt-3 border-r-2 border-[#E1E1E1] transition-all duration-300">
