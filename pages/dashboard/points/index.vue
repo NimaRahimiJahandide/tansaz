@@ -1,107 +1,192 @@
 <template>
-  <div class="min-h-screen bg-gray-100">
-    <LoadingComponent v-show="loadingState.isLoading" />
+  <div class="min-h-screen bg-[#151515] text-white">
+  <DashboardGlobalHeader />
 
-    <div class="flex flex-col md:flex-row mt-4 px-4 gap-8" v-show="!loadingState.isLoading">
-      <DashboardSidebarComponent class="hidden md:block"/>
-
-      <!-- Main Content -->
-      <div class="w-full md:w-3/4">
-        <!-- Points Earned Section -->
-        <div class="flex justify-between items-center py-6">
-          <div class="text-black md:text-[40px] font-bold text-[20px]">امتیازات</div>
-        </div>
-        <div class="py-5 container md:px-5 mx-auto">
-          <div>
-            <div class="mx-auto space-y-6 max-w-[1240px]">
-              <div
-                v-for="(point, index) in points"
-                :key="index"
-                class="container bg-white rounded-[16px] transition-all duration-300"
-              >
-                <div
-                  class="question transition-all duration-300 flex items-center justify-between p-4 cursor-pointer"
-                  :class="activeIndex === index ? 'rounded-t-[16px] border-b-[.5px] border-[rgba(153,153,153,.3)]' : 'rounded-[16px]'"
-                  @click="toggleAnswer(index)"
-                >
-                  <span class="md:text-[20px] text-[12px]  line-clamp-1 lg:line-clamp-none">{{point.point}} امتیاز بابت {{point.description}}</span>
-                  
-                  <span
-                    class="icon text-2xl transition-transform duration-300"
-                  >
-                  <Icon v-if="activeIndex === index" name="fe:arrow-down" size="24" style="color: #999999" />
-                  <Icon v-else name="fe:arrow-up" size="24" style="color: #999999" />
-                  </span>
-                </div>
-                <div
-                  class="answercont bg-[#FAFAFA] overflow-hidden rounded-b-[16px] transition-max-h duration-300"
-                  :style="{ maxHeight: activeIndex === index ? '50vh' : '0px' }"
-                >
-                  <article class="answer p-4 md:text-[20px] text-[12px] leading-[180%]">
-                    <div class="flex gap-5">
-                      <span class="font-semibold">تاریخ:</span>
-                      <span>{{point.created_at_fa}}</span>
-                    </div>
-                    <div class="flex gap-5">
-                      <span class="font-semibold">امتیاز :</span>
-                      <span>{{point.point}}</span>
-                    </div>
-                    <div class="flex gap-5">
-                      <span class="font-semibold">توضیحات:</span>
-                      <span>{{point.description }}</span>
-                    </div>
-                  </article>
-                </div>
-              </div>
-            </div>
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto p-4 lg:p-6">
+      <!-- Desktop Layout -->
+      <div class="hidden lg:block">
+        <div class="flex justify-between items-center mb-8">
+          <div class="flex items-center space-x-4">
+            <button 
+              @click="handleEarnMore"
+              class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+              </svg>
+              <span>کسب امتیاز بیشتر</span>
+            </button>
+            <button 
+              @click="handleConvertPoints"
+              class="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+              </svg>
+              <span>تبدیل امتیاز</span>
+            </button>
+          </div>
+          <div class="text-center">
+            <h1 class="text-2xl font-bold mb-2">
+              کل امتیاز های من: 
+              <span class="text-red-500">{{ totalPoints }}</span> 
+              {{ totalPointsText }}
+            </h1>
+            <button class="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-lg flex items-center space-x-2 mx-auto transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <span>امتیازات من</span>
+            </button>
           </div>
         </div>
-        <DashboardPaginationComponent  />
+
+        <!-- Filters -->
+        <div class="mb-6">
+          <DashboardPointPointsFilters v-model="filters" />
+        </div>
+
+        <!-- Points Table -->
+        <DashboardPointPointsTable :items="filteredPointsHistory" />
+      </div>
+
+      <!-- Mobile Layout -->
+      <div class="lg:hidden">
+        <!-- Points Summary -->
+        <div class="mb-6">
+          <DashboardPointPointsSummary 
+            :total-points="totalPoints"
+            :total-points-text="totalPointsText"
+            @convert-points="handleConvertPoints"
+            @earn-more="handleEarnMore"
+          />
+        </div>
+
+        <!-- Mobile Filters -->
+        <div class="mb-6">
+          <DashboardPointPointsFilters v-model="filters" />
+        </div>
+
+        <!-- Mobile Points History -->
+        <div class="space-y-4">
+          <DashboardPointPointsHistoryItem 
+            v-for="(item, index) in filteredPointsHistory" 
+            :key="index"
+            :item="item"
+            :index="index + 1"
+          />
+        </div>
       </div>
     </div>
+
+    <!-- Chat Widget -->
+    <ChatWidget />
   </div>
 </template>
 
-<script setup lang="ts">
-import numeral from "numeral";
-import axios from "axios";
-import { useLoadingState } from "@/store/loadingState";
-const loadingState = useLoadingState();
+<script setup>
+// Composables and imports
+const router = useRouter()
 
-import { useUserStore } from '@/store/user'
-definePageMeta({
-  layout: 'dashboard'
-});
+// Reactive data
+const totalPoints = ref(1200)
+const totalPointsText = ref('هزار و دویست')
 
-const activeIndex = ref<number | null>(null);
+const filters = ref({
+  fromDate: '1404/03/25',
+  toDate: '1404/06/25',
+  type: 'همه'
+})
 
-const toggleAnswer = (index: number): void => {
-  activeIndex.value = activeIndex.value === index ? null : index;
-};
+const pointsHistory = ref([
+  {
+    points: 30,
+    type: 'قرعه کشی',
+    description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از گرافیک است.',
+    date: '1404/06/25 - 15:30'
+  },
+  {
+    points: 5,
+    type: 'تخفیف',
+    description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از گرافیک است.',
+    date: '1404/06/25 - 15:30'
+  },
+  {
+    points: 23,
+    type: 'خرید انه شانس',
+    description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از گرافیک است.',
+    date: '1404/06/25 - 15:30'
+  },
+  {
+    points: 11,
+    type: 'قرعه کشی',
+    description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از گرافیک است.',
+    date: '1404/06/25 - 15:30'
+  },
+  {
+    points: 5,
+    type: 'تخفیف',
+    description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از گرافیک است.',
+    date: '1404/06/25 - 15:30'
+  },
+  {
+    points: 11,
+    type: 'قرعه کشی',
+    description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از گرافیک است.',
+    date: '1404/06/25 - 15:30'
+  },
+  {
+    points: 8,
+    type: 'خرید انه شانس',
+    description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از گرافیک است.',
+    date: '1404/06/24 - 14:20'
+  },
+  {
+    points: 15,
+    type: 'قرعه کشی',
+    description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از گرافیک است.',
+    date: '1404/06/23 - 16:45'
+  }
+])
 
-const userStore = useUserStore()
+// Computed properties
+const filteredPointsHistory = computed(() => {
+  if (filters.value.type === 'همه') {
+    return pointsHistory.value
+  }
+  return pointsHistory.value.filter(item => item.type === filters.value.type)
+})
 
-const points = ref({});
+// Methods
+const handleEarnMore = () => {
+  // Handle earn more points logic
+  console.log('Navigating to earn more points...')
+  // router.push('/dashboard/earn-points')
+}
 
-const getPoints = async () => {
-  loadingState.isLoading = true
-  await axios.get(`/points`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
-    })
-    .then(response => {
-      points.value = response.data.data;
-      loadingState.isLoading = false
-    }).catch(err => {
-      console.log(err);
-      loadingState.isLoading = false
-    }) 
-};
+const handleConvertPoints = () => {
+  // Handle convert points logic
+  console.log('Navigating to convert points...')
+  // router.push('/dashboard/convert-points')
+}
 
-const formatPrice = (price) => {
-  return numeral(price).format("0,0");
-};
+// Meta tags for SEO
+useSeoMeta({
+  title: 'امتیازات من - تن ساز',
+  description: 'مشاهده و مدیریت امتیازات خود در سیستم تن ساز'
+})
 
-onMounted(async  () => {
-  await getPoints();
-});
+// Page meta
+// definePageMeta({
+//   layout: 'dashboard',
+//   middleware: 'auth' // Add authentication middleware if needed
+// })
 </script>
+
+<style scoped>
+/* Add any additional custom styles if needed */
+.hover\:bg-gray-750:hover {
+  background-color: #374151;
+}
+</style>

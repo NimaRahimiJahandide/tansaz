@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <div class="flex flex-col px-[16px] bg-[#f5f5f5] pt-[30px]">
+  <div class="flex flex-col px-[16px] bg-[#F5F5F5] pt-[30px]">
     <p class="text-[20px] font-bold">
       <span class="text-[#000000]"> با</span>
       <span class="text-[#ED1C24]"> ثبت دیدگاه</span>
@@ -18,29 +18,20 @@
     <div class="flex flex-col gap-[4px] mt-[25px]">
       <p class="text-[14px] font-semibold text-[#000000]">نام و نام خانوادگی</p>
 
-      <input
-        type="text"
-        name=""
-        id=""
+      <input type="text" name="" id=""
         class="px-[16px] py-[8px] text-[14px] placeholder-[#929AA5] bg-[#ffffff] w-full h-[42px] rounded-[16px] focus:outline-0"
-        placeholder="نام کامل  خود را وارد کنید"
-      />
+        placeholder="نام کامل  خود را وارد کنید" />
     </div>
     <div class="flex flex-col gap-[4px] mt-[25px]">
       <p class="text-[14px] font-semibold text-[#000000]">نظر شما</p>
 
-      <textarea
-        type="text"
-        name=""
-        id=""
+      <textarea type="text" name="" id=""
         class="px-[16px] py-[8px] text-[14px] placeholder-[#929AA5] bg-[#ffffff] w-full h-[126px] rounded-[16px] focus:outline-0"
-        placeholder="نظر خود را بنویسید"
-      />
+        placeholder="نظر خود را بنویسید" />
     </div>
 
     <button
-      class="w-[134px] h-[36px] flex justify-center items-center rounded-[100px] bg-[#ED1C24] text-[14px] font-semibold text-[#ffffff] my-[28px]"
-    >
+      class="w-[134px] h-[36px] flex justify-center items-center rounded-[100px] bg-[#ED1C24] text-[14px] font-semibold text-[#ffffff] my-[28px]">
       ارسال و ثبت نظر
     </button>
   </div>
@@ -56,7 +47,7 @@
       <div class="size-[28px] rounded-full bg-[#000000]" />
 
       <div class="flex flex-col flex-1">
-        <div class="flex items-center gap-[4px]">
+        <div class="flex items-center gap-[6px]">
           <p class="text-[12px] font-semibold text-[#000000]">هانیه کرانی</p>
 
           <p class="text-[12px] text-[#828282]">1 روز قبل</p>
@@ -68,6 +59,7 @@
         </p>
 
         <div class="flex items-center gap-[3px] mt-[10px]">
+          <Icon name="ci:arrow-undo-down-left" size="14" style="color: #0077FF" />
           <p class="text-[12px] font-semibold text-[#0077FF]">پاسخ</p>
         </div>
       </div>
@@ -78,5 +70,26 @@
 
       <div class="h-[1px] flex-1 bg-[#E1E1E1]" />
     </div>
+    <div class="flex gap-[11px] mt-[25px]">
+      <div class="size-[28px] rounded-full bg-[#000000]" />
+
+      <div class="flex flex-col flex-1">
+        <div class="flex items-center gap-[6px]">
+          <p class="text-[12px] font-semibold text-[#000000]">هانیه کرانی</p>
+
+          <p class="text-[12px] text-[#828282]">1 روز قبل</p>
+        </div>
+        <p class="text-[12px] leading-[20px] text-[#2E2E2E] mt-[5px]">
+          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+          استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
+          ستون و سطرآنچنان که لازم است.
+        </p>
+
+        <div class="flex items-center gap-[3px] mt-[10px]">
+          <Icon name="ci:arrow-undo-down-left" size="14" style="color: #0077FF" />
+          <p class="text-[12px] font-semibold text-[#0077FF]">پاسخ</p>
+        </div>
+      </div>
+    </div> 
   </div>
 </template>

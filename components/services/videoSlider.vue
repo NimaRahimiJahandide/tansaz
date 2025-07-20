@@ -47,9 +47,9 @@ defineProps({
         </div>
 
         <img
-          src="/images/blog1.png"
+          src="/images/services2.png"
           alt=""
-          class="h-[60px] w-[116px] rounded-[12px]"
+          class="h-[60px] w-[116px] object-cover rounded-[12px]"
         />
 
         <div

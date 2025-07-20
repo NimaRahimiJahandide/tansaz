@@ -1,6 +1,15 @@
 <script setup>
 import { useStartWebsite } from "@/store/initWebsite";
 const startWebsite = useStartWebsite();
+const router = useRouter()
+
+const goBack = () => {
+  if (window.history.length > 1) {
+    router.back()
+  } else {
+    router.push('/')
+  }
+}
 
 onMounted(() => {
   startWebsite.setImageClicked(true);
@@ -33,7 +42,7 @@ const faqs = [
       "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.",
   },
 ];
-const categoryList = ["خدمات لاغری", "آنالیز اندارم", "عضلع ساز"];
+const categoryList = ["خدمات لاغری", "آنالیز اندارم", "عضله ساز"];
 const selectedCategory = ref(0);
 const isCategoryOpen = ref(false);
 </script>
@@ -47,7 +56,7 @@ const isCategoryOpen = ref(false);
         </h1>
       </header>
 
-      <img src="/icons/left-arrow.svg" alt="" />
+      <img @click="goBack" src="/icons/left-arrow.svg" alt="" />
     </div>
 
     <div

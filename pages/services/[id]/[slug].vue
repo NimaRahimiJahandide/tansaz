@@ -1,6 +1,7 @@
 <script setup>
 import { useStartWebsite } from "@/store/initWebsite";
 const startWebsite = useStartWebsite();
+const activeIndex = ref(null);
 
 onMounted(() => {
   startWebsite.setImageClicked(true);
@@ -10,37 +11,28 @@ onMounted(() => {
 <template>
   <div>
     <div class="w-full h-[354px] relative">
-      <div
-        class="absolute top-0 left-0 w-full h-[354px] bg-[#000000af] z-[2]"
-      />
+      <div class="absolute top-0 left-0 w-full h-[354px] bg-[#000000af] z-[2]" />
       <img src="/images/blog1.png" alt="" class="w-full h-[354px]" />
       <div class="flex flex-col absolute top-[94px] right-[16px] z-[3]">
         <p class="text-[#ED1C24] text-[30px] font-bold">تزریقات</p>
         <p class="text-[#FFFFFF] text-[30px] font-bold">زیبایی</p>
       </div>
 
-      <div
-        class="grid grid-cols-3 gap-[10px] px-[16px] w-full absolute top-[198px] right-0 z-[3]"
-      >
-        <div
-          v-for="x in 6"
-          class="h-[38px] rounded-[30px] flex items-center justify-center backdrop-blur-xl inset-shadow-[0px_-5px_21px_0px_#e3edef41,0px_70px_47px_-74px_#CAACFF4D]"
-        >
+      <div class="grid grid-cols-3 gap-[10px] px-[16px] w-full absolute top-[198px] right-0 z-[3]">
+        <div v-for="(x, index) in 6" :key="index" @click="activeIndex = index"
+          class="h-[38px] rounded-[30px] flex items-center justify-center cursor-pointer backdrop-blur-xl inset-shadow-[0px_-5px_21px_0px_#e3edef41,0px_70px_47px_-74px_#CAACFF4D]"
+          :class="activeIndex === index ? 'bg-brand' : 'bg-transparent'">
           <p class="text-[14px] text-[#ffffff]">بوتاکس</p>
         </div>
       </div>
     </div>
-    <div
-      class="flex flex-col pt-[20px] px-[16px] mt-[-40px] relative bg-[#F8F8F8] rounded-t-[40px] pb-[45px] z-[10]"
-    >
+    <div class="flex flex-col pt-[20px] px-[16px] mt-[-40px] relative bg-[#F8F8F8] rounded-t-[40px] pb-[16px] z-[10]">
       <p class="text-[20px] font-bold">
         <span class="text-[#ED1C24]">مزوتراپی</span>
         <span class="text-[#000000]"> چیست ؟</span>
       </p>
 
-      <p
-        class="text-[16px] font-semibold text-[#2E2E2E] leading-[30px] mt-[10px]"
-      >
+      <p class="text-[16px] text-justify text-[#2E2E2E] leading-[30px] mt-[10px]">
         مزوتراپی تکنیکی است برای جوانسازی ، سفت کردن و بازسازی پوست که توسط
         تزریق عصاره گیاهان ، ویتامینها ، هورمونها در پوست انجام می گیرید . این
         تکنیک همچنین برای حذف چربی ها نیز کاربرد دارد .مزوتراپی باعث تغذیه و
@@ -52,19 +44,19 @@ onMounted(() => {
         پوست، محو کردن خطوط پوست، بهبود ، روشنایی پوست ملتهب و قرمز، سفت کردن
         پوست شل می باشد.
       </p>
+
+      <div class="flex items-center justify-end">
+        <ServicesFastSupport />
+      </div>
     </div>
 
     <HomeBeforAfterExample />
-    <ServicesVideoSlider :data="['/images/blog1.png']" />
+    <ServicesVideoSlider :data="['/images/services2.png']" />
     <HomeFaqSection />
 
-    <div
-      class="flex flex-col w-full mt-[30px] bg-[#F5F5F5] px-[16px] py-[30px] relative"
-    >
-      <div
-        class="absolute bottom-0 right-0 w-full bg-gradient-to-t h-[200px] from-[#00000016] to-[#00000000]"
-      ></div>
-
+    <!-- slider -->
+    <section class="flex flex-col w-full bg-[#F5F5F5] px-[16px] py-[30px] relative">
+      <div class="absolute bottom-0 right-0 w-full bg-gradient-to-t h-[200px] from-[#00000016] to-[#00000000]"></div>
       <p class="text-[20px] font-bold">
         <span class="text-[#ED1C24]"> متریال درجه یک </span>
 
@@ -72,7 +64,10 @@ onMounted(() => {
 
         <span class="text-[#ED1C24]"> ! </span>
       </p>
-      <p class="text-[20px] font-bold mt-[40px]">
+
+      <ServicesSliderComponent />
+
+      <p class="text-[20px] font-bold">
         <span class="text-[#000000]"> مزو تراپی در کمتر از 20 دقیقه، </span>
 
         <span class="text-[#ED1C24]"> بدون درد </span>
@@ -81,7 +76,7 @@ onMounted(() => {
         <span class="text-[#ED1C24]"> بی حسی </span>
         <span class="text-[#000000]"> موضعی انجام می شود. </span>
       </p>
-    </div>
+    </section>
 
     <Comments />
     <HomeBlogsSection />
@@ -89,7 +84,10 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* .custom-shadow {
-  box-shadow: inset;
-} */
+.custom-gradient {
+  @apply bg-no-repeat bg-cover;
+  background-image:
+    linear-gradient(0deg, #F5F5F5, #F5F5F5),
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 90.73%, rgba(0, 0, 0, 0.2) 110.4%);
+}
 </style>
