@@ -34,7 +34,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <div class="flex flex-col items-center bg-[#EFEFEF] pt-[84px] pb-[50px] px-[16px]">
+    <section class="flex flex-col items-center bg-[#EFEFEF] pt-[84px] pb-[50px] px-[16px]">
       <div class="flex items-center justify-between w-full">
         <header class="">
           <h1 class="text-xl font-bold">
@@ -70,16 +70,16 @@ onMounted(() => {
         <p class="text-[14px] font-medium text-[#2E2E2E]">32 تصویر</p>
       </div>
   
-      <div class="grid grid-cols-2 gap-[16px] mt-[15px]">
-        <img @click="isModalOpen = !isModalOpen" :src="item.image" alt="" class="rounded-[16px] w-full aspect-square"
+      <div class="grid grid-cols-2 gap-[16px] mt-[15px]" >
+        <img @click="isModalOpen = !isModalOpen" :src="item.image" alt="" class="rounded-[16px] w-full aspect-square" data-aos="fade-up"
           v-for="item in items" :key="item.id" />
       </div>
   
-      <button class="mt-[22px] w-full bg-brand text-center rounded-full h-[48px]">
+      <button class="mt-[22px] w-full bg-brand text-center rounded-full h-[48px]" data-aos="fade-up">
         <NuxtLink to="#" class="bg-brand text-white font-semibold leading-[26px] rounded-full w-full">مشاهده بیشتر
         </NuxtLink>
       </button>
-    </div>
+    </section>
   
     <div v-if="isModalOpen"
       @click="isModalOpen = false"
