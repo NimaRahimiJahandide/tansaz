@@ -69,7 +69,7 @@ onMounted(() => {
       </article>
     </section>
 
-    <div class="fex flex-col gap-[8px] mt-[30px] w-full">
+    <div class="fex flex-col gap-[8px] mt-[30px] w-full" >
       <p class="text-[12px] text-[#828282]">
         آدرس و نقشه مسیر یابی تا کلینیک تن ساز
       </p>
@@ -90,7 +90,7 @@ onMounted(() => {
         در شبکه های اجتماعی با ما در ارتباط باشید
       </p>
 
-      <div class="flex flex-col gap-[12px]">
+      <div class="flex flex-col gap-[12px]" data-aos="fade-up">
         <div class="flex items-center gap-[16px] bg-white p-[15px] rounded-[15px]">
           <div class="flex justify-center items-center bg-[#ED1C24] size-[50px] rounded-[12px]">
             <Icon name="mdi:instagram" size="26" style="color: #fff" />
