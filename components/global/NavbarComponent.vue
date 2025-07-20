@@ -1,7 +1,7 @@
 <template>
-  <nav class="flex items-center  h-16 fixed w-full z-50 transition-colors duration-300" :class="{
+  <nav class="flex items-center h-16 fixed top-0 left-0 right-0 w-full z-[9999] transition-colors duration-300 will-change-transform" :class="{
     'bg-transparent': isServiceRoute  && !isScrolled,
-    'bg-white shadow-md': !isServiceRoute || isScrolled,
+    'bg-white': !isServiceRoute || isScrolled,
   }">
     <div class="container mx-auto px-4 py-2 flex justify-between items-center">
       <div class="flex gap-8 items-center">
