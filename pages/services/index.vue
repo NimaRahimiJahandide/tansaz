@@ -22,6 +22,48 @@ const handleServiceSelected = (service) => {
   console.log('Selected service:', service)
 }
 
+const services = ref([ 
+  {
+    id: 1,
+    title: 'پزشکان زیبایی',
+    image: '/images/service-init5.png'
+  },
+  {
+    id: 2,
+    title: 'جوانسازی',
+    image: '/images/service-init6.png'
+  },
+  {
+    id: 3,
+    title: 'تزریقات زیبایی',
+    image: '/images/service-init2.png'
+  },
+  {
+    id: 4,
+    title: 'اقدامات جراحی',
+    image: '/images/service-init3.png'
+  },
+  {
+    id: 5,
+    title: 'آنالیز دقیق چهره',
+    image: '/images/service-init4.png'
+  },
+  {
+    id: 6,
+    title: 'آنالیز دقیق چهره',
+    image: '/images/service-init4.png'
+  },
+  {
+    id: 7,
+    title: 'تزریقات زیبایی',
+    image: '/images/service-init6.png'
+  },
+  
+])
+
+const rightServices = computed(() => services.value.slice(0, 3))
+const leftServices = computed(() => services.value.slice(3))
+
 </script>
 
 <template>
@@ -48,16 +90,24 @@ const handleServiceSelected = (service) => {
 
       <div class="flex gap-[16px] mt-[35px]">
         <div class="flex flex-col gap-[23px] w-[171px]">
-          <ServicesCard @click="$router.push('/services/1/test')" v-for="x in 4" :key="x" />
+          <ServicesCard data-aos="fade-up"
+            v-for="service in leftServices"
+            :key="service.id"
+            :service="service"
+            @click="$router.push(`/services/${service.id}/test`)"
+          />
         </div>
         <div class="flex flex-col gap-[23px] w-[171px]">
           <p class="text-[16px] font-semibold">
             <span class="text-[#ED1C24]"> لاین زیبـایی </span>
-
             <span class="text-[#2E2E2E]"> مورد نظرتـان را انتخاب کنید </span>
           </p>
-
-          <ServicesCard @click="$router.push('/services/1/test')" v-for="x in 3" :key="x" />
+          <ServicesCard data-aos="fade-up"
+            v-for="service in rightServices"
+            :key="service.id"
+            :service="service"
+            @click="$router.push(`/services/${service.id}/test`)"
+          />
         </div>
       </div>
     </div>
