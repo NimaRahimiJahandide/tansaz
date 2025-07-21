@@ -1,8 +1,18 @@
 <script setup lang="ts">
 import { useLoadingState } from "../store/loadingState";
+import { ref } from 'vue';
 
 const loadingState = useLoadingState();
 const router = useRouter()
+const isSidebarOpen = ref(false)
+
+function openSidebar() {
+  isSidebarOpen.value = true
+}
+function closeSidebar() {
+  isSidebarOpen.value = false
+}
+
 onMounted(() => {
   if (!localStorage.getItem("token")) {
     router.push("/auth/login");
@@ -12,10 +22,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex">
-    <div class="flex flex-col w-full">
-        <DashboardNavbarComponent v-if="!loadingState.isLoading" class="sticky top-0 z-50" />
-      <slot />
+  <div class="min-h-screen bg-[#151515] text-white flex">
+    <!-- Sidebar (Desktop & Mobile) -->
+    <DashboardGlobalSidebar :is-open="isSidebarOpen" @close-sidebar="closeSidebar" />
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col">
+      <DashboardGlobalHeader @open-sidebar="openSidebar" />
+      <main class="flex-1 max-w-7xl mx-auto p-4 lg:p-6 w-full">
+        <slot />
+      </main>
     </div>
   </div>
 </template>

@@ -1,0 +1,155 @@
+<template>
+  <div>
+    <!-- Mobile Sidebar Overlay -->
+    <transition name="fade">
+      <div
+        v-if="isMobile && isOpen"
+        class="fixed inset-0 z-50 bg-black/60 flex"
+        @click.self="$emit('close-sidebar')"
+      >
+        <aside
+          class="w-64 bg-[#212121] h-full py-8 px-4 border-l rounded-l-[28px] border-[#232323] flex flex-col relative animate-slideInRight"
+        >
+          <button
+            class="absolute left-2 top-4 z-50 text-white"
+            @click="$emit('close-sidebar')"
+            aria-label="بستن سایدبار"
+          >
+            <Icon name="mdi:close" size="28" />
+          </button>
+          <div class="flex items-center mb-[1.875rem] px-2 relative">
+            <img src="/icons/new-logo.png" alt="tansaz logo" class="h-7 w-full object-contain" />
+          </div>
+          <nav class="flex-1 border-t border-[#E1E1E16B]">
+            <ul class="space-y-2">
+              <li v-for="item in items" :key="item.label">
+                <button
+                  class="w-full flex items-center px-4 py-3 rounded-lg transition-colors text-right gap-2 cursor-pointer"
+                  :class="item.active ? 'bg-[linear-gradient(90deg,_#ED1C24_0%,_#ED1C24_70.15%,_#FA5157_84.92%,_#ED1C24_100%)] text-white' : 'hover:bg-[#232323] text-gray-300'"
+                >
+                  <Icon :name="item.icon" size="22" :class="item.active ? 'text-white' : 'text-[#828282]'" />
+                  <span class="font-medium">{{ item.label }}</span>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </aside>
+      </div>
+    </transition>
+    <!-- Desktop Sidebar -->
+    <aside
+      v-if="!isMobile"
+      :class="[
+        'fixed right-0 top-0 z-40 transition-all duration-300',
+        isOpen
+          ? 'hidden lg:flex flex-col w-64 bg-[#212121] py-8 my-4 px-4 border-l rounded-[28px] border-[#232323]'
+          : 'w-14 mt-2 px-2  rounded-[28px] flex flex-col items-center justify-center'
+      ]"
+    >
+      <div v-if="isOpen" class="flex items-center mb-[1.875rem] px-2 relative">
+        <img src="/icons/new-logo.png" alt="tansaz logo" class="h-7 w-full object-contain" />
+        <img
+          src="/icons/arrow-right.svg"
+          alt="arrow-right"
+          class="h-6 object-contain absolute cursor-pointer -left-7 top-12"
+          @click="$emit('close-sidebar')"
+        />
+      </div>
+      <nav v-if="isOpen" class="flex-1 border-t border-[#E1E1E16B]">
+        <ul class="space-y-2">
+          <li v-for="item in items" :key="item.label">
+            <button
+              class="w-full flex items-center px-4 py-3 rounded-lg transition-colors text-right gap-2 cursor-pointer"
+              :class="item.active ? 'bg-[linear-gradient(90deg,_#ED1C24_0%,_#ED1C24_70.15%,_#FA5157_84.92%,_#ED1C24_100%)] text-white' : 'hover:bg-[#232323] text-gray-300'"
+            >
+              <Icon :name="item.icon" size="22" :class="item.active ? 'text-white' : 'text-[#828282]'" />
+              <span class="font-medium">{{ item.label }}</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+      <button
+        v-else
+        class="flex items-center justify-center w-10 h-10 rounded-full mt-2"
+        @click="$emit('close-sidebar')"
+        aria-label="باز کردن سایدبار"
+      >
+        <img src="/public/icons/Menu_Alt_01-white.svg" alt="menu" class="w-6 h-6 cursor-pointer">
+      </button>
+    </aside>
+  </div>
+</template>
+
+<script setup>
+import { computed, toRefs } from 'vue'
+const props = defineProps({
+  isOpen: Boolean
+})
+const emit = defineEmits(['close-sidebar'])
+
+const isMobile = computed(() => window.innerWidth < 1024)
+
+const items = [
+  {
+    label: 'داشبورد',
+    icon: `mynaui:grid`,
+    active: false
+  },
+  {
+    label: 'امتیازات من',
+    icon: `mdi:gift-outline`,
+    active: true
+  },
+  {
+    label: 'کیف پول',
+    icon: `ion:card-outline`,
+    active: false
+  },
+  {
+    label: 'پروفایل کاربری',
+    icon: `bx:user`,
+    active: false
+  },
+  {
+    label: 'نوبت های من',
+    icon: `mdi:calendar-tick-outline`,
+    active: false
+  },
+  {
+    label: 'سوابق و پرونده ها',
+    icon: `ci:swatches-palette`,
+    active: false
+  },
+  {
+    label: 'لیست پرداخت ها',
+    icon: `tdesign:check-rectangle`,
+    active: false
+  },
+  {
+    label: 'لیست نحوه امتیازدهی',
+    icon: `streamline-plump:book-1`,
+    active: false
+  },
+    {
+    label: 'آنالیز اندام و چهره',
+    icon: `tabler:border-corners`,
+    active: false
+  }
+]
+</script>
+
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+.animate-slideInRight {
+  animation: slideInRight 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+</style> 
