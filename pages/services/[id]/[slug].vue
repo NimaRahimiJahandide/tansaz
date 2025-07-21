@@ -77,9 +77,9 @@ const categories = ref([
       </div>
     </div>
 
-    <HomeBeforAfterExample data-aos="fade-up" />
-    <ServicesVideoSlider :data="['/images/services2.png']" data-aos="fade-up" />
-    <HomeFaqSection data-aos="fade-up" />
+    <HomeBeforAfterExample data-aos="fade-up" data-aos-once="true"/>
+    <ServicesVideoSlider :data="['/images/services2.png']" data-aos="fade-up" data-aos-once="true"/>
+    <HomeFaqSection data-aos="fade-up" data-aos-once="true"/>
 
     <!-- slider -->
     <section class="flex flex-col w-full bg-[#F5F5F5] px-[16px] py-[30px] relative" data-aos="fade-up">
@@ -105,8 +105,8 @@ const categories = ref([
       </p>
     </section>
 
-    <Comments data-aos="fade-up" />
-    <HomeBlogsSection data-aos="fade-up" />
+    <Comments data-aos="fade-up" data-aos-once="true"/>
+    <HomeBlogsSection data-aos="fade-up" data-aos-once="true"/>
   </div>
 </template>
 

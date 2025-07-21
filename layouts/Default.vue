@@ -4,9 +4,12 @@ import { useStartWebsite } from '@/store/initWebsite'
 const startWebsite = useStartWebsite();
 const route = useRoute();
 
-// Check if we're on the home page
+// Check if we're on the home or services page
 const isHomePage = computed(() => {
   return route.path === '/' || route.path === '/home';
+});
+const isServicesPage = computed(() => {
+  return route.path.startsWith('/services');
 });
 </script>
 
@@ -16,10 +19,12 @@ const isHomePage = computed(() => {
     <transition v-if="isHomePage" name="fade-navbar" appear>
       <NavbarComponent v-if="startWebsite.isStart" />
     </transition>
-    <!-- Show navbar immediately on other pages, but with transition for smoothness -->
-    <transition v-else name="fade-navbar" appear>
-      <NavbarComponent v-if="!isHomePage" />
+    <!-- Show navbar with transition only on services page -->
+    <transition v-else-if="isServicesPage" name="fade-navbar" appear>
+      <NavbarComponent v-if="startWebsite.isServicesStart" />
     </transition>
+    <!-- Show fixed navbar on all other pages -->
+    <NavbarComponent v-else />
     <main>
       <slot />
     </main>

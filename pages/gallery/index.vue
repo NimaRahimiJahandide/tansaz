@@ -71,11 +71,11 @@ onMounted(() => {
       </div>
   
       <div class="grid grid-cols-2 gap-[16px] mt-[15px]" >
-        <img @click="isModalOpen = !isModalOpen" :src="item.image" alt="" class="rounded-[16px] w-full aspect-square" data-aos="fade-up"
+        <img @click="isModalOpen = !isModalOpen" :src="item.image" alt="" class="rounded-[16px] w-full aspect-square" data-aos="fade-up" data-aos-once="true"
           v-for="item in items" :key="item.id" />
       </div>
   
-      <button class="mt-[22px] w-full bg-brand text-center rounded-full h-[48px]" data-aos="fade-up">
+      <button class="mt-[22px] w-full bg-brand text-center rounded-full h-[48px]" data-aos="fade-up" data-aos-once="true">
         <NuxtLink to="#" class="bg-brand text-white font-semibold leading-[26px] rounded-full w-full">مشاهده بیشتر
         </NuxtLink>
       </button>

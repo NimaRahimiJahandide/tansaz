@@ -115,7 +115,7 @@ onMounted(() => {
       <img @click="goBack" src="/icons/left-arrow.svg" alt="" />
     </section>
 
-    <section class="w-full flex flex-col items-center px-4" data-aos="fade-up">
+    <section class="w-full flex flex-col items-center px-4" data-aos="fade-up" data-aos-once="true">
       <!-- تصویر اصلی -->
       <div class="relative w-full max-w-md aspect-square rounded-2xl overflow-hidden mt-5">
         <img v-for="(image, i) in gallery" :key="i" :src="image" alt=""
@@ -134,7 +134,7 @@ onMounted(() => {
     </section>
 
 
-    <section class="flex flex-col px-[16px]" data-aos="fade-up">
+    <section class="flex flex-col px-[16px]" data-aos="fade-up" data-aos-once="true">
       <h2 class="text-xl font-bold mt-[16px]">
         <span class="text-brand">کلینیک تــــن ساز</span> متن معرفی
       </h2>
@@ -158,7 +158,7 @@ onMounted(() => {
       </button>
     </section>
 
-    <section class="flex flex-col py-[60px] px-[16px] gap-[30px] w-full bg-[#1D1D1D] mt-[43px]" data-aos="fade-up">
+    <section class="flex flex-col py-[60px] px-[16px] gap-[30px] w-full bg-[#1D1D1D] mt-[43px]" data-aos="fade-up" data-aos-once="true">
       <p class="text-[20px] font-bold text-[#ffffff]">
         <span>چرا کلینیک </span>
         <span class="text-brand">تــــــن ســـــــــــــاز </span>
@@ -178,7 +178,7 @@ onMounted(() => {
       </div>
     </section>
 
-    <section class="flex flex-col gap-[40px] w-full px-[16px] mb-[40px]">
+    <section class="flex flex-col gap-[40px] w-full px-[16px] mb-[40px]" data-aos="fade-up" data-aos-once="true">
       <div class="flex flex-col mt-[43px] w-full">
         <p class="text-[20px] font-bold text-[#ffffff]">
           <span class="text-brand">پزشکان </span>
@@ -190,9 +190,9 @@ onMounted(() => {
       </div>
 
       <div class="flex flex-col gap-y-[1.25rem]">
-        <AboutUsDoctorCard v-for="doctor in doctors" :key="doctor.id" :doctor="doctor" data-aos="fade-left" />
+        <AboutUsDoctorCard v-for="doctor in doctors" :key="doctor.id" :doctor="doctor" data-aos="fade-left"  data-aos-once="true"/>
       </div>
     </section>
-    <AboutUsEventsSection :is-transparent="true" data-aos="fade-up"/>
+    <AboutUsEventsSection :is-transparent="true" data-aos="fade-up" data-aos-once="true"/>
   </div>
 </template>
