@@ -1,9 +1,9 @@
 <template>
-    <div class="bg-white rounded-lg shadow-md p-4">
+    <div class="bg-white rounded-[16px] p-4">
         <!-- Question -->
         <div @click="toggleAnswer" class="flex items-center justify-between cursor-pointer">
             <h3 class="text-sm font-medium leading-[23px]">{{ question }}</h3>
-            <svg class="transition-transform duration-300" :class="{ 'rotate-180': showAnswer }" width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="transition-transform duration-300 ease-in-out" :class="{ 'rotate-180': showAnswer }" width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_362_39)">
                     <path
                         d="M8.47438 6.35397C8.80169 6.08701 9.2842 6.10584 9.58929 6.41094L15.4226 12.2443L15.4796 12.3077C15.7466 12.6351 15.7277 13.1176 15.4226 13.4227C15.1175 13.7278 14.635 13.7466 14.3077 13.4796L14.2442 13.4227L9.0001 8.17852L3.75596 13.4227C3.43052 13.7481 2.90301 13.7481 2.57757 13.4227C2.25214 13.0972 2.25214 12.5697 2.57757 12.2443L8.41091 6.41094L8.47438 6.35397Z"
@@ -53,16 +53,31 @@ const toggleAnswer = () => {
 
 <style scoped>
 .slide-fade-enter-active {
-    transition: all 0.3s ease;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
 }
 
 .slide-fade-leave-active {
-    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
 }
 
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-    transform: translateY(-20px);
+.slide-fade-enter-from {
+    transform: translateY(-10px);
     opacity: 0;
+    max-height: 0;
+}
+
+.slide-fade-leave-to {
+    transform: translateY(-5px);
+    opacity: 0;
+    max-height: 0;
+}
+
+.slide-fade-enter-to,
+.slide-fade-leave-from {
+    transform: translateY(0);
+    opacity: 1;
+    max-height: 500px;
 }
 </style>

@@ -16,65 +16,59 @@ const goBack = () => {
   }
 }
 
+const handleServiceSelected = (service) => {
+  startWebsite.setServicesStart(true)
+  // You can add additional logic here to handle the selected service
+  console.log('Selected service:', service)
+}
+
+const services = ref([ 
+  {
+    id: 1,
+    title: 'پزشکان زیبایی',
+    image: '/images/service-init5.png'
+  },
+  {
+    id: 2,
+    title: 'جوانسازی',
+    image: '/images/service-init6.png'
+  },
+  {
+    id: 3,
+    title: 'تزریقات زیبایی',
+    image: '/images/service-init2.png'
+  },
+  {
+    id: 4,
+    title: 'اقدامات جراحی',
+    image: '/images/service-init3.png'
+  },
+  {
+    id: 5,
+    title: 'آنالیز دقیق چهره',
+    image: '/images/service-init4.png'
+  },
+  {
+    id: 6,
+    title: 'آنالیز دقیق چهره',
+    image: '/images/service-init4.png'
+  },
+  {
+    id: 7,
+    title: 'تزریقات زیبایی',
+    image: '/images/service-init6.png'
+  },
+  
+])
+
+const rightServices = computed(() => services.value.slice(0, 3))
+const leftServices = computed(() => services.value.slice(3))
+
 </script>
 
 <template>
   <div>
-    <div v-if="!startWebsite.isServicesStart"
-      class="min-h-screen bg-[radial-gradient(65.64%_65.64%_at_50%_34.36%,_#565656_0%,_#353535_54.08%,_#1F1F1F_100%)] px-[30px] pt-[100px] pb-[30px] relative">
-      <!-- Background Images -->
-
-      <!-- Main Content -->
-      <div class="relative z-10 w-full">
-        <!-- Main Model Image -->
-        <div class="text-center -mb-20">
-          <div class="relative inline-block">
-            <img src="/images/services1.png" alt="Main Beauty Model" class="w-[196px] h-[236px] object-cover" />
-          </div>
-        </div>
-
-        <!-- Content Card -->
-        <div
-          class="bg-[#FFFFFF05] rounded-3xl px-[25px] pt-[70px] pb-[25px] backdrop-blur-[20px] shadow-[inset_0px_-5px_21px_0px_#E3EDEF33,inset_0px_0px_3px_0px_#9A92D24D,inset_0px_70px_47px_-75px_#CAACFF4D,inset_0px_2px_10px_-4px_#FFFFFF42,inset_0px_34px_29px_-49px_#FFFFFF80]">
-          <!-- Title -->
-          <div class="flex justify-between items-center mb-4">
-            <h1 class="text-[26px] font-bold text-white mb-2">
-              <span class="text-brand">خدمات</span> زیبایی
-            </h1>
-            <button class="text-white bg-[#FFFFFF1A] w-[63px] h-[29px] rounded-[40px] text-[14px] font-semibold"><span
-                class="text-brand">9</span> لاین</button>
-          </div>
-
-          <!-- Description -->
-          <div class="text-white text-sm leading-[23px] mb-8 text-justify font-medium">
-            <p>
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و
-              متون بلکه روزنامه و مجله در ستون و سطر آنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز است
-            </p>
-          </div>
-
-          <!-- Main CTA Button -->
-          <div>
-            <button @click="startWebsite.setServicesStart(true)"
-              class="w-full bg-brand text-white font-semibold h-[42px] rounded-full">
-              برو به صفحه خدمات زیبایی
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- Support Button -->
-      <div class="w-full pt-[60px] flex items-center justify-center">
-        <button
-          class="flex justify-center w-[169px] h-[46px] items-center bg-transparent border border-white text-white font-medium rounded-full shadow-lg">
-          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
-            </path>
-          </svg>
-          پشتیبانی سریع
-        </button>
-      </div>
-    </div>
+    <ServicesBeautyServicesSlider v-if="!startWebsite.isServicesStart" @service-selected="handleServiceSelected" />
 
     <div v-else class="flex flex-col pt-[20px] px-[16px] mt-[64px] pb-[30px] bg-[#EFEFEF]">
       <div class="flex items-center justify-between">
@@ -96,16 +90,24 @@ const goBack = () => {
 
       <div class="flex gap-[16px] mt-[35px]">
         <div class="flex flex-col gap-[23px] w-[171px]">
-          <ServicesCard @click="$router.push('/services/1/test')" v-for="x in 4" />
+          <ServicesCard data-aos="fade-up"
+            v-for="service in leftServices"
+            :key="service.id"
+            :service="service"
+            @click="$router.push(`/services/${service.id}/test`)"
+          />
         </div>
         <div class="flex flex-col gap-[23px] w-[171px]">
           <p class="text-[16px] font-semibold">
             <span class="text-[#ED1C24]"> لاین زیبـایی </span>
-
             <span class="text-[#2E2E2E]"> مورد نظرتـان را انتخاب کنید </span>
           </p>
-
-          <ServicesCard @click="$router.push('/services/1/test')" v-for="x in 3" />
+          <ServicesCard data-aos="fade-up"
+            v-for="service in rightServices"
+            :key="service.id"
+            :service="service"
+            @click="$router.push(`/services/${service.id}/test`)"
+          />
         </div>
       </div>
     </div>

@@ -2,13 +2,22 @@
 import { useStartWebsite } from '@/store/initWebsite'
 
 const startWebsite = useStartWebsite();
+const route = useRoute();
+
+// Check if we're on the home page
+const isHomePage = computed(() => {
+  return route.path === '/' || route.path === '/home';
+});
 </script>
 
 <template>
   <div class="flex flex-col w-full">
-    <transition name="fade-slide" appear>
+    <!-- Show navbar with transition only on home page -->
+    <transition v-if="isHomePage" name="fade-slide" appear>
       <NavbarComponent v-if="startWebsite.isStart" />
     </transition>
+    <!-- Show navbar immediately on other pages -->
+    <NavbarComponent v-if="!isHomePage" />
     <main>
       <slot />
     </main>
@@ -17,17 +26,3 @@ const startWebsite = useStartWebsite();
     </transition>
   </div>
 </template>
-
-<style scoped>
-.fade-slide-enter-active, .fade-slide-leave-active {
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.fade-slide-enter-from, .fade-slide-leave-to {
-  opacity: 0;
-  transform: translateY(-10px);
-}
-.fade-slide-enter-to, .fade-slide-leave-from {
-  opacity: 1;
-  transform: translateY(0);
-}
-</style>

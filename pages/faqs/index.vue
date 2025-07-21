@@ -60,7 +60,7 @@ const isCategoryOpen = ref(false);
     </div>
 
     <div
-      class="flex items-center h-[46px] bg-[#ffffff] rounded-[14px] px-[16px] mt-[16px] w-full"
+      class="flex items-center h-[46px] bg-[#ffffff] rounded-[16px] px-[16px] mt-[16px] w-full"
     >
       <img src="/icons/search-icon.svg" alt="" class="size-[20px]" />
       <input
@@ -73,7 +73,7 @@ const isCategoryOpen = ref(false);
     </div>
 
     <div class="flex flex-col gap-[4px] w-full mt-[10px]">
-      <p class="text-[14px] text-[#000000]">انتخاب دسته بندی</p>
+      <p class="text-[14px] font-medium text-[#000000]">انتخاب دسته بندی</p>
 
       <div class="w-full">
         <!-- Question -->
@@ -83,7 +83,7 @@ const isCategoryOpen = ref(false);
               isCategoryOpen = !isCategoryOpen;
             }
           "
-          class="flex items-center justify-between cursor-pointer bg-white shadow-md p-4 w-full rounded-lg"
+          class="flex items-center justify-between cursor-pointer bg-white p-4 w-full rounded-[16px]"
         >
           <h3 class="text-sm font-medium leading-[23px]">
             {{ categoryList[selectedCategory] }}
@@ -130,7 +130,7 @@ const isCategoryOpen = ref(false);
             class="mt-4 flex items-center gap-[10px] overflow-x-scroll custom-scroll"
           >
             <div
-              class="px-[16px] py-[8px] rounded-[30px] cursor-pointer"
+              class="px-[16px] py-[8px] rounded-[30px] cursor-pointer" :key="i"
               :class="selectedCategory == i ? 'bg-[#ED1C24]' : 'bg-[#ffffff] '"
               v-for="(x, i) in categoryList"
               @click="selectedCategory = i"
@@ -149,7 +149,7 @@ const isCategoryOpen = ref(false);
       </div>
     </div>
 
-    <div class="bg-[#EFEFEF] py-[30px] w-full">
+    <div class="bg-[#EFEFEF] py-[16px] w-full">
       <!-- Header -->
 
       <!-- FAQ Section -->

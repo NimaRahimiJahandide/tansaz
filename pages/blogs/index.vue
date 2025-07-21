@@ -1,15 +1,10 @@
 <script setup>
+import { ref, onMounted, nextTick, onBeforeUnmount } from 'vue';
+import { useRouter } from 'vue-router';
 import { useStartWebsite } from "@/store/initWebsite";
 const startWebsite = useStartWebsite();
-const router = useRouter();
 
-const goBack = () => {
-  if (window.history.length > 1) {
-    router.back();
-  } else {
-    router.push('/');
-  }
-};
+const router = useRouter();
 
 const blogs = ref([
   {
@@ -22,7 +17,7 @@ const blogs = ref([
   },
   {
     id: 1,
-    image: "/images/blog1.png",
+    image: "/images/blog.png",
     title: "تغذیه مناسب برای رشد مو",
     duration: "3 دقیقه",
     date: "1404/01/10",
@@ -30,7 +25,23 @@ const blogs = ref([
   },
   {
     id: 2,
-    image: "/images/blog1.png",
+    image: "/images/blog2.png",
+    title: "راهکارهای جلوگیری از ریزش مو",
+    duration: "4 دقیقه",
+    date: "1404/01/18",
+    liked: false,
+  },
+  {
+    id: 3,
+    image: "/images/blog3.png",
+    title: "راهکارهای جلوگیری از ریزش مو",
+    duration: "4 دقیقه",
+    date: "1404/01/18",
+    liked: false,
+  },
+  {
+    id: 4,
+    image: "/images/blog4.png",
     title: "راهکارهای جلوگیری از ریزش مو",
     duration: "4 دقیقه",
     date: "1404/01/18",
@@ -38,9 +49,26 @@ const blogs = ref([
   },
 ]);
 
-onMounted(() => {
-  startWebsite.setImageClicked(true);
-});
+const categoryList = ref([
+  'همه مقالات',
+  'مراقبت پوست',
+  'لیزر موهای زائد',
+  'کرم ضد آفتاب',
+  'مراقبت مو',
+  'زیبایی صورت',
+  'لاغری',
+  'سلامت پوست'
+]);
+
+const showLeftFade = ref(false);
+
+const goBack = () => {
+  if (window.history.length > 1) {
+    router.back();
+  } else {
+    router.push('/');
+  }
+};
 
 const toggleLike = (blogId) => {
   const blog = blogs.value.find(b => b.id === blogId);
@@ -49,12 +77,30 @@ const toggleLike = (blogId) => {
   }
 };
 
-const categoryList = ["همه", "علاقه مندی ها", "خدمات لیزر", "خدمات زیبایی"];
 const selectedCategory = ref(0);
 
 const goToBlog = (blogId) => {
   router.push(`/blogs/${blogId}`);
 };
+
+const checkScrollable = () => {
+  nextTick(() => {
+    const scrollContainer = document.querySelector('.custom-scroll');
+    if (scrollContainer) {
+      showLeftFade.value = scrollContainer.scrollWidth > scrollContainer.clientWidth;
+    }
+  });
+};
+
+onMounted(() => {
+  startWebsite.setImageClicked(true);
+  checkScrollable();
+  window.addEventListener('resize', checkScrollable);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', checkScrollable);
+});
 </script>
 
 
@@ -79,11 +125,11 @@ const goToBlog = (blogId) => {
     </section>
 
     <section class="flex flex-col gap-[4px] w-full mt-[10px] pr-[16px]">
-      <div class="w-full">
+      <div class="w-full relative">
         <transition name="blog-fade">
           <div class="mt-4 flex items-center gap-[10px] overflow-x-scroll custom-scroll">
             <div class="px-[16px] py-[8px] rounded-[30px] cursor-pointer"
-              :class="selectedCategory == i ? 'bg-[#ED1C24]' : 'bg-[#ffffff] '" v-for="(x, i) in categoryList"
+              :class="selectedCategory == i ? 'bg-[#ED1C24]' : 'bg-[#ffffff] '" v-for="(x, i) in categoryList" :key="i"
               @click="selectedCategory = i">
               <p class="text-[14px] text-nowrap" :class="selectedCategory == i ? 'text-[#ffffff]' : 'text-[#2E2E2E] '
                 ">
@@ -92,14 +138,16 @@ const goToBlog = (blogId) => {
             </div>
           </div>
         </transition>
+        <!-- Fade effect on the left side -->
+        <div class="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#EFEFEF] to-transparent pointer-events-none z-10"></div>
       </div>
     </section>
 
-    <section class="bg-[#EFEFEF] pb-[30px] pt-[18px] w-full px-[16px] flex flex-col gap-4">
+    <section class="bg-[#EFEFEF] pb-[30px] pt-[18px] w-full px-[16px] flex flex-col gap-4" >
       <h2 class="text-lg font-semibold">
         <span class="text-brand">110</span> مقاله وجود دارد
       </h2>
-      <article class="rounded-2xl overflow-hidden relative" v-for="blog in blogs" :key="blog"  @click="goToBlog(blog.id)">
+      <article class="rounded-2xl overflow-hidden relative" v-for="blog in blogs" :key="blog"  @click="goToBlog(blog.id)" data-aos="fade-up">
         <!-- Heart image -->
         <span class="absolute right-4 top-3 cursor-pointer z-10" @click.stop="toggleLike(blog.id)">
           <img v-if="blog.liked" src="/icons/Heart-white.svg" alt="Heart-white" />
