@@ -15,7 +15,7 @@
             @click="$emit('close-sidebar')"
             aria-label="بستن سایدبار"
           >
-            <Icon name="mdi:close" size="28" />
+            <img src="/public/icons/arrow-right.svg" alt="arrow-right" class="w-6 h-6 cursor-pointer absolute left-0 top-0">
           </button>
           <div class="flex items-center mb-[1.875rem] px-2 relative">
             <img src="/icons/new-logo.png" alt="tansaz logo" class="h-7 w-full object-contain" />
@@ -38,12 +38,12 @@
     </transition>
     <!-- Desktop Sidebar -->
     <aside
-      v-if="!isMobile"
+      v-if="!isMobile" class="justify-start"
       :class="[
-        'fixed right-0 top-0 z-40 transition-all duration-300',
+        'transition-all duration-300 ',
         isOpen
-          ? 'hidden lg:flex flex-col w-64 bg-[#212121] py-8 my-4 px-4 border-l rounded-[28px] border-[#232323]'
-          : 'w-14 mt-2 px-2  rounded-[28px] flex flex-col items-center justify-center'
+          ? 'lg:flex flex-col w-64 bg-[#212121] py-8 my-4 px-4 border-l rounded-l-[28px] border-[#232323]'
+          : 'w-14 mt-2 px-2 rounded-l-[28px] flex flex-col items-center justify-center'
       ]"
     >
       <div v-if="isOpen" class="flex items-center mb-[1.875rem] px-2 relative">
@@ -68,26 +68,42 @@
           </li>
         </ul>
       </nav>
+      <!-- Sidebar closed: show menu icon to open -->
       <button
         v-else
-        class="flex items-center justify-center w-10 h-10 rounded-full mt-2"
-        @click="$emit('close-sidebar')"
+        class="flex w-10 h-10 rounded-full mt-4"
+        @click="$emit('open-sidebar')"
         aria-label="باز کردن سایدبار"
       >
-        <img src="/public/icons/Menu_Alt_01-white.svg" alt="menu" class="w-6 h-6 cursor-pointer">
+        <img src="/icons/Menu_Alt_01-white.svg" alt="menu" class="w-6 h-6 cursor-pointer">
       </button>
     </aside>
   </div>
 </template>
 
 <script setup>
-import { computed, toRefs } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 const props = defineProps({
   isOpen: Boolean
 })
-const emit = defineEmits(['close-sidebar'])
+const emit = defineEmits(['close-sidebar', 'open-sidebar'])
 
-const isMobile = computed(() => window.innerWidth < 1024)
+const isMobile = ref(false)
+
+function updateIsMobile() {
+  if (typeof window !== 'undefined') {
+    isMobile.value = window.innerWidth < 1024
+  }
+}
+
+onMounted(() => {
+  updateIsMobile()
+  window.addEventListener('resize', updateIsMobile)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateIsMobile)
+})
 
 const items = [
   {

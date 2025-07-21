@@ -3,7 +3,7 @@
     <!-- Mobile Header -->
     <div class="lg:hidden bg-[#212121] p-4 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <img class="w-6 h-6 cursor-pointer" src="/icons/Menu_Alt_01-white.svg" alt="menu" @click="$emit('open-sidebar')">
+        <img class="w-6 h-6 cursor-pointer" src="/icons/Menu_Alt_01-white.svg" alt="menu" @click="$emit('open-sidebar')" >
         <Icon name="bx:user" size="24" class="text-white cursor-pointer" />
       </div>
       <div class="flex items-center space-x-3">
@@ -54,7 +54,9 @@
 </template>
 
 <script setup>
-
+const props = defineProps({
+  isSidebarOpen: Boolean
+})
 </script>
 
 <style scoped></style>
