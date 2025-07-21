@@ -1,41 +1,32 @@
 <template>
   <div>
-    <!-- فقط محتوای امتیازات، بدون هدر و سایدبار -->
     <!-- Desktop Layout -->
     <div class="hidden lg:block">
       
-      <div class="flex justify-between items-center mb-8">
+      <div class="flex justify-between items-center mb-8 bg-[#212121] p-[25px] rounded-[28px]">
+        <div class="text-center">
+          <h1 class="text-2xl mb-2">
+            <span class="text-white">کل امتیاز های من:</span>
+            <span class="text-brand text-2xl mx-2">{{ totalPoints }}</span>
+            <span class="text-brand text-2xl">{{ totalPointsText }}</span>
+          </h1>
+        </div>
         <div class="flex items-center space-x-4">
           <button 
-            @click="handleEarnMore"
-            class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors"
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-            </svg>
-            <span>کسب امتیاز بیشتر</span>
-          </button>
-          <button 
             @click="handleConvertPoints"
-            class="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors"
+            class="bg-[#363636] px-6 py-3 rounded-full flex items-center space-x-2 transition-colors cursor-pointer"
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
             </svg>
             <span>تبدیل امتیاز</span>
           </button>
-        </div>
-        <div class="text-center">
-          <h1 class="text-4xl font-bold mb-2">
-            <span class="text-white">کل امتیاز های من:</span>
-            <span class="text-red-600 text-5xl mx-2">{{ totalPoints }}</span>
-            <span class="text-red-600 text-2xl">{{ totalPointsText }}</span>
-          </h1>
-          <button class="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-lg flex items-center space-x-2 mx-auto transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            <span>امتیازات من</span>
+          <button 
+            @click="handleEarnMore"
+            class="bg-brand px-6 py-3 rounded-full flex items-center space-x-2 transition-colors cursor-pointer"
+          >
+            <Icon name="ei:plus" size="24" style="color: #FFFFFF" />
+            <span>کسب امتیاز بیشتر</span>
           </button>
         </div>
       </div>
