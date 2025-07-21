@@ -1,5 +1,5 @@
 <template>
-  <nav class="flex items-center h-16 fixed top-0 left-0 right-0 w-full z-50 transition-colors duration-300 will-change-transform" :class="{
+  <nav class="flex items-center h-16 fixed top-0 left-0 right-0 w-full z-50 transition-colors duration-300" :class="{
     'bg-transparent': isServiceRoute  && !isScrolled,
     'bg-white': !isServiceRoute || isScrolled,
   }">
@@ -35,7 +35,7 @@
     <!-- Mobile Menu -->
     <transition name="mobile-menu">
       <div v-if="isMenuOpen"
-        class="fixed top-0 left-0 w-full bg-white h-full overflow-y-auto z-50 transform translate-x-0 transition-transform duration-300 ease-in-out"
+        class="fixed top-0 left-0 w-full bg-white h-full overflow-y-auto z-[1000] transform translate-x-0 transition-transform duration-300 ease-in-out"
         :class="{
           'translate-x-0': isMenuOpen,
           '-translate-x-full': !isMenuOpen,
@@ -56,51 +56,51 @@
           </li>
 
           <!-- Services Dropdown -->
-          <div>
-            <li class="flex justify-between items-center w-full py-2 px-4" :class="{
-              'bg-[#EFEFEF] border-r-4 border-brand':
-                isServicesOpen || activeItem === 'services',
-            }" @click="toggleServices">
+          <li class="flex flex-col">
+            <div
+              class="flex justify-between items-center w-full py-2 px-4"
+              :class="{
+                'bg-[#EFEFEF] border-r-4 border-brand': isServicesOpen || activeItem === 'services',
+              }"
+              @click="toggleServices"
+            >
               <div class="flex items-center gap-4">
                 <img src="/icons/services.svg" alt="services" />
                 <span class="text-[#2E2E2E] leading-[34px] font-medium">معرفی خدمات</span>
               </div>
               <Icon v-if="isServicesOpen" name="flowbite:angle-up-outline" size="16" style="color: #000" />
               <Icon v-if="!isServicesOpen" name="uil:angle-down"  size="24" style="color: #000" />
-            </li>
+            </div>
             <transition name="submenu" @enter="onEnter" @leave="onLeave">
               <ul v-if="isServicesOpen" class="mr-8 mt-3 border-r-2 border-[#E1E1E1] transition-all duration-300">
                 <li class="py-2 px-4" :class="{
-                  'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand':
-                    activeItem === 'beauty',
-                }" @click="activeItems('beauty')">
+                  'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand': activeItem === 'beauty',
+                }" @click.stop="activeItems('beauty')">
                   <NuxtLink to="/services/1/test">
                     <span class="text-[#2E2E2ECC] leading-[34px]">خدمات زیبایی</span>
                   </NuxtLink>
                 </li>
                 <li class="py-2 px-4" :class="{
-                  'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand':
-                    activeItem === 'slimming',
-                }" @click="activeItems('slimming')">
+                  'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand': activeItem === 'slimming',
+                }" @click.stop="activeItems('slimming')">
                   <NuxtLink to="/services/1/test">
                     <span class="text-[#2E2E2ECC] leading-[34px]">خدمات لاغری</span>
                   </NuxtLink>
                 </li>
                 <li class="py-2 px-4" :class="{
-                  'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand':
-                    activeItem === 'laser',
-                }" @click="activeItems('laser')">
+                  'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand': activeItem === 'laser',
+                }" @click.stop="activeItems('laser')">
                   <NuxtLink to="/services/1/test">
                     <span class="leading-[34px] text-[#2E2E2ECC]">خدمات لیزر</span>
                   </NuxtLink>
                 </li>
               </ul>
             </transition>
-          </div>
+          </li>
           <li class="py-2 px-4" :class="{
             'bg-[#EFEFEF] border-r-4 border-brand': activeItem === 'gallery',
           }" @click="activeItems('gallery')">
-            <NuxtLink to="#" class="flex items-center gap-4">
+            <NuxtLink to="/gallery" class="flex items-center gap-4">
               <img src="/icons/gallery.svg" alt="gallery" />
               <span class="text-[#2E2E2E] leading-[34px]">گالری تصاویر و تور مجازی</span>
             </NuxtLink>
@@ -125,7 +125,7 @@
           <li class="py-2 px-4" :class="{
             'bg-[#EFEFEF] border-r-4 border-brand': activeItem === 'articles',
           }" @click="activeItems('articles')">
-            <NuxtLink to="#" class="flex items-center gap-4">
+            <NuxtLink to="/blogs" class="flex items-center gap-4">
               <img src="/icons/file.svg" alt="file" />
               <span class="text-[#2E2E2E] leading-[34px]">آخرین مقالات</span>
             </NuxtLink>
