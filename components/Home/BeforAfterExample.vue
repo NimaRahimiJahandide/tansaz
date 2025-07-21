@@ -10,7 +10,7 @@
     <!-- Before & After Image Section -->
     <section class="relative mx-auto px-4 z-10">
       <div class="container max-w-[1240px] mx-auto px-5">
-        <div class="max-w-xl mx-auto rounded-lg overflow-hidden relative">
+        <div class="max-w-xl mx-auto rounded-lg overflow-hidden relative aspect-square">
           <client-only>
             <transition name="fade" mode="out-in">
               <VueCompareImage :key="selected.after" :left-image="selected.before" :right-image="selected.after" :handle="customHandle" />

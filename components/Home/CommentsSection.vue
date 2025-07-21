@@ -34,7 +34,7 @@
         class="bg-brand size-10 flex items-center justify-center text-white font-bold rounded-lg">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
+        </svg> 
       </button>
 
       <!-- شماره‌های صفحه -->
@@ -55,8 +55,13 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
       </button>
+
     </div>
 
+    <section class="flex justify-center items-center pt-7">
+      <NuxtLink to="/comments" class="bg-[#363636] text-white rounded-full px-7 py-2">مشاهده بیشتر</NuxtLink>
+    </section>
+  
   </div>
 </template>
 

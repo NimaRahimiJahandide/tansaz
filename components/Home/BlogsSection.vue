@@ -13,7 +13,7 @@
     </h2>
     <div class="container mx-auto px-4 pb-8">
       <div class="rounded-2xl overflow-hidden relative">
-        <transition name="fade" mode="out-in">
+        <transition name="slide-fade" mode="out-in">
           <div
             :key="activeIndex"
             class="relative"
@@ -199,5 +199,21 @@ const toggleLike = () => {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.slide-fade-enter-active, .slide-fade-leave-active {
+  transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.slide-fade-enter-from {
+  opacity: 0;
+  transform: translateX(60px) scale(0.98);
+}
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateX(-60px) scale(0.98);
+}
+.slide-fade-enter-to, .slide-fade-leave-from {
+  opacity: 1;
+  transform: translateX(0) scale(1);
 }
 </style>

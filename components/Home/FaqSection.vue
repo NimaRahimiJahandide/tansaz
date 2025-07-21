@@ -1,6 +1,7 @@
 <template>
   <div class="bg-[#EFEFEF] p-4 py-[30px] w-full">
-    <img v-if="$route.path === '/'" class="object-cover pb-[30px]" src="/images/Faq-Banner.png" alt="Faq-Banner" />
+    <img v-if="$route.path === '/' && typeof onScrollToLuck === 'function'" @click="onScrollToLuck"
+      class="object-cover pb-[30px]" src="/images/Faq-Banner.png" alt="Faq-Banner" />
     <!-- Header -->
     <header class="mb-8">
       <h1 class="text-xl font-bold"><span class="text-brand">پرسش</span> های متداول</h1>
@@ -49,6 +50,10 @@ const faqs = [
       "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.",
   },
 ];
+
+defineProps({
+  onScrollToLuck: Function
+})
 </script>
 
 <style scoped>

@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen">
-    <div class="bg-black text-white flex flex-col items-center px-14 relative overflow-hidden pt-28">
+    <div class="bg-black min-h-screen text-white flex flex-col items-center px-14 relative overflow-hidden pt-28">
       <!-- Header Text -->
       <div class="text-center z-10 mb-16">
         <h1 class="text-2xl leading-8 font-bold mb-1 text-center">
@@ -14,14 +14,14 @@
       <!-- start header content -->
       <section v-show="!isStarted">
         <!-- Call to Action Button -->
-        <div class="z-10 mb-8" data-aos="zoom-in" data-aos-delay="200">
+        <div class="z-10 mb-8" data-aos="zoom-in" data-aos-delay="200" data-aos-once="true">
           <button @click="playGif"
             class="bg-[#FFFFFF03] py-5 px-5 rounded-full whitespace-nowrap backdrop-blur-[20px] [box-shadow:inset_0_-5px_21px_0_#E3EDEF33,inset_0_0_3px_0_#9A92D24D,inset_0_70px_47px_-75px_#CAACFF4D,inset_0_2px_10px_-4px_#FFFFFF42,inset_0_34px_29px_-49px_#FFFFFF80] text-base font-semibold text-right">
             برای شروع دکمه پایین را <span class="text-brand">فشار</span> دهید!
           </button>
         </div>
         <!-- Arrow Animation -->
-        <div class="z-10 mb-10" data-aos="fade-up" data-aos-delay="400">
+        <div class="z-10 mb-10" data-aos="fade-up" data-aos-delay="400" data-aos-once="true">
           <div class="flex items-center justify-center h-28 bg-black">
             <div class="text-6xl font-bold text-brand">
               <!-- SVG Arrow -->
@@ -50,22 +50,22 @@
       <!-- end header content -->
 
       <!-- 3D Card Stack -->
-      <div class="relative z-10" data-aos="zoom-in" data-aos-delay="500">
+      <div class="relative z-10" data-aos="zoom-in" data-aos-delay="500" data-aos-once="true">
         <img id="gifImage" src="/icons/start-button.jpg" alt="GIF preview" style="cursor: pointer;" @click="playGif" />
       </div>
       <!-- Phone Button -->
-      <HomeFastSupport data-aos="fade-up" data-aos-delay="600" />
+      <HomeFastSupport data-aos="fade-up" data-aos-delay="600" data-aos-once="true"/>
     </div>
     <!-- Service Section -->
     <transition name="fade">
       <div v-if="isStarted">
-        <HomeServiceSection data-aos="fade-up" data-aos-delay="100" />
-        <HomeBeforAfterExample data-aos="fade-up" data-aos-delay="200" />
-        <HomeFaqSection data-aos="fade-up" data-aos-delay="300" />
-        <HomeTourSection data-aos="fade-up" data-aos-delay="400" />
-        <HomeCommentsSection data-aos="fade-up" data-aos-delay="500" />
-        <HomeLuckSection data-aos="fade-up" data-aos-delay="600" />
-        <HomeBlogsSection data-aos="fade-up" data-aos-delay="700" />
+        <HomeServiceSection data-aos="fade-up" data-aos-delay="100" data-aos-once="true"/>
+        <HomeBeforAfterExample data-aos="fade-up" data-aos-delay="200" data-aos-once="true"/>
+        <HomeFaqSection data-aos="fade-up" data-aos-delay="300" :onScrollToLuck="scrollToLuckSection" data-aos-once="true"/>
+        <HomeTourSection data-aos="fade-up" data-aos-delay="400"  data-aos-once="true"/>
+        <HomeCommentsSection data-aos="fade-up" data-aos-delay="500" data-aos-once="true"/>
+        <HomeLuckSection ref="luckSectionRef" data-aos="fade-up" data-aos-delay="600" data-aos-once="true"/>
+        <HomeBlogsSection data-aos="fade-up" data-aos-delay="700" data-aos-once="true"/>
       </div>
     </transition>
   </div>
@@ -81,6 +81,7 @@ const startWebsite = useStartWebsite();
 
 const sectionRef = ref(null)
 const localIsStarted = ref(false)
+const luckSectionRef = ref(null)
 
 // Computed property to ensure reactivity
 const isStarted = computed(() => {
@@ -105,12 +106,19 @@ function playGif() {
   img.src = '/gifs/Tansaz-Once.gif';
   img.onclick = null;
 
-  console.log('Setting isStart to true');
-  startWebsite.setImageClicked(true)
-  localIsStarted.value = true;
-  console.log('isStart after setting:', startWebsite.isStart, 'local:', localIsStarted.value);
-
   played = true;
+  setTimeout(() => {
+    console.log('GIF finished, setting isStarted to true');
+    startWebsite.setImageClicked(true)
+    localIsStarted.value = true;
+    console.log('isStart after setting:', startWebsite.isStart, 'local:', localIsStarted.value);
+  }, 1000);
+}
+
+function scrollToLuckSection() {
+  if (luckSectionRef.value?.$el) {
+    luckSectionRef.value.$el.scrollIntoView({ behavior: 'smooth' })
+  }
 }
 
 watch(isStarted, async (newVal) => {
