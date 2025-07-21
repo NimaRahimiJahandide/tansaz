@@ -11,11 +11,11 @@
           class="w-64 bg-[#212121] h-full py-8 px-4 border-l rounded-l-[28px] border-[#232323] flex flex-col relative animate-slideInRight"
         >
           <button
-            class="absolute left-2 top-4 z-50 text-white"
+            class="absolute -left-3 top-20 z-50 text-white"
             @click="$emit('close-sidebar')"
             aria-label="بستن سایدبار"
           >
-            <img src="/public/icons/arrow-right.svg" alt="arrow-right" class="w-6 h-6 cursor-pointer absolute left-0 top-0">
+            <img src="/public/icons/arrow-right.svg" alt="arrow-right" class="w-6 h-6 cursor-pointer">
           </button>
           <div class="flex items-center mb-[1.875rem] px-2 relative">
             <img src="/icons/new-logo.png" alt="tansaz logo" class="h-7 w-full object-contain" />
@@ -32,6 +32,14 @@
                 </button>
               </li>
             </ul>
+            <div class="mt-8 flex justify-center">
+              <div class="bg-[#54A6DE] rounded-[28px] p-5 w-56 flex flex-col items-center">
+                <img src="/icons/chat-online.svg" alt="chat-online">
+                <div class="mt-3 text-white font-extrabold text-[20px]">چت آنلاین</div>
+                <div class="mt-2 text-white text-sm font-medium text-justify leading-6">شما میتوانید با دستیار کلینیک تن ساز بصورت آنلاین چت کنید.</div>
+                <button class="mt-4 cursor-pointer bg-[#2E2E2E] text-white w-full h-[48px] rounded-full px-6 py-2 text-sm font-semibold shadow-[0px_4px_24px_0px_#2E2E2E66] transition">شروع چت</button>
+              </div>
+            </div>
           </nav>
         </aside>
       </div>
@@ -67,6 +75,14 @@
             </button>
           </li>
         </ul>
+        <div class="mt-8 flex justify-center">
+          <div class="bg-[#54A6DE] rounded-[28px] p-5 w-56 flex flex-col items-center">
+            <img src="/icons/chat-online.svg" alt="chat-online">
+            <div class="mt-3 text-white font-extrabold text-[20px]">چت آنلاین</div>
+            <div class="mt-2 text-white text-sm font-medium text-justify leading-6">شما میتوانید با دستیار کلینیک تن ساز بصورت آنلاین چت کنید.</div>
+            <button class="mt-4 cursor-pointer bg-[#2E2E2E] text-white w-full h-[48px] rounded-full px-6 py-2 text-sm font-semibold shadow-[0px_4px_24px_0px_#2E2E2E66] transition">شروع چت</button>
+          </div>
+        </div>
       </nav>
       <!-- Sidebar closed: show menu icon to open -->
       <button
