@@ -12,7 +12,7 @@
       </div>
 
       <!-- start header content -->
-      <section v-if="!startWebsite.isStart">
+      <section v-show="!isStarted">
         <!-- Call to Action Button -->
         <div class="z-10 mb-8" data-aos="zoom-in" data-aos-delay="200">
           <button @click="playGif"
@@ -41,12 +41,11 @@
         </div>
       </section>
 
-      <section v-else ref="sectionRef"
-        class="flex justify-center items-center flex-col gap-[35px] text-lg font-medium leading-6 text-white"
-        data-aos="fade-up" data-aos-duration="900">
-        <p class="menu-item" data-aos="fade-right" data-aos-delay="100">باشگاه مشتریان</p>
-        <p class="menu-item" data-aos="fade-right" data-aos-delay="200">معرفــی خدمــات</p>
-        <p class="menu-item" data-aos="fade-right" data-aos-delay="300">ارتبــــــاط بــا مـــــــا</p>
+      <section v-show="isStarted" ref="sectionRef"
+        class="flex justify-center items-center flex-col gap-[35px] text-lg font-medium leading-6 text-white">
+        <p class="menu-item">باشگاه مشتریان</p>
+        <p class="menu-item">معرفــی خدمــات</p>
+        <p class="menu-item">ارتبــــــاط بــا مـــــــا</p>
       </section>
       <!-- end header content -->
 
@@ -59,7 +58,7 @@
     </div>
     <!-- Service Section -->
     <transition name="fade">
-      <div v-if="startWebsite.isStart">
+      <div v-if="isStarted">
         <HomeServiceSection data-aos="fade-up" data-aos-delay="100" />
         <HomeBeforAfterExample data-aos="fade-up" data-aos-delay="200" />
         <HomeFaqSection data-aos="fade-up" data-aos-delay="300" />
@@ -74,46 +73,65 @@
 
 <script setup>
 import { gsap } from 'gsap'
+import { computed } from 'vue'
 
 import { useStartWebsite } from '@/store/initWebsite'
 
 const startWebsite = useStartWebsite();
 
 const sectionRef = ref(null)
+const localIsStarted = ref(false)
+
+// Computed property to ensure reactivity
+const isStarted = computed(() => {
+  console.log('Computing isStarted, value:', startWebsite.isStart, 'local:', localIsStarted.value);
+  return startWebsite.isStart || localIsStarted.value;
+})
 
 let played = false;
 
+function testStore() {
+  console.log('Test store clicked');
+  startWebsite.setImageClicked(true);
+  localIsStarted.value = true;
+  console.log('isStart after test:', startWebsite.isStart, 'local:', localIsStarted.value);
+}
+
 function playGif() {
+  console.log('playGif called, played:', played);
   if (played) return;
 
   const img = document.getElementById('gifImage');
   img.src = '/gifs/Tansaz-Once.gif';
   img.onclick = null;
+
+  console.log('Setting isStart to true');
   startWebsite.setImageClicked(true)
+  localIsStarted.value = true;
+  console.log('isStart after setting:', startWebsite.isStart, 'local:', localIsStarted.value);
 
   played = true;
 }
 
-watch(
-  () => startWebsite.isStart,
-  async (newVal) => {
-    if (newVal) {
-      await nextTick()
-      const items = sectionRef.value?.querySelectorAll('.menu-item')
-      if (items) {
-        gsap.from(items, {
-          y: 50,
-          opacity: 0,
-          duration: 0.6,
-          stagger: 0.2,
-          ease: 'power2.out'
-        })
-      }
+watch(isStarted, async (newVal) => {
+  if (newVal) {
+    await nextTick()
+    const items = sectionRef.value?.querySelectorAll('.menu-item')
+    if (items && items.length) {
+      gsap.from(items, {
+        y: 50,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.2,
+        ease: 'power2.out'
+      })
     }
   }
-)
+})
 
 onMounted(() => {
+  console.log('Component mounted, isStart:', startWebsite.isStart);
+
   const gradient = document.querySelector('#arrowGradient')
 
   gsap.to(gradient, {
@@ -131,10 +149,13 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.5s ease;
 }
-.fade-enter-from, .fade-leave-to {
+
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 </style>
