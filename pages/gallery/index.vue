@@ -101,7 +101,7 @@ onMounted(() => {
   
       <!-- Image section -->
       <div class="relative">
-        <img src="public/images/tour1.png" alt="" class="w-full aspect-square object-cover" />
+        <img src="/images/tour1.png" alt="" class="w-full aspect-square object-cover" />
       </div>
   
       <!-- Content section -->

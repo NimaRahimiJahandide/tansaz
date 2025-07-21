@@ -15,7 +15,7 @@
             @click="$emit('close-sidebar')"
             aria-label="بستن سایدبار"
           >
-            <img src="/public/icons/arrow-right.svg" alt="arrow-right" class="w-6 h-6 cursor-pointer">
+            <img src="/icons/arrow-right.svg" alt="arrow-right" class="w-6 h-6 cursor-pointer">
           </button>
           <div class="flex items-center mb-[1.875rem] px-2 relative">
             <img src="/icons/new-logo.png" alt="tansaz logo" class="h-7 w-full object-contain" />
