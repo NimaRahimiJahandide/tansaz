@@ -1,7 +1,7 @@
 <template>
   <div :class="!isTransparent ? 'bg-white' : ''">
     <img
-      class="px-4 pt-[30px]"
+      class="pt-[30px] w-full" :class="isBlogDetailPage ? 'px-4' : ''"
       :src="isBlogDetailPage ? '/images/contact-us.png' : '/images/blog-banner.png'"
       alt="blog-banner"
     />
