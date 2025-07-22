@@ -8,9 +8,6 @@ const route = useRoute();
 const isHomePage = computed(() => {
   return route.path === '/' || route.path === '/home';
 });
-const isServicesPage = computed(() => {
-  return route.path.startsWith('/services');
-});
 </script>
 
 <template>
@@ -19,10 +16,7 @@ const isServicesPage = computed(() => {
     <transition v-if="isHomePage" name="fade-navbar" appear>
       <NavbarComponent v-if="startWebsite.isStart" />
     </transition>
-    <!-- Show navbar with transition only on services page -->
-    <transition v-else-if="isServicesPage" name="fade-navbar" appear>
-      <NavbarComponent v-if="startWebsite.isServicesStart" />
-    </transition>
+
     <!-- Show fixed navbar on all other pages -->
     <NavbarComponent v-else />
     <main>
