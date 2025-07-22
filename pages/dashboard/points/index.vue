@@ -32,7 +32,7 @@
       </div>
 
       <!-- Filters -->
-      <div class="mb-6">
+      <div>
         <DashboardPointPointsFilters v-model="filters" />
       </div>
 
@@ -83,6 +83,7 @@ const totalPoints = ref(1200)
 const totalPointsText = ref('هزار و دویست')
 
 const filters = ref({
+  service: 'خدمات لاغری',
   fromDate: '1404/03/25',
   toDate: '1404/06/25',
   type: 'همه'
@@ -92,48 +93,56 @@ const pointsHistory = ref([
   {
     points: 30,
     type: 'قرعه کشی',
+    service: 'خدمات لاغری',
     description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از گرافیک است.',
     date: '1404/06/25 - 15:30'
   },
   {
     points: 5,
     type: 'تخفیف',
+    service: 'خدمات زیبایی',
     description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از گرافیک است.',
     date: '1404/06/25 - 15:30'
   },
   {
     points: 23,
-    type: 'خرید انه شانس',
+    type: 'خریدانه شانس',
+    service: 'خدمات لاغری',
     description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از گرافیک است.',
     date: '1404/06/25 - 15:30'
   },
   {
     points: 11,
     type: 'قرعه کشی',
+    service: 'خدمات کلینیک تن ساز',
     description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از گرافیک است.',
     date: '1404/06/25 - 15:30'
   },
   {
     points: 5,
     type: 'تخفیف',
+    service: 'خدمات لیزر',
     description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از گرافیک است.',
     date: '1404/06/25 - 15:30'
   },
   {
     points: 11,
     type: 'قرعه کشی',
+    service: 'باشگاه مشتریان',
     description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از گرافیک است.',
     date: '1404/06/25 - 15:30'
   },
   {
     points: 8,
-    type: 'خرید انه شانس',
+    type: 'خریدانه شانس',
+    service: 'خدمات لاغری',
     description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از گرافیک است.',
     date: '1404/06/24 - 14:20'
   },
   {
     points: 15,
     type: 'قرعه کشی',
+    service: 'سایر موارد کلینیک تن ساز',
     description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از گرافیک است.',
     date: '1404/06/23 - 16:45'
   }
@@ -141,10 +150,27 @@ const pointsHistory = ref([
 
 // Computed properties
 const filteredPointsHistory = computed(() => {
-  if (filters.value.type === 'همه') {
-    return pointsHistory.value
+  let filtered = pointsHistory.value
+
+  // Filter by type
+  if (filters.value.type !== 'همه') {
+    filtered = filtered.filter(item => item.type === filters.value.type)
   }
-  return pointsHistory.value.filter(item => item.type === filters.value.type)
+
+  // Filter by service
+  if (filters.value.service) {
+    filtered = filtered.filter(item => item.service === filters.value.service)
+  }
+
+  // Add date filtering logic here if needed
+  // if (filters.value.fromDate && filters.value.toDate) {
+  //   filtered = filtered.filter(item => {
+  //     // Add your date comparison logic here
+  //     return true
+  //   })
+  // }
+
+  return filtered
 })
 
 // Methods
