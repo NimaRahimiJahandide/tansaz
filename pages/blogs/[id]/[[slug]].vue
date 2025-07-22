@@ -32,7 +32,7 @@ onMounted(() => {
         <img @click="goBack" src="/icons/left-arrow.svg" alt="" />
       </section>
 
-      <section class="text-[#2E2E2E]" data-aos="fade-up">
+      <section class="text-[#2E2E2E]" data-aos="fade-up" data-aos-once="true">
         <img class="h-[250px] object-cover object-center rounded-2xl w-full my-[20px]" src="/images/blog1.png"
           alt="blog1">
         <article class="flex flex-col gap-[12px]">
@@ -55,7 +55,7 @@ onMounted(() => {
       </section>
 
     </header>
-    <div class="flex flex-col pt-[20px] px-[16px] pb-[16px] z-[10]" data-aos="fade-up">
+    <div class="flex flex-col pt-[20px] px-[16px] pb-[16px] z-[10]" data-aos="fade-up" data-aos-once="true" >
       <p class="text-[16px] text-justify text-[#2E2E2E] leading-[30px] mt-[10px]">
         لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون
         بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با
@@ -67,9 +67,9 @@ onMounted(() => {
       </p>
     </div>
     
-    <HomeBlogsSection data-aos="fade-up"/>
+    <HomeBlogsSection data-aos="fade-up" data-aos-once="true"/>
 
-    <Comments data-aos="fade-up"/>
+    <Comments data-aos="fade-up" data-aos-once="true"/>
   </div>
 </template>
 

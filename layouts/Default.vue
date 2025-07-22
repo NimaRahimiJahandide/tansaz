@@ -4,7 +4,7 @@ import { useStartWebsite } from '@/store/initWebsite'
 const startWebsite = useStartWebsite();
 const route = useRoute();
 
-// Check if we're on the home page
+// Check if we're on the home or services page
 const isHomePage = computed(() => {
   return route.path === '/' || route.path === '/home';
 });
@@ -13,11 +13,12 @@ const isHomePage = computed(() => {
 <template>
   <div class="flex flex-col w-full">
     <!-- Show navbar with transition only on home page -->
-    <transition v-if="isHomePage" name="fade-slide" appear>
+    <transition v-if="isHomePage" name="fade-navbar" appear>
       <NavbarComponent v-if="startWebsite.isStart" />
     </transition>
-    <!-- Show navbar immediately on other pages -->
-    <NavbarComponent v-if="!isHomePage" />
+
+    <!-- Show fixed navbar on all other pages -->
+    <NavbarComponent v-else />
     <main>
       <slot />
     </main>
@@ -26,3 +27,15 @@ const isHomePage = computed(() => {
     </transition>
   </div>
 </template>
+
+<style scoped>
+.fade-navbar-enter-active, .fade-navbar-leave-active {
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fade-navbar-enter-from, .fade-navbar-leave-to {
+  opacity: 0;
+}
+.fade-navbar-enter-to, .fade-navbar-leave-from {
+  opacity: 1;
+}
+</style>

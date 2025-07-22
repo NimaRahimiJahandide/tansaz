@@ -147,7 +147,7 @@ onBeforeUnmount(() => {
       <h2 class="text-lg font-semibold">
         <span class="text-brand">110</span> مقاله وجود دارد
       </h2>
-      <article class="rounded-2xl overflow-hidden relative" v-for="blog in blogs" :key="blog"  @click="goToBlog(blog.id)" data-aos="fade-up">
+      <article class="rounded-2xl overflow-hidden relative" v-for="blog in blogs" :key="blog"  @click="goToBlog(blog.id)" data-aos="fade-up"  data-aos-once="true">
         <!-- Heart image -->
         <span class="absolute right-4 top-3 cursor-pointer z-10" @click.stop="toggleLike(blog.id)">
           <img v-if="blog.liked" src="/icons/Heart-white.svg" alt="Heart-white" />

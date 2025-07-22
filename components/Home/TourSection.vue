@@ -11,10 +11,10 @@
     </div>
 
     <!-- Call to Action Button -->
-    <footer class="px-4 py-[25px] w-full">
-      <button class="w-full bg-brand text-white font-semibold py-3 px-4 rounded-full">
-        تور مجاني كلينيك تن ساز
-      </button>
+    <footer class="px-4 py-[25px] flex items-center justify-center text-center w-full">
+      <NuxtLink to="/gallery" class="w-full bg-brand text-white font-semibold py-3 px-4 rounded-full">
+        تور مجازی کلینیک تن ساز
+      </NuxtLink>
     </footer>
   </div>
 </template>

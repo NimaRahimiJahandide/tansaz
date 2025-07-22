@@ -52,32 +52,28 @@ const toggleAnswer = () => {
 </script>
 
 <style scoped>
-.slide-fade-enter-active {
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: hidden;
-}
-
+.slide-fade-enter-active,
 .slide-fade-leave-active {
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: hidden;
+  transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
 }
 
 .slide-fade-enter-from {
-    transform: translateY(-10px);
-    opacity: 0;
-    max-height: 0;
+  transform: translateY(-12px);
+  opacity: 0;
+  max-height: 0;
 }
 
 .slide-fade-leave-to {
-    transform: translateY(-5px);
-    opacity: 0;
-    max-height: 0;
+  transform: translateY(-8px);
+  opacity: 0;
+  max-height: 0;
 }
 
 .slide-fade-enter-to,
 .slide-fade-leave-from {
-    transform: translateY(0);
-    opacity: 1;
-    max-height: 500px;
+  transform: translateY(0);
+  opacity: 1;
+  max-height: 1000px;
 }
 </style>

@@ -24,7 +24,7 @@
 
     <!-- ProgressBar -->
     <div class="flex items-center justify-center mt-6">
-      <HomeProgressBar :value="progressValue" />
+      <HomeProgressBar />
     </div>
 
     <!-- pagination -->
@@ -37,13 +37,12 @@
         </svg>
       </button>
 
-      <!-- شماره‌های صفحه -->
-      <div class="flex items-center gap-2 text-white font-bold">
-        <button v-for="(slide, index) in teamMembers.length" :key="index" @click="selectMember(index)"
-          class="w-8 h-8 flex items-center justify-center rounded-lg  transition duration-300 ease-in-out"
-          :class="activeIndex === index ? 'bg-[#FFFFFF0D] text-white' : ''">
-          {{ index + 1 }}
-        </button>
+      <!-- Progress Bar -->
+
+      <div class="flex-1 mx-4">
+        <div class="w-full h-1 rounded-full overflow-hidden neon-progress ltr">
+          <div class="h-full bg-[#FF2525] neon-progress" :style="{ width: progressValue + '%' }"></div>
+        </div>
       </div>
 
 
@@ -55,7 +54,12 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
       </button>
+
     </div>
+
+    <section class="flex justify-center items-center pt-7">
+      <NuxtLink to="/comments" class="bg-[#363636] text-white rounded-full px-7 py-2">مشاهده بیشتر</NuxtLink>
+    </section>
 
   </div>
 </template>
@@ -69,10 +73,9 @@ const totalItemWidth = itemWidth + itemMargin
 
 // Auto-play settings
 const autoPlayDuration = 5000 // 5 ثانیه
-const progressInterval = 50 // هر 50 میلی‌ثانیه آپدیت شود
-let autoPlayTimer = null
 let progressTimer = null
 let isAutoPlaying = true
+let isAnimating = false
 
 const teamMembers = ref([
   {
@@ -113,67 +116,52 @@ const teamMembers = ref([
 ])
 
 const nextSlide = () => {
-  activeIndex.value = (activeIndex.value + 1) % teamMembers.value.length
+  pauseAutoPlay();
+  progressValue.value = 0;
+  activeIndex.value = (activeIndex.value + 1) % teamMembers.value.length;
+  startAutoPlay();
 }
 
 const prevSlide = () => {
-  activeIndex.value = (activeIndex.value - 1 + teamMembers.value.length) % teamMembers.value.length
+  pauseAutoPlay();
+  progressValue.value = 0;
+  activeIndex.value = (activeIndex.value - 1 + teamMembers.value.length) % teamMembers.value.length;
+  startAutoPlay();
 }
-
-const selectMember = async (index) => {
-  // توقف auto-play موقت هنگام کلیک دستی
-  pauseAutoPlay()
-
-  activeIndex.value = index
-  progressValue.value = 0
-
-  await nextTick()
-  scrollActiveThumbnailIntoCenter()
-
-  // شروع مجدد auto-play بعد از 3 ثانیه
-  setTimeout(() => {
-    startAutoPlay()
-  }, 3000)
-}
-
-let startTime = null;
 
 const startAutoPlay = () => {
   if (!isAutoPlaying) return;
-
   pauseAutoPlay(); // پاکسازی تایمرهای قبلی
-
   progressValue.value = 0;
-  startTime = performance.now();
+  let startTime = null;
+  isAnimating = true;
 
   const animate = (time) => {
+    if (!isAnimating) return;
+    if (!startTime) startTime = time;
     const elapsed = time - startTime;
     const percentage = Math.min((elapsed / autoPlayDuration) * 100, 100);
     progressValue.value = percentage;
-
     if (percentage < 100) {
       progressTimer = requestAnimationFrame(animate);
     } else {
+      progressValue.value = 100;
       nextSlide();
-      startAutoPlay();
+      setTimeout(() => {
+        startAutoPlay();
+      }, 100);
     }
   };
-
   progressTimer = requestAnimationFrame(animate);
 };
 
-
 const pauseAutoPlay = () => {
-  if (autoPlayTimer) {
-    clearTimeout(autoPlayTimer);
-    autoPlayTimer = null;
-  }
+  isAnimating = false;
   if (progressTimer) {
     cancelAnimationFrame(progressTimer);
     progressTimer = null;
   }
 };
-
 
 const resumeAutoPlay = () => {
   isAutoPlaying = true
@@ -195,19 +183,6 @@ const getItemClass = (index) => {
     return 'scale-90 opacity-80 z-10 card-skew-right';
   } else {
     return 'scale-85 opacity-60 z-0';
-  }
-};
-
-const getThumbnailClass = (index) => {
-  if (index === activeIndex.value) {
-    return 'w-[90px] h-[70px] active-pagination z-10 shadow-lg';
-  } else if (
-    index === activeIndex.value - 1 ||
-    index === activeIndex.value + 1
-  ) {
-    return 'w-[50px] h-[50px]';
-  } else {
-    return 'w-[40px] h-[40px] opacity-70';
   }
 };
 
@@ -283,5 +258,12 @@ defineExpose({
 
 .card-skew-right {
   clip-path: polygon(0% 0%, 10% 2%, 10% 98%, 0% 100%);
+}
+
+.neon-progress {
+  box-shadow:
+    0 0 0.6em #22222222,
+    0 0 0.8em #FF2525cc;
+  border-image-source: linear-gradient(0.71deg, rgba(255, 0, 0, 0) 43.39%, #FF2525 97.71%);
 }
 </style>

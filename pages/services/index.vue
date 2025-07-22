@@ -90,7 +90,7 @@ const leftServices = computed(() => services.value.slice(3))
 
       <div class="flex gap-[16px] mt-[35px]">
         <div class="flex flex-col gap-[23px] w-[171px]">
-          <ServicesCard data-aos="fade-up"
+          <ServicesCard data-aos="fade-up" data-aos-once="true"
             v-for="service in leftServices"
             :key="service.id"
             :service="service"
@@ -102,7 +102,7 @@ const leftServices = computed(() => services.value.slice(3))
             <span class="text-[#ED1C24]"> لاین زیبـایی </span>
             <span class="text-[#2E2E2E]"> مورد نظرتـان را انتخاب کنید </span>
           </p>
-          <ServicesCard data-aos="fade-up"
+          <ServicesCard data-aos="fade-up" data-aos-once="true"
             v-for="service in rightServices"
             :key="service.id"
             :service="service"

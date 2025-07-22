@@ -6,7 +6,7 @@ const startWebsite = useStartWebsite();
 
 <template>
   <div class="flex flex-col w-full">
-    <transition name="fade-slide" appear>
+    <transition name="fade-navbar" appear>
       <NavbarComponent v-if="startWebsite.isServicesStart" />
     </transition>
     <main>
@@ -19,6 +19,16 @@ const startWebsite = useStartWebsite();
 </template>
 
 <style scoped>
+.fade-navbar-enter-active, .fade-navbar-leave-active {
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fade-navbar-enter-from, .fade-navbar-leave-to {
+  opacity: 0;
+}
+.fade-navbar-enter-to, .fade-navbar-leave-from {
+  opacity: 1;
+}
+
 .fade-slide-enter-active, .fade-slide-leave-active {
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
