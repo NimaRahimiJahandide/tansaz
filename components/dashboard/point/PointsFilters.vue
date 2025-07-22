@@ -5,6 +5,9 @@
     <!-- Desktop Layout -->
     <div class="hidden lg:grid lg:grid-cols-3 lg:gap-4">
       <div>
+        <DashboardGlobalFilterComponent />
+      </div>
+      <div>
         <select v-model="filters.type" @change="emitFilterChange"
           class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-red-500">
           <option value="همه">همه</option>
