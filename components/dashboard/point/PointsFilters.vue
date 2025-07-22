@@ -1,66 +1,53 @@
 <template>
-  <div class="flex justify-between rounded-lg p-4 lg:p-6">
+  <div class="flex lg:flex-row flex-col justify-between rounded-lg pb-5">
     <h3 class="text-lg lg:text-2xl font-bold mb-4">تاریخچه امتیازات من</h3>
 
     <!-- Desktop Layout -->
     <div class="hidden lg:grid lg:grid-cols-3 lg:gap-4">
       <div>
-        <DashboardGlobalFilterComponent 
+        <DashboardGlobalFilterComponent :items="typeItems" label="بابت" v-model="filters.type"
+          @update:modelValue="emitFilterChange" />
+      </div>
+      <div>
+        <DashboardGlobalFilterComponent :items="dateItems" label="از تاریخ" v-model="filters.fromDate"
+          @update:modelValue="emitFilterChange" />
+      </div>
+      <div>
+        <DashboardGlobalFilterComponent :items="toDateItems" label="تا تاریخ" v-model="filters.toDate"
+          @update:modelValue="emitFilterChange" />
+      </div>
+    </div>
+
+    <!-- Mobile Layout -->
+    <div class="lg:hidden grid grid-cols-2 gap-2">
+      <div>
+        <DashboardGlobalFilterComponent
+          :items="dateItems"
+          label="از تاریخ"
+          v-model="filters.fromDate"
+          @update:modelValue="emitFilterChange"
+        />
+      </div>
+    
+      <div>
+        <DashboardGlobalFilterComponent
+          :items="toDateItems"
+          label="تا تاریخ"
+          v-model="filters.toDate"
+          @update:modelValue="emitFilterChange"
+        />
+      </div>
+    
+      <div class="col-span-2">
+        <DashboardGlobalFilterComponent
           :items="typeItems"
           label="بابت"
           v-model="filters.type"
           @update:modelValue="emitFilterChange"
         />
       </div>
-      <div>
-        <DashboardGlobalFilterComponent 
-          :items="dateItems"
-          label="از تاریخ"
-          v-model="filters.fromDate"
-          @update:modelValue="emitFilterChange"
-        />
-      </div>
-      <div>
-        <DashboardGlobalFilterComponent 
-          :items="toDateItems"
-          label="تا تاریخ"
-          v-model="filters.toDate"
-          @update:modelValue="emitFilterChange"
-        />
-      </div>
     </div>
-
-    <!-- Mobile Layout -->
-    <div class="lg:hidden space-y-4">
-      <div>
-        <DashboardGlobalFilterComponent 
-          :items="dateItems"
-          label="از تاریخ"
-          v-model="filters.fromDate"
-          @update:modelValue="emitFilterChange"
-        />
-      </div>
-
-      <div>
-        <DashboardGlobalFilterComponent 
-          :items="toDateItems"
-          label="تا تاریخ"
-          v-model="filters.toDate"
-          @update:modelValue="emitFilterChange"
-        />
-      </div>
-
-      <div class="flex items-center bg-[#232323] rounded-full px-4 py-1 min-w-[120px]">
-        <span class="text-gray-400 text-sm ml-1">بابت:</span>
-        <select v-model="filters.type" @change="emitFilterChange"
-          class="bg-[#232323] text-white text-sm font-medium border-none focus:ring-0 outline-none appearance-none px-1 py-0">
-          <option value="همه">همه</option>
-          <option value="قرعه کشی">قرعه کشی</option>
-          <option value="تخفیف">تخفیف</option>
-          <option value="خریدانه شانس">خریدانه شانس</option>
-        </select>
-      </div>
-    </div>
+    
   </div>
 </template>
 
@@ -80,16 +67,6 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue'])
 
 const filters = ref({ ...props.modelValue })
-
-// Service items (from original FilterComponent)
-const serviceItems = ref([
-  { id: 1, title: 'خدمات کلینیک تن ساز', value: 'خدمات کلینیک تن ساز', active: false },
-  { id: 2, title: 'خدمات زیبایی', value: 'خدمات زیبایی', active: false },
-  { id: 3, title: 'خدمات لاغری', value: 'خدمات لاغری', active: true },
-  { id: 4, title: 'خدمات لیزر', value: 'خدمات لیزر', active: false },
-  { id: 5, title: 'سایر موارد کلینیک تن ساز', value: 'سایر موارد کلینیک تن ساز', active: false },
-  { id: 6, title: 'باشگاه مشتریان', value: 'باشگاه مشتریان', active: false }
-])
 
 // Type items
 const typeItems = ref([
@@ -124,21 +101,16 @@ watch(() => props.modelValue, (newValue) => {
 
 // Update active states when filters change
 watch(() => filters.value, (newFilters) => {
-  // Update service items active state
-  serviceItems.value.forEach(item => {
-    item.active = item.value === newFilters.service
-  })
-  
   // Update type items active state
   typeItems.value.forEach(item => {
     item.active = item.value === newFilters.type
   })
-  
+
   // Update date items active state
   dateItems.value.forEach(item => {
     item.active = item.value === newFilters.fromDate
   })
-  
+
   // Update to date items active state
   toDateItems.value.forEach(item => {
     item.active = item.value === newFilters.toDate

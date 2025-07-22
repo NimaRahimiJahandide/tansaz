@@ -42,6 +42,7 @@
 
     <!-- Mobile Layout -->
     <div class="lg:hidden">
+      <DashboardPointPointsDropDown />
       <!-- Points Summary -->
       <div class="mb-6">
         <DashboardPointPointsSummary 

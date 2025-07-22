@@ -1,11 +1,13 @@
 <template>
-  <div class="bg-gray-800 rounded-lg p-4 hover:bg-gray-750 transition-colors">
-    <div class="flex justify-between items-start mb-2">
-      <h4 class="font-semibold text-white">{{ index }}. {{ item.type }}</h4>
-      <span class="text-red-500 font-bold">{{ item.points }} امتیاز</span>
+  <div class="bg-[#212121] rounded-[28px] p-4 transition-colors">
+    <div class="flex justify-between items-start pb-2">
+      <h4 class="font-medium text-white text-[18px] leading-[24px]  ">{{ index }}. {{ item.type }}</h4>
+      <span class="text-brand bg-[#ED1C241A] font-medium text-[14px] leading-[24px] px-4 py-1 rounded-[10px]">{{ item.points }} امتیاز</span>
     </div>
-    <p class="text-sm text-gray-300 mb-2 leading-relaxed">{{ item.description }}</p>
-    <div class="text-xs text-gray-400">{{ item.date }}</div>
+    <div>
+      <p class="text-white mb-2 text-[14px] leading-[26px] text-justify"><span class="text-[#828282]">توضیحات :</span> {{ item.description }}</p>
+    </div>
+    <div class="text-sm text-[#828282]">{{ item.date }}</div>
   </div>
 </template>
 

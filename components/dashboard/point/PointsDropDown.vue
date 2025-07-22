@@ -1,20 +1,23 @@
 <template>
   <div>
     <!-- Category Selection -->
-    <div class="mx-auto">
+    <div class="mb-4">
+
       <!-- Dropdown Container -->
       <div class="relative">
         <!-- Dropdown Header -->
         <div @click="toggleDropdown"
-          class="bg-[#212121] rounded-[35px] shadow-sm px-4 py-[7px] cursor-pointer hover:shadow-md transition-shadow">
-          <div class="flex items-center gap-2 justify-between">
+          class="bg-[#212121] rounded-xl shadow-sm p-4 cursor-pointer hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between">
             <!-- Selected Item Display -->
-            <div class="flex items-center">
-              <span class="text-base text-[#F2F4F6]">
-                <span class="text-[#828282]">{{ label }}: </span> {{ selectedItem.title }}
+            <div class="flex items-center space-x-2 space-x-reverse">
+              <Icon name="mdi:gift-outline" size="22" class="text-brand ml-2"/>
+              <span class="text-base font-medium text-white">
+                {{ selectedItem.title }}
               </span>
             </div>
-            <!-- Chevron Icon -->
+
+            <!-- Home Icon -->
             <svg class="w-5 h-5 text-red-500 transform transition-transform duration-200"
               :class="{ 'rotate-180': isOpen }" fill="none" stroke="#828282" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -27,14 +30,14 @@
           enter-to-class="opacity-100 scale-100" leave-active-class="transition ease-in duration-150"
           leave-from-class="opacity-100 scale-100" leave-to-class="opacity-0 scale-95">
           <div v-show="isOpen"
-            class="absolute top-full left-0 right-0 mt-2 bg-[#212121] rounded-xl shadow-lg z-10 overflow-hidden">
+            class="absolute top-full left-0 right-0 mt-2 bg-[#212121] rounded-xl shadow-lgz-10 overflow-hidden">
             <!-- Menu Items -->
             <div class="py-2">
               <div v-for="item in menuItems" :key="item.id" @click="selectMenuItem(item)"
-                class="px-4 py-3 hover:bg-gray-50 cursor-pointer  text-white transition-colors flex items-center justify-between"
+                class="px-4 py-3 hover:bg-gray-50 cursor-pointer transition-colors flex items-center justify-between"
                 :class="{
-                  'bg-red-500 hover:bg-red-600': item.active,
-                  'text-gray-700 hover:text-[#212121]': !item.active
+                  'bg-red-500 text-white hover:bg-red-600': item.active,
+                  'text-gray-700': !item.active
                 }">
                 <span class="text-sm" :class="{ 'font-medium': item.active }">
                   {{ item.title }}
@@ -59,52 +62,18 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
-
-const props = defineProps({
-  items: {
-    type: Array,
-    required: true
-  },
-  label: {
-    type: String,
-    default: 'بابت'
-  },
-  modelValue: {
-    type: [String, Number],
-    default: null
-  }
-})
-
-const emit = defineEmits(['update:modelValue'])
+import { ref, onMounted, onUnmounted } from 'vue'
 
 // Dropdown state
 const isOpen = ref(false)
 
-// Menu items data - use props.items
-const menuItems = ref([...props.items])
+// Menu items data
+const menuItems = ref([
+  { id: 1, title: 'امتیازات من', active: true }
+])
 
-// Get selected item - either from modelValue or find active item
-const selectedItem = computed(() => {
-  if (props.modelValue) {
-    return menuItems.value.find(item => item.value === props.modelValue) || menuItems.value[0]
-  }
-  return menuItems.value.find(item => item.active) || menuItems.value[0]
-})
-
-// Watch for changes in props.items
-watch(() => props.items, (newItems) => {
-  menuItems.value = [...newItems]
-}, { deep: true })
-
-// Watch for modelValue changes
-watch(() => props.modelValue, (newValue) => {
-  if (newValue) {
-    menuItems.value.forEach(item => {
-      item.active = item.value === newValue
-    })
-  }
-})
+// Get selected item
+const selectedItem = ref(menuItems.value.find(item => item.active))
 
 // Toggle dropdown
 const toggleDropdown = () => {
@@ -123,8 +92,8 @@ const selectMenuItem = (item) => {
     menuItem.active = menuItem.id === item.id
   })
 
-  // Emit the selected value
-  emit('update:modelValue', item.value)
+  // Update selected item
+  selectedItem.value = item
 
   // Close dropdown
   closeDropdown()
@@ -140,13 +109,6 @@ const handleKeydown = (event) => {
 // Add keyboard event listener
 onMounted(() => {
   document.addEventListener('keydown', handleKeydown)
-  
-  // Set initial active state based on modelValue
-  if (props.modelValue) {
-    menuItems.value.forEach(item => {
-      item.active = item.value === props.modelValue
-    })
-  }
 })
 
 // Remove keyboard event listener
@@ -175,5 +137,8 @@ onUnmounted(() => {
   background: #f1f5f9;
 }
 
-
+.dropdown-menu::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 2px;
+}
 </style>
