@@ -82,7 +82,7 @@ const categories = ref([
     <HomeFaqSection data-aos="fade-up" data-aos-once="true"/>
 
     <!-- slider -->
-    <section class="flex flex-col w-full bg-[#F5F5F5] px-[16px] py-[30px] relative" data-aos="fade-up">
+    <section class="flex flex-col w-full bg-[#F5F5F5] px-[16px] py-[30px] relative">
       <div class="absolute bottom-0 right-0 w-full bg-gradient-to-t h-[200px] from-[#00000016] to-[#00000000]"></div>
       <p class="text-[20px] font-bold">
         <span class="text-[#ED1C24]"> متریال درجه یک </span>
@@ -92,21 +92,23 @@ const categories = ref([
         <span class="text-[#ED1C24]"> ! </span>
       </p>
 
-      <ServicesSliderComponent />
-
-      <p class="text-[20px] font-bold">
-        <span class="text-[#000000]"> مزو تراپی در کمتر از 20 دقیقه، </span>
-
-        <span class="text-[#ED1C24]"> بدون درد </span>
-
-        <span class="text-[#000000]"> و با </span>
-        <span class="text-[#ED1C24]"> بی حسی </span>
-        <span class="text-[#000000]"> موضعی انجام می شود. </span>
-      </p>
+      <div  data-aos="fade-up" data-aos-once="true">
+        <ServicesSliderComponent />
+  
+        <p class="text-[20px] font-bold">
+          <span class="text-[#000000]"> مزو تراپی در کمتر از 20 دقیقه، </span>
+  
+          <span class="text-[#ED1C24]"> بدون درد </span>
+  
+          <span class="text-[#000000]"> و با </span>
+          <span class="text-[#ED1C24]"> بی حسی </span>
+          <span class="text-[#000000]"> موضعی انجام می شود. </span>
+        </p>
+      </div>
     </section>
 
-    <Comments data-aos="fade-up" data-aos-once="true"/>
-    <HomeBlogsSection data-aos="fade-up" data-aos-once="true"/>
+    <Comments/>
+    <HomeBlogsSection/>
   </div>
 </template>
 

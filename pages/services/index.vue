@@ -88,7 +88,7 @@ const leftServices = computed(() => services.value.slice(3))
           class="p-[8px] w-full h-full focus:outline-0 placeholder-[#2E2E2E80]" />
       </div>
 
-      <div class="flex gap-[16px] mt-[35px]">
+      <div class="flex gap-[16px] mt-[35px] justify-center">
         <div class="flex flex-col gap-[23px] w-[171px]">
           <ServicesCard data-aos="fade-up" data-aos-once="true"
             v-for="service in leftServices"
