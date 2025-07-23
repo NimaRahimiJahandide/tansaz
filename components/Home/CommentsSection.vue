@@ -190,18 +190,6 @@ const getItemClass = (index) => {
 
 const paginationWrapper = ref(null)
 
-const scrollActiveThumbnailIntoCenter = () => {
-  const wrapper = paginationWrapper.value
-  const activeThumb = wrapper?.querySelector('.active-pagination')
-
-  if (wrapper && activeThumb) {
-    const wrapperRect = wrapper.getBoundingClientRect()
-    const activeRect = activeThumb.getBoundingClientRect()
-    const offset = activeRect.left - wrapperRect.left - wrapper.clientWidth / 2 + activeThumb.clientWidth / 2
-    wrapper.scrollBy({ left: offset, behavior: 'smooth' })
-  }
-}
-
 // شروع auto-play هنگام mount
 onMounted(() => {
   startAutoPlay()
