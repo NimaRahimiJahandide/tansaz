@@ -1,5 +1,5 @@
 <template>
-  <div class="relative bg-black text-white py-8 overflow-hidden">
+  <div class="relative bg-black text-white pt-8 overflow-hidden">
     <!-- Header Section -->
     <header class="px-2 pb-[25px] z-10">
       <h1 class="text-xl font-bold leading-7">
@@ -42,8 +42,8 @@
             class="absolute -bottom-4 left-1/2 -translate-x-1/2 heartbeat">
         </div>
       </section>
+      <div class="pb-20"></div>
     </div>
-    <div class="pb-[40px]"></div>
   </div>
 </template>
 

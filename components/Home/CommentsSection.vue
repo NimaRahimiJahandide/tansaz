@@ -13,10 +13,10 @@
     <div data-aos="fade-up" data-aos-delay="500" data-aos-once="true">
       <!-- Slider -->
       <div class="relative overflow-hidden w-full ltr">
-        <div class="flex transition-transform duration-500 ease-in-out ltr"
+        <div class="flex transition-all duration-700 ease-out ltr"
           :style="{ transform: `translateX(calc(50% - ${(activeIndex * totalItemWidth) + totalItemWidth / 2}px))` }">
           <div v-for="(person, index) in teamMembers" :key="index"
-            class="min-w-[240px] mx-4 transition-transform duration-500 ease-in-out" :class="getItemClass(index)">
+            class="min-w-[240px] mx-4 transition-all duration-700 ease-out" :class="getItemClass(index)">
             <HomeUserExperienceCard :name="person.name" :lastName="person.lastName" :role="person.role"
               :experience="person.experience" :image="person.image" />
           </div>
@@ -32,37 +32,34 @@
       <div class="flex justify-between items-center mt-4 px-4">
         <!-- دکمه قبلی -->
         <button @click="prevSlide"
-          class="bg-brand size-10 flex items-center justify-center text-white font-bold rounded-lg">
+          class="bg-brand size-10 flex items-center justify-center text-white font-bold rounded-lg transition-all duration-300 hover:scale-110">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
           </svg>
         </button>
   
         <!-- Progress Bar -->
-  
         <div class="flex-1 mx-4">
           <div class="w-full h-1 rounded-full overflow-hidden neon-progress ltr">
-            <div class="h-full bg-[#FF2525] neon-progress" :style="{ width: progressValue + '%' }"></div>
+            <div class="h-full bg-[#FF2525] neon-progress transition-all duration-100 ease-linear" 
+                 :style="{ width: progressValue + '%' }"></div>
           </div>
         </div>
   
-  
         <!-- دکمه بعدی -->
         <button @click="nextSlide"
-          class="bg-[#2E2E2E] text-[#929DAC] font-bold size-10 flex items-center justify-center rounded-lg">
+          class="bg-[#2E2E2E] text-[#929DAC] font-bold size-10 flex items-center justify-center rounded-lg transition-all duration-300 hover:scale-110">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 rotate-180" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
           </svg>
         </button>
-  
       </div>
   
       <section class="flex justify-center items-center pt-7">
-        <NuxtLink to="/comments" class="bg-[#363636] text-white rounded-full px-7 py-2">مشاهده بیشتر</NuxtLink>
+        <NuxtLink to="/comments" class="bg-[#363636] text-white rounded-full px-7 py-2 transition-all duration-300 hover:bg-[#444444]">مشاهده بیشتر</NuxtLink>
       </section>
     </div>
-
   </div>
 </template>
 
@@ -72,6 +69,7 @@ const progressValue = ref(0)
 const itemWidth = 240
 const itemMargin = 32 // mx-4 = 16px در هر طرف = 32px کل
 const totalItemWidth = itemWidth + itemMargin
+const isTransitioning = ref(false)
 
 // Auto-play settings
 const autoPlayDuration = 5000 // 5 ثانیه
@@ -118,56 +116,71 @@ const teamMembers = ref([
 ])
 
 const nextSlide = () => {
-  pauseAutoPlay();
-  progressValue.value = 0;
-  activeIndex.value = (activeIndex.value + 1) % teamMembers.value.length;
-  startAutoPlay();
+  if (isTransitioning.value) return
+  
+  isTransitioning.value = true
+  pauseAutoPlay()
+  progressValue.value = 0
+  activeIndex.value = (activeIndex.value + 1) % teamMembers.value.length
+  
+  // صبر تا انیمیشن کامل شود
+  setTimeout(() => {
+    isTransitioning.value = false
+    startAutoPlay()
+  }, 700) // مطابق با duration انیمیشن
 }
 
 const prevSlide = () => {
-  pauseAutoPlay();
-  progressValue.value = 0;
-  activeIndex.value = (activeIndex.value - 1 + teamMembers.value.length) % teamMembers.value.length;
-  startAutoPlay();
+  if (isTransitioning.value) return
+  
+  isTransitioning.value = true
+  pauseAutoPlay()
+  progressValue.value = 0
+  activeIndex.value = (activeIndex.value - 1 + teamMembers.value.length) % teamMembers.value.length
+  
+  // صبر تا انیمیشن کامل شود
+  setTimeout(() => {
+    isTransitioning.value = false
+    startAutoPlay()
+  }, 700) // مطابق با duration انیمیشن
 }
 
 const startAutoPlay = () => {
-  if (!isAutoPlaying) return;
-  pauseAutoPlay(); // پاکسازی تایمرهای قبلی
-  progressValue.value = 0;
-  let startTime = null;
-  isAnimating = true;
+  if (!isAutoPlaying || isTransitioning.value) return
+  pauseAutoPlay() // پاکسازی تایمرهای قبلی
+  progressValue.value = 0
+  let startTime = null
+  isAnimating = true
 
   const animate = (time) => {
-    if (!isAnimating) return;
-    if (!startTime) startTime = time;
-    const elapsed = time - startTime;
-    const percentage = Math.min((elapsed / autoPlayDuration) * 100, 100);
-    progressValue.value = percentage;
+    if (!isAnimating || isTransitioning.value) return
+    if (!startTime) startTime = time
+    const elapsed = time - startTime
+    const percentage = Math.min((elapsed / autoPlayDuration) * 100, 100)
+    progressValue.value = percentage
     if (percentage < 100) {
-      progressTimer = requestAnimationFrame(animate);
+      progressTimer = requestAnimationFrame(animate)
     } else {
-      progressValue.value = 100;
-      nextSlide();
-      setTimeout(() => {
-        startAutoPlay();
-      }, 100);
+      progressValue.value = 100
+      nextSlide()
     }
-  };
-  progressTimer = requestAnimationFrame(animate);
-};
+  }
+  progressTimer = requestAnimationFrame(animate)
+}
 
 const pauseAutoPlay = () => {
-  isAnimating = false;
+  isAnimating = false
   if (progressTimer) {
-    cancelAnimationFrame(progressTimer);
-    progressTimer = null;
+    cancelAnimationFrame(progressTimer)
+    progressTimer = null
   }
-};
+}
 
 const resumeAutoPlay = () => {
   isAutoPlaying = true
-  startAutoPlay()
+  if (!isTransitioning.value) {
+    startAutoPlay()
+  }
 }
 
 const stopAutoPlay = () => {
@@ -177,18 +190,20 @@ const stopAutoPlay = () => {
 }
 
 const getItemClass = (index) => {
-  if (index === activeIndex.value) {
-    return 'scale-100 rotate-0 opacity-100 z-20';
-  } else if (index === activeIndex.value - 1) {
-    return 'scale-90 opacity-80 z-10 card-skew-left';
-  } else if (index === activeIndex.value + 1) {
-    return 'scale-90 opacity-80 z-10 card-skew-right';
+  const diff = (index - activeIndex.value + teamMembers.value.length) % teamMembers.value.length
+  
+  if (diff === 0) {
+    // آیتم فعال
+    return 'scale-100 rotate-0 opacity-100 z-20 transform-gpu'
+  } else if (diff === 1 || diff === teamMembers.value.length - 1) {
+    // آیتم‌های مجاور
+    const isLeft = diff === teamMembers.value.length - 1
+    return `scale-90 opacity-80 z-10 transform-gpu ${isLeft ? 'card-skew-left' : 'card-skew-right'}`
   } else {
-    return 'scale-85 opacity-60 z-0';
+    // باقی آیتم‌ها
+    return 'scale-85 opacity-60 z-0 transform-gpu'
   }
-};
-
-const paginationWrapper = ref(null)
+}
 
 // شروع auto-play هنگام mount
 onMounted(() => {
@@ -206,7 +221,7 @@ const handleMouseEnter = () => {
 }
 
 const handleMouseLeave = () => {
-  if (isAutoPlaying) {
+  if (isAutoPlaying && !isTransitioning.value) {
     startAutoPlay()
   }
 }
@@ -225,21 +240,10 @@ defineExpose({
   direction: ltr;
 }
 
-.rotate-y-12 {
-  transform: perspective(1000px) rotateY(12deg);
-}
-
-.-rotate-y-12 {
-  transform: perspective(1000px) rotateY(-12deg);
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.transform-gpu {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
 }
 
 .card-skew-left {
@@ -255,5 +259,15 @@ defineExpose({
     0 0 0.6em #22222222,
     0 0 0.8em #FF2525cc;
   border-image-source: linear-gradient(0.71deg, rgba(255, 0, 0, 0) 43.39%, #FF2525 97.71%);
+}
+
+/* بهبود انیمیشن‌های اضافی */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 </style>
