@@ -6,7 +6,7 @@
       <p class="text-3xl font-bold leading-8">و برنــــــــــده شویــــــــــــــــــــــد</p>
     </div>
 
-    <div  data-aos="fade-up" data-aos-delay="600" data-aos-once="true">
+    <div ز  data-aos="fade-up" data-aos-delay="600" data-aos-once="true">
       <!-- Wheel -->
       <div class="relative w-[350px] h-[350px] overflow-hidden rounded-full  transition-transform duration-[5s] ease-out"
         ref="wheel"
@@ -17,10 +17,12 @@
       </div>
   
       <!-- Reset -->
-      <button  @click="resetGame"
-        class="mt-16 bg-white w-[186px] h-[48px] text-brand px-4 py-2 rounded-full font-bold">
-        شروع چرخش
-      </button>
+      <div class="flex items-center justify-center">
+        <button  @click="resetGame"
+          class="mt-16 flex items-center justify-center text-center bg-white w-[186px] h-[48px] text-brand px-4 py-2 rounded-full font-bold">
+          شروع چرخش
+        </button>
+      </div>
     </div>
   </div>
 </template>
