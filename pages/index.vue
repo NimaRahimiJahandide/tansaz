@@ -59,13 +59,13 @@
     <!-- Service Section -->
     <transition name="fade">
       <div v-if="isStarted">
-        <HomeServiceSection data-aos="fade-up" data-aos-delay="100" data-aos-once="true"/>
-        <HomeBeforAfterExample data-aos="fade-up" data-aos-delay="200" data-aos-once="true"/>
-        <HomeFaqSection data-aos="fade-up" data-aos-delay="300" :onScrollToLuck="scrollToLuckSection" data-aos-once="true"/>
+        <HomeServiceSection/>
+        <HomeBeforAfterExample/>
+        <HomeFaqSection :onScrollToLuck="scrollToLuckSection"/>
         <HomeTourSection data-aos="fade-up" data-aos-delay="400"  data-aos-once="true"/>
-        <HomeCommentsSection data-aos="fade-up" data-aos-delay="500" data-aos-once="true"/>
-        <HomeLuckSection ref="luckSectionRef" data-aos="fade-up" data-aos-delay="600" data-aos-once="true"/>
-        <HomeBlogsSection data-aos="fade-up" data-aos-delay="700" data-aos-once="true"/>
+        <HomeCommentsSection/>
+        <HomeLuckSection ref="luckSectionRef"/>
+        <HomeBlogsSection />
       </div>
     </transition>
   </div>

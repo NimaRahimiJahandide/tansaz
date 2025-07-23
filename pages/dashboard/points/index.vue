@@ -69,6 +69,7 @@
       </div>
     </div>
     <ChatWidget />
+    <DashboardPointConvertPointsModal v-if="showConvertModal" @close="showConvertModal = false" />
   </div>
 </template>
 
@@ -181,10 +182,10 @@ const handleEarnMore = () => {
   // router.push('/dashboard/earn-points')
 }
 
+const showConvertModal = ref(false)
+
 const handleConvertPoints = () => {
-  // Handle convert points logic
-  console.log('Navigating to convert points...')
-  // router.push('/dashboard/convert-points')
+  showConvertModal.value = true
 }
 
 // Meta tags for SEO

@@ -7,17 +7,19 @@
       <h1 class="text-xl font-bold"><span class="text-brand">پرسش</span> های متداول</h1>
     </header>
 
-    <!-- FAQ Section -->
-    <section class="space-y-4">
-      <!-- FAQ Items -->
-      <HomeFaqItem v-for="(faq, index) in faqs" :key="index" :question="faq.question" :answer="faq.answer" />
-    </section>
-
-    <!-- Button to navigate to FAQ Category Page -->
-    <button class="mt-8 w-full bg-brand text-center rounded-full h-[48px]">
-      <NuxtLink to="/faqs" class="bg-brand text-white font-semibold leading-[26px] rounded-full w-full">صفحه دسته بندی پرسش
-        های متداول</NuxtLink>
-    </button>
+    <div data-aos="fade-up" data-aos-delay="300"  data-aos-once="true">
+      <!-- FAQ Section -->
+      <section class="space-y-4">
+        <!-- FAQ Items -->
+        <HomeFaqItem v-for="(faq, index) in faqs" :key="index" :question="faq.question" :answer="faq.answer" />
+      </section>
+  
+      <!-- Button to navigate to FAQ Category Page -->
+      <button class="mt-8 w-full bg-brand text-center rounded-full h-[48px]">
+        <NuxtLink to="/faqs" class="bg-brand text-white font-semibold leading-[26px] rounded-full w-full">صفحه دسته بندی پرسش
+          های متداول</NuxtLink>
+      </button>
+    </div>
   </div>
 </template>
 
