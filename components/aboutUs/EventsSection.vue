@@ -4,7 +4,7 @@
     <h2 class="text-xl font-bold leading-7 text-center pb-4 pt-[30px]">
       <span class="text-brand">رویداد های</span> کلینیک تن ساز
     </h2>
-    <div class="container mx-auto px-4 pb-8">
+    <div class="container mx-auto px-4 pb-8"  data-aos="fade-up" data-aos-once="true">
       <div class="rounded-2xl overflow-hidden relative">
         <transition name="fade" mode="out-in">
           <div :key="activeIndex" class="relative" @touchstart="handleTouchStart" @touchend="handleTouchEnd">

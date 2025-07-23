@@ -11,7 +11,7 @@
     <h2 v-else class="text-xl font-bold leading-7 text-center pb-4 pt-[30px]">
       <span class="text-brand">مقالات کاربردی</span> برای شما عزیزان
     </h2>
-    <div class="container mx-auto px-4 pb-8">
+    <div class="container mx-auto px-4 pb-8" data-aos="fade-up" data-aos-delay="700" data-aos-once="true">
       <div class="rounded-2xl overflow-hidden relative">
         <transition name="slide-fade" mode="out-in">
           <div

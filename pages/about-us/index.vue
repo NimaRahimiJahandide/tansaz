@@ -133,13 +133,12 @@ onMounted(() => {
 
     </section>
 
-
-    <section class="flex flex-col px-[16px]" data-aos="fade-up" data-aos-once="true">
+    <section class="flex flex-col px-[16px]">
       <h2 class="text-xl font-bold mt-[16px]">
         <span class="text-brand">کلینیک تــــن ساز</span> متن معرفی
       </h2>
 
-      <p class="mt-[12px] text-[#2E2E2E] text-[14px] text-justify leading-[1.625rem]">
+      <p class="mt-[12px] text-[#2E2E2E] text-[14px] text-justify leading-[1.625rem]" data-aos="fade-up" data-aos-once="true">
         لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده
         از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و
         سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای
@@ -158,7 +157,7 @@ onMounted(() => {
       </button>
     </section>
 
-    <section class="flex flex-col py-[60px] px-[16px] gap-[30px] w-full bg-[#1D1D1D] mt-[43px]" data-aos="fade-up" data-aos-once="true">
+    <section class="flex flex-col py-[60px] px-[16px] gap-[30px] w-full bg-[#1D1D1D] mt-[43px]">
       <p class="text-[20px] font-bold text-[#ffffff]">
         <span>چرا کلینیک </span>
         <span class="text-brand">تــــــن ســـــــــــــاز </span>
@@ -166,7 +165,7 @@ onMounted(() => {
       </p>
 
       <div class="flex flex-col gap-[25px]">
-        <div class="flex gap-[8px] items-start" v-for="item in whyTansaz" :key="item.id">
+        <div class="flex gap-[8px] items-start" v-for="item in whyTansaz" :key="item.id" data-aos="fade-up" data-aos-once="true">
           <img src="/icons/books.svg" alt="" class="mt-[2px]" />
 
           <div class="flex flex-col gap-[2px]">
@@ -178,7 +177,7 @@ onMounted(() => {
       </div>
     </section>
 
-    <section class="flex flex-col gap-[40px] w-full px-[16px] mb-[40px]" data-aos="fade-up" data-aos-once="true">
+    <section class="flex flex-col gap-[40px] w-full px-[16px] mb-[40px]">
       <div class="flex flex-col mt-[43px] w-full">
         <p class="text-[20px] font-bold text-[#ffffff]">
           <span class="text-brand">پزشکان </span>
@@ -193,6 +192,6 @@ onMounted(() => {
         <AboutUsDoctorCard v-for="doctor in doctors" :key="doctor.id" :doctor="doctor" data-aos="fade-left"  data-aos-once="true"/>
       </div>
     </section>
-    <AboutUsEventsSection :is-transparent="true" data-aos="fade-up" data-aos-once="true"/>
+    <AboutUsEventsSection :is-transparent="true"/>
   </div>
 </template>

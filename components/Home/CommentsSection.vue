@@ -10,56 +10,58 @@
       </h2>
     </div>
 
-    <!-- Slider -->
-    <div class="relative overflow-hidden w-full ltr">
-      <div class="flex transition-transform duration-500 ease-in-out ltr"
-        :style="{ transform: `translateX(calc(50% - ${(activeIndex * totalItemWidth) + totalItemWidth / 2}px))` }">
-        <div v-for="(person, index) in teamMembers" :key="index"
-          class="min-w-[240px] mx-4 transition-transform duration-500 ease-in-out" :class="getItemClass(index)">
-          <HomeUserExperienceCard :name="person.name" :lastName="person.lastName" :role="person.role"
-            :experience="person.experience" :image="person.image" />
+    <div data-aos="fade-up" data-aos-delay="500" data-aos-once="true">
+      <!-- Slider -->
+      <div class="relative overflow-hidden w-full ltr">
+        <div class="flex transition-transform duration-500 ease-in-out ltr"
+          :style="{ transform: `translateX(calc(50% - ${(activeIndex * totalItemWidth) + totalItemWidth / 2}px))` }">
+          <div v-for="(person, index) in teamMembers" :key="index"
+            class="min-w-[240px] mx-4 transition-transform duration-500 ease-in-out" :class="getItemClass(index)">
+            <HomeUserExperienceCard :name="person.name" :lastName="person.lastName" :role="person.role"
+              :experience="person.experience" :image="person.image" />
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- ProgressBar -->
-    <div class="flex items-center justify-center mt-6">
-      <HomeProgressBar />
-    </div>
-
-    <!-- pagination -->
-    <div class="flex justify-between items-center mt-4 px-4">
-      <!-- دکمه قبلی -->
-      <button @click="prevSlide"
-        class="bg-brand size-10 flex items-center justify-center text-white font-bold rounded-lg">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-
-      <!-- Progress Bar -->
-
-      <div class="flex-1 mx-4">
-        <div class="w-full h-1 rounded-full overflow-hidden neon-progress ltr">
-          <div class="h-full bg-[#FF2525] neon-progress" :style="{ width: progressValue + '%' }"></div>
-        </div>
+  
+      <!-- ProgressBar -->
+      <div class="flex items-center justify-center mt-6">
+        <HomeProgressBar />
       </div>
-
-
-      <!-- دکمه بعدی -->
-      <button @click="nextSlide"
-        class="bg-[#2E2E2E] text-[#929DAC] font-bold size-10 flex items-center justify-center rounded-lg">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 rotate-180" fill="none" viewBox="0 0 24 24"
-          stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-
+  
+      <!-- pagination -->
+      <div class="flex justify-between items-center mt-4 px-4">
+        <!-- دکمه قبلی -->
+        <button @click="prevSlide"
+          class="bg-brand size-10 flex items-center justify-center text-white font-bold rounded-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+  
+        <!-- Progress Bar -->
+  
+        <div class="flex-1 mx-4">
+          <div class="w-full h-1 rounded-full overflow-hidden neon-progress ltr">
+            <div class="h-full bg-[#FF2525] neon-progress" :style="{ width: progressValue + '%' }"></div>
+          </div>
+        </div>
+  
+  
+        <!-- دکمه بعدی -->
+        <button @click="nextSlide"
+          class="bg-[#2E2E2E] text-[#929DAC] font-bold size-10 flex items-center justify-center rounded-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 rotate-180" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+  
+      </div>
+  
+      <section class="flex justify-center items-center pt-7">
+        <NuxtLink to="/comments" class="bg-[#363636] text-white rounded-full px-7 py-2">مشاهده بیشتر</NuxtLink>
+      </section>
     </div>
-
-    <section class="flex justify-center items-center pt-7">
-      <NuxtLink to="/comments" class="bg-[#363636] text-white rounded-full px-7 py-2">مشاهده بیشتر</NuxtLink>
-    </section>
 
   </div>
 </template>
@@ -187,18 +189,6 @@ const getItemClass = (index) => {
 };
 
 const paginationWrapper = ref(null)
-
-const scrollActiveThumbnailIntoCenter = () => {
-  const wrapper = paginationWrapper.value
-  const activeThumb = wrapper?.querySelector('.active-pagination')
-
-  if (wrapper && activeThumb) {
-    const wrapperRect = wrapper.getBoundingClientRect()
-    const activeRect = activeThumb.getBoundingClientRect()
-    const offset = activeRect.left - wrapperRect.left - wrapper.clientWidth / 2 + activeThumb.clientWidth / 2
-    wrapper.scrollBy({ left: offset, behavior: 'smooth' })
-  }
-}
 
 // شروع auto-play هنگام mount
 onMounted(() => {

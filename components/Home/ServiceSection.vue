@@ -14,6 +14,7 @@
         title="خدمات زيبايي"
         description="الكساندرايت ، دايود و آي بي ال"
         image="/images/service1.png"
+        data-aos="fade-up" data-aos-delay="100" data-aos-once="true"
       />
 
       <!-- Service Card 2: خدمات ليزر موهاي زائد -->
@@ -21,6 +22,7 @@
         title="خدمات ليزر موهاي زائد"
         description="الكساندرايت ، دايود و آي بي ال"
         image="/images/service2.png"
+        data-aos="fade-up" data-aos-delay="100" data-aos-once="true"
       />
 
       <!-- Service Card 3: خدمات داغري -->
@@ -28,6 +30,7 @@
         title="خدمات داغري"
         description="الكساندرايت ، دايود و آي بي ال"
         image="/images/service3.png"
+        data-aos="fade-up" data-aos-delay="100" data-aos-once="true"
       />
     </section>
   </div>

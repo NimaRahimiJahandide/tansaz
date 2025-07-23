@@ -43,55 +43,57 @@
   
         <span class="text-[#000000]"> کاربران</span>
       </p>
-  
-      <div class="flex gap-[11px] mt-[25px]">
-        <div class="size-[28px] rounded-full bg-[#000000]" />
-  
-        <div class="flex flex-col flex-1">
-          <div class="flex items-center gap-[6px]">
-            <p class="text-[12px] font-semibold text-[#000000]">هانیه کرانی</p>
-  
-            <p class="text-[12px] text-[#828282]">1 روز قبل</p>
-          </div>
-          <p class="text-[12px] leading-[20px] text-[#2E2E2E] mt-[5px]">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-            استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
-            ستون و سطرآنچنان که لازم است.
-          </p>
-  
-          <div class="flex items-center gap-[3px] mt-[10px]">
-            <Icon name="ci:arrow-undo-down-left" size="14" style="color: #0077FF" />
-            <p class="text-[12px] font-semibold text-[#0077FF]">پاسخ</p>
-          </div>
-        </div>
-      </div>
-  
-      <div class="flex items-center gap-[10px] mt-[15px]">
-        <p class="text-[12px] font-semibold text-[#000000]">مشاهده پاسخ ها</p>
-  
-        <div class="h-[1px] flex-1 bg-[#E1E1E1]" />
-      </div>
-      <div class="flex gap-[11px] mt-[25px]">
-        <div class="size-[28px] rounded-full bg-[#000000]" />
-  
-        <div class="flex flex-col flex-1">
-          <div class="flex items-center gap-[6px]">
-            <p class="text-[12px] font-semibold text-[#000000]">هانیه کرانی</p>
-  
-            <p class="text-[12px] text-[#828282]">1 روز قبل</p>
-          </div>
-          <p class="text-[12px] leading-[20px] text-[#2E2E2E] mt-[5px]">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-            استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
-            ستون و سطرآنچنان که لازم است.
-          </p>
-  
-          <div class="flex items-center gap-[3px] mt-[10px]">
-            <Icon name="ci:arrow-undo-down-left" size="14" style="color: #0077FF" />
-            <p class="text-[12px] font-semibold text-[#0077FF]">پاسخ</p>
+      
+      <div  data-aos="fade-up" data-aos-once="true">
+        <div class="flex gap-[11px] mt-[25px]">
+          <div class="size-[28px] rounded-full bg-[#000000]" />
+    
+          <div class="flex flex-col flex-1">
+            <div class="flex items-center gap-[6px]">
+              <p class="text-[12px] font-semibold text-[#000000]">هانیه کرانی</p>
+    
+              <p class="text-[12px] text-[#828282]">1 روز قبل</p>
+            </div>
+            <p class="text-[12px] leading-[20px] text-[#2E2E2E] mt-[5px]">
+              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+              استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
+              ستون و سطرآنچنان که لازم است.
+            </p>
+    
+            <div class="flex items-center gap-[3px] mt-[10px]">
+              <Icon name="ci:arrow-undo-down-left" size="14" style="color: #0077FF" />
+              <p class="text-[12px] font-semibold text-[#0077FF]">پاسخ</p>
+            </div>
           </div>
         </div>
-      </div> 
+    
+        <div class="flex items-center gap-[10px] mt-[15px]">
+          <p class="text-[12px] font-semibold text-[#000000]">مشاهده پاسخ ها</p>
+    
+          <div class="h-[1px] flex-1 bg-[#E1E1E1]" />
+        </div>
+        <div class="flex gap-[11px] mt-[25px]">
+          <div class="size-[28px] rounded-full bg-[#000000]" />
+    
+          <div class="flex flex-col flex-1">
+            <div class="flex items-center gap-[6px]">
+              <p class="text-[12px] font-semibold text-[#000000]">هانیه کرانی</p>
+    
+              <p class="text-[12px] text-[#828282]">1 روز قبل</p>
+            </div>
+            <p class="text-[12px] leading-[20px] text-[#2E2E2E] mt-[5px]">
+              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+              استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
+              ستون و سطرآنچنان که لازم است.
+            </p>
+    
+            <div class="flex items-center gap-[3px] mt-[10px]">
+              <Icon name="ci:arrow-undo-down-left" size="14" style="color: #0077FF" />
+              <p class="text-[12px] font-semibold text-[#0077FF]">پاسخ</p>
+            </div>
+          </div>
+        </div> 
+      </div>
     </div>
   </div>
 </template>

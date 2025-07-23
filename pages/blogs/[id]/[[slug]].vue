@@ -67,9 +67,9 @@ onMounted(() => {
       </p>
     </div>
     
-    <HomeBlogsSection data-aos="fade-up" data-aos-once="true"/>
+    <HomeBlogsSection/>
 
-    <Comments data-aos="fade-up" data-aos-once="true"/>
+    <Comments/>
   </div>
 </template>
 
