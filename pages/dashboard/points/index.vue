@@ -11,19 +11,16 @@
           </h1>
         </div>
         <div class="flex items-center space-x-4">
-          <button 
-            @click="openConvertModal"
-            class="bg-[#363636] px-6 py-3 rounded-full flex items-center space-x-2 transition-colors cursor-pointer hover:bg-[#404040]"
-          >
+          <button @click="openConvertModal"
+            class="bg-[#363636] px-6 py-3 rounded-full flex items-center space-x-2 transition-colors cursor-pointer hover:bg-[#404040]">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
             </svg>
             <span>تبدیل امتیاز</span>
           </button>
-          <button 
-            @click="handleEarnMore"
-            class="bg-brand px-6 py-3 rounded-full flex items-center space-x-2 transition-colors cursor-pointer hover:bg-opacity-90"
-          >
+          <button @click="handleEarnMore"
+            class="bg-brand px-6 py-3 rounded-full flex items-center space-x-2 transition-colors cursor-pointer hover:bg-opacity-90">
             <Icon name="ei:plus" size="24" style="color: #FFFFFF" />
             <span>کسب امتیاز بیشتر</span>
           </button>
@@ -42,15 +39,11 @@
     <!-- Mobile Layout -->
     <div class="lg:hidden">
       <DashboardPointPointsDropDown />
-      
+
       <!-- Points Summary -->
       <div class="mb-6">
-        <DashboardPointPointsSummary 
-          :total-points="totalPoints"
-          :total-points-text="totalPointsText"
-          @convert-points="openConvertModal"
-          @earn-more="handleEarnMore"
-        />
+        <DashboardPointPointsSummary :total-points="totalPoints" :total-points-text="totalPointsText"
+          @convert-points="openConvertModal" @earn-more="handleEarnMore" />
       </div>
 
       <!-- Mobile Filters -->
@@ -60,22 +53,14 @@
 
       <!-- Mobile Points History -->
       <div class="space-y-4">
-        <DashboardPointPointsHistoryItem 
-          v-for="(item, index) in filteredPointsHistory" 
-          :key="index"
-          :item="item"
-          :index="index + 1"
-        />
+        <DashboardPointPointsHistoryItem v-for="(item, index) in filteredPointsHistory" :key="index" :item="item"
+          :index="index + 1" />
       </div>
     </div>
-    
+
     <!-- Convert Points Modal -->
-    <DashboardPointConvertPointsModal 
-      v-if="showConvertModal" 
-      :user-points="totalPoints"
-      @close="closeConvertModal" 
-      @conversion-success="handleConversionSuccess"
-    />
+    <DashboardPointConvertPointsModal v-if="showConvertModal" :user-points="totalPoints" @close="closeConvertModal"
+      @conversion-success="handleConversionSuccess" />
   </div>
 </template>
 
@@ -190,8 +175,8 @@ const handleConversionSuccess = (conversionData) => {
   console.log('Conversion successful:', conversionData)
   // Update total points if needed
   totalPoints.value -= conversionData.points
-  // Close modal
-  closeConvertModal()
+  // Don't close modal here! Let the success modal handle the closing
+  // closeConvertModal() // Remove this line
   // Maybe show a toast notification
 }
 
@@ -212,15 +197,19 @@ useSeoMeta({
 .hover\:bg-gray-750:hover {
   background-color: #374151;
 }
+
 .text-red-600 {
   color: #ff1d25;
 }
+
 .bg-red-600 {
   background-color: #ff1d25;
 }
+
 .bg-brand {
   background-color: #ED1C24;
 }
+
 .text-brand {
   color: #ED1C24;
 }
