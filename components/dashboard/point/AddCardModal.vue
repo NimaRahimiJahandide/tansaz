@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed inset-0 z-50 flex items-center justify-center bg-[#2F2F2F80] bg-opacity-60">
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-[#2F2F2F80] bg-opacity-60 backdrop-blur-[5px]">
     <div class="bg-[#181818] rounded-2xl w-full max-w-[400px] mx-4 p-6 relative shadow-lg">
       <!-- Close Button -->
       <button @click="$emit('close')" class="absolute left-4 top-4 text-gray-400 hover:text-white text-2xl focus:outline-none">
