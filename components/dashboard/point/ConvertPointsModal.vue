@@ -1,5 +1,13 @@
 <template>
-  <div class="fixed inset-0 z-50 flex items-center justify-center bg-[#2F2F2F80] bg-opacity-60">
+  <!-- Add Card Modal -->
+  <AddCardModal 
+    v-if="showAddCardModal" 
+    @close="closeAddCardModal" 
+    @add-card="handleAddCard" 
+  />
+
+  <!-- Main Convert Points Modal -->
+  <div v-if="!showAddCardModal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#2F2F2F80] bg-opacity-60">
     <div class="bg-[#151515] rounded-2xl w-full max-w-[400px] mx-4 p-6 relative shadow-lg">
       <!-- Close Button -->
       <button @click="$emit('close')"
@@ -52,7 +60,7 @@
           <div class="relative">
             <button @click="dropdownCashCard = !dropdownCashCard" type="button"
               class="w-full flex justify-between items-center cursor-pointer bg-[#232323] text-white p-3 rounded-lg focus:outline-none">
-              <span>{{ selectedCashCard ? selectedCashCard.label : 'شماره کارت خود را انتخاب کنید' }}</span>
+              <span>{{ selectedCashCard ? selectedCashCard.name + ' - ' + selectedCashCard.number : 'شماره کارت خود را انتخاب کنید' }}</span>
               <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
@@ -64,10 +72,11 @@
                 <div class="flex justify-between w-full">
                   <span>{{ option.number }}</span> {{ option.name }}
                 </div>
-                <span>{{ option.shaba }}</span>
+                <span class="text-xs text-gray-400">{{ option.sheba }}</span>
               </div>
-              <div class="flex items-center text-[#589ED4] text-sm font-medium cursor-pointer pb-[18px] pr-3">
-                <Icon name="ic:round-plus" size="18"  style="color: #589ED4" /> اضافه کردن شماره کارت 
+              <div @click="openAddCardModal" class="flex items-center text-[#589ED4] text-sm font-medium cursor-pointer pb-[18px] pr-3 hover:bg-[#444444] rounded-[14px] p-3">
+                <Icon name="ic:round-plus" size="18" style="color: #589ED4" class="ml-2" /> 
+                اضافه کردن شماره کارت 
               </div>
             </div>
           </div>
@@ -89,7 +98,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import AddCardModal from './AddCardModal.vue'
+
+const emit = defineEmits(['close'])
 
 const points = ref('')
 const pointsError = ref('')
@@ -97,6 +109,7 @@ const dropdownOpen = ref(false)
 const dropdownCashCard = ref(false)
 const selectedOption = ref(null)
 const optionError = ref('')
+const showAddCardModal = ref(false)
 
 const options = [
   { label: 'پول نقد', value: 'cash' },
@@ -107,14 +120,30 @@ const options = [
 
 const selectedCashCard = ref(null)
 
-const cashCardOptions = [
-  { number: '6604-2232-2838-9876', name: 'علی صالحی', shaba: 'IR123456789012345678901234' },
-]
+const cashCardOptions = ref([
+  { 
+    number: '6604-2232-2838-9876', 
+    name: 'علی صالحی', 
+    sheba: 'IR123456789012345678901234',
+    value: '6604-2232-2838-9876|IR123456789012345678901234'
+  },
+])
+
+const disabled = computed(() => {
+  if (!points.value || Number(points.value) <= 0) return true
+  if (!selectedOption.value) return true
+  if (selectedOption.value.value === 'cash' && !selectedCashCard.value) return true
+  return false
+})
 
 function selectOption(option) {
   selectedOption.value = option
   dropdownOpen.value = false
   optionError.value = ''
+  // Reset card selection when changing conversion type
+  if (option.value !== 'cash') {
+    selectedCashCard.value = null
+  }
 }
 
 function selectOptionCashCard(option) {
@@ -122,9 +151,32 @@ function selectOptionCashCard(option) {
   dropdownCashCard.value = false
 }
 
+function openAddCardModal() {
+  dropdownCashCard.value = false
+  showAddCardModal.value = true
+}
+
+function closeAddCardModal() {
+  showAddCardModal.value = false
+}
+
+function handleAddCard(newCard) {
+  // Add the new card to the list
+  cashCardOptions.value.push(newCard)
+  
+  // Select the newly added card
+  selectedCashCard.value = newCard
+  
+  // Close the add card modal
+  showAddCardModal.value = false
+  
+  console.log('Card added:', newCard)
+}
+
 function submit() {
   pointsError.value = ''
   optionError.value = ''
+  
   if (!points.value || Number(points.value) <= 0) {
     pointsError.value = 'لطفا تعداد امتیاز معتبر وارد کنید.'
     return
@@ -133,9 +185,21 @@ function submit() {
     optionError.value = 'لطفا نوع تبدیل را انتخاب کنید.'
     return
   }
+  
+  if (selectedOption.value.value === 'cash' && !selectedCashCard.value) {
+    optionError.value = 'لطفا شماره کارت را انتخاب کنید.'
+    return
+  }
+  
   // اینجا می‌توانید درخواست تبدیل را ارسال کنید
+  console.log('Converting points:', {
+    points: points.value,
+    type: selectedOption.value,
+    card: selectedCashCard.value
+  })
+  
   // پس از موفقیت:
-  $emit('close')
+  emit('close')
 }
 </script>
 
@@ -146,5 +210,9 @@ function submit() {
 
 .hover\:bg-gray-750:hover {
   background-color: #23272f;
+}
+
+.focus\:ring-brand:focus {
+  --tw-ring-color: #ff1d25;
 }
 </style>
