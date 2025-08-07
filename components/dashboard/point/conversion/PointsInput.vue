@@ -5,7 +5,7 @@
       <input 
         :value="modelValue" 
         @input="$emit('update:modelValue', $event.target.value)"
-        type="number" 
+        type="text" 
         min="1"
         class="w-full rounded-lg bg-[#232323] text-white p-3 focus:outline-none focus:ring-2 focus:ring-brand border-none placeholder-gray-500 text-right" 
       />
