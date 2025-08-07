@@ -83,8 +83,12 @@
 definePageMeta({
   layout: 'dashboard'
 })
+
 // Composables and imports
 const router = useRouter()
+
+// Modal state
+const showConvertModal = ref(false)
 
 // Reactive data
 const totalPoints = ref(1200)
@@ -170,28 +174,31 @@ const filteredPointsHistory = computed(() => {
     filtered = filtered.filter(item => item.service === filters.value.service)
   }
 
-  // Add date filtering logic here if needed
-  // if (filters.value.fromDate && filters.value.toDate) {
-  //   filtered = filtered.filter(item => {
-  //     // Add your date comparison logic here
-  //     return true
-  //   })
-  // }
-
   return filtered
 })
 
-// Methods
-const handleEarnMore = () => {
-  // Handle earn more points logic
-  console.log('Navigating to earn more points...')
-  // router.push('/dashboard/earn-points')
+// Modal methods
+const openConvertModal = () => {
+  showConvertModal.value = true
 }
 
-const showConvertModal = ref(false)
+const closeConvertModal = () => {
+  showConvertModal.value = false
+}
 
-const handleConvertPoints = () => {
-  showConvertModal.value = true
+const handleConversionSuccess = (conversionData) => {
+  console.log('Conversion successful:', conversionData)
+  // Update total points if needed
+  totalPoints.value -= conversionData.points
+  // Close modal
+  closeConvertModal()
+  // Maybe show a toast notification
+}
+
+// Other methods
+const handleEarnMore = () => {
+  console.log('Navigating to earn more points...')
+  // router.push('/dashboard/earn-points')
 }
 
 // Meta tags for SEO
@@ -202,7 +209,6 @@ useSeoMeta({
 </script>
 
 <style scoped>
-/* Add any additional custom styles if needed */
 .hover\:bg-gray-750:hover {
   background-color: #374151;
 }
@@ -211,5 +217,11 @@ useSeoMeta({
 }
 .bg-red-600 {
   background-color: #ff1d25;
+}
+.bg-brand {
+  background-color: #ED1C24;
+}
+.text-brand {
+  color: #ED1C24;
 }
 </style>
