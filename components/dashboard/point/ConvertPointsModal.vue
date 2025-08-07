@@ -45,7 +45,7 @@
         />
 
         <!-- Warning Message -->
-        <div v-if="showSuccessModal" class="mb-6 bg-[#1EAC741A] rounded-2xl px-3.5 py-3 gap-2 flex items-start space-x-3 space-x-reverse">
+        <div v-if="selectedOption?.value?.value === 'cash'" class="mb-6 bg-[#1EAC741A] rounded-2xl px-3.5 py-3 gap-2 flex items-start space-x-3 space-x-reverse">
           <div class="flex-shrink-0">
             <Icon name="charm:shield-tick" size="18" style="color: #1EAC74" />
           </div>
@@ -92,8 +92,6 @@
 </template>
 
 <script setup>
-import { usePointsConversion, useModal } from '~/composables/usePointsConversion'
-
 // Props & Emits
 const props = defineProps({
   userPoints: {
@@ -106,8 +104,10 @@ const emit = defineEmits(['close', 'conversion-success'])
 
 // Composables
 const router = useRouter()
-const { isOpen: showSuccessModal, openModal: openSuccessModal, closeModal: closeSuccessModal } = useModal()
-const { isOpen: showAddCardModal, openModal: openAddCardModal, closeModal: closeAddCardModal } = useModal()
+
+// Modal states - using simple refs instead of composable
+const showSuccessModal = ref(false)
+const showAddCardModal = ref(false)
 
 // Use points conversion composable
 const {
@@ -136,7 +136,7 @@ const {
   validateForm,
   resetForm,
   buildConversionResult
-} = usePointsConversion()
+} = usePointsConversion(props.userPoints)
 
 // Local state
 const conversionResult = ref({})
@@ -146,10 +146,6 @@ const getWarningMessage = () => {
   if (selectedOption.value?.value === 'cash') {
     return 'شماره کارت به نام خودتان باشد، در غیر این صورت عملیات انجام نمی‌شود.'
   }
-  if (selectedOption.value?.value === 'service') {
-    return 'انتخاب خدمت مناسب برای تبدیل امتیازات شما اهمیت دارد.'
-  }
-  return 'اطلاعات وارد شده را با دقت بررسی کنید.'
 }
 
 // Methods
@@ -159,7 +155,7 @@ const handleClose = () => {
 }
 
 const handleAddCard = () => {
-  openAddCardModal()
+  showAddCardModal.value = true
 }
 
 const handleCardAdded = (cardData) => {
@@ -174,15 +170,20 @@ const handleCardAdded = (cardData) => {
   
   cashCardOptions.value.push(newCard)
   selectedCashCard.value = newCard
-  closeAddCardModal()
+  showAddCardModal.value = false
 }
 
 const handleSubmit = async () => {
+  console.log('Submit clicked')
+  
   if (!validateForm()) {
+    console.log('Form validation failed')
     return
   }
 
   try {
+    console.log('Processing conversion...')
+    
     // Here you would typically make an API call
     // const response = await $fetch('/api/points/convert', {
     //   method: 'POST',
@@ -191,9 +192,10 @@ const handleSubmit = async () => {
 
     // For now, simulate the conversion
     conversionResult.value = buildConversionResult()
+    console.log('Conversion result:', conversionResult.value)
     
     // Show success modal
-    openSuccessModal()
+    showSuccessModal.value = true
     
     // Emit success event with result
     emit('conversion-success', conversionResult.value)
@@ -205,7 +207,7 @@ const handleSubmit = async () => {
 }
 
 const handleCloseSuccess = () => {
-  closeSuccessModal()
+  showSuccessModal.value = false
   resetForm()
   emit('close')
 }
@@ -223,14 +225,14 @@ onUnmounted(() => {
 
 <style scoped>
 .bg-brand {
-  background-color: #ff1d25;
+  background-color: #ED1C24;
 }
 
 .focus\:ring-brand:focus {
-  --tw-ring-color: #ff1d25;
+  --tw-ring-color: #ED1C24;
 }
 
 .text-brand {
-  color: #ff1d25;
+  color: #ED1C24;
 }
 </style>
