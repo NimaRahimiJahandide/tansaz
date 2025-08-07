@@ -1,26 +1,27 @@
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 
-export const usePointsConversion = () => {
+export const usePointsConversion = (initialUserPoints = 1200) => {
   // State
   const points = ref('')
   const selectedOption = ref(null)
   const selectedCashCard = ref(null)
   const selectedService = ref(null)
+  const userPoints = ref(initialUserPoints)
   
   // Errors
   const pointsError = ref('')
   const optionError = ref('')
   const serviceError = ref('')
+  const cashCardError = ref('')
   
   // Options
   const conversionOptions = ref([
     { label: 'پول نقد', value: 'cash' },
     { label: 'پول در کیف پول', value: 'wallet' },
-    { label: 'استفاده از خدمات', value: 'service' },
-    { label: '...', value: 'other' }
+    { label: 'استفاده از خدمات', value: 'service' }
   ])
   
-  // Cash cards (this would typically come from an API)
+  // Cash cards - این باید از API بیاد
   const cashCardOptions = ref([
     { 
       id: 1,
@@ -31,7 +32,7 @@ export const usePointsConversion = () => {
     },
   ])
   
-  // Services (this would typically come from an API)
+  // Services - این هم باید از API بیاد
   const services = ref([
     { 
       id: 1, 
@@ -70,7 +71,14 @@ export const usePointsConversion = () => {
     }
   ])
   
-  // Computed
+  // Configuration
+  const config = ref({
+    conversionRate: 10, // 10 امتیاز = 100 تومان
+    multiplier: 100,
+    minPoints: 1
+  })
+  
+  // Computed properties
   const isFormValid = computed(() => {
     if (!points.value || Number(points.value) <= 0) return false
     if (!selectedOption.value) return false
@@ -81,17 +89,24 @@ export const usePointsConversion = () => {
     return true
   })
   
-  const conversionRate = computed(() => {
-    // 10 امتیاز = 100 تومان
-    return 10
-  })
+  const conversionRate = computed(() => config.value.conversionRate)
   
   const calculatedAmount = computed(() => {
-    if (!points.value) return 0
-    return (Number(points.value) / conversionRate.value) * 100
+    if (!points.value || isNaN(Number(points.value))) return 0
+    return Math.floor((Number(points.value) / conversionRate.value) * config.value.multiplier)
   })
   
-  // Methods
+  const hasEnoughPoints = computed(() => {
+    return Number(points.value) <= userPoints.value
+  })
+  
+  const availableServices = computed(() => {
+    return services.value.filter(service => 
+      service.points <= userPoints.value && !service.completed
+    )
+  })
+  
+  // Validation methods
   const validatePoints = () => {
     pointsError.value = ''
     
@@ -100,8 +115,20 @@ export const usePointsConversion = () => {
       return false
     }
     
-    if (Number(points.value) <= 0) {
-      pointsError.value = 'تعداد امتیاز باید بیشتر از صفر باشد'
+    const pointsNum = Number(points.value)
+    
+    if (isNaN(pointsNum) || pointsNum <= 0) {
+      pointsError.value = 'تعداد امتیاز باید عددی مثبت باشد'
+      return false
+    }
+    
+    if (pointsNum < config.value.minPoints) {
+      pointsError.value = `حداقل ${config.value.minPoints} امتیاز قابل تبدیل است`
+      return false
+    }
+    
+    if (pointsNum > userPoints.value) {
+      pointsError.value = `شما فقط ${userPoints.value} امتیاز دارید`
       return false
     }
     
@@ -119,8 +146,21 @@ export const usePointsConversion = () => {
     return true
   }
   
+  const validateCashCard = () => {
+    cashCardError.value = ''
+    
+    if (selectedOption.value?.value === 'cash' && !selectedCashCard.value) {
+      cashCardError.value = 'لطفاً شماره کارت را انتخاب کنید'
+      return false
+    }
+    
+    return true
+  }
+  
   const validateService = () => {
     serviceError.value = ''
+    
+    if (selectedOption.value?.value !== 'service') return true
     
     if (!selectedService.value) {
       serviceError.value = 'لطفاً یک خدمت انتخاب کنید'
@@ -128,8 +168,15 @@ export const usePointsConversion = () => {
     }
     
     const requiredPoints = selectedService.value.points
-    if (Number(points.value) < requiredPoints) {
+    const userPointsNum = Number(points.value)
+    
+    if (userPointsNum < requiredPoints) {
       serviceError.value = `برای این خدمت حداقل ${requiredPoints} امتیاز نیاز است`
+      return false
+    }
+    
+    if (selectedService.value.completed) {
+      serviceError.value = 'این خدمت قبلاً تکمیل شده است'
       return false
     }
     
@@ -137,15 +184,22 @@ export const usePointsConversion = () => {
   }
   
   const validateForm = () => {
-    const isPointsValid = validatePoints()
-    const isOptionValid = validateOption()
+    const validations = [
+      validatePoints(),
+      validateOption(),
+      validateCashCard(),
+      validateService()
+    ]
     
-    let isServiceValid = true
-    if (selectedOption.value?.value === 'service') {
-      isServiceValid = validateService()
-    }
-    
-    return isPointsValid && isOptionValid && isServiceValid
+    return validations.every(isValid => isValid)
+  }
+  
+  // Utility methods
+  const clearErrors = () => {
+    pointsError.value = ''
+    optionError.value = ''
+    serviceError.value = ''
+    cashCardError.value = ''
   }
   
   const resetForm = () => {
@@ -153,35 +207,101 @@ export const usePointsConversion = () => {
     selectedOption.value = null
     selectedCashCard.value = null
     selectedService.value = null
-    pointsError.value = ''
-    optionError.value = ''
-    serviceError.value = ''
+    clearErrors()
+  }
+  
+  const setMaxPoints = () => {
+    points.value = String(userPoints.value)
   }
   
   const buildConversionResult = () => {
-    const result = {
+    const baseResult = {
       points: Number(points.value),
-      cardNumber: '',
-      amount: 0,
-      currency: '',
-      type: selectedOption.value.value
+      type: selectedOption.value?.value || '',
+      timestamp: new Date().toISOString()
     }
     
-    if (selectedOption.value.value === 'service') {
-      result.amount = selectedService.value.title
-      result.currency = 'خدمت'
-      result.serviceId = selectedService.value.id
-    } else if (selectedOption.value.value === 'cash') {
-      result.amount = calculatedAmount.value
-      result.currency = 'تومان پول نقد'
-      result.cardNumber = selectedCashCard.value ? selectedCashCard.value.number : ''
-    } else if (selectedOption.value.value === 'wallet') {
-      result.amount = calculatedAmount.value
-      result.currency = 'تومان در کیف پول'
+    switch (selectedOption.value?.value) {
+      case 'service':
+        return {
+          ...baseResult,
+          amount: selectedService.value?.title || '',
+          currency: 'خدمت',
+          serviceId: selectedService.value?.id,
+          cardNumber: ''
+        }
+        
+      case 'cash':
+        return {
+          ...baseResult,
+          amount: calculatedAmount.value,
+          currency: 'تومان پول نقد',
+          cardNumber: selectedCashCard.value?.number || '',
+          cardId: selectedCashCard.value?.id
+        }
+        
+      case 'wallet':
+        return {
+          ...baseResult,
+          amount: calculatedAmount.value,
+          currency: 'تومان در کیف پول',
+          cardNumber: ''
+        }
+        
+      default:
+        return baseResult
     }
-    
-    return result
   }
+  
+  // API methods - این‌ها باید به سرور وصل بشن
+  const fetchUserCards = async () => {
+    try {
+      // const response = await $fetch('/api/user/cards')
+      // cashCardOptions.value = response.data
+    } catch (error) {
+      console.error('Failed to fetch user cards:', error)
+    }
+  }
+  
+  const fetchServices = async () => {
+    try {
+      // const response = await $fetch('/api/services')
+      // services.value = response.data
+    } catch (error) {
+      console.error('Failed to fetch services:', error)
+    }
+  }
+  
+  const addNewCard = (cardData) => {
+    const newCard = {
+      id: Date.now(), // استفاده از timestamp به جای length
+      number: cardData.cardNumber,
+      name: cardData.holderName || 'کاربر جدید',
+      shaba: cardData.ibanNumber,
+      value: `card_${Date.now()}`
+    }
+    
+    cashCardOptions.value.push(newCard)
+    return newCard
+  }
+  
+  // Watchers
+  watch(() => selectedOption.value, (newOption) => {
+    // پاک کردن انتخاب‌های قبلی هنگام تغییر نوع تبدیل
+    if (newOption?.value !== 'cash') {
+      selectedCashCard.value = null
+    }
+    if (newOption?.value !== 'service') {
+      selectedService.value = null
+    }
+    clearErrors()
+  })
+  
+  watch(() => points.value, () => {
+    if (pointsError.value) {
+      pointsError.value = ''
+    }
+  })
   
   return {
     // State
@@ -189,32 +309,50 @@ export const usePointsConversion = () => {
     selectedOption,
     selectedCashCard,
     selectedService,
+    userPoints,
     
     // Errors
     pointsError,
     optionError,
     serviceError,
+    cashCardError,
     
-    // Options
+    // Options & Data
     conversionOptions,
     cashCardOptions,
     services,
+    config,
     
     // Computed
     isFormValid,
     conversionRate,
     calculatedAmount,
+    hasEnoughPoints,
+    availableServices,
     
     // Methods
     validateForm,
     resetForm,
-    buildConversionResult
+    clearErrors,
+    setMaxPoints,
+    buildConversionResult,
+    addNewCard,
+    
+    // API methods
+    fetchUserCards,
+    fetchServices,
+    
+    // Individual validations (for custom usage)
+    validatePoints,
+    validateOption,
+    validateCashCard,
+    validateService
   }
 }
 
-// composables/useModal.js
-export const useModal = () => {
-  const isOpen = ref(false)
+// Modal management composable
+export const useModal = (initialState = false) => {
+  const isOpen = ref(initialState)
   
   const openModal = () => {
     isOpen.value = true
@@ -229,16 +367,15 @@ export const useModal = () => {
   }
   
   return {
-    isOpen,
     openModal,
     closeModal,
     toggleModal
   }
 }
 
-// composables/useDropdown.js
-export const useDropdown = () => {
-  const isOpen = ref(false)
+// Dropdown management composable
+export const useDropdown = (initialState = false) => {
+  const isOpen = ref(initialState)
   
   const toggle = () => {
     isOpen.value = !isOpen.value
@@ -252,10 +389,28 @@ export const useDropdown = () => {
     isOpen.value = true
   }
   
+  // Auto-close when clicking outside
+  const setupOutsideClick = (containerRef) => {
+    const handleClickOutside = (event) => {
+      if (containerRef.value && !containerRef.value.contains(event.target)) {
+        close()
+      }
+    }
+    
+    if (process.client) {
+      document.addEventListener('click', handleClickOutside)
+      
+      return () => {
+        document.removeEventListener('click', handleClickOutside)
+      }
+    }
+  }
+  
   return {
-    isOpen,
+    isOpen: readonly(isOpen),
     toggle,
     close,
-    open
+    open,
+    setupOutsideClick
   }
 }

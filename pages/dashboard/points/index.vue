@@ -2,7 +2,6 @@
   <div>
     <!-- Desktop Layout -->
     <div class="hidden lg:block">
-      
       <div class="flex justify-between items-center mb-8 bg-[#212121] p-[25px] rounded-[28px]">
         <div class="text-center">
           <h1 class="text-2xl mb-2">
@@ -13,8 +12,8 @@
         </div>
         <div class="flex items-center space-x-4">
           <button 
-            @click="handleConvertPoints"
-            class="bg-[#363636] px-6 py-3 rounded-full flex items-center space-x-2 transition-colors cursor-pointer"
+            @click="openConvertModal"
+            class="bg-[#363636] px-6 py-3 rounded-full flex items-center space-x-2 transition-colors cursor-pointer hover:bg-[#404040]"
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
@@ -23,7 +22,7 @@
           </button>
           <button 
             @click="handleEarnMore"
-            class="bg-brand px-6 py-3 rounded-full flex items-center space-x-2 transition-colors cursor-pointer"
+            class="bg-brand px-6 py-3 rounded-full flex items-center space-x-2 transition-colors cursor-pointer hover:bg-opacity-90"
           >
             <Icon name="ei:plus" size="24" style="color: #FFFFFF" />
             <span>کسب امتیاز بیشتر</span>
@@ -43,12 +42,13 @@
     <!-- Mobile Layout -->
     <div class="lg:hidden">
       <DashboardPointPointsDropDown />
+      
       <!-- Points Summary -->
       <div class="mb-6">
         <DashboardPointPointsSummary 
           :total-points="totalPoints"
           :total-points-text="totalPointsText"
-          @convert-points="handleConvertPoints"
+          @convert-points="openConvertModal"
           @earn-more="handleEarnMore"
         />
       </div>
@@ -68,8 +68,14 @@
         />
       </div>
     </div>
-    <ChatWidget />
-    <DashboardPointConvertPointsModal v-if="showConvertModal" @close="showConvertModal = false" />
+    
+    <!-- Convert Points Modal -->
+    <DashboardPointConvertPointsModal 
+      v-if="showConvertModal" 
+      :user-points="totalPoints"
+      @close="closeConvertModal" 
+      @conversion-success="handleConversionSuccess"
+    />
   </div>
 </template>
 
