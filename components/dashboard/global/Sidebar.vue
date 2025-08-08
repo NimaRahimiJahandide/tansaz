@@ -23,13 +23,14 @@
           <nav class="flex-1 border-t border-[#E1E1E16B]">
             <ul class="space-y-2">
               <li v-for="item in items" :key="item.label">
-                <button
+                <nuxt-link
                   class="w-full flex items-center px-4 py-3 rounded-lg transition-colors text-right gap-2 cursor-pointer"
                   :class="item.active ? 'bg-[linear-gradient(90deg,_#ED1C24_0%,_#ED1C24_70.15%,_#FA5157_84.92%,_#ED1C24_100%)] text-white' : 'hover:bg-[#232323] text-gray-300'"
+                  :to="item.route"
                 >
                   <Icon :name="item.icon" size="22" :class="item.active ? 'text-white' : 'text-[#828282]'" />
                   <span class="font-medium">{{ item.label }}</span>
-                </button>
+                </nuxt-link>
               </li>
             </ul>
             <div class="mt-8 flex justify-center">
@@ -66,13 +67,13 @@
       <nav v-if="isOpen" class="flex-1 border-t border-[#E1E1E16B]">
         <ul class="space-y-2">
           <li v-for="item in items" :key="item.label">
-            <button
+            <nuxt-link :to="item.route"
               class="w-full flex items-center px-4 py-3 rounded-lg transition-colors text-right gap-2 cursor-pointer"
               :class="item.active ? 'bg-[linear-gradient(90deg,_#ED1C24_0%,_#ED1C24_70.15%,_#FA5157_84.92%,_#ED1C24_100%)] text-white' : 'hover:bg-[#232323] text-gray-300'"
             >
               <Icon :name="item.icon" size="22" :class="item.active ? 'text-white' : 'text-[#828282]'" />
               <span class="font-medium">{{ item.label }}</span>
-            </button>
+            </nuxt-link>
           </li>
         </ul>
         <div class="mt-8 flex justify-center">
@@ -98,11 +99,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
 const props = defineProps({
   isOpen: Boolean
 })
 const emit = defineEmits(['close-sidebar', 'open-sidebar'])
+
+const route = useRoute()
 
 const isMobile = ref(false)
 
@@ -121,53 +123,69 @@ onUnmounted(() => {
   window.removeEventListener('resize', updateIsMobile)
 })
 
-const items = [
+const baseItems = [
   {
     label: 'داشبورد',
     icon: `mynaui:grid`,
-    active: false
+    active: false,
+    route: '/dashboard'
   },
   {
     label: 'امتیازات من',
     icon: `mdi:gift-outline`,
-    active: true
+    active: true,
+    route: '/dashboard/points'
   },
   {
     label: 'کیف پول',
     icon: `ion:card-outline`,
-    active: false
+    active: false,
+    route: '/dashboard/wallet'
   },
   {
     label: 'پروفایل کاربری',
     icon: `bx:user`,
-    active: false
+    active: false,
+    route: '/dashboard/profile'
   },
   {
     label: 'نوبت های من',
     icon: `mdi:calendar-tick-outline`,
-    active: false
+    active: false,
+    route: '/dashboard/turns'
   },
   {
     label: 'سوابق و پرونده ها',
     icon: `ci:swatches-palette`,
-    active: false
+    active: false,
+    route: '/dashboard/records'
   },
   {
     label: 'لیست پرداخت ها',
     icon: `tdesign:check-rectangle`,
-    active: false
+    active: false,
+    route: '/dashboard/payments'
   },
   {
     label: 'لیست نحوه امتیازدهی',
     icon: `streamline-plump:book-1`,
-    active: false
+    active: false,
+    route: '/dashboard/points-methods'
   },
     {
     label: 'آنالیز اندام و چهره',
     icon: `tabler:border-corners`,
-    active: false
+    active: false,
+    route: '/dashboard/body-analysis'
   }
 ]
+
+const items = computed(() =>
+  baseItems.map(item => ({
+    ...item,
+    active: route.path === item.route
+  }))
+)
 </script>
 
 <style scoped>
