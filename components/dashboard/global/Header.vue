@@ -3,11 +3,12 @@
     <!-- Mobile Header -->
     <div class="lg:hidden bg-[#212121] p-4 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <img class="w-6 h-6 cursor-pointer" src="/icons/Menu_Alt_01-white.svg" alt="menu" @click="$emit('open-sidebar')" >
-        <Icon name="bx:user" size="24" class="text-white cursor-pointer" />
+        <img class="w-36  object-contain" src="/icons/new-logo-white.png" alt="logo">
       </div>
       <div class="flex items-center space-x-3">
-        <img class="w-36  object-contain" src="/icons/new-logo.png" alt="logo">
+        <img class="w-6 h-6 cursor-pointer" src="/icons/Menu_Alt_01-white.svg" alt="menu"
+          @click="$emit('open-sidebar')">
+        <Icon name="bx:user" size="24" class="text-white cursor-pointer" />
       </div>
     </div>
 
@@ -38,8 +39,8 @@
           <div class="relative">
             <input type="text" placeholder="جستجو"
               class="bg-[#212121] text-white px-4 py-2 rounded-[2.5rem] pr-10 focus:outline-none">
-            <svg class="w-5 h-5 absolute right-3 top-2.5 text-[#828282] cursor-pointer" fill="none" stroke="currentColor"
-              viewBox="0 0 24 24">
+            <svg class="w-5 h-5 absolute right-3 top-2.5 text-[#828282] cursor-pointer" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>

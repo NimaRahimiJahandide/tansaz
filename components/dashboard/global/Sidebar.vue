@@ -18,7 +18,7 @@
             <img src="/icons/arrow-right.svg" alt="arrow-right" class="w-6 h-6 cursor-pointer">
           </button>
           <div class="flex items-center mb-[1.875rem] px-2 relative">
-            <img src="/icons/new-logo.png" alt="tansaz logo" class="h-7 w-full object-contain" />
+            <img src="/icons/new-logo-white.png" alt="tansaz logo" class="h-7 w-full object-contain" />
           </div>
           <nav class="flex-1 border-t border-[#E1E1E16B]">
             <ul class="space-y-2">
@@ -56,7 +56,7 @@
       ]"
     >
       <div v-if="isOpen" class="flex items-center mb-[1.875rem] px-2 relative">
-        <img src="/icons/new-logo.png" alt="tansaz logo" class="h-7 w-full object-contain" />
+        <img src="/icons/new-logo-white.png" alt="tansaz logo" class="h-7 w-full object-contain" />
         <img
           src="/icons/arrow-right.svg"
           alt="arrow-right"

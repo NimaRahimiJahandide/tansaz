@@ -4,6 +4,14 @@
     'bg-white': !isServiceRoute || isScrolled,
   }">
     <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+       <!-- Logo -->
+      <div class="flex items-center space-x-2">
+        <img @click="$router.push('/')" :src="(isServiceRoute && !isScrolled)
+          ? '/icons/new-logo-white.png'
+          : '/icons/new-logo.png'" alt="Logo" class="w-[155px]" />
+
+      </div>
+
       <div class="flex gap-8 items-center">
         <!-- Hamburger Menu -->
         <div class="md:hidden">
@@ -21,14 +29,6 @@
 
           </button>
         </div>
-      </div>
-
-      <!-- Logo -->
-      <div class="flex items-center space-x-2">
-        <img @click="$router.push('/')" :src="(isServiceRoute && !isScrolled)
-          ? '/icons/new-logo-white.png'
-          : '/icons/new-logo.png'" alt="Logo" class="w-[144px]" />
-
       </div>
     </div>
 
