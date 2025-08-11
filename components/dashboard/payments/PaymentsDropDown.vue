@@ -11,7 +11,7 @@
           <div class="flex items-center justify-between">
             <!-- Selected Item Display -->
             <div class="flex items-center space-x-2 space-x-reverse">
-              <Icon name="mdi:calendar-tick-outline" size="22" class="text-brand ml-2"/>
+              <Icon name="tdesign:check-rectangle" size="22" class="text-brand ml-2"/>
               <span class="text-base font-medium text-white">
                 {{ selectedItem.title }}
               </span>
@@ -69,7 +69,7 @@ const isOpen = ref(false)
 
 // Menu items data
 const menuItems = ref([
-  { id: 1, title: 'نوبت های من', active: true }
+  { id: 1, title: 'لیست پرداخت ها', active: true }
 ])
 
 // Get selected item

@@ -128,7 +128,7 @@ const baseItems = [
     label: 'داشبورد',
     icon: `mynaui:grid`,
     active: false,
-    route: '/dashboard'
+    // route: '/dashboard'
   },
   {
     label: 'امتیازات من',
@@ -140,13 +140,13 @@ const baseItems = [
     label: 'کیف پول',
     icon: `ion:card-outline`,
     active: false,
-    route: '/dashboard/wallet'
+    // route: '/dashboard/wallet'
   },
   {
     label: 'پروفایل کاربری',
     icon: `bx:user`,
     active: false,
-    route: '/dashboard/profile'
+    // route: '/dashboard/profile'
   },
   {
     label: 'نوبت های من',
@@ -158,25 +158,25 @@ const baseItems = [
     label: 'سوابق و پرونده ها',
     icon: `ci:swatches-palette`,
     active: false,
-    route: '/dashboard/records'
+    // route: '/dashboard/records'
   },
   {
     label: 'لیست پرداخت ها',
     icon: `tdesign:check-rectangle`,
     active: false,
-    route: '/dashboard/payments'
+    route: '/dashboard/payment-list'
   },
   {
     label: 'لیست نحوه امتیازدهی',
     icon: `streamline-plump:book-1`,
     active: false,
-    route: '/dashboard/points-methods'
+    // route: '/dashboard/points-methods'
   },
     {
     label: 'آنالیز اندام و چهره',
     icon: `tabler:border-corners`,
     active: false,
-    route: '/dashboard/body-analysis'
+    // route: '/dashboard/body-analysis'
   }
 ]
 
