@@ -5,27 +5,31 @@
         <table class="w-full">
           <thead class="bg-[#212121]">
             <tr class="text-[#828282] text-right font-semibold">
-              <th class="px-6 py-3">ردیف</th>
-              <th class="px-6 py-3">تاریخ </th>
-              <th class="px-6 py-3">نوع خدمت</th>
-              <th class="px-6 py-3">وضعیت</th>
+              <th class="px-6 py-3">تاریخ و زمان</th>
+              <th class="px-6 py-3">مبلغ کل </th>
+              <th class="px-6 py-3">درصد کش بک</th>
+              <th class="px-6 py-3">دریافتی شما</th>
+              <th class="px-6 py-3">توضیحات</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(item, index) in paginatedItems" :key="index"
               class="hover:bg-[#212121] transition-colors text-[#F2F4F6]">
               <td class="px-6 py-4" :class="{ 'border-b border-[#32353C]': index < paginatedItems.length - 1 }">
-                {{ (currentPage - 1) * itemsPerPage + index + 1 }}
-              </td>
-              <td class="px-6 py-4" :class="{ 'border-b border-[#32353C]': index < paginatedItems.length - 1 }">
                 {{ item.date }}
               </td>
               <td class="px-6 py-4" :class="{ 'border-b border-[#32353C]': index < paginatedItems.length - 1 }">
-                {{ item.type }}
+                {{ item.totalPrice }}
               </td>
-              <td class="px-6 py-4 max-w-xs"
+              <td class="px-6 py-4" :class="{ 'border-b border-[#32353C]': index < paginatedItems.length - 1 }">
+                {{ item.cashBack }}
+              </td>
+              <td class="px-6 py-4" :class="{ 'border-b border-[#32353C]': index < paginatedItems.length - 1 }">
+                {{ item.yourEarn }}
+              </td>
+              <td class="px-6 py-4 max-w-xs truncate"
                 :class="{ 'border-b border-[#32353C]': index < paginatedItems.length - 1 }">
-                <button class="rounded-4xl px-2.5 leading-8" :class="item.status == 'رزرو شده' ? 'text-[#F7C41B] bg-[#FFF0220D]' : item.status == 'انجام شده' ? 'text-[#1EAC74] bg-[#1EAC740D]' : 'text-[#EE3035] bg-[#EE30351A]' ">{{ item.status }}</button>
+                {{ item.description }}
               </td>
             </tr>
           </tbody>

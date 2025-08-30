@@ -1,13 +1,9 @@
 <template>
   <div class="flex lg:flex-row flex-col justify-between rounded-lg pb-5">
-    <h3 class="text-lg lg:text-2xl font-bold mb-4">تاریخچه نوبت های من</h3>
+    <h3 class="text-lg lg:text-2xl font-bold mb-4">لیست پرداخت ها</h3>
 
     <!-- Desktop Layout -->
-    <div class="hidden lg:grid lg:grid-cols-3 lg:gap-4">
-      <div>
-        <DashboardGlobalFilterComponent :items="typeItems" label="وضعیت" v-model="filters.status"
-          @update:modelValue="emitFilterChange" />
-      </div>
+    <div class="hidden lg:grid lg:grid-cols-2 lg:gap-4">
       <div>
         <DashboardGlobalFilterComponent :items="dateItems" label="از تاریخ" v-model="filters.fromDate"
           @update:modelValue="emitFilterChange" />
@@ -34,15 +30,6 @@
           :items="toDateItems"
           label="تا تاریخ"
           v-model="filters.toDate"
-          @update:modelValue="emitFilterChange"
-        />
-      </div>
-    
-      <div class="col-span-2">
-        <DashboardGlobalFilterComponent
-          :items="typeItems"
-          label="وضعیت"
-          v-model="filters.status"
           @update:modelValue="emitFilterChange"
         />
       </div>
