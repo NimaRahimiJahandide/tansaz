@@ -66,9 +66,8 @@
 </template>
 
 <script setup>
-// Import composables
-import { useFaq } from '~/composables/home/useFaq'
-import { useFaqApi } from '~/composables/api/useFaqApi'
+// Import composables - تغییر در این قسمت
+import { useFaq, useFaqApi } from '~/composables/home/useFaq'
 
 // Initialize composables
 const faqComposable = useFaq()

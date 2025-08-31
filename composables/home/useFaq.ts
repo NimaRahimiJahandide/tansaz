@@ -11,6 +11,37 @@ export interface FaqApiResponse {
   data: FaqItem[]
 }
 
+// Composable for FAQ state management
+export const useFaq = () => {
+  const activeItems = ref<Set<string | number>>(new Set())
+
+  const toggleItem = (itemId: string | number) => {
+    if (activeItems.value.has(itemId)) {
+      activeItems.value.delete(itemId)
+    } else {
+      activeItems.value.add(itemId)
+    }
+    // Trigger reactivity
+    activeItems.value = new Set(activeItems.value)
+  }
+
+  const isActive = (itemId: string | number) => {
+    return activeItems.value.has(itemId)
+  }
+
+  const closeAll = () => {
+    activeItems.value.clear()
+  }
+
+  return {
+    toggleItem,
+    isActive,
+    closeAll,
+    activeItems: readonly(activeItems)
+  }
+}
+
+// Composable for FAQ API operations
 export const useFaqApi = () => {
   const { get } = useApi()
   const faqs = ref<FaqItem[]>([])

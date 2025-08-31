@@ -2,7 +2,7 @@
   <div class="bg-white rounded-[16px] p-4 overflow-hidden">
     <!-- Question -->
     <div @click="handleToggle" class="flex items-center justify-between cursor-pointer select-none">
-      <h3 class="text-sm font-medium leading-[23px] pr-2">{{ question }}</h3>
+      <h3 class="text-sm font-medium leading-[23px] pr-2 truncate-text">{{ question }}</h3>
       <div 
         class="transition-transform duration-500 ease-out transform-gpu shrink-0" 
         :class="{ 'rotate-180': isOpen }"
@@ -148,7 +148,13 @@ onMounted(() => {
 /* Improve text rendering during animations */
 .transition-all {
   text-rendering: optimizeSpeed;
-    
 }
 
+/* Text truncation for question */
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
 </style>
