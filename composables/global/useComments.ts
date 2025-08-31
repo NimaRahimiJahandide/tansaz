@@ -12,26 +12,35 @@ export const useComments = () => {
     error.value = null
     
     try {
+      console.log('Fetching comments for service:', serviceId)
       const response = await $fetch(`https://tansaz.liara.run/api/v1/services/${serviceId}/comments`)
       
-      // Ensure we always get an array
-      let commentsData = response      
-      if (response && response.data) {
+      console.log('Raw API response:', response)
+      
+      // Handle different response structures
+      let commentsData = []
+      
+      if (Array.isArray(response)) {
+        commentsData = response
+      } else if (response && Array.isArray(response.data)) {
         commentsData = response.data
+      } else if (response && response.comments && Array.isArray(response.comments)) {
+        commentsData = response.comments
+      } else if (response && typeof response === 'object') {
+        // Check for other possible array properties
+        const possibleArrays = Object.values(response).find(val => Array.isArray(val))
+        if (possibleArrays) {
+          commentsData = possibleArrays
+        }
       }
       
-      // Make sure it's an array
-      if (Array.isArray(commentsData)) {
-        comments.value = commentsData
-      } else {
-        comments.value = []
-      }
+      console.log('Processed comments data:', commentsData)
+      comments.value = commentsData
       
-      console.log('Fetched comments:', comments.value)
     } catch (err) {
+      console.error('Error fetching comments:', err)
       error.value = err.message || 'خطا در بارگذاری نظرات'
       comments.value = []
-      console.error('Error fetching comments:', err)
     } finally {
       loading.value = false
     }
@@ -43,10 +52,13 @@ export const useComments = () => {
     error.value = null
     
     try {
+      console.log('Posting comment:', commentData, 'for service:', serviceId)
       const response = await $fetch(`https://tansaz.liara.run/api/v1/services/${serviceId}/comments`, {
         method: 'POST',
         body: commentData
       })
+      
+      console.log('Post comment response:', response)
       
       // Add the new comment to the list
       let newComment = response
@@ -58,10 +70,13 @@ export const useComments = () => {
         comments.value.unshift(newComment)
       }
       
+      // Refresh comments to get updated list
+      await fetchComments(serviceId)
+      
       return response
     } catch (err) {
-      error.value = err.message || 'خطا در ارسال نظر'
       console.error('Error posting comment:', err)
+      error.value = err.message || 'خطا در ارسال نظر'
       throw err
     } finally {
       submitting.value = false
@@ -72,17 +87,24 @@ export const useComments = () => {
   const formatDate = (dateString) => {
     if (!dateString) return 'تاریخ نامشخص'
     
-    const date = new Date(dateString)
-    const now = new Date()
-    const diffTime = Math.abs(now - date)
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
-    
-    if (diffDays === 0) {
-      return 'امروز'
-    } else if (diffDays === 1) {
-      return '1 روز قبل'
-    } else {
-      return `${diffDays} روز قبل`
+    try {
+      const date = new Date(dateString)
+      if (isNaN(date.getTime())) return 'تاریخ نامعتبر'
+      
+      const now = new Date()
+      const diffTime = Math.abs(now - date)
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
+      
+      if (diffDays === 0) {
+        return 'امروز'
+      } else if (diffDays === 1) {
+        return '1 روز قبل'
+      } else {
+        return `${diffDays} روز قبل`
+      }
+    } catch (err) {
+      console.error('Date formatting error:', err)
+      return 'تاریخ نامشخص'
     }
   }
 

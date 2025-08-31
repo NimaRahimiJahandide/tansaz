@@ -1,6 +1,11 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useComments } from '~/composables/global/useComments'
+import { useRoute } from 'vue-router'
+
+// Get service ID from route
+const route = useRoute()
+const serviceId = computed(() => route.params.id || 1)
 
 const { comments, loading, error, submitting, fetchComments, postComment, formatDate } = useComments()
 
@@ -19,8 +24,17 @@ const replyData = ref({
 })
 
 // Fetch comments on mount
-onMounted(() => {
-  fetchComments()
+onMounted(async () => {
+  console.log('Comments component mounted, service ID:', serviceId.value)
+  await fetchComments(serviceId.value)
+})
+
+// Watch for route changes
+watch(() => serviceId.value, async (newServiceId) => {
+  if (newServiceId) {
+    console.log('Service ID changed to:', newServiceId)
+    await fetchComments(newServiceId)
+  }
 })
 
 // Submit new comment
@@ -33,7 +47,7 @@ const submitComment = async () => {
     await postComment({
       name: formData.value.name,
       content: formData.value.comment
-    })
+    }, serviceId.value)
     
     // Reset form
     formData.value = {
@@ -41,7 +55,7 @@ const submitComment = async () => {
       comment: ''
     }
   } catch (err) {
-    // Error is handled in the composable
+    console.error('Submit comment error:', err)
   }
 }
 
@@ -56,7 +70,7 @@ const submitReply = async (parentId) => {
       name: replyData.value.name,
       content: replyData.value.comment,
       parent_id: parentId
-    })
+    }, serviceId.value)
     
     // Reset reply form
     replyData.value = {
@@ -65,7 +79,7 @@ const submitReply = async (parentId) => {
     }
     replyingTo.value = null
   } catch (err) {
-    // Error is handled in the composable
+    console.error('Submit reply error:', err)
   }
 }
 
@@ -94,10 +108,14 @@ const cancelReply = () => {
 
 // Computed properties
 const mainComments = computed(() => {
+  console.log('Computing main comments from:', comments.value)
   if (!Array.isArray(comments.value)) {
+    console.log('Comments is not an array:', typeof comments.value, comments.value)
     return []
   }
-  return comments.value.filter(comment => !comment.parent_id)
+  const filtered = comments.value.filter(comment => !comment.parent_id)
+  console.log('Main comments:', filtered)
+  return filtered
 })
 
 const getReplies = (parentId) => {
@@ -110,10 +128,26 @@ const getReplies = (parentId) => {
 const hasReplies = (commentId) => {
   return getReplies(commentId).length > 0
 }
+
+// Debug computed
+const debugInfo = computed(() => ({
+  commentsType: typeof comments.value,
+  commentsLength: Array.isArray(comments.value) ? comments.value.length : 'not array',
+  commentsValue: comments.value,
+  mainCommentsLength: mainComments.value.length,
+  loading: loading.value,
+  error: error.value,
+  serviceId: serviceId.value
+}))
 </script>
 
 <template>
   <div>
+    <!-- Debug Info (remove in production) -->
+    <div class="bg-gray-100 p-4 m-4 rounded text-xs">
+      <pre>{{ JSON.stringify(debugInfo, null, 2) }}</pre>
+    </div>
+
     <div class="flex flex-col px-[16px] bg-[#F5F5F5] pt-[30px]">
       <p class="text-[20px] font-bold">
         <span class="text-[#000000]"> با</span>
@@ -173,6 +207,7 @@ const hasReplies = (commentId) => {
       <!-- No Comments -->
       <div v-else-if="!loading && mainComments.length === 0" class="py-8 text-center">
         <p class="text-[#828282]">هنوز نظری ثبت نشده است. اولین نفر باشید!</p>
+        <p class="text-xs text-gray-500 mt-2">تعداد کامنت‌ها: {{ Array.isArray(comments) ? comments.length : 'نامشخص' }}</p>
       </div>
 
       <!-- Comments List -->
@@ -185,10 +220,10 @@ const hasReplies = (commentId) => {
             <div class="flex flex-col flex-1">
               <div class="flex items-center gap-[6px]">
                 <p class="text-[12px] font-semibold text-[#000000]">{{ comment.name || comment.user?.name || 'کاربر ناشناس' }}</p>
-                <p class="text-[12px] text-[#828282]">{{ formatDate(comment.created_at) }}</p>
+                <p class="text-[12px] text-[#828282]">{{comment.created_at_fa}}</p>
               </div>
               <p class="text-[12px] leading-[20px] text-[#2E2E2E] mt-[5px]">
-                {{ comment.content || comment.comment }}
+                {{ comment.text || comment.comment }}
               </p>
 
               <div class="flex items-center gap-[3px] mt-[10px]">
@@ -253,10 +288,10 @@ const hasReplies = (commentId) => {
               <div class="flex flex-col flex-1">
                 <div class="flex items-center gap-[6px]">
                   <p class="text-[12px] font-semibold text-[#000000]">{{ reply.name || reply.user?.name || 'کاربر ناشناس' }}</p>
-                  <p class="text-[12px] text-[#828282]">{{ formatDate(reply.created_at) }}</p>
+                  <p class="text-[12px] text-[#828282]">{{ comment.created_at_fa }}</p>
                 </div>
                 <p class="text-[12px] leading-[20px] text-[#2E2E2E] mt-[5px]">
-                  {{ reply.content || reply.comment }}
+                  {{ reply.text || reply.comment }}
                 </p>
 
                 <div class="flex items-center gap-[3px] mt-[10px]">
