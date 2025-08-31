@@ -47,6 +47,7 @@ const isLoading = computed(() => loading.value)
 const hasError = computed(() => error.value !== null)
 // Service data
 const serviceData = computed(() => service.value)
+console.log(service.value);
 
 // Computed properties for service data
 const serviceName = computed(() => serviceData.value?.name || '')
@@ -144,15 +145,7 @@ const clipsData = computed(() => {
         </p>
 
         <div data-aos="fade-up" data-aos-once="true">
-          <ServicesSliderComponent :slides="serviceMaterials" />
-
-          <p class="text-[20px] font-bold">
-            <span class="text-[#000000]"> {{ serviceName }} در کمتر از 20 دقیقه، </span>
-            <span class="text-[#ED1C24]"> بدون درد </span>
-            <span class="text-[#000000]"> و با </span>
-            <span class="text-[#ED1C24]"> بی حسی </span>
-            <span class="text-[#000000]"> موضعی انجام می شود. </span>
-          </p>
+          <ServicesSliderComponent :slidesData="serviceMaterials" />
         </div>
       </section>
 

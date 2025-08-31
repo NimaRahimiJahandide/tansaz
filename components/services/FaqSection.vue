@@ -52,9 +52,7 @@
         <p class="text-gray-500">پرسش متداولی یافت نشد.</p>
       </div>
   
-      <!-- Button to navigate to FAQ Category Page - فقط در صفحه اصلی نمایش داده می‌شود -->
       <button 
-        v-if="showCategoryButton" 
         class="mt-8 w-full bg-brand text-center rounded-full h-[48px] transition-colors duration-300"
       >
         <NuxtLink 

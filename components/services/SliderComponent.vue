@@ -1,10 +1,11 @@
 <template>
   <div class="container mx-auto px-4 pb-8">
-    <div class="rounded-2xl overflow-hidden  relative">
+    <div class="rounded-2xl overflow-hidden relative">
       <transition name="fade" mode="out-in">
         <div :key="activeIndex" class="relative" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
           <!-- Image -->
-          <img :src="slides[activeIndex].image" :alt="slides[activeIndex].title" class="w-full h-full object-cover" />
+          <img :src="currentSlide?.main_image || '/images/services3.png'"
+            :alt="currentSlide?.title || currentSlide?.name || 'Slide'" class="w-full h-full object-cover" />
         </div>
       </transition>
     </div>
@@ -12,37 +13,51 @@
     <!-- pagination -->
     <div class="flex justify-center items-center mt-4">
       <!-- دایره‌های شماره صفحه -->
-      <div class="flex items-center">
-        <div v-for="(slide, index) in slides.length" :key="index" @click="activeIndex = index"
+      <div class="flex flex-col items-center">
+        <div v-for="(slide, index) in slidesData" :key="slide.id || index" @click="activeIndex = index"
           class="w-[10px] h-2 rounded-full mx-1 bg-[#D4D4D4] cursor-pointer transition duration-300 ease-in-out"
           :class="{ 'bg-brand w-[30px]': activeIndex === index }"></div>
+        </div>
+        
       </div>
-
-    </div>
+      <p class="text-[20px] font-bold mt-10">
+       {{ currentSlide.description }}
+      </p>
   </div>
 </template>
 
 <script setup>
+// Props definition
+const props = defineProps({
+  slidesData: {
+    type: Array,
+  }
+})
+
 const activeIndex = ref(0)
 
-const slides = ref([
-  {
-    image: '/images/services3.png',
-  },
-  {
-    image: '/images/services4.png',
-  },
-  {
-    image: '/images/services3.png',
+// Computed property for current slide
+const currentSlide = computed(() => {
+  return props.slidesData[activeIndex.value] || null
+})
+
+// Watch for changes in slidesData prop and reset activeIndex if necessary
+watch(() => props.slidesData, (newSlides) => {
+  if (newSlides.length > 0 && activeIndex.value >= newSlides.length) {
+    activeIndex.value = 0
   }
-])
+}, { immediate: true })
 
 const nextSlide = () => {
-  activeIndex.value = (activeIndex.value + 1) % slides.value.length
+  if (props.slidesData.length > 0) {
+    activeIndex.value = (activeIndex.value + 1) % props.slidesData.length
+  }
 }
 
 const prevSlide = () => {
-  activeIndex.value = (activeIndex.value - 1 + slides.value.length) % slides.value.length
+  if (props.slidesData.length > 0) {
+    activeIndex.value = (activeIndex.value - 1 + props.slidesData.length) % props.slidesData.length
+  }
 }
 
 const touchStartX = ref(0)
@@ -69,7 +84,6 @@ const handleSwipe = () => {
     }
   }
 }
-
 </script>
 
 <style scoped>
