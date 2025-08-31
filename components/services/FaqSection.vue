@@ -54,13 +54,7 @@
           صفحه دسته بندی پرسش های متداول
         </NuxtLink>
       </button>
-      
-      <section class="bg-[url('/images/tour-vr-home-banner.png')] bg-cover  flex flex-col h-[158px] mt-[30px] rounded-3xl items-end justify-center">
-        <div class="flex flex-col items-center gap-5 pl-9">
-          <img width="141px" height="52px" src="/icons/label-text-tour-vr.svg" alt="تور مجازی کلینیک تن ساز" />
-          <button class="text-sm cursor-pointer text-white font-semibold leading-5 flex justify-center items-center bg-[#222B3C] w-[161px] h-[36px] rounded-full">شروع کن</button>
-        </div>
-      </section>
+
     </div>
   </div>
 </template>
