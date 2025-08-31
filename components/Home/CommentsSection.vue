@@ -6,7 +6,7 @@
       <h2
         class="text-white flex-col gap-2.5 flex items-center justify-center px-[15px] py-[10px] text-xl font-bold mb-2 mx-auto">
         <img src="/icons/Vector.svg" alt="Vector">
-        <span>تجربه مراجعه کننده ها</span>
+        <span>نظرات کاربران</span>
       </h2>
     </div>
 
@@ -24,8 +24,13 @@
         </button>
       </div>
 
+      <!-- No Comments State -->
+      <div v-if="!loading && !error && !hasComments" class="text-center text-white py-8">
+        هنوز کامنتی ثبت نشده است
+      </div>
+
       <!-- Comments Slider -->
-      <div v-if="!loading && !error">
+      <div v-if="!loading && !error && hasComments">
         <!-- Slider -->
         <div class="relative overflow-hidden w-full ltr">
           <div class="flex transition-all duration-700 ease-out ltr"
@@ -36,8 +41,7 @@
                 :name="comment.name || comment.first_name" 
                 :lastName="comment.lastName || comment.last_name || ''" 
                 :role="comment.role || comment.service || 'مراجعه کننده'"
-                :experience="comment.experience || comment.comment || comment.description"
-                :image="comment.image || comment.avatar" />
+                :experience="comment.text || comment.comment || comment.description" />
             </div>
           </div>
         </div>    
@@ -103,62 +107,13 @@ const {
   commentsCount
 } = useHomeComments()
 
-// Fallback data if API fails
-const fallbackComments = [
-  {
-    id: 1,
-    name: 'نازنین',
-    lastName: 'بیاتی',
-    image: '/images/comment3.png',
-    role: 'عمل زیبایی بوکال فت',
-    experience: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد',
-  },
-  {
-    id: 2,
-    name: 'امیر',
-    lastName: 'کاظمی',
-    image: '/images/comment1.png',
-    role: 'پیکر تراشی',
-    experience: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد',
-  },
-  {
-    id: 3,
-    name: 'سارا',
-    lastName: 'کریمی',
-    image: '/images/comment2.png',
-    role: 'لیفت ابرو',
-    experience: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد',
-  },
-  {
-    id: 4,
-    name: 'محسن',
-    lastName: 'رضایی',
-    image: '/images/comment4.png',
-    role: 'زاویه فک',
-    experience: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد',
-  },
-  {
-    id: 5,
-    name: 'الهام',
-    lastName: 'نوری',
-    image: '/images/comment5.png',
-    role: 'زاویه‌سازی صورت',
-    experience: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد',
-  },
-]
-
-// Use API data or fallback
-const displayComments = computed(() => {
-  return hasComments.value ? comments.value : fallbackComments
-})
-
 const nextSlide = () => {
-  if (isTransitioning.value) return
+  if (isTransitioning.value || !hasComments.value) return
   
   isTransitioning.value = true
   pauseAutoPlay()
   progressValue.value = 0
-  activeIndex.value = (activeIndex.value + 1) % displayComments.value.length
+  activeIndex.value = (activeIndex.value + 1) % comments.value.length
   
   // صبر تا انیمیشن کامل شود
   setTimeout(() => {
@@ -168,12 +123,12 @@ const nextSlide = () => {
 }
 
 const prevSlide = () => {
-  if (isTransitioning.value) return
+  if (isTransitioning.value || !hasComments.value) return
   
   isTransitioning.value = true
   pauseAutoPlay()
   progressValue.value = 0
-  activeIndex.value = (activeIndex.value - 1 + displayComments.value.length) % displayComments.value.length
+  activeIndex.value = (activeIndex.value - 1 + comments.value.length) % comments.value.length
   
   // صبر تا انیمیشن کامل شود
   setTimeout(() => {
@@ -183,7 +138,7 @@ const prevSlide = () => {
 }
 
 const startAutoPlay = () => {
-  if (!isAutoPlaying || isTransitioning.value) return
+  if (!isAutoPlaying || isTransitioning.value || !hasComments.value) return
   pauseAutoPlay() // پاکسازی تایمرهای قبلی
   progressValue.value = 0
   let startTime = null
@@ -215,7 +170,7 @@ const pauseAutoPlay = () => {
 
 const resumeAutoPlay = () => {
   isAutoPlaying = true
-  if (!isTransitioning.value) {
+  if (!isTransitioning.value && hasComments.value) {
     startAutoPlay()
   }
 }
@@ -227,14 +182,14 @@ const stopAutoPlay = () => {
 }
 
 const getItemClass = (index) => {
-  const diff = (index - activeIndex.value + displayComments.value.length) % displayComments.value.length
+  const diff = (index - activeIndex.value + comments.value.length) % comments.value.length
   
   if (diff === 0) {
     // آیتم فعال
     return 'scale-100 rotate-0 opacity-100 z-20 transform-gpu'
-  } else if (diff === 1 || diff === displayComments.value.length - 1) {
+  } else if (diff === 1 || diff === comments.value.length - 1) {
     // آیتم‌های مجاور
-    const isLeft = diff === displayComments.value.length - 1
+    const isLeft = diff === comments.value.length - 1
     return `scale-90 opacity-80 z-10 transform-gpu ${isLeft ? 'card-skew-left' : 'card-skew-right'}`
   } else {
     // باقی آیتم‌ها
@@ -245,8 +200,14 @@ const getItemClass = (index) => {
 // شروع auto-play هنگام mount
 onMounted(() => {
   fetchComments() // Load comments from API
-  startAutoPlay()
 })
+
+// Watch for successful data load to start autoplay
+watch(hasComments, (newValue) => {
+  if (newValue && !isTransitioning.value) {
+    startAutoPlay()
+  }
+}, { immediate: true })
 
 // پاکسازی timer ها هنگام unmount
 onUnmounted(() => {
@@ -259,7 +220,7 @@ const handleMouseEnter = () => {
 }
 
 const handleMouseLeave = () => {
-  if (isAutoPlaying && !isTransitioning.value) {
+  if (isAutoPlaying && !isTransitioning.value && hasComments.value) {
     startAutoPlay()
   }
 }
