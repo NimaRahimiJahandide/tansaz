@@ -26,7 +26,7 @@
     <!-- Answer Container -->
     <div 
       ref="answerContainer"
-      class="overflow-hidden transition-all duration-500 ease-out"
+      class="transition-all duration-500 ease-out"
       :style="containerStyle"
     >
       <div 
@@ -80,6 +80,7 @@ const containerStyle = computed(() => ({
   height: isOpen.value ? `${contentHeight.value}px` : '0px',
   paddingTop: isOpen.value ? '0px' : '0px',
   paddingBottom: isOpen.value ? '0px' : '0px',
+  overflow: isOpen.value ? 'visible' : 'hidden'
 }))
 
 const contentClasses = computed(() => ({
@@ -147,5 +148,7 @@ onMounted(() => {
 /* Improve text rendering during animations */
 .transition-all {
   text-rendering: optimizeSpeed;
+    
 }
+
 </style>

@@ -29,8 +29,9 @@
                 v-if="isLiked"
                 src="/icons/Heart-white.svg"
                 alt="Heart-white"
+                width="30px"
               />
-              <img v-else src="/icons/Heart.svg" alt="Heart" />
+              <img v-else src="/icons/Heart.svg" alt="Heart" width="30px"/>
             </span>
             <!-- Image -->
             <img
