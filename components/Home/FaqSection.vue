@@ -28,22 +28,6 @@
           class="transform transition-all duration-300 hover:scale-[1.01] hover:shadow-lg"
         />
       </section>
-      
-      <!-- Control Buttons (optional) -->
-      <div class="mt-6 flex gap-2 justify-center">
-        <button 
-          @click="handleExpandAll"
-          class="px-4 py-2 text-sm bg-white rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors duration-200"
-        >
-          باز کردن همه
-        </button>
-        <button 
-          @click="handleCollapseAll"
-          class="px-4 py-2 text-sm bg-white rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors duration-200"
-        >
-          بستن همه
-        </button>
-      </div>
   
       <!-- Button to navigate to FAQ Category Page -->
       <button class="mt-8 w-full bg-brand text-center rounded-full h-[48px] hover:bg-brand/90 transition-colors duration-300">
@@ -54,11 +38,20 @@
           صفحه دسته بندی پرسش های متداول
         </NuxtLink>
       </button>
+      <section class="bg-[url('/images/tour-vr-home-banner.png')] bg-cover  flex flex-col h-[158px] mt-[30px] rounded-3xl items-end justify-center">
+        <div class="flex flex-col items-center gap-5 pl-9">
+          <img width="141px" height="52px" src="/icons/label-text-tour-vr.svg" alt="تور مجازی کلینیک تن ساز" />
+          <button class="text-sm cursor-pointer text-white font-semibold leading-5 flex justify-center items-center bg-[#222B3C] w-[161px] h-[36px] rounded-full">شروع کن</button>
+        </div>
+      </section>
     </div>
   </div>
 </template>
 
 <script setup>
+// Import the composable
+import { useFaq } from '~/composables/home/useFaq'
+
 // Initialize FAQ composable
 const faqComposable = useFaq()
 
@@ -93,19 +86,6 @@ const faqs = [
     answer: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.",
   },
 ]
-
-// Control functions
-const handleExpandAll = () => {
-  faqs.forEach((_, index) => {
-    if (!faqComposable.isActive(`faq-${index}`)) {
-      faqComposable.toggleItem(`faq-${index}`)
-    }
-  })
-}
-
-const handleCollapseAll = () => {
-  faqComposable.closeAll()
-}
 </script>
 
 <style scoped>
