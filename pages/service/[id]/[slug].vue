@@ -60,7 +60,7 @@ const serviceFaqs = computed(() => serviceData.value?.faqs || [])
 
 // Prepare clips data for video slider
 const clipsData = computed(() => {
-  return serviceClips.value.length > 0 
+  return serviceClips.value.length > 0
     ? serviceClips.value.map(clip => clip.url || clip.image || clip)
     : ['/images/services2.png']
 })
@@ -82,10 +82,8 @@ const clipsData = computed(() => {
         <div class="text-red-500 text-5xl mb-4">⚠️</div>
         <h2 class="text-xl font-bold text-[#2E2E2E] mb-2">خطا در بارگذاری</h2>
         <p class="text-[#666] mb-4">متأسفانه امکان بارگذاری اطلاعات وجود ندارد</p>
-        <button 
-          @click="fetchService(route.params.id)"
-          class="px-4 py-2 bg-[#ED1C24] text-white rounded-lg hover:bg-[#d91920] transition-colors"
-        >
+        <button @click="fetchService(route.params.id)"
+          class="px-4 py-2 bg-[#ED1C24] text-white rounded-lg hover:bg-[#d91920] transition-colors">
           تلاش مجدد
         </button>
       </div>
@@ -109,17 +107,15 @@ const clipsData = computed(() => {
           </div>
         </div>
       </div>
-      
-      <div class="flex flex-col pt-[20px] px-[16px] mt-[-40px] relative bg-[#F8F8F8] rounded-t-[40px] pb-[16px] z-[10]" data-aos="fade-up"> 
+
+      <div class="flex flex-col pt-[20px] px-[16px] mt-[-40px] relative bg-[#F8F8F8] rounded-t-[40px] pb-[16px] z-[10]"
+        data-aos="fade-up">
         <p class="text-[20px] font-bold">
           <span class="text-[#ED1C24]">{{ serviceName }}</span>
           <span class="text-[#000000]"> چیست ؟</span>
         </p>
 
-        <div 
-          v-html="serviceDescription" 
-          class="text-[16px] text-justify text-[#2E2E2E] leading-[30px] mt-[10px]"
-        ></div>
+        <div v-html="serviceDescription" class="text-[16px] text-justify text-[#2E2E2E] leading-[30px] mt-[10px]"></div>
 
         <div class="flex items-center justify-end">
           <ServicesFastSupport />
@@ -127,33 +123,19 @@ const clipsData = computed(() => {
       </div>
 
       <!-- Before/After Section -->
-      <HomeBeforAfterExample 
-        v-if="serviceBeforeAfters.length > 0" 
-        :data="serviceBeforeAfters"
-        data-aos="fade-up" 
-        data-aos-once="true"
-      />
+      <HomeBeforAfterExample v-if="serviceBeforeAfters.length > 0" :data="serviceBeforeAfters" data-aos="fade-up"
+        data-aos-once="true" />
 
       <!-- Video Slider Section -->
-      <ServicesVideoSlider 
-        :data="clipsData" 
-        data-aos="fade-up" 
-        data-aos-once="true"
-      />
+      <ServicesVideoSlider :data="clipsData" data-aos="fade-up" data-aos-once="true" />
 
       <!-- FAQ Section -->
-      <ServicesFaqSection 
-        v-if="serviceFaqs.length > 0"
-        :faqs="serviceFaqs"
-        data-aos="fade-up" 
-        data-aos-once="true"
-      />
+      <ServicesFaqSection :faqs="serviceFaqs" :loading="isLoading" :error="hasError ? 'خطا در بارگذاری' : null"
+        :show-banner="false" :show-category-button="false" @retry="fetchService(route.params.id)" />
 
       <!-- Materials/Devices Section -->
-      <section 
-        v-if="serviceMaterials.length > 0" 
-        class="flex flex-col w-full bg-[#F5F5F5] px-[16px] py-[30px] relative"
-      >
+      <section v-if="serviceMaterials.length > 0"
+        class="flex flex-col w-full bg-[#F5F5F5] px-[16px] py-[30px] relative">
         <div class="absolute bottom-0 right-0 w-full bg-gradient-to-t h-[200px] from-[#00000016] to-[#00000000]"></div>
         <p class="text-[20px] font-bold">
           <span class="text-[#ED1C24]"> متریال درجه یک </span>
@@ -163,7 +145,7 @@ const clipsData = computed(() => {
 
         <div data-aos="fade-up" data-aos-once="true">
           <ServicesSliderComponent :slides="serviceMaterials" />
-    
+
           <p class="text-[20px] font-bold">
             <span class="text-[#000000]"> {{ serviceName }} در کمتر از 20 دقیقه، </span>
             <span class="text-[#ED1C24]"> بدون درد </span>
@@ -174,8 +156,8 @@ const clipsData = computed(() => {
         </div>
       </section>
 
-      <Comments/>
-      <HomeBlogsSection/>
+      <Comments />
+      <HomeBlogsSection />
     </div>
   </div>
 </template>
