@@ -90,11 +90,12 @@ const leftServices = computed(() => services.value.slice(3))
 
       <div class="flex gap-[16px] mt-[35px] justify-center">
         <div class="flex flex-col gap-[23px] w-[171px]">
+  
           <ServicesCard data-aos="fade-up" data-aos-once="true"
             v-for="service in leftServices"
             :key="service.id"
             :service="service"
-            @click="$router.push(`/services/${service.id}/test`)"
+            @click="$router.push(`/service/${service.id}/test`)"
           />
         </div>
         <div class="flex flex-col gap-[23px] w-[171px]">
@@ -106,7 +107,7 @@ const leftServices = computed(() => services.value.slice(3))
             v-for="service in rightServices"
             :key="service.id"
             :service="service"
-            @click="$router.push(`/services/${service.id}/test`)"
+            @click="$router.push(`/service/${service.id}/test`)"
           />
         </div>
       </div>
