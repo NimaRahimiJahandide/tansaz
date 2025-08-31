@@ -1,6 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import { useStartWebsite } from "@/store/initWebsite";
-
+import { useServices } from '~/composables/services/useServices'
 
 const startWebsite = useStartWebsite();
 
@@ -19,48 +19,27 @@ const goBack = () => {
   }
 }
 
-const services = ref([
-  {
-    id: 1,
-    title: 'پزشکان زیبایی',
-    image: '/images/service-init5.png'
-  },
-  {
-    id: 2,
-    title: 'جوانسازی',
-    image: '/images/service-init6.png'
-  },
-  {
-    id: 3,
-    title: 'تزریقات زیبایی',
-    image: '/images/service-init2.png'
-  },
-  {
-    id: 4,
-    title: 'اقدامات جراحی',
-    image: '/images/service-init3.png'
-  },
-  {
-    id: 5,
-    title: 'آنالیز دقیق چهره',
-    image: '/images/service-init4.png'
-  },
-  {
-    id: 6,
-    title: 'آنالیز دقیق چهره',
-    image: '/images/service-init4.png'
-  },
-  {
-    id: 7,
-    title: 'تزریقات زیبایی',
-    image: '/images/service-init6.png'
-  },
-])
+// Get current page from query parameters
+const currentPage = computed(() => {
+  return parseInt(route.query.page as string) || 1
+})
+
+// Fetch services data using the composable
+const { data: servicesData, pending, error } = useServices(currentPage.value)
+
+// Transform API data to match the expected format
+const services = computed(() => {
+  if (!servicesData.value?.services) return []
+  
+  return servicesData.value.services.map(service => ({
+    id: service.id,
+    title: service.name,
+    image: service.thumb_image
+  }))
+})
 
 const rightServices = computed(() => services.value.slice(0, 3))
 const leftServices = computed(() => services.value.slice(3))
-
-
 </script>
 
 <template>
@@ -84,7 +63,18 @@ const leftServices = computed(() => services.value.slice(3))
           class="p-[8px] w-full h-full focus:outline-0 placeholder-[#2E2E2E80]" />
       </div>
 
-      <div class="flex gap-[16px] mt-[35px] justify-center">
+      <!-- Loading state -->
+      <div v-if="pending" class="flex justify-center items-center mt-[35px] h-[200px]">
+        <p class="text-[16px] text-[#2E2E2E]">Loading...</p>
+      </div>
+
+      <!-- Error state -->
+      <div v-else-if="error" class="flex justify-center items-center mt-[35px] h-[200px]">
+        <p class="text-[16px] text-[#ED1C24]">Failed to load data</p>
+      </div>
+
+      <!-- Services content -->
+      <div v-else class="flex gap-[16px] mt-[35px] justify-center">
         <div class="flex flex-col gap-[23px] w-[171px]">
           <ServicesCard data-aos="fade-up" data-aos-once="true" v-for="service in leftServices" :key="service.id"
             :service="service" @click="$router.push(`/service/${service.id}/test`)" />
