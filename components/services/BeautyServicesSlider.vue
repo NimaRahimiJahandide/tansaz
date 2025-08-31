@@ -7,6 +7,7 @@ const slideDirection = ref('next') // 'next' or 'prev'
 
 const slides = [
   {
+    id: 0,
     title: 'خدمات زیبایی',
     lines: 9,
     description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطر آنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز است.',
@@ -15,6 +16,7 @@ const slides = [
     backgroundImage2: '/images/service-init1.png'
   },
   {
+    id: 1,
     title: 'میکاپ صورت',
     lines: 5,
     description: 'میکاپ حرفه‌ای با استفاده از بهترین برندها و تکنیک‌های روز دنیا برای زیبایی و درخشندگی صورت شما.',
@@ -23,6 +25,7 @@ const slides = [
     backgroundImage2: '/images/service-init1.png'
   },
   {
+    id: 2,
     title: 'ناخن حرفه‌ای',
     lines: 7,
     description: 'طراحی ناخن با بهترین کیفیت و متریال روز دنیا برای زیبایی و استایل منحصر به فرد شما.',
@@ -150,122 +153,123 @@ const handleSelectStart = (event) => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-[radial-gradient(65.64%_65.64%_at_50%_34.36%,_#565656_0%,_#353535_54.08%,_#1F1F1F_100%)] px-[30px] pt-[100px] pb-[30px] relative">
-    
-    <!-- Main Content Container -->
-    <div class="relative z-10 w-full">
-      <!-- Main Model Image with Background Images -->
-      <div class="text-center -mb-20 relative">
-        <div class="relative inline-block">
-          <!-- Background Image 1 (Left) - Clickable -->
-          <div 
-            @click="switchToSlide(getLeftImageIndex())"
-            class="absolute -left-16 -top-8 opacity-30 cursor-pointer hover:opacity-50 transition-opacity duration-300 z-20">
-            <div class="w-16 h-16 rounded-full overflow-hidden">
-              <img :src="slides[getLeftImageIndex()].image" alt="Background 1" class="w-full h-full object-cover" />
+  <section class="bg-[radial-gradient(65.64%_65.64%_at_50%_34.36%,_#565656_0%,_#353535_54.08%,_#1F1F1F_100%)]  pb-[30px] relative">
+    <div class="min-h-screen pt-[100px]">
+      <!-- Main Content Container -->
+      <div class="relative z-10 w-full">
+        <!-- Main Model Image with Background Images -->
+        <div class="text-center -mb-20 relative overflow-x-hidden">
+          <div class=" inline-block">
+            <!-- Background Image 1 (Left) - Clickable -->
+            <div 
+              @click="switchToSlide(getLeftImageIndex())"
+              class="absolute -left-10 top-0 opacity-30 cursor-pointer hover:opacity-50 transition-opacity duration-300 z-20">
+              <div class="w-[133px] h-[140px] rounded-full overflow-hidden">
+                <img :src="slides[getLeftImageIndex()].image" alt="Background 1" class="w-full h-full object-cover" />
+              </div>
+              <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-2 bg-brand rounded-full"></div>
             </div>
-            <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-2 bg-brand rounded-full"></div>
+            
+            <!-- Background Image 2 (Right) - Clickable -->
+            <div 
+              @click="switchToSlide(getRightImageIndex())"
+              class="absolute -right-10 -top-0 opacity-30 cursor-pointer hover:opacity-50 transition-opacity duration-300 z-20">
+              <div class="w-[133px] h-[140px] rounded-full overflow-hidden">
+                <img :src="slides[getRightImageIndex()].image" alt="Background 2" class="w-full h-full object-cover" />
+              </div>
+              <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-2 bg-brand rounded-full"></div>
+            </div>
+  
+            <!-- Main Image - Swipeable with Animation -->
+            <div 
+              @touchstart="handleTouchStart"
+              @touchmove="handleTouchMove"
+              @touchend="handleTouchEnd"
+              @mousedown="handleMouseDown"
+              @mousemove="handleMouseMove"
+              @mouseup="handleMouseUp"
+              @mouseleave="handleMouseUp"
+              @selectstart="handleSelectStart"
+              class="cursor-grab active:cursor-grabbing select-none">
+              <img 
+                :src="slides[currentSlide].image" 
+                alt="Main Beauty Model" 
+                class="w-[196px] h-[236px] object-cover mt-[50px] relative  pointer-events-none transition-all duration-500 ease-in-out "
+                :class="{
+                  'opacity-0 scale-95': isTransitioning,
+                  'opacity-100 scale-100': !isTransitioning
+                }" />
+            </div>
           </div>
+        </div>
+  
+        <!-- Content Card -->
+        <div
+          class="bg-[#FFFFFF05] mx-[30px] rounded-3xl px-[25px] pt-[70px] pb-[25px] backdrop-blur-[20px] shadow-[inset_0px_-5px_21px_0px_#E3EDEF33,inset_0px_0px_3px_0px_#9A92D24D,inset_0px_70px_47px_-75px_#CAACFF4D,inset_0px_2px_10px_-4px_#FFFFFF42,inset_0px_34px_29px_-49px_#FFFFFF80] relative">
           
-          <!-- Background Image 2 (Right) - Clickable -->
-          <div 
-            @click="switchToSlide(getRightImageIndex())"
-            class="absolute -right-16 -top-8 opacity-30 cursor-pointer hover:opacity-50 transition-opacity duration-300 z-20">
-            <div class="w-16 h-16 rounded-full overflow-hidden">
-              <img :src="slides[getRightImageIndex()].image" alt="Background 2" class="w-full h-full object-cover" />
+          <!-- Card Stack Effect -->
+          <div class="absolute inset-0 rounded-3xl overflow-hidden">
+            <!-- Previous Card (Behind) -->
+            <div 
+              class="absolute inset-0 bg-[#FFFFFF03] rounded-3xl transform scale-95 translate-x-2 opacity-60 transition-all duration-300"
+              :class="{ 'opacity-0': currentSlide === 0 }">
             </div>
-            <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-2 bg-brand rounded-full"></div>
+            
+            <!-- Next Card (Behind) -->
+            <div 
+              class="absolute inset-0 bg-[#FFFFFF03] rounded-3xl transform scale-95 -translate-x-2 opacity-60 transition-all duration-300"
+              :class="{ 'opacity-0': currentSlide === slides.length - 1 }">
+            </div>
           </div>
-
-          <!-- Main Image - Swipeable with Animation -->
-          <div 
-            @touchstart="handleTouchStart"
-            @touchmove="handleTouchMove"
-            @touchend="handleTouchEnd"
-            @mousedown="handleMouseDown"
-            @mousemove="handleMouseMove"
-            @mouseup="handleMouseUp"
-            @mouseleave="handleMouseUp"
-            @selectstart="handleSelectStart"
-            class="cursor-grab active:cursor-grabbing select-none">
-            <img 
-              :src="slides[currentSlide].image" 
-              alt="Main Beauty Model" 
-              class="w-[196px] h-[236px] object-cover relative z-10 pointer-events-none transition-all duration-500 ease-in-out"
+  
+          <!-- Current Slide Content with Animation -->
+          <div class="relative z-10">
+            <!-- Title - Static -->
+            <div class="flex justify-between items-center mb-4">
+              <h1 class="text-[26px] font-bold text-white mb-2">
+                <span class="text-brand">{{ slides[currentSlide].title.split(' ')[0] }}</span> {{ slides[currentSlide].title.split(' ').slice(1).join(' ') }}
+              </h1>
+              <button class="text-brand -rotate-[15deg] bg-[#FFFFFF1A] w-[103px] h-[45px] rounded-[40px] text-[24px] font-semibold absolute left-0 -top-8">
+                <span class="text-white">{{ slides[currentSlide].lines }}</span> لاین
+              </button>
+            </div>
+  
+            <!-- Description with Fade Animation -->
+            <div 
+              class="text-white text-sm leading-[23px] mb-8 text-justify font-medium transition-all duration-400 ease-in-out"
               :class="{
-                'opacity-0 scale-95': isTransitioning,
-                'opacity-100 scale-100': !isTransitioning
-              }" />
+                'opacity-0': isTransitioning,
+                'opacity-100': !isTransitioning
+              }">
+              <p>{{ slides[currentSlide].description }}</p>
+            </div>
+  
+            <!-- Main CTA Button - Static -->
+            <div>
+              <button 
+                @click="selectService(slides[currentSlide])"
+                class="w-full bg-brand text-white font-semibold h-[42px] rounded-full transition-all duration-300">
+                برو به صفحه {{ slides[currentSlide].title }}
+              </button>
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- Content Card -->
-      <div
-        class="bg-[#FFFFFF05] rounded-3xl px-[25px] pt-[70px] pb-[25px] backdrop-blur-[20px] shadow-[inset_0px_-5px_21px_0px_#E3EDEF33,inset_0px_0px_3px_0px_#9A92D24D,inset_0px_70px_47px_-75px_#CAACFF4D,inset_0px_2px_10px_-4px_#FFFFFF42,inset_0px_34px_29px_-49px_#FFFFFF80] relative">
-        
-        <!-- Card Stack Effect -->
-        <div class="absolute inset-0 rounded-3xl overflow-hidden">
-          <!-- Previous Card (Behind) -->
-          <div 
-            class="absolute inset-0 bg-[#FFFFFF03] rounded-3xl transform scale-95 translate-x-2 opacity-60 transition-all duration-300"
-            :class="{ 'opacity-0': currentSlide === 0 }">
-          </div>
-          
-          <!-- Next Card (Behind) -->
-          <div 
-            class="absolute inset-0 bg-[#FFFFFF03] rounded-3xl transform scale-95 -translate-x-2 opacity-60 transition-all duration-300"
-            :class="{ 'opacity-0': currentSlide === slides.length - 1 }">
-          </div>
-        </div>
-
-        <!-- Current Slide Content with Animation -->
-        <div class="relative z-10">
-          <!-- Title - Static -->
-          <div class="flex justify-between items-center mb-4">
-            <h1 class="text-[26px] font-bold text-white mb-2">
-              <span class="text-brand">{{ slides[currentSlide].title.split(' ')[0] }}</span> {{ slides[currentSlide].title.split(' ').slice(1).join(' ') }}
-            </h1>
-            <button class="text-white bg-[#FFFFFF1A] w-[63px] h-[29px] rounded-[40px] text-[14px] font-semibold">
-              <span class="text-brand">{{ slides[currentSlide].lines }}</span> لاین
-            </button>
-          </div>
-
-          <!-- Description with Fade Animation -->
-          <div 
-            class="text-white text-sm leading-[23px] mb-8 text-justify font-medium transition-all duration-400 ease-in-out"
-            :class="{
-              'opacity-0': isTransitioning,
-              'opacity-100': !isTransitioning
-            }">
-            <p>{{ slides[currentSlide].description }}</p>
-          </div>
-
-          <!-- Main CTA Button - Static -->
-          <div>
-            <button 
-              @click="selectService(slides[currentSlide])"
-              class="w-full bg-brand text-white font-semibold h-[42px] rounded-full transition-all duration-300">
-              برو به صفحه {{ slides[currentSlide].title }}
-            </button>
-          </div>
-        </div>
+  
+      <!-- Support Button -->
+      <div class="w-full pt-[60px] flex items-center justify-center">
+        <button
+          class="flex justify-center w-[169px] h-[46px] items-center bg-transparent border border-white text-white font-medium rounded-full shadow-lg">
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+            </path>
+          </svg>
+          پشتیبانی سریع
+        </button>
       </div>
     </div>
-
-    <!-- Support Button -->
-    <div class="w-full pt-[60px] flex items-center justify-center">
-      <button
-        class="flex justify-center w-[169px] h-[46px] items-center bg-transparent border border-white text-white font-medium rounded-full shadow-lg">
-        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
-          </path>
-        </svg>
-        پشتیبانی سریع
-      </button>
-    </div>
-  </div>
+  </section>
 </template>
 
 <style scoped>
@@ -352,4 +356,4 @@ img.transition-all {
 .scale-100 {
   transform: scale(1);
 }
-</style> 
+</style>

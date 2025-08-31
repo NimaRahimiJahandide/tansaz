@@ -1,11 +1,14 @@
 <script setup>
-definePageMeta({
-  layout: 'services'
-});
 import { useStartWebsite } from "@/store/initWebsite";
+
 
 const startWebsite = useStartWebsite();
 
+onMounted(() => {
+  startWebsite.setImageClicked(true);
+});
+
+const route = useRoute()
 const router = useRouter()
 
 const goBack = () => {
@@ -16,13 +19,7 @@ const goBack = () => {
   }
 }
 
-const handleServiceSelected = (service) => {
-  startWebsite.setServicesStart(true)
-  // You can add additional logic here to handle the selected service
-  console.log('Selected service:', service)
-}
-
-const services = ref([ 
+const services = ref([
   {
     id: 1,
     title: 'پزشکان زیبایی',
@@ -58,19 +55,18 @@ const services = ref([
     title: 'تزریقات زیبایی',
     image: '/images/service-init6.png'
   },
-  
 ])
 
 const rightServices = computed(() => services.value.slice(0, 3))
 const leftServices = computed(() => services.value.slice(3))
 
+
 </script>
 
 <template>
   <div>
-    <ServicesBeautyServicesSlider v-if="!startWebsite.isServicesStart" @service-selected="handleServiceSelected" />
-
-    <div v-else class="flex flex-col pt-[20px] px-[16px] mt-[64px] pb-[30px] bg-[#EFEFEF]">
+    <!-- Show all services (original content) -->
+    <div class="flex flex-col pt-[20px] px-[16px] mt-[64px] pb-[30px] bg-[#EFEFEF]">
       <div class="flex items-center justify-between">
         <p class="text-[20px] text-center font-bold">
           <span class="text-[rgb(237,28,36)]"> خدمات </span>
@@ -90,25 +86,16 @@ const leftServices = computed(() => services.value.slice(3))
 
       <div class="flex gap-[16px] mt-[35px] justify-center">
         <div class="flex flex-col gap-[23px] w-[171px]">
-  
-          <ServicesCard data-aos="fade-up" data-aos-once="true"
-            v-for="service in leftServices"
-            :key="service.id"
-            :service="service"
-            @click="$router.push(`/service/${service.id}/test`)"
-          />
+          <ServicesCard data-aos="fade-up" data-aos-once="true" v-for="service in leftServices" :key="service.id"
+            :service="service" @click="$router.push(`/service/${service.id}/test`)" />
         </div>
         <div class="flex flex-col gap-[23px] w-[171px]">
           <p class="text-[16px] font-semibold">
             <span class="text-[#ED1C24]"> لاین زیبـایی </span>
             <span class="text-[#2E2E2E]"> مورد نظرتـان را انتخاب کنید </span>
           </p>
-          <ServicesCard data-aos="fade-up" data-aos-once="true"
-            v-for="service in rightServices"
-            :key="service.id"
-            :service="service"
-            @click="$router.push(`/service/${service.id}/test`)"
-          />
+          <ServicesCard data-aos="fade-up" data-aos-once="true" v-for="service in rightServices" :key="service.id"
+            :service="service" @click="$router.push(`/service/${service.id}/test`)" />
         </div>
       </div>
     </div>

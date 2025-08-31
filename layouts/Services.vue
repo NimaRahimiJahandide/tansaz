@@ -7,14 +7,11 @@ const startWebsite = useStartWebsite();
 <template>
   <div class="flex flex-col w-full">
     <transition name="fade-navbar" appear>
-      <NavbarComponent v-if="startWebsite.isServicesStart" />
+      <NavbarComponent />
     </transition>
-    <main>
+    <main class="">
       <slot />
     </main>
-     <transition name="fade-slide" appear>
-      <Footer v-if="startWebsite.isServicesStart" />
-    </transition>
   </div>
 </template>
 
