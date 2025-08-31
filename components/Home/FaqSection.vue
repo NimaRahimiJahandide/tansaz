@@ -16,13 +16,29 @@
     </header>
 
     <div data-aos="fade-up" data-aos-delay="300" data-aos-once="true">
+      <!-- Loading State -->
+      <div v-if="loading" class="flex justify-center items-center py-8">
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-brand"></div>
+      </div>
+
+      <!-- Error State -->
+      <div v-else-if="error" class="text-center py-8">
+        <p class="text-red-500 mb-4">{{ error }}</p>
+        <button 
+          @click="refetch" 
+          class="px-4 py-2 bg-brand text-white rounded-lg hover:bg-brand/90 transition-colors"
+        >
+          تلاش مجدد
+        </button>
+      </div>
+
       <!-- FAQ Section -->
-      <section class="space-y-4">
+      <section v-else class="space-y-4">
         <!-- FAQ Items -->
         <HomeFaqItem 
-          v-for="(faq, index) in faqs" 
-          :key="`faq-${index}`"
-          :item-id="`faq-${index}`"
+          v-for="faq in faqs" 
+          :key="`faq-${faq.id}`"
+          :item-id="`faq-${faq.id}`"
           :question="faq.question" 
           :answer="faq.answer" 
           class="transform transition-all duration-300 hover:scale-[1.01] hover:shadow-lg"
@@ -38,6 +54,7 @@
           صفحه دسته بندی پرسش های متداول
         </NuxtLink>
       </button>
+      
       <section class="bg-[url('/images/tour-vr-home-banner.png')] bg-cover  flex flex-col h-[158px] mt-[30px] rounded-3xl items-end justify-center">
         <div class="flex flex-col items-center gap-5 pl-9">
           <img width="141px" height="52px" src="/icons/label-text-tour-vr.svg" alt="تور مجازی کلینیک تن ساز" />
@@ -49,13 +66,15 @@
 </template>
 
 <script setup>
-// Import the composable
+// Import composables
 import { useFaq } from '~/composables/home/useFaq'
+import { useFaqApi } from '~/composables/api/useFaqApi'
 
-// Initialize FAQ composable
+// Initialize composables
 const faqComposable = useFaq()
+const { faqs, loading, error, fetchFaqs } = useFaqApi()
 
-// Provide composable to child components
+// Provide FAQ composable to child components
 provide('faqComposable', faqComposable)
 
 // Props
@@ -63,29 +82,15 @@ defineProps({
   onScrollToLuck: Function
 })
 
-// FAQ Data
-const faqs = [
-  {
-    question: "سوال مورد نظر انجا قرار میگیرد؟",
-    answer: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.",
-  },
-  {
-    question: "سوال مورد نظر انجا قرار میگیرد؟",
-    answer: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.",
-  },
-  {
-    question: "سوال مورد نظر انجا قرار میگیرد؟",
-    answer: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.",
-  },
-  {
-    question: "سوال مورد نظر انجا قرار میگیرد؟",
-    answer: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.",
-  },
-  {
-    question: "سوال مورد نظر انجا قرار میگیرد؟",
-    answer: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.",
-  },
-]
+// Refetch function for error handling
+const refetch = () => {
+  fetchFaqs()
+}
+
+// Fetch FAQs on component mount
+onMounted(() => {
+  fetchFaqs()
+})
 </script>
 
 <style scoped>
@@ -105,5 +110,19 @@ button:hover {
 
 button:active {
   transform: translateY(0);
+}
+
+/* Loading spinner animation */
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>
