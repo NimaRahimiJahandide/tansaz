@@ -6,35 +6,60 @@
         القاء حس از نو شکفتن در <span class="text-brand">کلینیـک تــن ســاز</span> !
       </h1>
     </header>
-    <div  data-aos="fade-up" data-aos-delay="200" data-aos-once="true">
-      <!-- Before & After Image Section -->
-      <section class="relative mx-auto px-4 z-10">
-        <div class="container max-w-[1240px] mx-auto px-5">
-          <div class="max-w-xl mx-auto rounded-lg overflow-hidden relative aspect-square">
-            <client-only>
-              <transition name="fade" mode="out-in">
-                <VueCompareImage :key="selected.after" :left-image="selected.before" :right-image="selected.after" :handle="customHandle" />
-              </transition>
-            </client-only>
+    <div data-aos="fade-up" data-aos-delay="200" data-aos-once="true">
+      <!-- Loading State -->
+      <div v-if="pending" class="text-center py-8">
+        <p class="text-white/70">در حال بارگذاری...</p>
+      </div>
+
+      <!-- Error State -->
+      <div v-else-if="error" class="text-center py-8">
+        <p class="text-red-400">خطا در بارگذاری اطلاعات</p>
+      </div>
+
+      <!-- No Data State -->
+      <div v-else-if="!gallery.length" class="text-center py-8">
+        <p class="text-white/70">No data available</p>
+      </div>
+
+      <!-- Main Content -->
+      <template v-else>
+        <!-- Before & After Image Section -->
+        <section class="relative mx-auto px-4 z-10">
+          <div class="container max-w-[1240px] mx-auto px-5">
+            <div class="max-w-xl mx-auto rounded-lg overflow-hidden relative aspect-square">
+              <client-only>
+                <transition name="fade" mode="out-in">
+                  <VueCompareImage 
+                    :key="selected.after" 
+                    :left-image="selected.before" 
+                    :right-image="selected.after" 
+                    :handle="customHandle" 
+                  />
+                </transition>
+              </client-only>
+            </div>
           </div>
-        </div>
-      </section>
-  
-      <!-- Gallery Section -->
-      <section class="pt-[25px] z-10">
-        <div class="flex gap-4 overflow-x-auto hide-scrollbar max-w-sm mx-auto z-10">
-          <div v-for="(item, index) in gallery" :key="index"
-            class="relative size-[105px] overflow-hidden rounded-[22px] cursor-pointer shrink-0 z-10"
-            @click="selectImages(item)">
-            <img :src="item.after" alt="Gallery Image"
-              class="w-full h-full object-cover transition-transform duration-500 ease-in-out z-10" />
+        </section>
+    
+        <!-- Gallery Section -->
+        <section class="pt-[25px] z-10">
+          <div class="flex gap-4 overflow-x-auto hide-scrollbar max-w-sm mx-auto z-10">
+            <div v-for="(item, index) in gallery" :key="item.id || index"
+              class="relative size-[105px] overflow-hidden rounded-[22px] cursor-pointer shrink-0 z-10"
+              @click="selectImages(item)">
+              <img :src="item.after" :alt="`${item.serviceName} - After`"
+                class="w-full h-full object-cover transition-transform duration-500 ease-in-out z-10" />
+            </div>
           </div>
-        </div>
-      </section>
-      <section class="text-center pt-4 z-10">
-        <p class="font-semibold leading-[26px]">پیکرتراشی</p>
-        <p class="text-sm font-medium leading-[23px]">دستگاه ایواماتیک</p>
-      </section>
+        </section>
+        
+        <section class="text-center pt-4 z-10">
+          <p class="font-semibold leading-[26px]">{{ selected.serviceName || 'پیکرتراشی' }}</p>
+          <p class="text-sm font-medium leading-[23px]">{{ selected.device || 'دستگاه ایواماتیک' }}</p>
+        </section>
+      </template>
+
       <section class="absolute bottom-10 z-0">
         <div class="relative inline-block">
           <img src="/icons/dot-before-after.svg" alt="dot-before-after">
@@ -48,28 +73,20 @@
 </template>
 
 <script setup>
-// گالری تصاویر
-const gallery = [
-  {
-    before: '/images/Surgery2.png',
-    after: '/images/Surgery1.png'
-  },
-  {
-    before: '/images/Surgery3.png',
-    after: '/images/Surgery2.png'
-  },
-  {
-    before: '/images/Surgery1.png',
-    after: '/images/Surgery3.png'
-  },
-  {
-    before: '/images/Surgery3.png',
-    after: '/images/Surgery1.png'
-  }
-]
+import { useBeforeAfter } from '~/composables/home/useBeforeAfter'
+
+// Use the composable
+const { gallery, pending, error } = useBeforeAfter()
 
 // عکس انتخاب‌شده فعلی
-const selected = ref(gallery[0])
+const selected = ref({})
+
+// Watch for gallery changes and set initial selection
+watch(gallery, (newGallery) => {
+  if (newGallery.length > 0 && (!selected.value.id || !newGallery.find(item => item.id === selected.value.id))) {
+    selected.value = newGallery[0]
+  }
+}, { immediate: true })
 
 const selectImages = (item) => {
   selected.value = item
