@@ -41,13 +41,22 @@ const selectService = (slide) => {
   emit('serviceSelected', slide)
 }
 
-// Calculate indices for prev/next slides
+// Check if navigation is possible
+const canNavigatePrev = () => {
+  return currentSlide.value > 0
+}
+
+const canNavigateNext = () => {
+  return currentSlide.value < slides.length - 1
+}
+
+// Calculate indices for prev/next slides (with bounds checking)
 const getPrevSlideIndex = () => {
-  return currentSlide.value === 0 ? slides.length - 1 : currentSlide.value - 1
+  return canNavigatePrev() ? currentSlide.value - 1 : null
 }
 
 const getNextSlideIndex = () => {
-  return (currentSlide.value + 1) % slides.length
+  return canNavigateNext() ? currentSlide.value + 1 : null
 }
 
 // Content animation function
@@ -94,42 +103,34 @@ const animateContent = (direction = 'next') => {
 
 // Main slide switching function with content animation
 const switchToSlide = async (slideIndex) => {
-  if (isTransitioning.value || slideIndex === currentSlide.value) return
+  if (isTransitioning.value || slideIndex === currentSlide.value || slideIndex === null) return
+  
+  // Check bounds
+  if (slideIndex < 0 || slideIndex >= slides.length) return
   
   isTransitioning.value = true
   
   // Determine direction
-  let direction = 'next'
-  if (slideIndex === getPrevSlideIndex()) {
-    direction = 'prev'
-  } else if (slideIndex === getNextSlideIndex()) {
-    direction = 'next'
-  } else {
-    // Handle direct clicks
-    const distNext = (slideIndex - currentSlide.value + slides.length) % slides.length
-    const distPrev = (currentSlide.value - slideIndex + slides.length) % slides.length
-    direction = distNext <= distPrev ? 'next' : 'prev'
-  }
+  let direction = slideIndex > currentSlide.value ? 'next' : 'prev'
   
   // Get all image containers
   const centerImage = document.querySelector('.center-image-container')
   const leftImage = document.querySelector('.left-image-container')  
   const rightImage = document.querySelector('.right-image-container')
   
-  if (!centerImage || !leftImage || !rightImage) {
+  if (!centerImage) {
     isTransitioning.value = false
     return
   }
   
-  // Create timeline for image circular movement
+  // Create timeline for image movement
   const imageTl = gsap.timeline()
   
   const duration = 0.8
   const ease = "power2.inOut"
   
   if (direction === 'next') {
-    // CIRCULAR CLOCKWISE MOVEMENT:
-    // Center → Top-Left (exit up-left)
+    // Center → Left (خارج شدن به بالا-چپ)
     imageTl.to(centerImage, {
       x: -120,
       y: -80,
@@ -138,27 +139,21 @@ const switchToSlide = async (slideIndex) => {
       force3D: true
     }, 0)
     
-    // Right → Center (main movement)
-    imageTl.to(rightImage, {
-      x: 0,
-      y: 0,
-      duration: duration,
-      ease: ease,
-      force3D: true
-    }, 0)
-    
-    // Left → Top-Right (moves to replace right)
-    imageTl.to(leftImage, {
-      x: 120,
-      y: -80,
-      duration: duration,
-      ease: ease,
-      force3D: true
-    }, 0)
+    // Right → Center (ورود به مرکز)
+    if (rightImage) {
+      imageTl.to(rightImage, {
+        x: 0,
+        y: 0,
+        duration: duration,
+        ease: ease,
+        force3D: true
+      }, 0)
+    }
+
+    // دیگه left حرکتی نداره 🚫
     
   } else {
-    // CIRCULAR COUNTER-CLOCKWISE MOVEMENT:
-    // Center → Top-Right (exit up-right)
+    // Center → Right (خارج شدن به بالا-راست)
     imageTl.to(centerImage, {
       x: 120,
       y: -80,
@@ -167,23 +162,18 @@ const switchToSlide = async (slideIndex) => {
       force3D: true
     }, 0)
     
-    // Left → Center (main movement)
-    imageTl.to(leftImage, {
-      x: 0,
-      y: 0,
-      duration: duration,
-      ease: ease,
-      force3D: true
-    }, 0)
-    
-    // Right → Top-Left (moves to replace left)
-    imageTl.to(rightImage, {
-      x: -120,
-      y: -80,
-      duration: duration,
-      ease: ease,
-      force3D: true
-    }, 0)
+    // Left → Center (ورود به مرکز)
+    if (leftImage) {
+      imageTl.to(leftImage, {
+        x: 0,
+        y: 0,
+        duration: duration,
+        ease: ease,
+        force3D: true
+      }, 0)
+    }
+
+    // دیگه right حرکتی نداره 🚫
   }
 
   // Start image animation and content animation simultaneously
@@ -218,7 +208,7 @@ const resetToDefaultPositions = () => {
   const leftImage = document.querySelector('.left-image-container')
   const rightImage = document.querySelector('.right-image-container')
   
-  if (!centerImage || !leftImage || !rightImage) return
+  if (!centerImage) return
   
   // Reset to default circular positions with hardware acceleration
   gsap.set(centerImage, {
@@ -227,17 +217,21 @@ const resetToDefaultPositions = () => {
     force3D: true
   })
   
-  gsap.set(leftImage, {
-    x: -120,
-    y: -80,
-    force3D: true
-  })
+  if (leftImage) {
+    gsap.set(leftImage, {
+      x: -120,
+      y: -80,
+      force3D: true
+    })
+  }
   
-  gsap.set(rightImage, {
-    x: 120,
-    y: -80,
-    force3D: true
-  })
+  if (rightImage) {
+    gsap.set(rightImage, {
+      x: 120,
+      y: -80,
+      force3D: true
+    })
+  }
 }
 
 // Touch/Swipe functionality
@@ -264,9 +258,17 @@ const handleTouchEnd = () => {
   
   if (Math.abs(swipeDistance) > swipeThreshold) {
     if (swipeDistance > 0) {
-      switchToSlide(getPrevSlideIndex())
+      // Swipe right - go to previous
+      const prevIndex = getPrevSlideIndex()
+      if (prevIndex !== null) {
+        switchToSlide(prevIndex)
+      }
     } else {
-      switchToSlide(getNextSlideIndex())
+      // Swipe left - go to next
+      const nextIndex = getNextSlideIndex()
+      if (nextIndex !== null) {
+        switchToSlide(nextIndex)
+      }
     }
   }
   
@@ -297,9 +299,17 @@ const handleMouseUp = () => {
   
   if (Math.abs(dragDistance) > dragThreshold) {
     if (dragDistance > 0) {
-      switchToSlide(getPrevSlideIndex())
+      // Drag right - go to previous
+      const prevIndex = getPrevSlideIndex()
+      if (prevIndex !== null) {
+        switchToSlide(prevIndex)
+      }
     } else {
-      switchToSlide(getNextSlideIndex())
+      // Drag left - go to next
+      const nextIndex = getNextSlideIndex()
+      if (nextIndex !== null) {
+        switchToSlide(nextIndex)
+      }
     }
   }
   
@@ -316,9 +326,15 @@ const handleSelectStart = (event) => {
 const handleKeyDown = (event) => {
   if (isTransitioning.value) return
   if (event.key === 'ArrowLeft') {
-    switchToSlide(getPrevSlideIndex())
+    const prevIndex = getPrevSlideIndex()
+    if (prevIndex !== null) {
+      switchToSlide(prevIndex)
+    }
   } else if (event.key === 'ArrowRight') {
-    switchToSlide(getNextSlideIndex())
+    const nextIndex = getNextSlideIndex()
+    if (nextIndex !== null) {
+      switchToSlide(nextIndex)
+    }
   }
 }
 
@@ -346,6 +362,7 @@ onUnmounted(() => {
             
             <!-- Left Top Position - Background Image -->
             <div 
+              v-if="getPrevSlideIndex() !== null"
               class="left-image-container absolute top-[30px] left-[50px] cursor-pointer transition-transform duration-200"
               @click="!isTransitioning && switchToSlide(getPrevSlideIndex())"
               style="transform: translateX(-120px) translateY(-80px)">
@@ -357,6 +374,7 @@ onUnmounted(() => {
             
             <!-- Right Top Position - Background Image -->
             <div 
+              v-if="getNextSlideIndex() !== null"
               class="right-image-container absolute top-[30px] right-[50px] cursor-pointer transition-transform duration-200"
               @click="!isTransitioning && switchToSlide(getNextSlideIndex())"
               style="transform: translateX(120px) translateY(-80px)">
