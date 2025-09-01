@@ -50,7 +50,49 @@ const getNextSlideIndex = () => {
   return (currentSlide.value + 1) % slides.length
 }
 
-// Circular/Wheel Animation - Items move in a circular pattern
+// Content animation function
+const animateContent = (direction = 'next') => {
+  return new Promise((resolve) => {
+    const contentInner = document.querySelector('.content-inner')
+    if (!contentInner) {
+      resolve()
+      return
+    }
+
+    // Create timeline for content animation
+    const contentTl = gsap.timeline({
+      onComplete: () => resolve()
+    })
+
+    // Phase 1: Animate old content out (slide up + fade out)
+    contentTl.to(contentInner, {
+      y: -30,
+      opacity: 0,
+      duration: 0.3,
+      ease: "power2.in"
+    })
+
+    // Phase 2: Update content and animate new content in (slide up from bottom + fade in)
+    contentTl.call(() => {
+      // Content is updated here via Vue reactivity
+      // Reset position for new content to slide in from bottom
+      gsap.set(contentInner, {
+        y: 30,
+        opacity: 0
+      })
+    })
+    .to(contentInner, {
+      y: 0,
+      opacity: 1,
+      duration: 0.4,
+      ease: "power2.out"
+    }, "+=0.1") // Small delay between out and in
+
+    contentTl.play()
+  })
+}
+
+// Main slide switching function with content animation
 const switchToSlide = async (slideIndex) => {
   if (isTransitioning.value || slideIndex === currentSlide.value) return
   
@@ -73,27 +115,14 @@ const switchToSlide = async (slideIndex) => {
   const centerImage = document.querySelector('.center-image-container')
   const leftImage = document.querySelector('.left-image-container')  
   const rightImage = document.querySelector('.right-image-container')
-  const content = document.querySelector('.content-container')
   
   if (!centerImage || !leftImage || !rightImage) {
     isTransitioning.value = false
     return
   }
   
-  // Update slide index BEFORE animation starts to prevent glitch
-  currentSlide.value = slideIndex
-  
-  // Create timeline for circular movement
-  const tl = gsap.timeline({
-    onComplete: () => {
-      isTransitioning.value = false
-      
-      // Reset all transforms to default positions after DOM update
-      nextTick(() => {
-        resetToDefaultPositions()
-      })
-    }
-  })
+  // Create timeline for image circular movement
+  const imageTl = gsap.timeline()
   
   const duration = 0.8
   const ease = "power2.inOut"
@@ -101,7 +130,7 @@ const switchToSlide = async (slideIndex) => {
   if (direction === 'next') {
     // CIRCULAR CLOCKWISE MOVEMENT:
     // Center → Top-Left (exit up-left)
-    tl.to(centerImage, {
+    imageTl.to(centerImage, {
       x: -120,
       y: -80,
       duration: duration,
@@ -110,7 +139,7 @@ const switchToSlide = async (slideIndex) => {
     }, 0)
     
     // Right → Center (main movement)
-    tl.to(rightImage, {
+    imageTl.to(rightImage, {
       x: 0,
       y: 0,
       duration: duration,
@@ -119,7 +148,7 @@ const switchToSlide = async (slideIndex) => {
     }, 0)
     
     // Left → Top-Right (moves to replace right)
-    tl.to(leftImage, {
+    imageTl.to(leftImage, {
       x: 120,
       y: -80,
       duration: duration,
@@ -130,7 +159,7 @@ const switchToSlide = async (slideIndex) => {
   } else {
     // CIRCULAR COUNTER-CLOCKWISE MOVEMENT:
     // Center → Top-Right (exit up-right)
-    tl.to(centerImage, {
+    imageTl.to(centerImage, {
       x: 120,
       y: -80,
       duration: duration,
@@ -139,7 +168,7 @@ const switchToSlide = async (slideIndex) => {
     }, 0)
     
     // Left → Center (main movement)
-    tl.to(leftImage, {
+    imageTl.to(leftImage, {
       x: 0,
       y: 0,
       duration: duration,
@@ -148,7 +177,7 @@ const switchToSlide = async (slideIndex) => {
     }, 0)
     
     // Right → Top-Left (moves to replace left)
-    tl.to(rightImage, {
+    imageTl.to(rightImage, {
       x: -120,
       y: -80,
       duration: duration,
@@ -156,20 +185,31 @@ const switchToSlide = async (slideIndex) => {
       force3D: true
     }, 0)
   }
+
+  // Start image animation and content animation simultaneously
+  const imageAnimationPromise = new Promise((resolve) => {
+    imageTl.call(resolve)
+    imageTl.play()
+  })
+
+  // Start content animation after a slight delay
+  setTimeout(() => {
+    animateContent(direction).then(() => {
+      // Content animation completed
+    })
+  }, 100)
+
+  // Wait for image animation to complete, then update slide and reset positions
+  await imageAnimationPromise
   
-  // Content subtle animation
-  tl.to(content, {
-    y: -8,
-    duration: duration * 0.3,
-    ease: "power1.out"
-  }, 0)
-  .to(content, {
-    y: 0,
-    duration: duration * 0.7,
-    ease: "power2.out"  
-  }, duration * 0.3)
+  // Update slide index AFTER image animation
+  currentSlide.value = slideIndex
   
-  tl.play()
+  // Reset image positions to default
+  await nextTick()
+  resetToDefaultPositions()
+  
+  isTransitioning.value = false
 }
 
 // Reset all positions to their default circular layout
@@ -345,7 +385,7 @@ onUnmounted(() => {
           </div>
         </div>
   
-        <!-- Content Card -->
+        <!-- Content Card - FIXED CONTAINER -->
         <div
           class="content-container bg-[#FFFFFF05] mx-[30px] rounded-3xl px-[25px] pt-[70px] pb-[25px] backdrop-blur-[20px] shadow-[inset_0px_-5px_21px_0px_#E3EDEF33,inset_0px_0px_3px_0px_#9A92D24D,inset_0px_70px_47px_-75px_#CAACFF4D,inset_0px_2px_10px_-4px_#FFFFFF42,inset_0px_34px_29px_-49px_#FFFFFF80] relative">
           
@@ -355,8 +395,8 @@ onUnmounted(() => {
             <div class="absolute inset-0 bg-[#FFFFFF03] rounded-3xl transform scale-95 -translate-x-2 opacity-60"></div>
           </div>
   
-          <!-- Current Slide Content -->
-          <div class="relative z-10">
+          <!-- Current Slide Content - ANIMATED INNER CONTENT -->
+          <div class="content-inner relative z-10">
             <!-- Title -->
             <div class="flex justify-between items-center mb-4">
               <h1 class="text-[26px] font-bold text-white mb-2">
@@ -436,6 +476,13 @@ onUnmounted(() => {
 /* Allow overflow for circular animation */
 .overflow-visible {
   overflow: visible;
+}
+
+/* Content animation styles */
+.content-inner {
+  /* Ensure content is ready for GSAP animations */
+  transform: translateY(0);
+  opacity: 1;
 }
 
 /* Responsive adjustments */
