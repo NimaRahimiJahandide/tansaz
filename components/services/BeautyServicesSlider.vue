@@ -80,15 +80,18 @@ const switchToSlide = async (slideIndex) => {
     return
   }
   
+  // Update slide index BEFORE animation starts to prevent glitch
+  currentSlide.value = slideIndex
+  
   // Create timeline for circular movement
   const tl = gsap.timeline({
     onComplete: () => {
-      // Update slide index
-      currentSlide.value = slideIndex
       isTransitioning.value = false
       
-      // Reset all transforms to default positions
-      resetToDefaultPositions()
+      // Reset all transforms to default positions after DOM update
+      nextTick(() => {
+        resetToDefaultPositions()
+      })
     }
   })
   
@@ -102,7 +105,8 @@ const switchToSlide = async (slideIndex) => {
       x: -120,
       y: -80,
       duration: duration,
-      ease: ease
+      ease: ease,
+      force3D: true
     }, 0)
     
     // Right → Center (main movement)
@@ -110,7 +114,8 @@ const switchToSlide = async (slideIndex) => {
       x: 0,
       y: 0,
       duration: duration,
-      ease: ease
+      ease: ease,
+      force3D: true
     }, 0)
     
     // Left → Top-Right (moves to replace right)
@@ -118,7 +123,8 @@ const switchToSlide = async (slideIndex) => {
       x: 120,
       y: -80,
       duration: duration,
-      ease: ease
+      ease: ease,
+      force3D: true
     }, 0)
     
   } else {
@@ -128,7 +134,8 @@ const switchToSlide = async (slideIndex) => {
       x: 120,
       y: -80,
       duration: duration,
-      ease: ease
+      ease: ease,
+      force3D: true
     }, 0)
     
     // Left → Center (main movement)
@@ -136,7 +143,8 @@ const switchToSlide = async (slideIndex) => {
       x: 0,
       y: 0,
       duration: duration,
-      ease: ease
+      ease: ease,
+      force3D: true
     }, 0)
     
     // Right → Top-Left (moves to replace left)
@@ -144,7 +152,8 @@ const switchToSlide = async (slideIndex) => {
       x: -120,
       y: -80,
       duration: duration,
-      ease: ease
+      ease: ease,
+      force3D: true
     }, 0)
   }
   
@@ -171,20 +180,23 @@ const resetToDefaultPositions = () => {
   
   if (!centerImage || !leftImage || !rightImage) return
   
-  // Reset to default circular positions
+  // Reset to default circular positions with hardware acceleration
   gsap.set(centerImage, {
     x: 0,
     y: 0,
+    force3D: true
   })
   
   gsap.set(leftImage, {
     x: -120,
     y: -80,
+    force3D: true
   })
   
   gsap.set(rightImage, {
     x: 120,
     y: -80,
+    force3D: true
   })
 }
 
@@ -260,16 +272,26 @@ const handleSelectStart = (event) => {
   }
 }
 
-// Initialize positions on mount
+// Keyboard navigation
+const handleKeyDown = (event) => {
+  if (isTransitioning.value) return
+  if (event.key === 'ArrowLeft') {
+    switchToSlide(getPrevSlideIndex())
+  } else if (event.key === 'ArrowRight') {
+    switchToSlide(getNextSlideIndex())
+  }
+}
+
 onMounted(() => {
   nextTick(() => {
     resetToDefaultPositions()
+    window.addEventListener('keydown', handleKeyDown)
   })
 })
 
-// Cleanup on unmount
 onUnmounted(() => {
   gsap.killTweensOf("*")
+  window.removeEventListener('keydown', handleKeyDown)
 })
 </script>
 
@@ -364,7 +386,7 @@ onUnmounted(() => {
       </div>
   
       <!-- Support Button -->
-      <div class="w-full pt-[60px] flex items-center justify-center">
+      <div class="w-full bottom-10 absolute pt-[60px] flex items-center justify-center">
         <button
           class="flex justify-center w-[169px] h-[46px] items-center bg-transparent border border-white text-white font-medium rounded-full shadow-lg transition-transform duration-200">
           <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
