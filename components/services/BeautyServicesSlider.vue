@@ -101,7 +101,7 @@ const animateContent = (direction = 'next') => {
   })
 }
 
-// Main slide switching function with content animation
+// Main slide switching function with enhanced scale/fade animations
 const switchToSlide = async (slideIndex) => {
   if (isTransitioning.value || slideIndex === currentSlide.value || slideIndex === null) return
   
@@ -123,57 +123,77 @@ const switchToSlide = async (slideIndex) => {
     return
   }
   
-  // Create timeline for image movement
+  // Create timeline for enhanced image movement with scale and fade
   const imageTl = gsap.timeline()
   
   const duration = 0.8
   const ease = "power2.inOut"
   
   if (direction === 'next') {
-    // Center → Left (خارج شدن به بالا-چپ)
+    // Center → Left (خارج شدن به بالا-چپ + کوچیک شدن + fade out)
     imageTl.to(centerImage, {
       x: -120,
       y: -80,
+      scale: 0.7,
+      opacity: 0.6,
       duration: duration,
       ease: ease,
       force3D: true
     }, 0)
     
-    // Right → Center (ورود به مرکز)
+    // Right → Center (ورود به مرکز + بزرگ شدن + fade in)
     if (rightImage) {
+      // ابتدا آماده‌سازی: کوچک و شفاف
+      gsap.set(rightImage, {
+        scale: 0.7,
+        opacity: 0.6,
+        force3D: true
+      })
+      
+      // انیمیشن ورود: حرکت + بزرگ شدن + ظاهر شدن
       imageTl.to(rightImage, {
         x: 0,
         y: 0,
+        scale: 1,
+        opacity: 1,
         duration: duration,
         ease: ease,
         force3D: true
       }, 0)
     }
-
-    // دیگه left حرکتی نداره 🚫
     
   } else {
-    // Center → Right (خارج شدن به بالا-راست)
+    // Center → Right (خارج شدن به بالا-راست + کوچیک شدن + fade out)
     imageTl.to(centerImage, {
       x: 120,
       y: -80,
+      scale: 0.7,
+      opacity: 0.6,
       duration: duration,
       ease: ease,
       force3D: true
     }, 0)
     
-    // Left → Center (ورود به مرکز)
+    // Left → Center (ورود به مرکز + بزرگ شدن + fade in)
     if (leftImage) {
+      // ابتدا آماده‌سازی: کوچک و شفاف
+      gsap.set(leftImage, {
+        scale: 0.7,
+        opacity: 0.6,
+        force3D: true
+      })
+      
+      // انیمیشن ورود: حرکت + بزرگ شدن + ظاهر شدن
       imageTl.to(leftImage, {
         x: 0,
         y: 0,
+        scale: 1,
+        opacity: 1,
         duration: duration,
         ease: ease,
         force3D: true
       }, 0)
     }
-
-    // دیگه right حرکتی نداره 🚫
   }
 
   // Start image animation and content animation simultaneously
@@ -202,7 +222,7 @@ const switchToSlide = async (slideIndex) => {
   isTransitioning.value = false
 }
 
-// Reset all positions to their default circular layout
+// Reset all positions to their default circular layout with proper scale and opacity
 const resetToDefaultPositions = () => {
   const centerImage = document.querySelector('.center-image-container')
   const leftImage = document.querySelector('.left-image-container')
@@ -210,25 +230,33 @@ const resetToDefaultPositions = () => {
   
   if (!centerImage) return
   
-  // Reset to default circular positions with hardware acceleration
+  // Reset center image to default (large and fully visible)
   gsap.set(centerImage, {
     x: 0,
     y: 0,
+    scale: 1,
+    opacity: 1,
     force3D: true
   })
   
+  // Reset left image to default (small and semi-transparent)
   if (leftImage) {
     gsap.set(leftImage, {
       x: -120,
       y: -80,
+      scale: 0.7,
+      opacity: 0.6,
       force3D: true
     })
   }
   
+  // Reset right image to default (small and semi-transparent)
   if (rightImage) {
     gsap.set(rightImage, {
       x: 120,
       y: -80,
+      scale: 0.7,
+      opacity: 0.6,
       force3D: true
     })
   }
@@ -365,8 +393,8 @@ onUnmounted(() => {
               v-if="getPrevSlideIndex() !== null"
               class="left-image-container absolute top-[30px] left-[50px] cursor-pointer transition-transform duration-200"
               @click="!isTransitioning && switchToSlide(getPrevSlideIndex())"
-              style="transform: translateX(-120px) translateY(-80px)">
-              <div class="w-[130px] h-[140px] overflow-hidden opacity-60">
+              style="transform: translateX(-120px) translateY(-80px) scale(0.7); opacity: 0.6;">
+              <div class="w-[130px] h-[140px] overflow-hidden">
                 <img :src="slides[getPrevSlideIndex()].image" alt="Previous slide" class="w-full h-full object-cover" />
               </div>
               <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-1 h-2 bg-brand rounded-full"></div>
@@ -377,8 +405,8 @@ onUnmounted(() => {
               v-if="getNextSlideIndex() !== null"
               class="right-image-container absolute top-[30px] right-[50px] cursor-pointer transition-transform duration-200"
               @click="!isTransitioning && switchToSlide(getNextSlideIndex())"
-              style="transform: translateX(120px) translateY(-80px)">
-              <div class="w-[130px] h-[140px] overflow-hidden opacity-60">
+              style="transform: translateX(120px) translateY(-80px) scale(0.7); opacity: 0.6;">
+              <div class="w-[130px] h-[140px] overflow-hidden">
                 <img :src="slides[getNextSlideIndex()].image" alt="Next slide" class="w-full h-full object-cover" />
               </div>
               <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-1 h-2 bg-brand "></div>
