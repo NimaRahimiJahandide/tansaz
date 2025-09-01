@@ -20,7 +20,7 @@ const showReplies = ref({})
 const replyingTo = ref(null)
 const replyData = ref({
   name: '',
-  comment: ''
+  text: ''
 })
 
 // Fetch comments on mount
@@ -61,21 +61,21 @@ const submitComment = async () => {
 
 // Submit reply
 const submitReply = async (parentId) => {
-  if (!replyData.value.name.trim() || !replyData.value.comment.trim()) {
+  if (!replyData.value.name.trim() || !replyData.value.text.trim()) {
     return
   }
 
   try {
     await postComment({
       name: replyData.value.name,
-      content: replyData.value.comment,
+      text: replyData.value.text,
       parent_id: parentId
     }, serviceId.value)
     
     // Reset reply form
     replyData.value = {
       name: '',
-      comment: ''
+      text: ''
     }
     replyingTo.value = null
   } catch (err) {
@@ -93,7 +93,7 @@ const startReply = (commentId) => {
   replyingTo.value = commentId
   replyData.value = {
     name: '',
-    comment: ''
+    text: ''
   }
 }
 
@@ -102,7 +102,7 @@ const cancelReply = () => {
   replyingTo.value = null
   replyData.value = {
     name: '',
-    comment: ''
+    text: ''
   }
 }
 
@@ -247,14 +247,14 @@ const debugInfo = computed(() => ({
                 placeholder="نام شما" 
               />
               <textarea 
-                v-model="replyData.comment"
+                v-model="replyData.text"
                 class="px-[16px] py-[8px] text-[12px] placeholder-[#929AA5] bg-[#ffffff] w-full h-[80px] rounded-[12px] focus:outline-0"
                 placeholder="پاسخ خود را بنویسید" 
               />
               <div class="flex gap-2">
                 <button
                   @click="submitReply(comment.id)"
-                  :disabled="submitting || !replyData.name.trim() || !replyData.comment.trim()"
+                  :disabled="submitting || !replyData.name.trim() || !replyData.text.trim()"
                   class="px-4 py-2 bg-[#ED1C24] text-white text-[12px] rounded-[8px] disabled:opacity-50">
                   {{ submitting ? 'در حال ارسال...' : 'ارسال پاسخ' }}
                 </button>

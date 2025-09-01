@@ -1,9 +1,9 @@
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, onUnmounted } from 'vue'
+import { gsap } from 'gsap'
 
 const currentSlide = ref(0)
 const isTransitioning = ref(false)
-const slideDirection = ref('next') // 'next' or 'prev'
 
 const slides = [
   {
@@ -41,147 +41,272 @@ const selectService = (slide) => {
   emit('serviceSelected', slide)
 }
 
+// Calculate indices for prev/next slides
+const getPrevSlideIndex = () => {
+  return currentSlide.value === 0 ? slides.length - 1 : currentSlide.value - 1
+}
+
+const getNextSlideIndex = () => {
+  return (currentSlide.value + 1) % slides.length
+}
+
+// Circular/Wheel Animation - Items move in a circular pattern
 const switchToSlide = async (slideIndex) => {
-  if (isTransitioning.value) return
+  if (isTransitioning.value || slideIndex === currentSlide.value) return
   
   isTransitioning.value = true
   
   // Determine direction
-  if (slideIndex > currentSlide.value) {
-    slideDirection.value = 'next'
-  } else if (slideIndex < currentSlide.value) {
-    slideDirection.value = 'prev'
+  let direction = 'next'
+  if (slideIndex === getPrevSlideIndex()) {
+    direction = 'prev'
+  } else if (slideIndex === getNextSlideIndex()) {
+    direction = 'next'
+  } else {
+    // Handle direct clicks
+    const distNext = (slideIndex - currentSlide.value + slides.length) % slides.length
+    const distPrev = (currentSlide.value - slideIndex + slides.length) % slides.length
+    direction = distNext <= distPrev ? 'next' : 'prev'
   }
   
-  // Wait for animation to complete
-  await nextTick()
+  // Get all image containers
+  const centerImage = document.querySelector('.center-image-container')
+  const leftImage = document.querySelector('.left-image-container')  
+  const rightImage = document.querySelector('.right-image-container')
+  const content = document.querySelector('.content-container')
   
-  // Change slide after a small delay to allow for fade out
-  setTimeout(() => {
-    currentSlide.value = slideIndex
+  if (!centerImage || !leftImage || !rightImage) {
     isTransitioning.value = false
-  }, 300)
+    return
+  }
+  
+  // Create timeline for circular movement
+  const tl = gsap.timeline({
+    onComplete: () => {
+      // Update slide index
+      currentSlide.value = slideIndex
+      isTransitioning.value = false
+      
+      // Reset all transforms to default positions
+      resetToDefaultPositions()
+    }
+  })
+  
+  const duration = 0.8
+  const ease = "power2.inOut"
+  
+  if (direction === 'next') {
+    // CIRCULAR CLOCKWISE MOVEMENT:
+    // Center → Top-Left (exit up-left)
+    tl.to(centerImage, {
+      x: -120,
+      y: -80,
+      duration: duration,
+      ease: ease
+    }, 0)
+    
+    // Right → Center (main movement)
+    tl.to(rightImage, {
+      x: 0,
+      y: 0,
+      duration: duration,
+      ease: ease
+    }, 0)
+    
+    // Left → Top-Right (moves to replace right)
+    tl.to(leftImage, {
+      x: 120,
+      y: -80,
+      duration: duration,
+      ease: ease
+    }, 0)
+    
+  } else {
+    // CIRCULAR COUNTER-CLOCKWISE MOVEMENT:
+    // Center → Top-Right (exit up-right)
+    tl.to(centerImage, {
+      x: 120,
+      y: -80,
+      duration: duration,
+      ease: ease
+    }, 0)
+    
+    // Left → Center (main movement)
+    tl.to(leftImage, {
+      x: 0,
+      y: 0,
+      duration: duration,
+      ease: ease
+    }, 0)
+    
+    // Right → Top-Left (moves to replace left)
+    tl.to(rightImage, {
+      x: -120,
+      y: -80,
+      duration: duration,
+      ease: ease
+    }, 0)
+  }
+  
+  // Content subtle animation
+  tl.to(content, {
+    y: -8,
+    duration: duration * 0.3,
+    ease: "power1.out"
+  }, 0)
+  .to(content, {
+    y: 0,
+    duration: duration * 0.7,
+    ease: "power2.out"  
+  }, duration * 0.3)
+  
+  tl.play()
 }
 
-// Get the indices for left and right background images
-const getLeftImageIndex = () => {
-  return (currentSlide.value + 1) % slides.length
+// Reset all positions to their default circular layout
+const resetToDefaultPositions = () => {
+  const centerImage = document.querySelector('.center-image-container')
+  const leftImage = document.querySelector('.left-image-container')
+  const rightImage = document.querySelector('.right-image-container')
+  
+  if (!centerImage || !leftImage || !rightImage) return
+  
+  // Reset to default circular positions
+  gsap.set(centerImage, {
+    x: 0,
+    y: 0,
+  })
+  
+  gsap.set(leftImage, {
+    x: -120,
+    y: -80,
+  })
+  
+  gsap.set(rightImage, {
+    x: 120,
+    y: -80,
+  })
 }
 
-const getRightImageIndex = () => {
-  return (currentSlide.value + 2) % slides.length
-}
-
-// Swipe functionality
+// Touch/Swipe functionality
 const touchStartX = ref(0)
 const touchEndX = ref(0)
 const isSwiping = ref(false)
 
 const handleTouchStart = (event) => {
+  if (isTransitioning.value) return
   touchStartX.value = event.touches[0].clientX
   isSwiping.value = true
 }
 
 const handleTouchMove = (event) => {
-  if (!isSwiping.value) return
+  if (!isSwiping.value || isTransitioning.value) return
   touchEndX.value = event.touches[0].clientX
 }
 
 const handleTouchEnd = () => {
-  if (!isSwiping.value) return
+  if (!isSwiping.value || isTransitioning.value) return
   
-  const swipeThreshold = 50 // Minimum distance for swipe
+  const swipeThreshold = 50
   const swipeDistance = touchEndX.value - touchStartX.value
   
   if (Math.abs(swipeDistance) > swipeThreshold) {
     if (swipeDistance > 0) {
-      // Swipe right - go to previous slide
-      const prevIndex = currentSlide.value === 0 ? slides.length - 1 : currentSlide.value - 1
-      switchToSlide(prevIndex)
+      switchToSlide(getPrevSlideIndex())
     } else {
-      // Swipe left - go to next slide
-      const nextIndex = (currentSlide.value + 1) % slides.length
-      switchToSlide(nextIndex)
+      switchToSlide(getNextSlideIndex())
     }
   }
   
   isSwiping.value = false
 }
 
-// Mouse drag functionality for desktop
+// Mouse drag functionality
 const isDragging = ref(false)
 const dragStartX = ref(0)
 const dragEndX = ref(0)
 
 const handleMouseDown = (event) => {
+  if (isTransitioning.value) return
   isDragging.value = true
   dragStartX.value = event.clientX
 }
 
 const handleMouseMove = (event) => {
-  if (!isDragging.value) return
+  if (!isDragging.value || isTransitioning.value) return
   dragEndX.value = event.clientX
 }
 
 const handleMouseUp = () => {
-  if (!isDragging.value) return
+  if (!isDragging.value || isTransitioning.value) return
   
   const dragThreshold = 50
   const dragDistance = dragEndX.value - dragStartX.value
   
   if (Math.abs(dragDistance) > dragThreshold) {
     if (dragDistance > 0) {
-      // Drag right - go to previous slide
-      const prevIndex = currentSlide.value === 0 ? slides.length - 1 : currentSlide.value - 1
-      switchToSlide(prevIndex)
+      switchToSlide(getPrevSlideIndex())
     } else {
-      // Drag left - go to next slide
-      const nextIndex = (currentSlide.value + 1) % slides.length
-      switchToSlide(nextIndex)
+      switchToSlide(getNextSlideIndex())
     }
   }
   
   isDragging.value = false
 }
 
-// Prevent text selection during drag
 const handleSelectStart = (event) => {
   if (isDragging.value || isSwiping.value) {
     event.preventDefault()
   }
 }
+
+// Initialize positions on mount
+onMounted(() => {
+  nextTick(() => {
+    resetToDefaultPositions()
+  })
+})
+
+// Cleanup on unmount
+onUnmounted(() => {
+  gsap.killTweensOf("*")
+})
 </script>
 
 <template>
-  <section class="bg-[radial-gradient(65.64%_65.64%_at_50%_34.36%,_#565656_0%,_#353535_54.08%,_#1F1F1F_100%)]  pb-[30px] relative">
+  <section class="bg-[radial-gradient(65.64%_65.64%_at_50%_34.36%,_#565656_0%,_#353535_54.08%,_#1F1F1F_100%)] pb-[30px] relative overflow-hidden">
     <div class="min-h-screen pt-[100px]">
       <!-- Main Content Container -->
       <div class="relative z-10 w-full">
-        <!-- Main Model Image with Background Images -->
-        <div class="text-center -mb-20 relative overflow-x-hidden">
-          <div class=" inline-block">
-            <!-- Background Image 1 (Left) - Clickable -->
+        <!-- Images Container - Circular Layout -->
+        <div class="text-center -mb-20 relative h-[320px] overflow-visible">
+          <div class="inline-block relative w-[350px] h-[320px]">
+            
+            <!-- Left Top Position - Background Image -->
             <div 
-              @click="switchToSlide(getLeftImageIndex())"
-              class="absolute -left-10 top-0 opacity-30 cursor-pointer hover:opacity-50 transition-opacity duration-300 z-20">
-              <div class="w-[133px] h-[140px] rounded-full overflow-hidden">
-                <img :src="slides[getLeftImageIndex()].image" alt="Background 1" class="w-full h-full object-cover" />
+              class="left-image-container absolute top-[30px] left-[50px] cursor-pointer transition-transform duration-200"
+              @click="!isTransitioning && switchToSlide(getPrevSlideIndex())"
+              style="transform: translateX(-120px) translateY(-80px)">
+              <div class="w-[130px] h-[140px] overflow-hidden opacity-60">
+                <img :src="slides[getPrevSlideIndex()].image" alt="Previous slide" class="w-full h-full object-cover" />
               </div>
-              <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-2 bg-brand rounded-full"></div>
+              <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-1 h-2 bg-brand rounded-full"></div>
             </div>
             
-            <!-- Background Image 2 (Right) - Clickable -->
+            <!-- Right Top Position - Background Image -->
             <div 
-              @click="switchToSlide(getRightImageIndex())"
-              class="absolute -right-10 -top-0 opacity-30 cursor-pointer hover:opacity-50 transition-opacity duration-300 z-20">
-              <div class="w-[133px] h-[140px] rounded-full overflow-hidden">
-                <img :src="slides[getRightImageIndex()].image" alt="Background 2" class="w-full h-full object-cover" />
+              class="right-image-container absolute top-[30px] right-[50px] cursor-pointer transition-transform duration-200"
+              @click="!isTransitioning && switchToSlide(getNextSlideIndex())"
+              style="transform: translateX(120px) translateY(-80px)">
+              <div class="w-[130px] h-[140px] overflow-hidden opacity-60">
+                <img :src="slides[getNextSlideIndex()].image" alt="Next slide" class="w-full h-full object-cover" />
               </div>
-              <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-2 bg-brand rounded-full"></div>
+              <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-1 h-2 bg-brand "></div>
             </div>
   
-            <!-- Main Image - Swipeable with Animation -->
+            <!-- Center Position - Main Image -->
             <div 
+              class="center-image-container absolute top-[50px] left-1/2 transform -translate-x-1/2 cursor-grab active:cursor-grabbing select-none"
               @touchstart="handleTouchStart"
               @touchmove="handleTouchMove"
               @touchend="handleTouchEnd"
@@ -189,66 +314,48 @@ const handleSelectStart = (event) => {
               @mousemove="handleMouseMove"
               @mouseup="handleMouseUp"
               @mouseleave="handleMouseUp"
-              @selectstart="handleSelectStart"
-              class="cursor-grab active:cursor-grabbing select-none">
+              @selectstart="handleSelectStart">
               <img 
                 :src="slides[currentSlide].image" 
                 alt="Main Beauty Model" 
-                class="w-[196px] h-[236px] object-cover mt-[50px] relative  pointer-events-none transition-all duration-500 ease-in-out "
-                :class="{
-                  'opacity-0 scale-95': isTransitioning,
-                  'opacity-100 scale-100': !isTransitioning
-                }" />
+                class="w-[200px] h-[240px] object-cover pointer-events-none" />
             </div>
           </div>
         </div>
   
         <!-- Content Card -->
         <div
-          class="bg-[#FFFFFF05] mx-[30px] rounded-3xl px-[25px] pt-[70px] pb-[25px] backdrop-blur-[20px] shadow-[inset_0px_-5px_21px_0px_#E3EDEF33,inset_0px_0px_3px_0px_#9A92D24D,inset_0px_70px_47px_-75px_#CAACFF4D,inset_0px_2px_10px_-4px_#FFFFFF42,inset_0px_34px_29px_-49px_#FFFFFF80] relative">
+          class="content-container bg-[#FFFFFF05] mx-[30px] rounded-3xl px-[25px] pt-[70px] pb-[25px] backdrop-blur-[20px] shadow-[inset_0px_-5px_21px_0px_#E3EDEF33,inset_0px_0px_3px_0px_#9A92D24D,inset_0px_70px_47px_-75px_#CAACFF4D,inset_0px_2px_10px_-4px_#FFFFFF42,inset_0px_34px_29px_-49px_#FFFFFF80] relative">
           
           <!-- Card Stack Effect -->
           <div class="absolute inset-0 rounded-3xl overflow-hidden">
-            <!-- Previous Card (Behind) -->
-            <div 
-              class="absolute inset-0 bg-[#FFFFFF03] rounded-3xl transform scale-95 translate-x-2 opacity-60 transition-all duration-300"
-              :class="{ 'opacity-0': currentSlide === 0 }">
-            </div>
-            
-            <!-- Next Card (Behind) -->
-            <div 
-              class="absolute inset-0 bg-[#FFFFFF03] rounded-3xl transform scale-95 -translate-x-2 opacity-60 transition-all duration-300"
-              :class="{ 'opacity-0': currentSlide === slides.length - 1 }">
-            </div>
+            <div class="absolute inset-0 bg-[#FFFFFF03] rounded-3xl transform scale-95 translate-x-2 opacity-60"></div>
+            <div class="absolute inset-0 bg-[#FFFFFF03] rounded-3xl transform scale-95 -translate-x-2 opacity-60"></div>
           </div>
   
-          <!-- Current Slide Content with Animation -->
+          <!-- Current Slide Content -->
           <div class="relative z-10">
-            <!-- Title - Static -->
+            <!-- Title -->
             <div class="flex justify-between items-center mb-4">
               <h1 class="text-[26px] font-bold text-white mb-2">
-                <span class="text-brand">{{ slides[currentSlide].title.split(' ')[0] }}</span> {{ slides[currentSlide].title.split(' ').slice(1).join(' ') }}
+                <span class="text-brand">{{ slides[currentSlide].title.split(' ')[0] }}</span> 
+                {{ slides[currentSlide].title.split(' ').slice(1).join(' ') }}
               </h1>
               <button class="text-brand -rotate-[15deg] bg-[#FFFFFF1A] w-[103px] h-[45px] rounded-[40px] text-[24px] font-semibold absolute left-0 -top-8">
                 <span class="text-white">{{ slides[currentSlide].lines }}</span> لاین
               </button>
             </div>
   
-            <!-- Description with Fade Animation -->
-            <div 
-              class="text-white text-sm leading-[23px] mb-8 text-justify font-medium transition-all duration-400 ease-in-out"
-              :class="{
-                'opacity-0': isTransitioning,
-                'opacity-100': !isTransitioning
-              }">
+            <!-- Description -->
+            <div class="text-white text-sm leading-[23px] mb-8 text-justify font-medium">
               <p>{{ slides[currentSlide].description }}</p>
             </div>
   
-            <!-- Main CTA Button - Static -->
+            <!-- Main CTA Button -->
             <div>
               <button 
                 @click="selectService(slides[currentSlide])"
-                class="w-full bg-brand text-white font-semibold h-[42px] rounded-full transition-all duration-300">
+                class="w-full bg-brand text-white font-semibold h-[42px] rounded-full transition-transform duration-200">
                 برو به صفحه {{ slides[currentSlide].title }}
               </button>
             </div>
@@ -259,7 +366,7 @@ const handleSelectStart = (event) => {
       <!-- Support Button -->
       <div class="w-full pt-[60px] flex items-center justify-center">
         <button
-          class="flex justify-center w-[169px] h-[46px] items-center bg-transparent border border-white text-white font-medium rounded-full shadow-lg">
+          class="flex justify-center w-[169px] h-[46px] items-center bg-transparent border border-white text-white font-medium rounded-full shadow-lg transition-transform duration-200">
           <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
@@ -273,36 +380,6 @@ const handleSelectStart = (event) => {
 </template>
 
 <style scoped>
-/* Custom animations for smooth transitions */
-.transition-all {
-  transition: all 0.3s ease-in-out;
-}
-
-/* Hover effects for navigation */
-button:hover {
-  transform: scale(1.05);
-}
-
-/* Card stack effect */
-.transform {
-  transition: transform 0.3s ease-in-out;
-}
-
-/* Background image transitions */
-img {
-  transition: opacity 0.3s ease-in-out;
-}
-
-/* Hover effect for clickable background images */
-.cursor-pointer:hover {
-  transform: scale(1.1);
-}
-
-/* Smooth transition for all interactive elements */
-* {
-  transition: all 0.3s ease-in-out;
-}
-
 /* Prevent text selection during drag/swipe */
 .select-none {
   -webkit-user-select: none;
@@ -320,40 +397,35 @@ img {
   cursor: grabbing;
 }
 
-/* Enhanced slide transition animations */
-.transition-all.duration-500 {
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+/* Smooth hover transitions only */
+.transition-transform {
+  transition: transform 0.2s ease-out;
 }
 
-/* Smooth fade and scale for main image */
-img.transition-all {
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+/* Ensure proper positioning */
+.relative {
+  position: relative;
 }
 
-/* Slide up animation for content */
-.transform.translate-y-8 {
-  transform: translateY(2rem);
+.absolute {
+  position: absolute;
 }
 
-.transform.translate-y-0 {
-  transform: translateY(0);
+/* Allow overflow for circular animation */
+.overflow-visible {
+  overflow: visible;
 }
 
-/* Opacity transitions */
-.opacity-0 {
-  opacity: 0;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .inline-block {
+    transform: scale(0.85);
+  }
 }
 
-.opacity-100 {
-  opacity: 1;
-}
-
-/* Scale transitions for image */
-.scale-95 {
-  transform: scale(0.95);
-}
-
-.scale-100 {
-  transform: scale(1);
+@media (max-width: 480px) {
+  .inline-block {
+    transform: scale(0.75);
+  }
 }
 </style>
