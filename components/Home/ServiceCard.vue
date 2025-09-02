@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white relative rounded-[22px] overflow-hidden">
+  <NuxtLink :to="`/service/${id}/${title}`" class="bg-white relative rounded-[22px] overflow-hidden">
     <!-- Image -->
     <img :src="image" alt="Service Image" class="w-full h-64 object-cover" />
     <!-- Content -->
@@ -9,7 +9,7 @@
       <!-- Description -->
       <p class="text-center">{{ description }}</p>
     </div>
-  </div>
+  </NuxtLink>
 </template>
 
 <script setup>
@@ -24,6 +24,10 @@ defineProps({
   },
   image: {
     type: String,
+    required: true,
+  },
+  id: {
+    type: Number,
     required: true,
   },
 });

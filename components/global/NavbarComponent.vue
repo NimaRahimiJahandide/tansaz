@@ -73,27 +73,56 @@
             </div>
             <transition name="submenu" @enter="onEnter" @leave="onLeave">
               <ul v-if="isServicesOpen" class="mr-8 mt-3 border-r-2 border-[#E1E1E1] transition-all duration-300">
-                <li class="py-2 px-4" :class="{
-                  'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand': activeItem === 'beauty',
-                }" @click.stop="activeItems('beauty')">
-                  <NuxtLink to="/services/1/test">
-                    <span class="text-[#2E2E2ECC] leading-[34px]">خدمات زیبایی</span>
+                <!-- Loading state -->
+                <li v-if="servicesPending" class="py-2 px-4">
+                  <span class="text-[#2E2E2ECC] leading-[34px]">در حال بارگذاری...</span>
+                </li>
+                
+                <!-- Error state -->
+                <li v-else-if="servicesError" class="py-2 px-4">
+                  <span class="text-red-500 leading-[34px]">خطا در بارگذاری خدمات</span>
+                </li>
+                
+                <!-- Services list from API -->
+                <li 
+                  v-else
+                  v-for="service in servicesData?.services || []" 
+                  :key="service.id"
+                  class="py-2 px-4" 
+                  :class="{
+                    'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand': activeItem === `service-${service.id}`,
+                  }" 
+                  @click.stop="activeItems(`service-${service.id}`)"
+                >
+                  <NuxtLink :to="`/service/${service.id}/${service.slug || 'service'}`">
+                    <span class="text-[#2E2E2ECC] leading-[34px]">{{ service.title || service.name }}</span>
                   </NuxtLink>
                 </li>
-                <li class="py-2 px-4" :class="{
-                  'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand': activeItem === 'slimming',
-                }" @click.stop="activeItems('slimming')">
-                  <NuxtLink to="/services/1/test">
-                    <span class="text-[#2E2E2ECC] leading-[34px]">خدمات لاغری</span>
-                  </NuxtLink>
-                </li>
-                <li class="py-2 px-4" :class="{
-                  'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand': activeItem === 'laser',
-                }" @click.stop="activeItems('laser')">
-                  <NuxtLink to="/services/1/test">
-                    <span class="leading-[34px] text-[#2E2E2ECC]">خدمات لیزر</span>
-                  </NuxtLink>
-                </li>
+                
+                <!-- Fallback static items if no services from API -->
+                <template v-if="!servicesPending && !servicesError && (!servicesData?.services || servicesData.services.length === 0)">
+                  <li class="py-2 px-4" :class="{
+                    'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand': activeItem === 'beauty',
+                  }" @click.stop="activeItems('beauty')">
+                    <NuxtLink to="/service/1/test">
+                      <span class="text-[#2E2E2ECC] leading-[34px]">خدمات زیبایی</span>
+                    </NuxtLink>
+                  </li>
+                  <li class="py-2 px-4" :class="{
+                    'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand': activeItem === 'slimming',
+                  }" @click.stop="activeItems('slimming')">
+                    <NuxtLink to="/service/1/test">
+                      <span class="text-[#2E2E2ECC] leading-[34px]">خدمات لاغری</span>
+                    </NuxtLink>
+                  </li>
+                  <li class="py-2 px-4" :class="{
+                    'bg-[#EFEFEF] -mr-[2px] border-r-2 border-brand ml-4 rounded-l text-brand': activeItem === 'laser',
+                  }" @click.stop="activeItems('laser')">
+                    <NuxtLink to="/service/1/test">
+                      <span class="leading-[34px] text-[#2E2E2ECC]">خدمات لیزر</span>
+                    </NuxtLink>
+                  </li>
+                </template>
               </ul>
             </transition>
           </li>
@@ -147,12 +176,17 @@
 </template>
 
 <script setup>
+import { useServices } from '~/composables/services/useServices'
+
 const isMenuOpen = ref(false);
 const activeItem = ref(null);
 const isServicesOpen = ref(false);
 const isScrolled = ref(false);
 
 const route = useRoute();
+
+// استفاده از composable برای دریافت خدمات
+const { data: servicesData, pending: servicesPending, error: servicesError } = useServices();
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
@@ -168,7 +202,12 @@ const activeItems = (item) => {
 
   // اگر آیتم انتخاب شده غیر از services یا زیرمجموعه‌هاش بود، منو بسته شود
   const serviceItems = ["services", "beauty", "slimming", "laser"];
-  if (!serviceItems.includes(item)) {
+  
+  // اضافه کردن آیتم‌های جدید از API به لیست خدمات
+  const apiServiceItems = servicesData.value?.services?.map(service => `service-${service.id}`) || [];
+  const allServiceItems = [...serviceItems, ...apiServiceItems];
+  
+  if (!allServiceItems.includes(item)) {
     isServicesOpen.value = false;
   } else {
     isServicesOpen.value = true;
@@ -188,8 +227,9 @@ const handleScroll = () => {
 };
 
 const isServiceRoute = computed(() => {
-  return route.value?.path?.startsWith('/services/');
+  return route.value?.path?.startsWith('/service/');
 });
+
 watch(() => route.fullPath, () => {
   isMenuOpen.value = false;
 });

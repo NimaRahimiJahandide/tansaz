@@ -45,7 +45,7 @@
         class="flex justify-center items-center flex-col gap-[35px] text-lg font-medium leading-6 text-white">
         <p class="menu-item">باشگاه مشتریان</p>
         <p class="menu-item">معرفــی خدمــات</p>
-        <p class="menu-item">ارتبــــــاط بــا مـــــــا</p>
+        <p class="menu-item">ارتباط با ما</p>
       </section>
       <!-- end header content -->
 

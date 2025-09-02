@@ -143,11 +143,6 @@ const debugInfo = computed(() => ({
 
 <template>
   <div>
-    <!-- Debug Info (remove in production) -->
-    <div class="bg-gray-100 p-4 m-4 rounded text-xs">
-      <pre>{{ JSON.stringify(debugInfo, null, 2) }}</pre>
-    </div>
-
     <div class="flex flex-col px-[16px] bg-[#F5F5F5] pt-[30px]">
       <p class="text-[20px] font-bold">
         <span class="text-[#000000]"> با</span>
