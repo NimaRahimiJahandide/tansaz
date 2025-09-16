@@ -150,7 +150,7 @@ const clipsData = computed(() => {
       </section>
 
       <Comments />
-      <HomeBlogsSection />
+      <ServicesBlogSection />
     </div>
   </div>
 </template>
