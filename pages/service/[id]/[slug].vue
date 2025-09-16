@@ -150,7 +150,8 @@ const clipsData = computed(() => {
       </section>
 
       <Comments />
-      <ServicesBlogSection />
+      <!-- Pass service ID to BlogSection -->
+      <ServicesBlogSection :service-id="route.params.id" />
     </div>
   </div>
 </template>
