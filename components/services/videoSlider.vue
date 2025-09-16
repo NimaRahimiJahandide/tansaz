@@ -1,14 +1,18 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import "swiper/css"
 import { Swiper, SwiperSlide } from "swiper/vue"
+import { useLikes } from '~/composables/services/useLikes'
 
 const props = defineProps({
   data: Array,
 })
 
+const { likeClip, isClipLiked, loading: likeLoading } = useLikes()
+
 const swiperRef = ref(null)
 const currentSlideIndex = ref(0)
+const localLikeCounts = ref({}) // Store local like count increments
 
 const onSlideChange = (swiper) => {
   currentSlideIndex.value = swiper.realIndex
@@ -25,6 +29,47 @@ const goToNextSlide = () => {
     swiperRef.value.slideNext()
   }
 }
+
+// Computed property for current slide like count
+const currentLikeCount = computed(() => {
+  const currentSlide = props.data[currentSlideIndex.value]
+  if (!currentSlide) return 0
+  
+  const originalCount = currentSlide.likes || 0
+  const localIncrement = localLikeCounts.value[currentSlide.id] || 0
+  return originalCount + localIncrement
+})
+
+// Handle like button click
+const handleLikeClick = async () => {
+  const currentSlide = props.data[currentSlideIndex.value]
+  if (!currentSlide) return
+
+  // Check if already liked
+  if (isClipLiked(currentSlide.id)) {
+    return
+  }
+
+  try {
+    const result = await likeClip(currentSlide.id)
+    
+    if (result.success) {
+      // Increment local count immediately for UI feedback
+      if (!localLikeCounts.value[currentSlide.id]) {
+        localLikeCounts.value[currentSlide.id] = 0
+      }
+      localLikeCounts.value[currentSlide.id]++
+    }
+  } catch (error) {
+    console.error('Error liking clip:', error)
+  }
+}
+
+// Check if current slide is liked
+const isCurrentSlideLiked = computed(() => {
+  const currentSlide = props.data[currentSlideIndex.value]
+  return currentSlide ? isClipLiked(currentSlide.id) : false
+})
 </script>
 
 <template>
@@ -34,10 +79,24 @@ const goToNextSlide = () => {
       <div class="size-[40px] backdrop-blur-sm bg-[#2E2E2E80] flex items-center justify-center rounded-[50px] cursor-pointer hover:bg-[#2E2E2E90] transition-all">
         <Icon name="ic:baseline-share" class="size-[22px] text-[#ffffff]" />
       </div>
-      <div class="h-[40px] w-[84px] gap-[8px] backdrop-blur-sm bg-[#2E2E2E80] flex items-center justify-center rounded-[50px]">
-        <Icon name="icon-park-solid:like" class="size-[22px] text-[#ffffff]" />
+      <div 
+        @click="handleLikeClick"
+        class="h-[40px] w-[84px] gap-[8px] backdrop-blur-sm bg-[#2E2E2E80] flex items-center justify-center rounded-[50px] transition-all"
+        :class="{
+          'cursor-pointer hover:bg-[#2E2E2E90]': !isCurrentSlideLiked && !likeLoading,
+          'cursor-not-allowed opacity-75': isCurrentSlideLiked || likeLoading
+        }"
+      >
+        <Icon 
+          name="icon-park-solid:like" 
+          class="size-[22px] transition-colors"
+          :class="{
+            'text-[#ED1C24]': isCurrentSlideLiked,
+            'text-[#ffffff]': !isCurrentSlideLiked
+          }"
+        />
         <p class="text-[16px] font-semibold text-[#ffffff]">
-          {{ data[currentSlideIndex]?.likes || 0 }}
+          {{ currentLikeCount }}
         </p>
       </div>
     </div>
@@ -52,7 +111,7 @@ const goToNextSlide = () => {
       class="video-swiper"
     >
       <SwiperSlide v-for="(slide, index) in data" :key="slide.id">
-        <div class="h-[780px] w-full relative">
+        <div class="video-slide-container w-full relative">
           <!-- Background Image -->
           <!-- <img 
             :src="slide.main_image" 
@@ -132,7 +191,14 @@ const goToNextSlide = () => {
 <style scoped>
 .video-swiper {
   width: 100%;
-  height: 780px;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.video-slide-container {
+  height: 100vh;
+  max-height: 100vh;
 }
 
 /* Custom styling for Aparat embedded iframe */
@@ -155,13 +221,13 @@ const goToNextSlide = () => {
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .video-swiper {
-    height: 60vh;
-    min-height: 400px;
+    height: 100vh;
+    max-height: 100vh;
   }
   
-  .h-\[780px\] {
-    height: 60vh !important;
-    min-height: 400px !important;
+  .video-slide-container {
+    height: 100vh !important;
+    max-height: 100vh !important;
   }
 }
 
@@ -184,6 +250,16 @@ const goToNextSlide = () => {
   
   .w-\[36px\] {
     width: 32px !important;
+  }
+  
+  .video-swiper {
+    height: 80vh;
+    max-height: 100vh;
+  }
+  
+  .video-slide-container {
+    height: 100vh !important;
+    max-height: 100vh !important;
   }
 }
 </style>
