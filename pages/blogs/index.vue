@@ -16,17 +16,13 @@ const selectedCategoryId = ref(parseInt(route.query.category_id) || null)
 // Fetch categories
 const { categories, pending: categoriesPending, error: categoriesError } = useCategories()
 
-// Create a composable function that updates when category changes
-const postsComposable = computed(() => {
-  return usePosts(currentPage.value, selectedCategoryId.value)
-})
+// Use posts composable
+const { posts, links, meta, pending, error, refresh } = usePosts()
 
-// Extract posts data
-const posts = computed(() => postsComposable.value.posts.value)
-const links = computed(() => postsComposable.value.links.value)
-const meta = computed(() => postsComposable.value.meta.value)
-const pending = computed(() => postsComposable.value.pending.value)
-const error = computed(() => postsComposable.value.error.value)
+// Refresh posts when page or category changes
+const refreshPosts = async () => {
+  await refresh()
+}
 
 // Watch for query parameter changes
 watch(() => route.query.page, (newPage) => {
@@ -36,6 +32,11 @@ watch(() => route.query.page, (newPage) => {
 watch(() => route.query.category_id, (newCategoryId) => {
   selectedCategoryId.value = parseInt(newCategoryId) || null
 })
+
+// Watch for changes in currentPage and selectedCategoryId to refresh posts
+watch([currentPage, selectedCategoryId], () => {
+  refreshPosts()
+}, { immediate: true })
 
 const showLeftFade = ref(false)
 
@@ -54,8 +55,8 @@ const toggleLike = (blogId) => {
   }
 }
 
-const goToBlog = (slug) => {
-  router.push(`/blogs/${slug}`)
+const goToBlog = (id, slug) => {
+  router.push(`/blogs/${id}/${slug}`)
 }
 
 const selectCategory = (categoryId) => {
@@ -191,7 +192,7 @@ onBeforeUnmount(() => {
         </h2>
 
         <article class="rounded-2xl overflow-hidden relative" v-for="blog in posts" :key="blog.id" 
-          @click="goToBlog(blog.slug)" data-aos="fade-up" data-aos-once="true">
+          @click="goToBlog(blog.id, blog.slug)" data-aos="fade-up" data-aos-once="true">
           <!-- Heart image -->
           <span class="absolute right-4 top-3 cursor-pointer z-10" @click.stop="toggleLike(blog.id)">
             <img v-if="blog.liked" src="/icons/Heart-white.svg" alt="Heart-white" />

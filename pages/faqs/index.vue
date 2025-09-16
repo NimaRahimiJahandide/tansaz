@@ -1,5 +1,6 @@
 <script setup>
 import { useStartWebsite } from "@/store/initWebsite";
+import FaqItem from "~/components/global/FaqItem.vue";
 const startWebsite = useStartWebsite();
 const router = useRouter()
 
@@ -155,7 +156,7 @@ const isCategoryOpen = ref(false);
       <!-- FAQ Section -->
       <section class="space-y-4">
         <!-- FAQ Items -->
-        <HomeFaqItem
+        <FaqItem
           v-for="(faq, index) in faqs"
           :key="index"
           :question="faq.question"

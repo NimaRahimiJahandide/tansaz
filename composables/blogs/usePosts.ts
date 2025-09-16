@@ -32,24 +32,33 @@ export interface PostsResponse {
   meta: PostMeta
 }
 
-export const usePosts = (page: number = 1, categoryId: number | null = null) => {
+export const usePosts = (page: Ref<number> | number = 1, categoryId: Ref<number | null> | number | null = null) => {
   const config = useRuntimeConfig()
   
-  // Build query parameters
-  const query: Record<string, any> = { page }
-  if (categoryId !== null) {
-    query.category_id = categoryId
-  }
+  // Convert to refs if they aren't already
+  const pageRef = typeof page === 'number' ? ref(page) : page
+  const categoryIdRef = typeof categoryId === 'number' || categoryId === null ? ref(categoryId) : categoryId
+  
+  // Build query parameters reactively
+  const query = computed(() => {
+    const q: Record<string, any> = { page: pageRef.value }
+    if (categoryIdRef.value !== null) {
+      q.category_id = categoryIdRef.value
+    }
+    return q
+  })
 
   // Create a unique key that includes category for proper caching
-  const cacheKey = categoryId 
-    ? `posts-page-${page}-category-${categoryId}` 
-    : `posts-page-${page}`
+  const cacheKey = computed(() => {
+    return categoryIdRef.value 
+      ? `posts-page-${pageRef.value}-category-${categoryIdRef.value}` 
+      : `posts-page-${pageRef.value}`
+  })
   
   const { data, pending, error, refresh } = useFetch<PostsResponse>('/posts', {
     baseURL: config.public.baseURL,
     query,
-    key: cacheKey
+    key: cacheKey.value
   })
 
   // Transform API data to match component's expected format
