@@ -202,7 +202,6 @@ const debugInfo = computed(() => ({
       <!-- No Comments -->
       <div v-else-if="!loading && mainComments.length === 0" class="py-8 text-center">
         <p class="text-[#828282]">هنوز نظری ثبت نشده است. اولین نفر باشید!</p>
-        <p class="text-xs text-gray-500 mt-2">تعداد کامنت‌ها: {{ Array.isArray(comments) ? comments.length : 'نامشخص' }}</p>
       </div>
 
       <!-- Comments List -->

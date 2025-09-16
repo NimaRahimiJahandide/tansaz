@@ -12,7 +12,22 @@
       <span class="text-brand">مقالات کاربردی</span> برای شما عزیزان
     </h2>
     <div class="container mx-auto px-4 pb-8" data-aos="fade-up" data-aos-delay="700" data-aos-once="true">
-      <div class="rounded-2xl overflow-hidden relative">
+      <!-- Loading state -->
+      <div v-if="pending" class="rounded-2xl overflow-hidden relative">
+        <div class="w-full h-80 bg-gray-200 animate-pulse flex items-center justify-center">
+          <span class="text-gray-500">در حال بارگذاری...</span>
+        </div>
+      </div>
+      
+      <!-- Error state -->
+      <div v-else-if="error" class="rounded-2xl overflow-hidden relative">
+        <div class="w-full h-80 bg-red-100 flex items-center justify-center">
+          <span class="text-red-500">خطا در بارگذاری مقالات</span>
+        </div>
+      </div>
+      
+      <!-- Content -->
+      <div v-else-if="posts.length > 0" class="rounded-2xl overflow-hidden relative">
         <transition name="slide-fade" mode="out-in">
           <div
             :key="activeIndex"
@@ -33,33 +48,44 @@
               />
               <img v-else src="/icons/Heart.svg" alt="Heart" width="30px"/>
             </span>
-            <!-- Image -->
-            <img
-              :src="slides[activeIndex].image"
-              :alt="slides[activeIndex].title"
-              class="w-full h-80 object-cover"
-            />
+            <!-- Image with link -->
+            <NuxtLink :to="`/blogs/${posts[activeIndex].slug}`">
+              <img
+                :src="posts[activeIndex].image"
+                :alt="posts[activeIndex].title"
+                class="w-full h-80 object-cover cursor-pointer"
+              />
+            </NuxtLink>
 
             <!-- Overlay and Text -->
             <div
               class="absolute inset-0 bg-gradient-to-t from-[#151515] via-[#15151596] to-transparent via-[20.35%] from-[1.3%] flex flex-col justify-end p-4"
             >
-              <h3 class="text-lg font-bold text-white leading-6 mb-5">
-                {{ slides[activeIndex].title }}
-              </h3>
+              <NuxtLink :to="`/blogs/${posts[activeIndex].slug}`">
+                <h3 class="text-lg font-bold text-white leading-6 mb-5 cursor-pointer hover:text-brand transition-colors">
+                  {{ posts[activeIndex].title }}
+                </h3>
+              </NuxtLink>
               <p class="flex text-xs font-medium text-white justify-between">
                 <span class="mr-2"
-                  >زمان مطالعه: {{ slides[activeIndex].duration }}</span
+                  >زمان مطالعه: {{ posts[activeIndex].duration }}</span
                 >
-                <span>تاریخ نشر: {{ slides[activeIndex].date }}</span>
+                <span>تاریخ نشر: {{ posts[activeIndex].date }}</span>
               </p>
             </div>
           </div>
         </transition>
       </div>
 
+      <!-- No posts message -->
+      <div v-else class="rounded-2xl overflow-hidden relative">
+        <div class="w-full h-80 bg-gray-100 flex items-center justify-center">
+          <span class="text-gray-500">هیچ مقاله‌ای یافت نشد</span>
+        </div>
+      </div>
+
       <!-- pagination -->
-      <div class="flex justify-between items-center mt-4">
+      <div v-if="posts.length > 1" class="flex justify-between items-center mt-4">
         <!-- دکمه قبلی -->
         <button
           @click="prevSlide"
@@ -84,7 +110,7 @@
         <!-- دایره‌های شماره صفحه -->
         <div class="flex items-center">
           <div
-            v-for="(slide, index) in slides.length"
+            v-for="(_, index) in posts"
             :key="index"
             @click="activeIndex = index"
             class="w-[10px] h-2 rounded-full mx-1 bg-[#D4D4D4] cursor-pointer transition duration-300 ease-in-out"
@@ -121,42 +147,29 @@
 const props = defineProps({
   isTransparent: Boolean,
 });
+import { useHomePosts } from '~/composables/home/useHomePosts'
+
 
 const route = useRoute();
 
 const isBlogDetailPage = computed(() => route.path.startsWith('/blogs/'));
 
+// Use the composable to fetch posts
+const { posts, pending, error } = useHomePosts();
 
 const activeIndex = ref(0);
 
-const slides = ref([
-  {
-    image: "/images/blog1.png",
-    title: "مراقبت پس از درمان ریزش مو",
-    duration: "2 دقیقه",
-    date: "1404/01/04",
-  },
-  {
-    image: "/images/blog1.png",
-    title: "تغذیه مناسب برای رشد مو",
-    duration: "3 دقیقه",
-    date: "1404/01/10",
-  },
-  {
-    image: "/images/blog1.png",
-    title: "راهکارهای جلوگیری از ریزش مو",
-    duration: "4 دقیقه",
-    date: "1404/01/18",
-  },
-]);
-
 const nextSlide = () => {
-  activeIndex.value = (activeIndex.value + 1) % slides.value.length;
+  if (posts.value.length > 0) {
+    activeIndex.value = (activeIndex.value + 1) % posts.value.length;
+  }
 };
 
 const prevSlide = () => {
-  activeIndex.value =
-    (activeIndex.value - 1 + slides.value.length) % slides.value.length;
+  if (posts.value.length > 0) {
+    activeIndex.value =
+      (activeIndex.value - 1 + posts.value.length) % posts.value.length;
+  }
 };
 
 const touchStartX = ref(0);
@@ -189,6 +202,13 @@ const isLiked = ref(false);
 const toggleLike = () => {
   isLiked.value = !isLiked.value;
 };
+
+// Reset activeIndex when posts change
+watch(posts, (newPosts) => {
+  if (newPosts.length > 0 && activeIndex.value >= newPosts.length) {
+    activeIndex.value = 0;
+  }
+});
 </script>
 
 <style scoped>
