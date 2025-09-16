@@ -69,12 +69,12 @@
         <h2 class="text-lg font-medium leading-[24px] mb-[11px]"><span class="text-brand">دسترسی</span> آسان</h2>
         <ul class="grid text-[#D4D4D4] text-sm leading-[26px] grid-cols-2 gap-4">
           <li>باشگاه مشتریان</li>
-          <li>مقالات</li>
-          <li>گالری تصاویر</li>
-          <li>درباره ما</li>
-          <li>تور مجازی</li>
-          <li>ارتباط با ما</li>
-          <li>پرسش های متداول</li>
+          <nuxt-link to="/blogs">مقالات</nuxt-link>
+          <nuxt-link to="/gallery">گالری تصاویر</nuxt-link>
+          <nuxt-link to="/about-us">درباره ما</nuxt-link>
+          <nuxt-link to="/tour-vr">تور مجازی</nuxt-link>
+          <nuxt-link to="/contact-us">ارتباط با ما</nuxt-link>
+          <nuxt-link to="/faqs">پرسش های متداول</nuxt-link>
         </ul>
         <hr class="my-5 border-[#FFFFFF40]" />
       </div>

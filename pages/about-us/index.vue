@@ -1,9 +1,14 @@
 <script setup>
 import { AboutUsEventsSection } from "#components";
 import { useStartWebsite } from "@/store/initWebsite";
+import { usePersonnels } from "~/composables/about-us/usePersonnels";
+
 const startWebsite = useStartWebsite();
 const router = useRouter();
 const selectedImage = ref(0);
+
+// Get personnels from API
+const { personnels, pending, error } = usePersonnels();
 
 const goBack = () => {
   if (window.history.length > 1) {
@@ -12,6 +17,7 @@ const goBack = () => {
     router.push("/");
   }
 };
+
 const gallery = [
   "/images/clinic3.jpg",
   "/images/clinic1.jpg",
@@ -58,47 +64,6 @@ const whyTansaz = [
   },
 ]
 
-const doctors = [
-  {
-    id: 0,
-    name: "دکتر شهلا فلاحی",
-    specialty: "دکتری حرفه ای پزشکی (پوست، مو، زیبایی)",
-    description: "بیش از 30 سال تجربه طبابت و تدریس و پژوهش در حوزه پزشکی زیبایی و مراقبت از پوست عضو انجمن علمی استتیک کانادا",
-    image: "/images/doctor1.jpg",
-    education: "فارغ التحصیل پزشکی شیراز",
-    post: [
-      "عضو انجمن علمی آموزشی پزشکی ایران",
-    ],
-    body: "دارای گواهینامه های رسمی دوره های تخصصی لیزر پزشکی و دیگر تکنولوژی های پزشکی زیبایی و تزریقات ژل و فیلر و بوتاکس از سازمان نظام پزشکی کشور عضو انجمن علمی پزشکی لیزر ایران",
-  },
-  {
-    id: 1,
-    name: "دکتر سروش باقری",
-    specialty: "دکترای حرفه ای پزشکی ( پوست ، مو ، جراحی )",
-    description: "بیش از 8 سال سابقه فعالیت در حوزه پزشکی زیبایی",
-    image: "/images/doctor2.jpg",
-    education: "فارغ التحصیل پزشکی شیراز",
-    post: [
-      "عضو انجمن علمی پزشکی لیزر ایران", 
-      "عضو انجمن علمی آموزش پزشکی ایران", 
-      "عضو انجمن علمی تغذیه ایران", 
-    ],
-    body: "دارای گواهینامههای متعدد پزشکی زیبایی معتبر بین المللی از کشورهای اروپایی و مذاکز معتبر علمی کشور",
-  },
-  {
-    id: 2,
-    name: "دکتر سبحانی",
-    specialty: "دکترای حرفه ای پزشکی متخصص بیماریهای داخلی و فوق تخصص بیماری های روماتولوژی)",
-    description: "بیش از 6 سال تجربه طبابت تخصصی و فوق تخصصی",
-    image: "/images/doctor3.jpg",
-    education: "فارغ التحصیل پزشکی شیراز",
-    post: [
-      "عضو انجمن روماتولوژی ایران", 
-      "دارای بورد تخصصی", 
-    ],
-  },
-]
-
 onMounted(() => {
   startWebsite.setImageClicked(true);
 });
@@ -130,7 +95,6 @@ onMounted(() => {
             ? 'w-[74px] h-[74px] border-x-[3px] border-x-red-500  z-10'
             : 'w-[56px] h-[56px] scale-100 z-0'" @click="selectedImage = i" />
       </div>
-
     </section>
 
     <section class="flex flex-col px-[16px]">
@@ -188,8 +152,30 @@ onMounted(() => {
         </p>
       </div>
 
-      <div class="flex flex-col gap-y-[1.25rem]">
-        <AboutUsDoctorCard v-for="doctor in doctors" :key="doctor.id" :doctor="doctor" data-aos="fade-left"  data-aos-once="true"/>
+      <!-- Loading state -->
+      <div v-if="pending" class="flex justify-center items-center py-8">
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-red-500"></div>
+      </div>
+
+      <!-- Error state -->
+      <div v-else-if="error" class="text-center text-red-500 py-8">
+        خطا در بارگذاری اطلاعات پزشکان
+      </div>
+
+      <!-- Doctors list -->
+      <div v-else class="flex flex-col gap-y-[1.25rem]">
+        <AboutUsDoctorCard 
+          v-for="personnel in personnels" 
+          :key="personnel.id" 
+          :name="personnel.name"
+          :education="personnel.education"
+          :expertise="personnel.expertise"
+          :thumb_image="personnel.thumb_image"
+          :description="personnel.description"
+          :services="personnel.services"
+          data-aos="fade-left"  
+          data-aos-once="true"
+        />
       </div>
     </section>
     <AboutUsEventsSection :is-transparent="true"/>
