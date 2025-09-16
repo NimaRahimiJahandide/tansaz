@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#1D1D1D] flex flex-col py-[50px] font-persian" @mouseenter="handleMouseEnter"
+  <div v-show="loading || hasComments" class="bg-[#1D1D1D] flex flex-col py-[50px] font-persian" @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave">
     <!-- Header -->
     <div class="text-center mb-8">
@@ -22,11 +22,6 @@
         <button @click="fetchComments" class="block mx-auto mt-4 bg-brand text-white px-4 py-2 rounded-lg">
           تلاش مجدد
         </button>
-      </div>
-
-      <!-- No Comments State -->
-      <div v-if="!loading && !error && !hasComments" class="text-center text-white py-8">
-        هنوز کامنتی ثبت نشده است
       </div>
 
       <!-- Comments Slider -->
@@ -80,7 +75,6 @@
     </div>
   </div>
 </template>
-
 <script setup>
 import { useHomeComments } from '@/composables/home/useHomeComments'
 

@@ -1,12 +1,12 @@
 <template>
   <div class="bg-[#EFEFEF] p-4 py-[30px] w-full">
-    <img 
+    <!-- <img 
       v-if="$route.path === '/' && typeof onScrollToLuck === 'function'" 
       @click="onScrollToLuck"
       class="object-cover pb-[30px] cursor-pointer hover:opacity-90 transition-opacity duration-300" 
       src="/images/Faq-Banner.png" 
       alt="Faq-Banner" 
-    />
+    /> -->
     
     <!-- Header -->
     <header class="mb-8">

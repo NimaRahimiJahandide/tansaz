@@ -64,7 +64,7 @@
         <HomeFaqSection :onScrollToLuck="scrollToLuckSection"/>
         <HomeTourSection data-aos="fade-up" data-aos-delay="400"  data-aos-once="true"/>
         <HomeCommentsSection/>
-        <HomeLuckSection ref="luckSectionRef"/>
+        <!-- <HomeLuckSection ref="luckSectionRef"/> -->
         <HomeBlogsSection />
       </div>
     </transition>
