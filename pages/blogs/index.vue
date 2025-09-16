@@ -3,32 +3,39 @@ import { ref, onMounted, nextTick, onBeforeUnmount, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useStartWebsite } from "@/store/initWebsite"
 import { usePosts } from '~/composables/blogs/usePosts'
+import { useCategories } from '~/composables/global/useCategories'
 
 const startWebsite = useStartWebsite()
 const router = useRouter()
 const route = useRoute()
 
-// Get current page from query params
+// Get current page and category from query params
 const currentPage = ref(parseInt(route.query.page) || 1)
+const selectedCategoryId = ref(parseInt(route.query.category_id) || null)
 
-// Use the composable
-const { posts, links, meta, pending, error } = usePosts(currentPage.value)
+// Fetch categories
+const { categories, pending: categoriesPending, error: categoriesError } = useCategories()
 
-// Watch for page changes in query params
+// Create a composable function that updates when category changes
+const postsComposable = computed(() => {
+  return usePosts(currentPage.value, selectedCategoryId.value)
+})
+
+// Extract posts data
+const posts = computed(() => postsComposable.value.posts.value)
+const links = computed(() => postsComposable.value.links.value)
+const meta = computed(() => postsComposable.value.meta.value)
+const pending = computed(() => postsComposable.value.pending.value)
+const error = computed(() => postsComposable.value.error.value)
+
+// Watch for query parameter changes
 watch(() => route.query.page, (newPage) => {
   currentPage.value = parseInt(newPage) || 1
 })
 
-const categoryList = ref([
-  'همه مقالات',
-  'مراقبت پوست',
-  'لیزر موهای زائد',
-  'کرم ضد آفتاب',
-  'مراقبت مو',
-  'زیبایی صورت',
-  'لاغری',
-  'سلامت پوست'
-])
+watch(() => route.query.category_id, (newCategoryId) => {
+  selectedCategoryId.value = parseInt(newCategoryId) || null
+})
 
 const showLeftFade = ref(false)
 
@@ -47,17 +54,35 @@ const toggleLike = (blogId) => {
   }
 }
 
-const selectedCategory = ref(0)
-
 const goToBlog = (slug) => {
   router.push(`/blogs/${slug}`)
 }
 
+const selectCategory = (categoryId) => {
+  selectedCategoryId.value = categoryId
+  currentPage.value = 1 // Reset to first page when changing category
+  
+  const query = { page: 1 }
+  if (categoryId !== null) {
+    query.category_id = categoryId
+  }
+  
+  router.push({
+    path: '/blogs',
+    query
+  })
+}
+
 const goToPage = (page) => {
   if (page >= 1 && page <= meta.value?.last_page) {
+    const query = { page }
+    if (selectedCategoryId.value !== null) {
+      query.category_id = selectedCategoryId.value
+    }
+    
     router.push({
       path: '/blogs',
-      query: { page }
+      query
     })
   }
 }
@@ -105,18 +130,43 @@ onBeforeUnmount(() => {
     <section class="flex flex-col gap-[4px] w-full mt-[10px] pr-[16px]">
       <div class="w-full relative">
         <transition name="blog-fade">
-          <div class="mt-4 flex items-center gap-[10px] overflow-x-scroll custom-scroll">
+          <div v-if="!categoriesPending" class="mt-4 flex items-center gap-[10px] overflow-x-scroll custom-scroll">
+            <!-- All Articles button -->
             <div class="px-[16px] py-[8px] rounded-[30px] cursor-pointer"
-              :class="selectedCategory == i ? 'bg-[#ED1C24]' : 'bg-[#ffffff] '" v-for="(x, i) in categoryList" :key="i"
-              @click="selectedCategory = i">
-              <p class="text-[14px] text-nowrap" :class="selectedCategory == i ? 'text-[#ffffff]' : 'text-[#2E2E2E] '">
-                {{ x }}
+              :class="selectedCategoryId === null ? 'bg-[#ED1C24]' : 'bg-[#ffffff]'"
+              @click="selectCategory(null)">
+              <p class="text-[14px] text-nowrap" 
+                :class="selectedCategoryId === null ? 'text-[#ffffff]' : 'text-[#2E2E2E]'">
+                همه مقالات
               </p>
+            </div>
+            
+            <!-- Category buttons -->
+            <div class="px-[16px] py-[8px] rounded-[30px] cursor-pointer"
+              :class="selectedCategoryId === category.id ? 'bg-[#ED1C24]' : 'bg-[#ffffff]'"
+              v-for="category in categories" :key="category.id"
+              @click="selectCategory(category.id)">
+              <p class="text-[14px] text-nowrap" 
+                :class="selectedCategoryId === category.id ? 'text-[#ffffff]' : 'text-[#2E2E2E]'">
+                {{ category.name }}
+              </p>
+            </div>
+          </div>
+          
+          <!-- Loading state for categories -->
+          <div v-else class="mt-4 flex items-center gap-[10px] overflow-x-scroll custom-scroll">
+            <div class="px-[16px] py-[8px] rounded-[30px] bg-gray-200 animate-pulse" v-for="i in 3" :key="i">
+              <div class="h-4 bg-gray-300 rounded w-16"></div>
             </div>
           </div>
         </transition>
         <!-- Fade effect on the left side -->
         <div class="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#EFEFEF] to-transparent pointer-events-none z-10"></div>
+      </div>
+      
+      <!-- Categories error state -->
+      <div v-if="categoriesError" class="text-center py-2 text-red-500 text-sm">
+        خطا در بارگذاری دسته‌بندی‌ها
       </div>
     </section>
 
@@ -135,6 +185,9 @@ onBeforeUnmount(() => {
       <template v-else>
         <h2 class="text-lg font-semibold">
           <span class="text-brand">{{ meta?.total || 0 }}</span> مقاله وجود دارد
+          <span v-if="selectedCategoryId" class="text-sm font-normal text-gray-600">
+            در دسته‌بندی انتخاب شده
+          </span>
         </h2>
 
         <article class="rounded-2xl overflow-hidden relative" v-for="blog in posts" :key="blog.id" 
@@ -159,6 +212,11 @@ onBeforeUnmount(() => {
             </p>
           </div>
         </article>
+
+        <!-- No results message -->
+        <div v-if="posts.length === 0" class="text-center py-8 text-gray-500">
+          مقاله‌ای در این دسته‌بندی یافت نشد
+        </div>
 
         <!-- Pagination Controls -->
         <div v-if="meta && meta.last_page > 1" class="flex justify-center items-center gap-4 mt-8">
