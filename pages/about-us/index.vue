@@ -121,6 +121,7 @@ onMounted(() => {
       </button>
     </section>
 
+    <!-- start benefits -->
     <section class="flex flex-col py-[60px] px-[16px] gap-[30px] w-full bg-[#1D1D1D] mt-[43px]">
       <p class="text-[20px] font-bold text-[#ffffff]">
         <span>چرا کلینیک </span>
@@ -140,6 +141,7 @@ onMounted(() => {
         </div>
       </div>
     </section>
+    <!-- end benefits -->
 
     <section class="flex flex-col gap-[40px] w-full px-[16px] mb-[40px]">
       <div class="flex flex-col mt-[43px] w-full">
