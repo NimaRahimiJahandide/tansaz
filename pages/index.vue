@@ -43,9 +43,9 @@
 
       <section v-show="isStarted" ref="sectionRef"
         class="flex justify-center items-center flex-col gap-[35px] text-lg font-medium leading-6 text-white">
-        <p class="menu-item">باشگاه مشتریان</p>
-        <p class="menu-item">معرفــی خدمــات</p>
-        <p class="menu-item">ارتباط با ما</p>
+        <p class="menu-item justified-text">باشگاه مشتریان</p>
+        <p class="menu-item justified-text">معرفــی خدمــات</p>
+        <p class="menu-item justified-text">ارتبــــــاط بــا مـــــــا</p>
       </section>
       <!-- end header content -->
 
@@ -165,5 +165,35 @@ onMounted(() => {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+/* استایل سفارشی برای متن کشیده */
+.justified-text {
+  width: 125px;
+  text-align: justify;
+  text-align-last: justify;
+  text-justify: distribute;
+  word-spacing: -0.1em;
+  letter-spacing: 0.05em;
+}
+
+/* فال‌بک برای مرورگرهای قدیمی‌تر */
+@supports not (text-align-last: justify) {
+  .justified-text {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+  
+  .justified-text::after {
+    content: "";
+    display: inline-block;
+    width: 100%;
+  }
+}
+
+/* بهینه‌سازی برای فونت‌های فارسی */
+.justified-text {
+  font-feature-settings: "kern" 1;
+  text-rendering: optimizeLegibility;
 }
 </style>
