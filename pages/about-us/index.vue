@@ -2,6 +2,7 @@
 import { AboutUsEventsSection } from "#components";
 import { useStartWebsite } from "@/store/initWebsite";
 import { usePersonnels } from "~/composables/about-us/usePersonnels";
+import { useBenefits } from "~/composables/about-us/useBenefits";
 
 const startWebsite = useStartWebsite();
 const router = useRouter();
@@ -9,6 +10,9 @@ const selectedImage = ref(0);
 
 // Get personnels from API
 const { personnels, pending, error } = usePersonnels();
+
+// Get benefits from API
+const { benefits, pending: benefitsPending, error: benefitsError } = useBenefits();
 
 const goBack = () => {
   if (window.history.length > 1) {
@@ -26,51 +30,13 @@ const gallery = [
   "/images/clinic1.jpg",
 ];
 
-const whyTansaz = [
-  {
-    id: 0,
-    title: "توجه و احترام به مراجعین",
-    description: 'احترام به مراجعین و نیازهای آنها و توجه به کیفیت ارئه خدمات در بالاترین سطح استانداردهای بین المللی مهمترین اصل در همه فرایندهای جاری مجموعه تن ساز است .'
-  },
-  {
-    id: 1,
-    title: "آنالیز اختصاصی",
-    description: 'قبل از هر اقدام تخصصی و درمانی آنالیز کامل با پیشرفته ترین نکنولوژی روزدنیا و معاینه دقیق توسط پزشکان مجموعه انجام می گردد تا بهترین پیشنهاد اختصاصی برای هر فرد متناسب با اویتهای و هزینههای درمانی و با بیشترین اثر بخشی و ماندگاری توصیه شود تا تجربه ای متفاوت از مشاوره تخصصی دلسوزانه و مسئولانه ارائه گردد .'
-  },
-  {
-    id: 2,
-    title: "پزشکان متخصص",
-    description: 'پزشکان متخصص و فوق تخصص و با تجربه و عضو انجمن های پزشکی ایران و سایر کشورهای اروپایی و آمریکا دارای مدارک معتبر بین المللی دورههای پیشرفته تخصصی پزشکی استتیک با جدیدترین متدها و آشنا به پیشرفته ترین تکنولوژی های روز دنیا در صنعت پزشکی زیبایی و لیزر پزشکی و تناسب اندام .'
-  },
-  {
-    id: 3,
-    title: "دستگاه های مجهز",
-    description: 'اولین و تنها مجموعه کامل مجهز به مرکز لیزر اسکلپیون آلمان در جنوب کشور'
-  },
-  {
-    id: 4,
-    title: "چربی سوضی موضعی استاندارد",
-    description: 'مركز لاغری و تناسب اندام مجهز به تنها کویتیشن چربی سوز موضعی مورد تایید امریکا در دنیا شاک ویوتراپی سوئیسی گلد استاندارد درمانی سلولیت به تایید FDA با توان 7 تسلا ICM SLIM مریکا و شبیه ساز ورزشی FDA هر نیم ساعت معادل 20 هزار حرکت ورزشی .'
-  },
-  {
-    id: 5,
-    title: "محیط لوکس",
-    description: 'محیطی لوکس حرفه ای و کاملا بهداشتی با توجه ویژه به حریم خصوصی و آرامش مراجعین محترم مجموعه تن ساز در تمام زمینه ها با استانداردهای بین المللی و تجربه ای متفاوت و خاص .'
-  },
-  {
-    id: 6,
-    title: "تخفیف و جایزه های متنوع",
-    description: 'فراهم آوردن شرایط برخورداری مراجعین محترم از تخفیفات ویژه سیستم cash back و كيف پول باشگاه مشتریان با امکانات و امتیازات بسیار ویژه امکان پرداخت اقساطی هزینه های درمان و پروموشن های متنوع.'
-  },
-]
-
 onMounted(() => {
   startWebsite.setImageClicked(true);
 });
 </script>
 <template>
   <div class="flex flex-col items-center bg-[#EFEFEF] pt-[84px]">
-    <section class="flex items-center justify-between w-full px-[16px]" >
+    <section class="flex items-center justify-between w-full px-[16px]">
       <header class="">
         <h1 class="text-xl font-bold">
           <span class="text-brand">ما</span> درباره
@@ -102,7 +68,8 @@ onMounted(() => {
         <span class="text-brand">کلینیک تــــن ساز</span> متن معرفی
       </h2>
 
-      <p class="mt-[12px] text-[#2E2E2E] text-[14px] text-justify leading-[1.625rem]" data-aos="fade-up" data-aos-once="true">
+      <p class="mt-[12px] text-[#2E2E2E] text-[14px] text-justify leading-[1.625rem]" data-aos="fade-up"
+        data-aos-once="true">
         لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده
         از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و
         سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای
@@ -129,8 +96,19 @@ onMounted(() => {
         <span>؟</span>
       </p>
 
-      <div class="flex flex-col gap-[25px]">
-        <div class="flex gap-[8px] items-start" v-for="item in whyTansaz" :key="item.id" data-aos="fade-up" data-aos-once="true">
+      <!-- Benefits Loading state -->
+      <div v-if="benefitsPending" class="flex justify-center items-center py-8">
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-red-500"></div>
+      </div>
+
+      <!-- Benefits Error state -->
+      <div v-else-if="benefitsError" class="text-center text-red-500 py-8">
+        خطا در بارگذاری اطلاعات مزایا
+      </div>
+      <!-- Benefits list -->
+      <div v-else class="flex flex-col gap-[25px]">
+        <div class="flex gap-[8px] items-start" v-for="item in benefits" :key="item.id" data-aos="fade-up"
+          data-aos-once="true">
           <img src="/icons/books.svg" alt="" class="mt-[2px]" />
 
           <div class="flex flex-col gap-[2px]">
@@ -166,21 +144,12 @@ onMounted(() => {
 
       <!-- Doctors list -->
       <div v-else class="flex flex-col gap-y-[1.25rem]">
-        <AboutUsDoctorCard 
-          v-for="personnel in personnels" 
-          :key="personnel.id" 
-          :name="personnel.name"
-          :education="personnel.education"
-          :expertise="personnel.expertise"
-          :thumb_image="personnel.thumb_image"
-          :description="personnel.description"
-          :services="personnel.services"
-          :likes="personnel.likes"
-          data-aos="fade-left"  
-          data-aos-once="true"
-        />
+        <AboutUsDoctorCard v-for="personnel in personnels" :key="personnel.id" :name="personnel.name"
+          :education="personnel.education" :expertise="personnel.expertise" :thumb_image="personnel.thumb_image"
+          :description="personnel.description" :services="personnel.services" :likes="personnel.likes"
+          data-aos="fade-left" data-aos-once="true" />
       </div>
     </section>
-    <AboutUsEventsSection :is-transparent="true"/>
+    <AboutUsEventsSection :is-transparent="true" />
   </div>
 </template>
