@@ -8,15 +8,26 @@ useSchemaOrg([
   })
 ])
 
+// تنظیم meta viewport برای نمایش ثابت موبایل
+useHead({
+  meta: [
+    {
+      name: 'viewport',
+      content: 'width=425, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
+    }
+  ]
+})
 </script>
 
-
 <template>
-    <div>
-        <NuxtRouteAnnouncer />
-        <NuxtLayout>
-            <NuxtPage />
-        </NuxtLayout>
+    <div class="min-h-screen bg-gray-50">
+        <!-- Container اصلی که در دسکتاپ وسط‌چین می‌شود -->
+        <div class="max-w-[425px] mx-auto bg-white min-h-screen shadow-lg relative">
+            <NuxtRouteAnnouncer />
+            <NuxtLayout>
+                <NuxtPage />
+            </NuxtLayout>
+        </div>
     </div>
 </template>
 
@@ -29,6 +40,19 @@ useSchemaOrg([
     scroll-behavior: smooth;
 }
 
+/* اطمینان از اینکه body و html عرض کامل را اشغال کنند */
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* فورس کردن حداکثر عرض در تمام سطوح */
+#__nuxt {
+    max-width: none !important;
+    width: 100% !important;
+}
 
 :root {
     --swiper-pagination-color: #000 !important;
@@ -36,7 +60,6 @@ useSchemaOrg([
     --swiper-pagination-bullet-inactive-opacity: 1 !important;
     --swiper-navigation-background-color: gray;
     --swiper-navigation-color:#ffffff;
-
 }
 
 .page-enter-active,
@@ -47,5 +70,18 @@ useSchemaOrg([
 .page-leave-to {
   opacity: 0;
   filter: blur(1rem);
+}
+
+/* استایل‌های اضافی برای بهتر شدن نمایش در دسکتاپ */
+@media (min-width: 426px) {
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    /* اضافه کردن سایه و corner radius برای ظاهر بهتر */
+    .max-w-\[425px\] {
+        border-radius: 0;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+    }
 }
 </style>

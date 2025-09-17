@@ -1,7 +1,16 @@
 <template>
   <div class="bg-white rounded-2xl relative text-[#2E2E2E]">
-    <button class="absolute top-4 right-4 rounded-full">
-      <svg class="w-[30px] h-[30px] text-red-500" fill="currentColor" viewBox="0 0 20 20">
+    <button 
+      class="absolute top-4 right-4 rounded-full transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+      @click="handleLike"
+      :disabled="isLiked || isLiking"
+    >
+      <svg 
+        class="w-[30px] h-[30px] transition-colors duration-200" 
+        :class="isLiked ? 'text-red-500' : 'text-red-500 hover:text-red-600'"
+        fill="currentColor" 
+        viewBox="0 0 20 20"
+      >
         <path
           d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
       </svg>
@@ -10,7 +19,7 @@
     <img :src="thumb_image" :alt="name" class="w-full h-[18.75rem] object-cover rounded-xl mb-4" />
     <div
       class="absolute top-[256px] left-0 flex items-center bg-brand rounded-r-[5px] h-7 w-16 justify-center shadow text-white text-sm font-semibold">
-      {{ likes }}
+      {{ currentLikes }}
       <svg class="w-4 h-4 mr-1" fill="#fff" viewBox="0 0 20 20">
         <path
           d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
@@ -56,6 +65,10 @@
 
 <script setup>
 const props = defineProps({
+  id: {
+    type: Number,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
@@ -85,6 +98,50 @@ const props = defineProps({
     default: () => [],
   },
 });
+
+const config = useRuntimeConfig()
+const currentLikes = ref(props.likes)
+const isLiking = ref(false)
+
+// Check if doctor is already liked from localStorage
+const isLiked = computed(() => {
+  if (process.client) {
+    const likedDoctors = JSON.parse(localStorage.getItem('likedDoctors') || '[]')
+    return likedDoctors.includes(props.id)
+  }
+  return false
+})
+
+// Handle like functionality
+const handleLike = async () => {
+  if (isLiked.value || isLiking.value) return
+  
+  isLiking.value = true
+  const originalLikes = currentLikes.value
+  
+  // Optimistic UI update
+  currentLikes.value += 1
+  
+  try {
+    await $fetch(`/personnels/${props.id}/like`, {
+      method: 'POST',
+      baseURL: config.public.baseURL,
+    })
+    
+    // On success, store in localStorage
+    if (process.client) {
+      const likedDoctors = JSON.parse(localStorage.getItem('likedDoctors') || '[]')
+      likedDoctors.push(props.id)
+      localStorage.setItem('likedDoctors', JSON.stringify(likedDoctors))
+    }
+  } catch (error) {
+    // On failure, revert the likes count
+    currentLikes.value = originalLikes
+    console.error('Failed to like doctor:', error)
+  } finally {
+    isLiking.value = false
+  }
+}
 </script>
 
 <style scoped>
