@@ -14,7 +14,7 @@
 
       <div class="flex gap-8 items-center">
         <!-- Hamburger Menu -->
-        <div class="md:hidden">
+        <div>
           <button type="button" class="focus:outline-none flex items-center" @click="toggleMenu">
             <img :src="(isServiceRoute && !isScrolled)
               ? '/icons/Menu_Alt_01-white.svg'

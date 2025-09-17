@@ -1,8 +1,12 @@
 <script setup>
 import { useStartWebsite } from "@/store/initWebsite";
+import { useGalleries } from "@/composables/gallery/useGalleries";
+
 const startWebsite = useStartWebsite();
+const { galleries, pending, error, refresh } = useGalleries();
 const isModalOpen = ref(false);
-const router = useRouter()
+const selectedGallery = ref(null);
+const router = useRouter();
 
 const goBack = () => {
   if (window.history.length > 1) {
@@ -12,20 +16,20 @@ const goBack = () => {
   }
 }
 
-const items = ref([
-  {
-    image: '/images/tour1.png'
-  },
-  {
-    image: '/images/tour2.png'
-  },
-  {
-    image: '/images/tour3.png'
-  },
-  {
-    image: '/images/tour4.png'
-  },
-])
+const openModal = (gallery) => {
+  selectedGallery.value = gallery;
+  isModalOpen.value = true;
+}
+
+const closeModal = () => {
+  isModalOpen.value = false;
+  selectedGallery.value = null;
+}
+
+// Retry function for error handling
+const retryFetch = () => {
+  refresh();
+}
 
 onMounted(() => {
   startWebsite.setImageClicked(true);
@@ -67,41 +71,95 @@ onMounted(() => {
           </h1>
         </header>
   
-        <p class="text-[14px] font-medium text-[#2E2E2E]">32 تصویر</p>
+        <p class="text-[14px] font-medium text-[#2E2E2E]" v-if="!pending && galleries.length > 0">
+          {{ galleries.length }} تصویر
+        </p>
+      </div>
+
+      <!-- Loading State -->
+      <div v-if="pending" class="flex justify-center items-center w-full mt-[30px] py-[50px]">
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-brand"></div>
+        <p class="ml-3 text-[14px] text-[#828282]">در حال بارگذاری...</p>
+      </div>
+
+      <!-- Error State -->
+      <div v-else-if="error" class="flex flex-col items-center w-full mt-[30px] py-[50px]">
+        <p class="text-[14px] text-red-500 mb-4 text-center">خطا در دریافت اطلاعات گالری</p>
+        <button 
+          @click="retryFetch" 
+          class="px-4 py-2 bg-brand text-white rounded-full text-[14px] font-medium"
+        >
+          تلاش مجدد
+        </button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div v-else-if="galleries.length > 0" class="grid grid-cols-2 gap-[16px] mt-[15px] w-full">
+        <div 
+          v-for="gallery in galleries" 
+          :key="gallery.id"
+          @click="openModal(gallery)"
+          class="cursor-pointer"
+          data-aos="fade-up" 
+          data-aos-once="true"
+        >
+          <img 
+            :src="gallery.thumb_image" 
+            :alt="gallery.title" 
+            class="rounded-[16px] w-full aspect-square object-cover hover:opacity-90 transition-opacity"
+          />
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div v-else class="flex flex-col items-center w-full mt-[30px] py-[50px]">
+        <p class="text-[14px] text-[#828282] text-center">هیچ تصویری یافت نشد</p>
       </div>
   
-      <div class="grid grid-cols-2 gap-[16px] mt-[15px]" >
-        <img @click="isModalOpen = !isModalOpen" :src="item.image" alt="" class="rounded-[16px] w-full aspect-square" data-aos="fade-up" data-aos-once="true"
-          v-for="item in items" :key="item.id" />
-      </div>
-  
-      <button class="mt-[22px] w-full bg-brand text-center rounded-full h-[48px]" data-aos="fade-up" data-aos-once="true">
-        <NuxtLink to="#" class="bg-brand text-white font-semibold leading-[26px] rounded-full w-full">مشاهده بیشتر
+      <button 
+        v-if="galleries.length > 0" 
+        class="mt-[22px] w-full bg-brand text-center rounded-full h-[48px]" 
+        data-aos="fade-up" 
+        data-aos-once="true"
+      >
+        <NuxtLink to="#" class="bg-brand text-white font-semibold leading-[26px] rounded-full w-full">
+          مشاهده بیشتر
         </NuxtLink>
       </button>
     </section>
   
-    <div v-if="isModalOpen"
-      @click="isModalOpen = false"
-      class="fixed top-0 left-0 w-screen h-screen bg-black/40 backdrop-blur-sm z-[50] transition-opacity duration-300" />
+    <!-- Modal Backdrop -->
+    <div 
+      v-if="isModalOpen"
+      @click="closeModal"
+      class="fixed top-0 left-0 w-screen h-screen bg-black/40 backdrop-blur-sm z-[50] transition-opacity duration-300" 
+    />
   
+    <!-- Modal Content -->
     <div
       class="z-[99] flex flex-col bg-[#ffffff] fixed translate-x-[-50%] translate-y-[-50%] left-[50%] top-[50%] rounded-[22px] duration-300 shadow-2xl"
-      style="width: calc(100vw - 32px); max-width: 400px;" :class="isModalOpen ? 'scale-100' : 'scale-0'">
+      style="width: calc(100vw - 32px); max-width: 400px;" 
+      :class="isModalOpen ? 'scale-100' : 'scale-0'"
+      v-if="selectedGallery"
+    >
       
       <!-- Header with close button -->
       <div class="flex justify-between items-center px-[16px] py-[16px] border-b border-gray-100">
         <h1 class="text-[16px] font-bold">
-          <span>فضایی برای</span> <span class="text-brand">استراحت</span>
+          <span class="text-brand">{{ selectedGallery.title }}</span>
         </h1>
-        <button @click="isModalOpen = false" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+        <button @click="closeModal" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
           <Icon name="heroicons:x-mark" size="20" class="text-gray-600" />
         </button>
       </div>
   
       <!-- Image section -->
       <div class="relative">
-        <img src="/images/tour1.png" alt="" class="w-full aspect-square object-cover" />
+        <img 
+          :src="selectedGallery.main_image" 
+          :alt="selectedGallery.title" 
+          class="w-full aspect-square object-cover" 
+        />
       </div>
   
       <!-- Content section -->
@@ -111,15 +169,16 @@ onMounted(() => {
   
           <div class="flex items-center gap-1 px-[8px] py-[4px] bg-[#ED1C241A] rounded-[35px]">
             <Icon name="heroicons:eye" size="12" class="text-[#ED1C24]" />
-            <p class="text-[12px] font-medium text-[#ED1C24]">200 بازدید</p>
+            <p class="text-[12px] font-medium text-[#ED1C24]">{{ selectedGallery.views }} بازدید</p>
           </div>
         </div>
   
         <p class="text-[14px] text-[#2E2E2E] leading-6">
-          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده
-          از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و
-          سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای
-          متنوع است.
+          {{ selectedGallery.description }}
+        </p>
+
+        <p class="text-[12px] text-[#828282] mt-2">
+          تاریخ: {{ selectedGallery.created_at_fa }}
         </p>
       </div>
     </div>
