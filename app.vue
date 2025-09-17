@@ -71,17 +71,4 @@ html, body {
   opacity: 0;
   filter: blur(1rem);
 }
-
-/* استایل‌های اضافی برای بهتر شدن نمایش در دسکتاپ */
-@media (min-width: 426px) {
-    body {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-    
-    /* اضافه کردن سایه و corner radius برای ظاهر بهتر */
-    .max-w-\[425px\] {
-        border-radius: 0;
-        box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
-    }
-}
 </style>
