@@ -5,28 +5,44 @@
       <span class="text-brand">رویداد های</span> کلینیک تن ساز
     </h2>
     <div class="container mx-auto px-4 pb-8"  data-aos="fade-up" data-aos-once="true">
-      <div class="rounded-2xl overflow-hidden relative">
+      <!-- Loading state -->
+      <div v-if="pending" class="flex justify-center items-center py-8">
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-red-500"></div>
+      </div>
+
+      <!-- Error state -->
+      <div v-else-if="error" class="text-center text-red-500 py-8">
+        خطا در بارگذاری اطلاعات رویدادها
+      </div>
+
+      <!-- Events content -->
+      <div v-else-if="events.length > 0" class="rounded-2xl overflow-hidden relative">
         <transition name="fade" mode="out-in">
           <div :key="activeIndex" class="relative" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
             <!-- Image -->
-            <img :src="slides[activeIndex].image" :alt="slides[activeIndex].title" class="w-full h-80 object-cover" />
+            <img :src="events[activeIndex].image" :alt="events[activeIndex].title" class="w-full h-80 object-cover" />
 
             <!-- Overlay and Text -->
             <div
               class="absolute inset-0 bg-gradient-to-t from-[#151515] via-[#15151596] to-transparent via-[20.35%] from-[1.3%] flex flex-col justify-end p-4">
               <h3 class="text-lg font-bold text-white leading-6 mb-5">
-                {{ slides[activeIndex].title }}
+                {{ events[activeIndex].title }}
               </h3>
               <p class="flex text-xs font-medium text-white justify-between">
-                <span>تاریخ برگزاری: {{ slides[activeIndex].date }}</span>
+                <span>تاریخ برگزاری: {{ events[activeIndex].date }}</span>
               </p>
             </div>
           </div>
         </transition>
       </div>
 
+      <!-- No events message -->
+      <div v-else class="text-center text-gray-500 py-8">
+        هیچ رویدادی یافت نشد
+      </div>
+
       <!-- pagination -->
-      <div class="flex justify-between items-center mt-4">
+      <div v-if="events.length > 1" class="flex justify-between items-center mt-4">
         <!-- دکمه قبلی -->
         <button @click="prevSlide"
           class="bg-brand size-10 flex items-center justify-center text-white font-bold rounded-lg">
@@ -37,7 +53,7 @@
 
         <!-- شماره‌های صفحه -->
         <div class="flex items-center gap-2">
-          <div v-for="(slide, index) in slides.length" :key="index" @click="activeIndex = index"
+          <div v-for="(event, index) in events" :key="event.id" @click="activeIndex = index"
             class="w-8 h-8 rounded-xl cursor-pointer transition duration-300 ease-in-out flex items-center justify-center text-sm font-medium"
             :class="{ 'bg-[#0000000D] text-[#2E2E2E]': activeIndex === index, 'text-[#929DAC]': activeIndex !== index }">
             {{ index + 1 }}
@@ -58,42 +74,35 @@
 </template>
 
 <script setup>
+import { useEvents } from "~/composables/about-us/useEvents";
+
 const props = defineProps({
   isTransparent: Boolean,
 });
 
-const route = useRoute();
+// Get events from API
+const { events, pending, error } = useEvents();
 
 const activeIndex = ref(0);
 
-const slides = ref([
-  {
-    image: "/images/seminar.jpg",
-    title: "برگزاری سمینار آبان 1405",
-    duration: "2 دقیقه",
-    date: "1404/01/04",
-  },
-  {
-    image: "/images/blog1.png",
-    title: "تغذیه مناسب برای رشد مو",
-    duration: "3 دقیقه",
-    date: "1404/01/10",
-  },
-  {
-    image: "/images/blog1.png",
-    title: "راهکارهای جلوگیری از ریزش مو",
-    duration: "4 دقیقه",
-    date: "1404/01/18",
-  },
-]);
+// Watch for events changes to reset activeIndex if needed
+watch(events, (newEvents) => {
+  if (newEvents.length > 0 && activeIndex.value >= newEvents.length) {
+    activeIndex.value = 0;
+  }
+}, { immediate: true });
 
 const nextSlide = () => {
-  activeIndex.value = (activeIndex.value + 1) % slides.value.length;
+  if (events.value.length > 0) {
+    activeIndex.value = (activeIndex.value + 1) % events.value.length;
+  }
 };
 
 const prevSlide = () => {
-  activeIndex.value =
-    (activeIndex.value - 1 + slides.value.length) % slides.value.length;
+  if (events.value.length > 0) {
+    activeIndex.value =
+      (activeIndex.value - 1 + events.value.length) % events.value.length;
+  }
 };
 
 const touchStartX = ref(0);
@@ -120,7 +129,6 @@ const handleSwipe = () => {
     }
   }
 };
-
 </script>
 
 <style scoped>
