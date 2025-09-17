@@ -10,7 +10,7 @@
     <img :src="thumb_image" :alt="name" class="w-full h-[18.75rem] object-cover rounded-xl mb-4" />
     <div
       class="absolute top-[256px] left-0 flex items-center bg-brand rounded-r-[5px] h-7 w-16 justify-center shadow text-white text-sm font-semibold">
-      200
+      {{ likes }}
       <svg class="w-4 h-4 mr-1" fill="#fff" viewBox="0 0 20 20">
         <path
           d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
@@ -75,6 +75,10 @@ const props = defineProps({
   description: {
     type: String,
     default: '',
+  },
+  likes: {
+    type: Number,
+    default: 0,
   },
   services: {
     type: Array,

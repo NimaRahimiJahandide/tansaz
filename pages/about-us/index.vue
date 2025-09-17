@@ -173,6 +173,7 @@ onMounted(() => {
           :thumb_image="personnel.thumb_image"
           :description="personnel.description"
           :services="personnel.services"
+          :likes="personnel.likes"
           data-aos="fade-left"  
           data-aos-once="true"
         />
