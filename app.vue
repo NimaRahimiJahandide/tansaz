@@ -3,9 +3,6 @@ useSchemaOrg([
   defineWebPage({
     name: 'تن ساز'
   }),
-  defineWebSite({
-    name: 'تن ساز'
-  })
 ])
 
 // تنظیم meta viewport برای نمایش ثابت موبایل

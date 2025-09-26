@@ -30,26 +30,20 @@
             <div class="max-w-xl mx-auto rounded-lg overflow-hidden relative aspect-square">
               <client-only>
                 <transition name="fade" mode="out-in">
-                  <VueCompareImage 
-                    :key="selected.after" 
-                    :left-image="selected.before" 
-                    :right-image="selected.after" 
-                    :handle="customHandle" 
-                  />
+                  <VueCompareImage :key="selected.after" :left-image="selected.before" :right-image="selected.after"
+                    :handle="customHandle" />
                 </transition>
               </client-only>
             </div>
           </div>
         </section>
-    
+
         <!-- Gallery Section -->
         <section class="pt-[25px] z-10">
-          <div 
-            :class="[
-              'flex gap-4 max-w-sm mx-auto z-10',
-              gallery.length === 1 ? 'justify-center' : 'overflow-x-auto hide-scrollbar'
-            ]"
-          >
+          <div :class="[
+            'flex gap-4 max-w-sm mx-auto z-10',
+            gallery.length === 1 ? 'justify-center' : 'overflow-x-auto hide-scrollbar'
+          ]">
             <div v-for="(item, index) in gallery" :key="item.id || index"
               class="relative size-[105px] overflow-hidden rounded-[22px] cursor-pointer shrink-0 z-10"
               @click="selectImages(item)">
@@ -58,20 +52,21 @@
             </div>
           </div>
         </section>
-        
+
         <section class="text-center pt-4 z-10">
           <p class="font-semibold leading-[26px]">{{ selected.serviceName || 'پیکرتراشی' }}</p>
           <p class="text-sm font-medium leading-[23px]">{{ selected.device || 'دستگاه ایواماتیک' }}</p>
         </section>
       </template>
 
-      <section class="absolute bottom-10 z-0">
+      <section class="absolute w-full bottom-10 z-0 flex justify-center">
         <div class="relative inline-block">
-          <img src="/icons/dot-before-after.svg" alt="dot-before-after">
-          <img src="/icons/circle-before-after.svg" alt="circle-before-after"
+          <img src="/public/icons/dot-before-after.svg" alt="dot-before-after">
+          <img src="/public/icons/circle-before-after.svg" alt="circle-before-after"
             class="absolute -bottom-4 left-1/2 -translate-x-1/2 heartbeat">
         </div>
       </section>
+
       <div class="pb-20"></div>
     </div>
   </div>
@@ -158,10 +153,12 @@ const customHandle = `
 .fade-leave-active {
   transition: opacity 0.3s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
 }
+
 .fade-enter-to,
 .fade-leave-from {
   opacity: 1;
