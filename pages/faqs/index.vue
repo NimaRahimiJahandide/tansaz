@@ -103,8 +103,8 @@ watch(() => faqs.value?.data, () => {
             {{ categoryList[selectedCategory] }}
           </h3>
           <svg
-            class="transition-transform duration-300"
-            :class="{ 'rotate-180': isCategoryOpen }"
+            class="transition-transform duration-300 rotate-180"
+            :class="{ 'rotate-360': isCategoryOpen }"
             width="18"
             height="19"
             viewBox="0 0 18 19"

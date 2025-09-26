@@ -4,8 +4,8 @@
     <div @click="handleToggle" class="flex items-center justify-between cursor-pointer select-none">
       <h3 class="text-sm font-medium leading-[23px] pr-2 truncate-text">{{ question }}</h3>
       <div 
-        class="transition-transform duration-500 ease-out transform-gpu shrink-0" 
-        :class="{ 'rotate-180': isOpen }"
+        class="transition-transform duration-500 ease-out transform-gpu shrink-0 rotate-180" 
+        :class="{ 'rotate-[360deg]': isOpen }"
       >
         <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g clip-path="url(#clip0_362_39)">
